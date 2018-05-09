@@ -123,3 +123,43 @@ created(){
 # vue获取后端数据应该在created还是mounted方法
 
 看情况了，一般放到created里面就可以了，这样可以及早发请求获取数据，如果有依赖dom必须存在的情况，就放到`mounted(){this.$nextTick(() => { /* code */ })}`里面
+
+# vue的target:blank跳转
+
+```
+const {href} = this.$router.resolve({
+    name: 'logistics'
+})
+window.open(href, '_blank')
+```
+
+# 消息无缝滚动
+
+```
+ export default {
+data() {
+  return {
+      animate:false,
+      items:[
+          {name:"马云"},
+          {name:"雷军"},
+          {name:"王勤"}
+      ]
+  }
+},
+created(){
+    setInterval(this.scroll,1000)
+},
+methods: {
+    scroll(){
+       this.animate=true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
+       setTimeout(()=>{      //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
+               this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
+               this.items.shift();               //删除数组的第一个元素
+               this.animate=false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
+       },500)
+    }
+}
+```
+
+参考：https://segmentfault.com/a/1190000012272194
