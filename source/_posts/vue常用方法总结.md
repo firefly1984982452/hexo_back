@@ -163,3 +163,16 @@ methods: {
 ```
 
 参考：https://segmentfault.com/a/1190000012272194
+
+
+# 商品错误时显示默认图片
+
+```
+
+<img v-bind:src="userData.photo" :onerror="logo" class="img-box4">  
+
+
+data: () => ({  
+    logo: 'this.src="' + require('../assets/img.png') + '"'  
+}) 
+```
