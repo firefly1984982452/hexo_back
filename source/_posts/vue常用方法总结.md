@@ -7,6 +7,8 @@ categories: 编程开发
 
 # 路由跳转及传参
 
+## 直接跳转
+
 A.vue
 ```
 this.$router.push({
@@ -22,8 +24,33 @@ B.vue
 ```
 this.$route.params
 ```
-
 *tips:A.vue使用的是`$router`，B.vue使用的是`$route`，极易混淆。*
+
+
+## 地址栏'/'传参
+
+router.js
+
+```
+{
+    path: '/success/:order_id',
+    name: 'success',
+    component: success
+}
+```
+
+A.vue
+
+地址：`http://localhost:8080/#/success/257`
+
+获取：```this.$route.params.order_id```
+
+
+## 地址栏'?'传参
+
+地址：`http://localhost:8080/#/success?id=257`
+
+获取：`this.$route.query.id`
 
 # axios网络请求
 
