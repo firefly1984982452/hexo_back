@@ -203,3 +203,34 @@ data: () => ({
     logo: 'this.src="' + require('../assets/img.png') + '"'  
 }) 
 ```
+
+懒加载方法：
+
+`<img v-lazy:background-image="{src: item.pic_url, error: 'http://bpic.588ku.com/back_pic/03/53/97/65579958bb0ec9a.jpg!r850/fw/400', loading: 'default_banner'}" />`
+
+注意：`error`里的图片得是网络图片，用本地图片我设置了很久都没有效果。
+
+
+# 引入mui
+
+复制mui.min.js进去
+
+在vue页面中引入
+
+`import mui from '../../js/mui.js';`
+
+在严格模式下报错
+
+在.babel.rc中加入如下代码，排除mui相关的js就可以了：
+
+```
+
+{
+"presets": [ "es2015" ],
+"ignore": [
+"./src/lib/mui/mui.min.js",
+"./src/lib/mui/mui.picker.js",
+"./src/lib/mui/mui.poppicker.js"
+]
+}
+```
