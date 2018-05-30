@@ -52,6 +52,8 @@ A.vue
 
 获取：`this.$route.query.id`
 
+
+
 # axios网络请求
 
 `this.axios.post().then().catch();`
@@ -65,6 +67,8 @@ this.axios.post(url,params).then((res) => {
 	console.log(err);
 });
 ```
+
+
 
 # vue-cli快速构建项目
 
@@ -92,9 +96,13 @@ config/index.js
 
 `npm run build`
 
+
+
 # 绝对地址和相对址引用
 
 `<img src="~static/20180315130936.png"/>`
+
+
 
 # el-input 只能输入数字
 
@@ -120,6 +128,8 @@ config/index.js
 
 ------------
 
+
+
 # weex篇
 
 ## 部署
@@ -131,6 +141,8 @@ config/index.js
 `npm run build` 打包
 
 将`dist/index.js`里面的文件替换到Android中`assets/dist/index.js`和`assets/index.js`中
+
+
 
 
 # vue中做一些监听事件
@@ -147,9 +159,15 @@ created(){
 },
 ```
 
+
+
+
 # vue获取后端数据应该在created还是mounted方法
 
 看情况了，一般放到created里面就可以了，这样可以及早发请求获取数据，如果有依赖dom必须存在的情况，就放到`mounted(){this.$nextTick(() => { /* code */ })}`里面
+
+
+
 
 # vue的target:blank跳转
 
@@ -159,6 +177,9 @@ const {href} = this.$router.resolve({
 })
 window.open(href, '_blank')
 ```
+
+
+
 
 # 消息无缝滚动
 
