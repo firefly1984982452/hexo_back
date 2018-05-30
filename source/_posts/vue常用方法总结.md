@@ -43,7 +43,7 @@ A.vue
 
 地址：`http://localhost:8080/#/success/257`
 
-获取：```this.$route.params.order_id```
+获取：`this.$route.params.order_id`
 
 
 ## 地址栏'?'传参
@@ -59,6 +59,7 @@ A.vue
 `this.axios.post().then().catch();`
 
 详情如下：
+
 ```
 this.axios.post(url,params).then((res) => {
 		console.log(res.data);
