@@ -256,3 +256,14 @@ data: () => ({
 ]
 }
 ```
+
+
+# axios篇
+
+## 设置请求头带cooike
+
+```
+import axios from 'axios'
+axios.defaults.withCredentials=true;//让ajax携带cookie
+Vue.prototype.$axios = axios;
+```
