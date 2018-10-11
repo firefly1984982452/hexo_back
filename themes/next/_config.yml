@@ -13,6 +13,7 @@
 # Set to true, if you want to fully override the default configuration.
 # Useful if you don't want to inherit the theme _config.yml configurations.
 override: false
+fireworks: false
 
 # ---------------------------------------------------------------
 # Site Information Settings
@@ -77,7 +78,7 @@ footer:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
@@ -556,18 +557,18 @@ firestore:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
+  site_uv_header: <i class="fa fa-user"></i> 访问人数
   site_uv_footer:
   # custom pv span for the whole site
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
+  site_pv_header: <i class="fa fa-eye"></i> 总访问量
   site_pv_footer:
   # custom pv span for one page only
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
+  page_pv_header: <i class="fa fa-file-o"></i> 阅读数
   page_pv_footer:
 
 
@@ -809,7 +810,7 @@ vendors:
   # needMoreShare2
   # https://github.com/revir/need-more-share2
   needMoreShare2:
-
+    
 
 # Assets
 css: css

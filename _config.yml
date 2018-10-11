@@ -89,3 +89,9 @@ live2d:
 
 # 百度统计
 search : 88e5da32f9c28e65f8dd7fef89481103
+
+# add post views
+leancloud_visitors:
+  enable: true
+  app_id: yv0v3JGVmxkYl5K0iOKKndey-gzGzoHsz
+  app_key: Km6xMUqIGyFaK2lFc7HpDNvG
