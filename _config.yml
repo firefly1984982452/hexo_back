@@ -83,9 +83,22 @@ deploy:
     branch: master
 
 # 我新添加的宠物
-# live2d:
-#   model: wanko
-#   bottom: -90
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  debug: false
+  model:
+    use: live2d-widget-model-tororo
+  display:
+    position: right
+    width: 150
+    height: 300
+  mobile:
+    show: true
 
 # 百度统计
 # search : 88e5da32f9c28e65f8dd7fef89481103
