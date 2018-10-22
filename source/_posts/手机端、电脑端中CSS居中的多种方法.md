@@ -5,6 +5,12 @@ tags:
 categories: 编程开发
 ---
 
+# 预览
+
+[案例预览](https://firefly1984982452.github.io/css-center/)
+[案例下载地址](https://github.com/firefly1984982452/css-center)
+
+
 # 布局
 
 ## 首先，让我们的背景宽和高都是100%
@@ -127,7 +133,3 @@ html,body{
 - 文字垂直居中：`line-height:height`
 
 ------
-
-附：
-[案例预览](https://firefly1984982452.github.io/css-center/)
-[案例下载地址](https://github.com/firefly1984982452/css-center)
