@@ -21,6 +21,13 @@ categories: 编程开发
 
 `['a', 'b', 'c'].entries().next().value`
 
+# values
+
+和entries异曲同工
+返回迭代器，一般和`next`一起使用
+
+`['a', 'b', 'c'].values().next().value`
+
 # every
 
 ```
@@ -30,6 +37,18 @@ function c(element,index,array){
 [12, 54, 18, 130, 44].every(c)
 //true
 [12, 5, 8, 130, 44].every(c)
+//false
+```
+
+# some
+和every异曲同工
+```
+function c(element,index,array){
+    return (element > 10)
+}
+[12, 54, 18, 130, 44].some(c)
+//true
+[2, 5, 8, 3, 4].some(c)
 //false
 ```
 
@@ -50,8 +69,41 @@ function c(element,index,array){
 ```
 
 # includes
-
+返回是否有这个值
 ```
 [1,2,3].includes(2)
 //true
+```
+
+# indexOf
+返回这个值是第几个
+```
+[1,2,3].includes(2)
+//1
+```
+
+# map
+
+原来的：
+
+```
+for(var i in list){
+    list[i].type = 1
+}
+
+```
+
+优化后：
+
+```
+list.map(item => {
+    item.type = 1
+})
+```
+
+# toLocalString
+
+```
+arr.toLocaleString()
+"1,2,3,4,5"
 ```
