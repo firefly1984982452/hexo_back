@@ -67,3 +67,28 @@ str = str == 1?true:false;
 ```
 str = Boolean(str);
 ```
+
+# toString 和 parseInt的其它用法
+
+可以转换进制
+
+比如，`toString()`里面传数值的话，就会转换成对应的进制
+
+```
+var number = 3344
+number.toString();      //'3344'
+number.toString(16);    //'d10'
+```
+
+同样，用`parseInt`可以将其它进制的转换成10进制的正常数值
+
+```
+parseInt('d10',16)
+```
+
+# toLocalString
+
+```
+var num = 1234567890;
+num.toLocalString();    //'1,234,567,890'
+```
