@@ -5,6 +5,22 @@ tags: vue
 categories: 编程开发
 ---
 
+# 公共组件
+
+## 引入公共组件
+
+```
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+import SixiButton from 'components/common/SixiButton'
+
+
+Vue.use(VueRouter)
+Vue.use(VueResource)
+Vue.component('six-button', SixiButton)
+```
+
 # 路由跳转及传参
 
 ## 直接跳转
@@ -267,3 +283,4 @@ import axios from 'axios'
 axios.defaults.withCredentials=true;//让ajax携带cookie
 Vue.prototype.$axios = axios;
 ```
+
