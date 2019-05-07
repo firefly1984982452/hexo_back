@@ -108,9 +108,3 @@ leancloud_visitors:
   enable: true
   app_id: yv0v3JGVmxkYl5K0iOKKndey-gzGzoHsz
   app_key: Km6xMUqIGyFaK2lFc7HpDNvG
-
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
