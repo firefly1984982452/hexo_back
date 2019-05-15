@@ -284,3 +284,17 @@ axios.defaults.withCredentials=true;//让ajax携带cookie
 Vue.prototype.$axios = axios;
 ```
 
+
+# mode模式
+
+## history
+
+优点：地址栏不会有`#`号，利于`SEO`优化
+
+缺点：线上刷新后会404，需要前后台都配置才行
+
+## hash
+
+优点：线上线下都没有刷新异常的问题
+
+缺点：地址栏有`#`号，对`SEO`不友好
