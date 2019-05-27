@@ -15,7 +15,6 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import SixiButton from 'components/common/SixiButton'
 
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.component('six-button', SixiButton)
@@ -146,7 +145,6 @@ config/index.js
 ------------
 
 
-
 # weex篇
 
 ## 部署
@@ -158,8 +156,6 @@ config/index.js
 `npm run build` 打包
 
 将`dist/index.js`里面的文件替换到Android中`assets/dist/index.js`和`assets/index.js`中
-
-
 
 
 # vue中做一些监听事件
@@ -176,15 +172,9 @@ created(){
 },
 ```
 
-
-
-
 # vue获取后端数据应该在created还是mounted方法
 
 看情况了，一般放到created里面就可以了，这样可以及早发请求获取数据，如果有依赖dom必须存在的情况，就放到`mounted(){this.$nextTick(() => { /* code */ })}`里面
-
-
-
 
 # vue的target:blank跳转
 
@@ -194,9 +184,6 @@ const {href} = this.$router.resolve({
 })
 window.open(href, '_blank')
 ```
-
-
-
 
 # 消息无缝滚动
 
@@ -229,13 +216,10 @@ methods: {
 
 参考：https://segmentfault.com/a/1190000012272194
 
-
 # 商品错误时显示默认图片
 
 ```
-
 <img v-bind:src="userData.photo" :onerror="logo" class="img-box4">  
-
 
 data: () => ({  
     logo: 'this.src="' + require('../assets/img.png') + '"'  
@@ -247,7 +231,6 @@ data: () => ({
 `<img v-lazy:background-image="{src: item.pic_url, error: 'http://bpic.588ku.com/back_pic/03/53/97/65579958bb0ec9a.jpg!r850/fw/400', loading: 'default_banner'}" />`
 
 注意：`error`里的图片得是网络图片，用本地图片我设置了很久都没有效果。
-
 
 # 引入mui
 
@@ -273,7 +256,6 @@ data: () => ({
 }
 ```
 
-
 # axios篇
 
 ## 设置请求头带cooike
@@ -283,7 +265,6 @@ import axios from 'axios'
 axios.defaults.withCredentials=true;//让ajax携带cookie
 Vue.prototype.$axios = axios;
 ```
-
 
 # mode模式
 
@@ -298,3 +279,311 @@ Vue.prototype.$axios = axios;
 优点：线上线下都没有刷新异常的问题
 
 缺点：地址栏有`#`号，对`SEO`不友好
+
+# vue中nextTick使用
+
+```
+//改变数据
+var msg = 'change';
+
+//想要立即使用刚刚赋的值‘change’，此时是不行的，DOM并没有更新
+console.log(vm.$el.textContext);//不能得到 'change'
+
+//这样可以获取，nextTick会在DOM更新后获取
+this.$nextTick(()=>{
+    console.log(vm.$el.textContext);//可以得到 'change'
+})
+```
+
+# vue项目中的for循环引发的血案
+
+项目中用了
+```
+v-for="(item) in arr"
+```
+改成
+```
+v-for="item in arr"
+```
+# vue父子组件相互通信
+
+## 子 => 父 传值
+
+### child.vue
+
+```
+sendData() {
+    this.$emit('sendDataFun', 'hello');
+}
+```
+
+### father.vue
+
+```
+<child @sendDataFun="get"></child>
+...
+get(val){
+	console.log(val)
+}
+```
+
+## 父 => 子 传值
+
+### father.vue
+
+```
+<child :sendType="type"></child>
+```
+
+### child.vue
+
+```
+...
+props:{
+	sendType:''
+},
+watch:{
+	sendType(){
+		...
+	}
+}
+...
+```
+
+## 父 => 子 调方法
+
+### father.vue
+
+```
+<child ref="child" @sendDataFun="get"></child>
+...
+this.$refs.child.sendData();
+...
+get(val){
+	console.log(val)
+}
+
+```
+
+### child.vue
+
+```
+sendData() {
+    this.$emit('sendDataFun', 'hello');
+}
+```
+
+# vue兄弟组件通过eventbus传值
+
+
+新建`bus.js`
+
+
+```
+import Vue from "vue"
+export default new Vue();
+```
+
+兄组件`child1.vue`
+
+```
+<span @click="send">点击</span>
+send(){
+	eventBus.$emit('sentMsg','hellowrold~');
+}
+```
+
+弟组件`child2.vue`
+
+```
+mounted() {
+    eventBus.$on('sentMsg',v=>{
+        console.log(v)
+    })
+},
+```
+
+# vue下swiper的使用
+
+## 安装
+
+`npm install swiper`
+
+然后视情况看要不要在main.js里面全局引用，如果界面少可以不用。
+
+## 引用
+
+`html`部分：
+
+注意：此处的data要注意**网络请求的异步问题**
+
+```
+<swiper :options="swiperOption" ref="mySwiper">
+    <swiper-slide v-for="(item,index) in data" :key="index" class="swiper-slide">
+        {{item}}
+    </swiper-slide>
+</swiper>
+```
+
+`js`部分
+
+```
+import 'swiper/dist/css/swiper.css'
+import {swiper, swiperSlide} from 'vue-awesome-swiper'
+
+...
+
+data(){
+    reutrn {
+        swiperOption: {
+            direction: 'vertical',
+            notNextTick: true,
+            loop: true,
+            speed: 3500,
+            autoplay: {
+                delay: 4000,
+                stopOnLastSlide: false,
+                disableOnInteraction: false
+            }
+        }
+    }
+},
+components: {
+    swiper,
+    swiperSlide
+}
+```
+
+`css`部分
+
+视情况而定，有的代码需要，有的不需要。
+
+```
+.swiper-container{
+    windth:100%important;
+    heidth:100px!important;
+}
+```
+
+# vue国际化i18n使用
+
+## 安装vue-i18n
+
+npm install vue-i18n --save
+
+## main.js文件配置
+
+```
+// 引入i18n国际化插件
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+ 
+// 注册i18n实例并引入语言文件，文件格式等下解析
+const i18n = new VueI18n({
+  locale: 'zh',
+  messages: {
+    'zh': require('@/assets/languages/zh.json'),
+    'en': require('@/assets/languages/en.json')
+  }
+})
+//将i18n注入到vue实例中
+new Vue({
+  el: '#app',
+  router,
+  store,
+  i18n,
+  components: { App },
+  template: '<App/>'
+})
+```
+
+- en.json
+
+```
+{
+    "common": {
+        "home": "Home",
+        "login": "Login",
+        "register": "Register",
+        "appDownload": "APP Download",
+        "aboutUs": "About Us",
+        "faq": "FAQ",
+        "contact": "Contact Us",
+        "join": "Join Us",
+        "copyright": "Copyright © ZLGMcu Ltd",
+        "news": "News",
+        "toggle": "Toggle",
+        "welcome": "Welcome, ",
+        "userinfo": "Userinfo",
+        "firstPage": "Home",
+        "setting": "Setting",
+        "exit": "Exit"
+    },
+    "message": {
+        "hint1": "Please Input Nickname",
+        "hint2": "Please Input Username",
+        "hint3": "Please Input Password",
+        "hint4": "Don't find picture",
+        "hint5": "No Account?",
+        "hint6": "Register Now",
+        "hint7": "Remember me",
+        "hint8": "Can't login in?",
+        "placeHolder1": "Nickname",
+        "placeHolder2": "Username or Phone Number or Email",
+        "placeHolder3": "Password(8 Digits at Least)"
+    }
+}
+```
+
+- zh.json
+
+```
+
+{
+    "common":{
+        "home": "首页",
+        "login": "登录",
+        "register": "注册",
+        "appDownload": "APP下载",
+        "aboutUs": "关于我们",
+        "faq": "常见问题",
+        "contact": "联系方式",
+        "join": "加入我们",
+        "copyright": "版权说明 © 广州xxx有限公司",
+        "news": "消息",
+        "toggle": "切换",
+        "welcome": "欢迎您，",
+        "userinfo": "个人信息",
+        "firstPage":  "主页",
+        "setting": "设置",
+        "exit": "退出"
+    },
+    "message":{
+        "hint1": "请输入昵称",
+        "hint2": "请输入账号",
+        "hint3": "请输入密码",
+        "hint4": "没有找到",
+        "hin5": "没有账号？",
+        "hint6": "马上注册",
+        "hint7": "记住我",
+        "hint8": "登录遇到问题？",
+        "placeHolder1": "昵称",
+        "placeHolder2": "用户名、手机号或邮箱",
+        "placeHolder3": "密码（至少8位字符）"
+    }
+}
+```
+
+## 使用vue-i18n
+
+```
+<h1 >{{$t('common.home')}}</h1>
+<el-button @click="changeTest">切换</el-button>
+
+...
+
+changeTest(){
+	let lang = this.$i18n.locale == 'zh' ? 'en' : 'zh';
+	this.$i18n.locale = lang;
+},
+```
