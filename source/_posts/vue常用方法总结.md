@@ -179,10 +179,11 @@ created(){
 # vue的target:blank跳转
 
 ```
-const {href} = this.$router.resolve({
-    name: 'logistics'
-})
-window.open(href, '_blank')
+    let routeUrl = this.$router.resolve({
+    path: '/peoManager/peopleDetails',
+    query: {index: index, peopleID: item.peopleID}
+    })
+    window.open(routeUrl.href, '_blank')
 ```
 
 # 消息无缝滚动
@@ -216,13 +217,13 @@ methods: {
 
 参考：https://segmentfault.com/a/1190000012272194
 
-# 商品错误时显示默认图片
+# 图片错误时显示默认图片
 
 ```
 <img v-bind:src="userData.photo" :onerror="logo" class="img-box4">  
 
 data: () => ({  
-    logo: 'this.src="' + require('../assets/img.png') + '"'  
+    logo: 'this.src="' + require('../assets/img.png') + '"'
 }) 
 ```
 
