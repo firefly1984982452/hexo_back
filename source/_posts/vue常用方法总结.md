@@ -588,3 +588,16 @@ changeTest(){
 	this.$i18n.locale = lang;
 },
 ```
+
+## 让el-select可以绑定对象
+
+```
+<el-select value-key="name">
+  <el-option
+    v-for="item in list"
+    :key="item.id"
+    :label="item.name"
+    :value="item">
+  </el-option>
+</el-select>
+```
