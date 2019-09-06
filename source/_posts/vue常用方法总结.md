@@ -41,6 +41,7 @@ this.$route.params
 ```
 *tips:A.vue使用的是`$router`，B.vue使用的是`$route`，极易混淆。*
 
+**此处push的必须是name，不能是path，如果要用path的话，可以用query**
 
 ## 地址栏'/'传参
 
