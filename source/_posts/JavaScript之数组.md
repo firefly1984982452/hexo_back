@@ -5,6 +5,57 @@ tags:
 categories: 编程开发
 ---
 
+# 判断[1,2]是否为数组的方法
+
+**typeof 不能验证[1,2]是否为数组，返回的是'object'**
+
+## Array.isArray
+
+```
+Array.isArray([1,2]) // true
+```
+
+## instanceof
+
+```
+[1,2] instanceof Array
+```
+
+来一下`instanceof`的具体实现方法
+
+```
+function instanceof(left, right) {
+    // 获得类型的原型
+    let prototype = right.prototype
+    // 获得对象的原型
+    left = left.__proto__
+    // 判断对象的类型是否等于类型的原型
+    while (true) {
+        if (left === null)
+            return false
+        if (prototype === left)
+            return true
+        left = left.__proto__
+    }
+}
+```
+
+所以`[1,2].__proto__ === Array.prototype`也是可以验证是否为数组
+
+## constructor
+
+```
+[1,2].constructor === Array
+```
+
+同上理
+
+## apply
+
+```
+({}).toString.apply([1,2]) === '[object Array]'
+```
+
 # indexOf
 
 与String类似，Array也可以通过indexOf()来搜索一个指定的元素的位置：
@@ -166,4 +217,39 @@ list.map(item => {
 ```
 arr.toLocaleString()
 "1,2,3,4,5"
+```
+
+# from
+
+## 将类数组对象或可遍历对象变成真正的对象。
+
+```
+let arrayLike = {
+0: 'tom',
+1: '65',
+2: '男',
+3: ['jane','john','Mary'],
+'length': 4
+}
+let arr = Array.from(arrayLike)
+console.log(arr) // ['tom','65','男',['jane','john','Mary']]
+```
+
+其它情况则不会改变，会变成`[ undefined, undefined, undefined, undefined ]`。
+
+## Set变为数组
+
+```
+Array.from(new Set([1,3,3,4])) //[1, 3, 4]
+```
+还能带参数
+```
+Array.from(new Set([1,3,3,4]), item => item + 1) //[2, 4, 5]
+```
+
+
+## 字符串变为数组
+
+```
+Array.from('hello') // ["h", "e", "l", "l", "o"]
 ```
