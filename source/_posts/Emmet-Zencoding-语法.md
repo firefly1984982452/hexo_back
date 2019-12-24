@@ -7,7 +7,9 @@ categories: 编程开发
 
 > 参考原文：https://blog.csdn.net/seasunexpect/article/details/71124299
 
-# 子节点 '#'
+# DOM添加
+
+## 子节点 '>'
 
 - 语法：
 
@@ -25,7 +27,7 @@ div>ul>li
 </div>
 ```
 
-# 兄弟节点 '+'
+## 兄弟节点 '+'
 
 - 语法：
 
@@ -40,7 +42,7 @@ div+p
 <p></p>
 ```
 
-# 往上 '^'
+## 上线节点 '^'
 
 - 语法：
 
@@ -57,7 +59,69 @@ div>p>span^b
 </div>
 ```
 
-# 次数 '`*`'
+
+# 类和ID
+
+## ID '#'
+
+- 语法：
+
+```
+div#page
+```
+
+- 结果：
+
+```
+<div id="page"></div>
+```
+
+## class '.'
+
+- 语法：
+
+```
+div.page
+```
+
+- 结果：
+
+```
+<div class="page"></div>
+```
+
+## '.class#id'
+
+- 语法
+
+```
+div.class#id
+```
+
+- 结果：
+
+```
+<div class="class" id="id"></div>
+```
+
+## '.class.class'
+
+- 语法
+
+```
+div.class.class
+```
+
+- 结果：
+
+```
+<div class="class class"></div>
+```
+
+
+# 算法
+
+## 次数 '`*`'
 
 - 语法：
 
@@ -75,7 +139,7 @@ ul>li*3
 </ul>
 ```
 
-# 分组 '()'
+## 分组 '()'
 
 - 语法：
 
@@ -99,51 +163,7 @@ div>(header>ul>li*2)+footer>p
 </div>
 ```
 
-
-# ID '#'
-
-- 语法：
-
-```
-div#page
-```
-
-- 结果：
-
-```
-<div id="page"></div>
-```
-
-# class '.'
-
-- 语法：
-
-```
-div.page
-```
-
-- 结果：
-
-```
-<div class="page"></div>
-```
-
-# 自定义属性 '[attr]'
-
-- 语法：
-
-```
-td[title="hello" colspan=3]
-```
-
-- 结果：
-
-```
-<td title="hello" colspan="3"></td>
-```
-
-
-# 编号 '$'
+## 编号 '$'
 
 - 语法：
 
@@ -161,7 +181,28 @@ ul>li.item$$$*3
 </ul>
 ```
 
-# 改变编号基数和方向 '$@-'
+
+
+# 属性
+
+## 自定义属性 '[attr]'
+
+- 语法：
+
+```
+td[title="hello" colspan=3]
+a[href='www.baidu.com' target='_blank']
+```
+
+- 结果：
+
+```
+<td title="hello" colspan="3"></td>
+<a href="www.baidu.com" target="_blank"></a>
+```
+
+	
+## 改变编号基数和方向 '$@-'
 
 - 语法：
 
@@ -195,12 +236,32 @@ ul>li.item$@3*4
 
 ```
 div{click me}
+p>{click}+a{here}+{continue}
 ```
 
 - 结果：
 
 ```
 <div>click me</div>
+<p>click<a href="">here</a>continue</p>
+```
+
+# 隐式标签 
+
+- 语法：
+
+```
+ul>.test*3
+```
+
+- 结果：
+
+```
+<ul>
+	<li class="test"></li>
+	<li class="test"></li>
+	<li class="test"></li>
+</ul>
 ```
 
 # 其它
