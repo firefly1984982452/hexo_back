@@ -576,7 +576,7 @@ new Vue({
 }
 ```
 
-## 使用vue-i18n
+# 使用vue-i18n
 
 ```
 <h1 >{{$t('common.home')}}</h1>
@@ -590,7 +590,7 @@ changeTest(){
 },
 ```
 
-## 让el-select可以绑定对象
+# 让el-select可以绑定对象
 
 ```
 <el-select value-key="name">
@@ -601,4 +601,61 @@ changeTest(){
     :value="item">
   </el-option>
 </el-select>
+```
+
+# 使用Vuex
+
+## `main.vue`
+
+```
+import { mapState,mapMutations } from 'vuex';
+...
+computed: {
+    ...mapState({
+    tabsList: 'tabsList'
+    })
+},
+methods: {
+    ...mapMutations(["handleTabsList"]),
+}
+```
+这样就可以直接在`vue`文件中写`this.tabsList`来获取vuex中的值。
+如：
+
+原来：
+```
+this.$store.commit('handleTabsList',this.$store.state.tabsList)
+```
+
+现在：
+```
+this.handleTabsList(this.tabsList)
+
+```
+
+## store.js
+
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    state: {
+        tabsList: [] || localStorage.getItem('tabsList')
+    },
+    mutations: {
+        handleTabsList: (state, tabsList) => {
+            state.tabsList = tabsList
+            localStorage.setItem('tabsList', JSON.stringify(tabsList))
+        }
+    },
+    actions: {
+
+    },
+    getters: {
+        tabsList: (state) => state.tabsList
+    }
+})
 ```
