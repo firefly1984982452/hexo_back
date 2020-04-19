@@ -98,3 +98,17 @@ b = {
 
 数组我们一般用`concat`合并，同理，对象用`assign`合并。
 
+# Symbol
+
+```
+var a = Symbol('e')
+var b = Symbol('e')
+a == b //false
+
+var c = 'e'
+var d = 'e'
+c == d // true
+c === d // true
+```
+
+可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。

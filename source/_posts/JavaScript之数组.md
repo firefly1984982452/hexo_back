@@ -50,10 +50,12 @@ function instanceof(left, right) {
 
 同上理
 
-## apply
+## apply、call、bind
 
 ```
 ({}).toString.apply([1,2]) === '[object Array]'
+({}).toString.call([1,2]) === '[object Array]'
+({}).toString.bind([1,2])() === '[object Array]'
 ```
 
 # indexOf
