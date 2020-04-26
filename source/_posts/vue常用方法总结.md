@@ -138,6 +138,8 @@ config/index.js
 
 `v-model.number`同样也只能输入数字，但是输入的非数字仍然会显示在输入框，看不去不友好。
 
+`v-model.number`和`onkeyup="value=value.replace(/[^\d]/g,'') "`同时使用时可能会出错。
+
 *tips:*
 `<input type="number" name="" id="" value="" />`
 
