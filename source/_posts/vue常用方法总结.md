@@ -607,6 +607,10 @@ changeTest(){
 
 # 使用Vuex
 
+## 下载
+
+`npm install vuex --save`
+
 ## `main.vue`
 
 ```
@@ -660,4 +664,19 @@ export default new Vuex.Store({
         tabsList: (state) => state.tabsList
     }
 })
+```
+
+## main.js
+
+```
+import store from './store'
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
+})
+
 ```
