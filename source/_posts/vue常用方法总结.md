@@ -140,6 +140,8 @@ config/index.js
 
 `v-model.number`和`onkeyup="value=value.replace(/[^\d]/g,'') "`同时使用时可能会出错。
 
+`oninput="value=value.replace(/[^0-9A-Za-z.]/g,'')"`
+
 *tips:*
 `<input type="number" name="" id="" value="" />`
 
