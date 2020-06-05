@@ -1,0 +1,119 @@
+---
+title: js时间方法
+date: 2020-06-05 10:19:32
+tags:
+categories: 编程开发
+---
+
+# 把时间戳转为时间（年月日时分秒）
+
+```
+var time = new Date();
+var Y = time.getFullYear();
+var m = time.getMonth() + 1;
+var d = time.getDate();
+var H = time.getHours();
+var mi = time.getMinutes();
+var s = time.getSeconds();
+if(m < 10)  m = '0' + m;
+if(d < 10) d = '0' + d;
+if(H < 10) H = "0" + H;
+if(mi < 10) mi = '0' + mi;
+if(s < 10) s = "0" + s;
+console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
+```
+
+# 当时时间时分秒（非时间戳）
+
+`new Date().toLocaleString()`
+
+# 获取指定时间的时间戳
+
+`Math.floor(new Date(Date.UTC(2020, 0, 1, 0, 0, 0)).getTime() / 1000)` // 1577836800 --> 2020/1/1 8:0:0
+
+`Math.floor(new Date('2020-01-01 00:00:00').getTime()/1000)` // 1577808000 --> 2020/1/1 0:0:0
+
+`Date.parse('2020-01-01 00:00:00')/1000` // 1577808000 --> 2020/1/1 0:0:0
+
+# 获取当前时间戳
+
+以下为秒数，如果要毫秒数就不要`/1000`
+
+## 方法一
+
+```
+Math.round(new Date().getTime()/1000)
+```
+
+## 方法二
+
+```
+Math.round((+ new Date())/1000)
+```
+
+## 方法三
+
+```
+Math.round(Date.now()/1000)
+```
+
+## 方法四
+
+```
+Math.round(Date.valueOf()/1000)
+```
+
+# 两个时间戳相减所距时间
+
+```
+getDate(){
+  let startTimeStamp = Date.parse('2020-01-01 00:00:00')/1000;
+  let nowTimeStamp = Math.floor(+new Date()/1000);
+  let reduceTimeStamp = nowTimeStamp - startTimeStamp;
+  let seconds = reduceTimeStamp % 60;
+  let day = Math.floor(reduceTimeStamp / 60 /60 / 24);
+  let hour = Math.floor((reduceTimeStamp / 60 /60) % 24);
+  let minute = Math.floor((reduceTimeStamp /60) % 60);
+  console.log('两个时间段相距：' + day + '天 ' + hour + '小时 ' + minute + '秒');
+},
+```
+
+# 计算今天是今年的进度的多少
+
+```
+getPlan(){
+  let now = new Date();
+  let year = now.getFullYear();
+  let yearStartTimeStamp = Math.floor(new Date(year + '/01/01 00:00:00').getTime()/1000);
+  let yearEndTimeStamp = Math.floor(new Date(year + '/12/31 23:59:59').getTime()/1000);
+  let nowTimeStamp = Math.floor(now.getTime()/1000);
+  let reduceTotal = yearEndTimeStamp - yearStartTimeStamp;
+  let reduceNow = nowTimeStamp - yearStartTimeStamp;
+  let plan = parseFloat(((reduceNow/reduceTotal)*100).toFixed(2));
+  console.log('对今年来说，今天的进度是：'+plan)
+},
+
+<!-- 其它进度 -->
+
+// 对于80岁，你目前的进度是多少
+getAgePlan () {
+  let now = new Date();
+  let year = 1996;
+  let startBirthDay = Math.floor(new Date(year + '-11-18 00:00:00').getTime()/1000);
+  let endBirthDay = Math.floor(new Date((year + 80) +'-11-18 23:59:59').getTime()/1000);
+  let nowTimeStamp = Math.floor(now.getTime()/1000);
+  let reduceTotal = endBirthDay - startBirthDay;
+  let reduceNow = nowTimeStamp - startBirthDay;
+  let plan = parseFloat(((reduceNow/reduceTotal)*100).toFixed(2));
+  console.log('对于80岁，你目前的进度是:' +plan)
+},
+// 你目前的年龄相当于时钟上的几点几分
+getAge24Time() {
+  let minutesTotal = 24*60;
+  let agePlan = Math.ceil(minutesTotal * (29.43/100));
+  console.log(agePlan);
+  let hour = Math.trunc(agePlan/60);
+  let minute = agePlan%60;
+  console.log('你目前的年龄相当于时钟上的'+hour+'点'+minute+'分')
+}
+```
