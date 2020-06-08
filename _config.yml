@@ -101,7 +101,7 @@ live2d:
     show: true
 
 # 百度统计
-# search : 88e5da32f9c28e65f8dd7fef89481103
+search : 88e5da32f9c28e65f8dd7fef89481103
 
 # add post views
 leancloud_visitors:
