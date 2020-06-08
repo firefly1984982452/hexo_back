@@ -220,7 +220,7 @@ methods: {
 }
 ```
 
-参考：https://segmentfault.com/a/1190000012272194
+[参考](https://segmentfault.com/a/1190000012272194)
 
 # 图片错误时显示默认图片
 
