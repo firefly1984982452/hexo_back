@@ -1,6 +1,6 @@
 ---
 title: JavaScript之数组
-date: 2018-05-02 15:44:34
+date: 2020-06-08 15:44:34
 tags:
 categories: 编程开发
 ---
@@ -58,18 +58,13 @@ function instanceof(left, right) {
 ({}).toString.bind([1,2])() === '[object Array]'
 ```
 
-# indexOf
+# 截取
 
-与String类似，Array也可以通过indexOf()来搜索一个指定的元素的位置：
+## slice
 
-```
-var arr = [123,124,'124'];
-arr.indexOf(124);    //1
-```
+截取数组一部分，并返回新数组，输入开始位置，结束位置
 
-注意了，数字124和字符串'124'是不同的元素。
-
-# slice
+**不会改变原数组**
 
 ```
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -77,8 +72,22 @@ arr.slice(1,3);      //(2) ["B", "C"]
 
 ```
 
+## splice
 
-# push和pop
+从数组中添加或删除元素
+
+开始位置，个数，添加数据
+
+**会改变原数组**
+
+```
+var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+arr.splice(1,3);     //(3) ["B", "C", "D"]
+```
+
+# 在开头或末尾增加或删除
+
+## push和pop
 
 push()向Array的末尾添加若干元素，pop()则把Array的最后一个元素删除掉.
 
@@ -88,22 +97,43 @@ arr.push('h');       //['A', 'B', 'C', 'D', 'E', 'F', 'G','h'];
 arr.pop();           //['A', 'B', 'C', 'D', 'E', 'F', 'G']
 ```
 
-# sort和reverse
+## shift和unshift
+
+shift()删除数组第一个数据；
+unshift()删除数姐最后一个数据。
+
+# 排序
+
+## sort
+
+按ascii码排序
 
 ```
 var arr = [23,122,1,53,231]
 arr.sort();          //(5) [1, 122, 23, 231, 53]
+```
+
+升序
+
+```
+var arr = [23,122,1,53,231];
+arr.sort((a,b) => {return a - b}); //[1, 23, 53, 122, 231]
+
+```
+
+## reverse 
+
+倒序
+
+```
+var arr = [23,122,1,53,231]
 arr.reverse();       //(5) [53, 231, 23, 122, 1]
 ```
 
-# splice
-
-```
-var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-arr.splice(1,3);     //(3) ["B", "C", "D"]
-```
 
 # cancat
+
+合并两个数组
 
 ```
 var a = ['a','b'];
@@ -128,20 +158,24 @@ c.join(',');       //"a,b,c,d"
 // [4, 2, 3, 4, 5]
 ```
 
-# entries
+# 查询和过滤
+
+## entries
 
 返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].entries().next().value`
 
-# values
+## values
 
 和entries异曲同工
 返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].values().next().value`
 
-# every
+## every
+
+检查数组的每个元素是否符合条件
 
 ```
 function c(element,index,array){
@@ -153,7 +187,7 @@ function c(element,index,array){
 //false
 ```
 
-# some
+## some
 和every异曲同工
 ```
 function c(element,index,array){
@@ -165,14 +199,25 @@ function c(element,index,array){
 //false
 ```
 
-# filter
+## filter
 
 ```
 [12, 5, 8, 130, 44].filter( num => num >10)
 (3) [12, 130, 44]
 ```
 
-# find和findIndex
+## indexOf
+
+与String类似，Array也可以通过indexOf()来搜索一个指定的元素的位置：
+
+```
+var arr = [123,124,'124'];
+arr.indexOf(124);    //1
+```
+
+注意了，数字124和字符串'124'是不同的元素。
+
+## find和findIndex
 
 ```
 [12, 5, 8, 130, 44].find((ele)=>{return ele>10})
@@ -181,21 +226,27 @@ function c(element,index,array){
 //3
 ```
 
-# includes
+## includes
 返回是否有这个值
 ```
 [1,2,3].includes(2)
 //true
 ```
 
-# indexOf
-返回这个值是第几个
+
+# fill
+
+填充
+
 ```
-[1,2,3].includes(2)
-//1
+var arr = new Array(8).fill('2'); // ["2", "2", "2", "2", "2", "2", "2", "2"]
 ```
 
-# map
+# 遍历
+
+## map
+
+遍历，**返回新数据**，对原数组不影响。
 
 原来的：
 
@@ -212,6 +263,37 @@ for(var i in list){
 list.map(item => {
     item.type = 1
 })
+```
+
+## forEach
+
+遍历，每个元素执行回调函数，**返回undefined**。
+
+## reduce
+
+将数组计算为一个值
+
+原来写法：
+
+```
+var numbers = [15.5, 2.3, 1.1, 4.7];
+let total = 0;
+numbers.forEach(val => {
+    total += val;
+})
+console.log(total); // 23.6
+```
+
+reduce写法：
+
+```
+var numbers = [15.5, 2.3, 1.1, 4.7];
+
+function getSum(total, num) {
+    return total + num;
+}
+
+console.log(getSum,0); // 23.6
 ```
 
 # toLocalString
@@ -244,7 +326,9 @@ console.log(arr) // ['tom','65','男',['jane','john','Mary']]
 ```
 Array.from(new Set([1,3,3,4])) //[1, 3, 4]
 ```
+
 还能带参数
+
 ```
 Array.from(new Set([1,3,3,4]), item => item + 1) //[2, 4, 5]
 ```
