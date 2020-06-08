@@ -98,6 +98,9 @@ menu:
   home: /
   archives: /archives
   categories: /categories
+  program: /categories/program
+  reading: /categories/reading
+  idea: /categories/idea
   tags: /tags
   about: /about
   # commonweal: 公益404
@@ -162,7 +165,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: https://www.jianshu.com/u/8a209bfd158a
+avatar: https://upload.jianshu.io/users/upload_avatars/830956/debe5156eed7?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240
 
 # Table Of Contents in the Sidebar
 toc:
