@@ -5,9 +5,7 @@ categories: - program
 ---
 
 # 设计图
-首先，拿到设计图
-
-![携程APP设计图](http://img.caibaojian.com/uploads/2015/12/1418891322.jpeg)
+首先，拿到设计图，假设设计图是375*667。
 
 以顶部轮播为例，它的宽是375px，高是120px左右。
 
