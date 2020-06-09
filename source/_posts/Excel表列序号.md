@@ -1,8 +1,7 @@
 ---
 title: Excel表列序号
 date: 2019-07-11 15:44:34
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 [地址](https://leetcode-cn.com/problems/excel-sheet-column-number/)

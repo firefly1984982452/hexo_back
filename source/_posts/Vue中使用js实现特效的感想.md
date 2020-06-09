@@ -1,8 +1,7 @@
 ---
 title: Vue中使用js实现特效的感想
 date: 2019-09-10 17:44:34
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 首先，上代码：

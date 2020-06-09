@@ -1,8 +1,7 @@
 ---
 title: 新建vue项目之后要搭建的项目框架
 date: 2020-05-08 09:57:31
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 [github地址](https://github.com/firefly1984982452/base)

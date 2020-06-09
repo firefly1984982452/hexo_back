@@ -1,8 +1,7 @@
 ---
 title: 用node安装一些有用的插件
 date: 2018-03-28 18:35:14
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 # 虚拟服务器

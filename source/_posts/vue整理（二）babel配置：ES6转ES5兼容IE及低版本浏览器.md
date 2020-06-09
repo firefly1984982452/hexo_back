@@ -1,8 +1,7 @@
 ---
 title: vue整理（二）babel配置：ES6转ES5兼容IE及低版本浏览器
 date: 2018-10-18 14:59:46
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 如果用到了	`promise`、`async...await`之类的ES6的语法，在IE等低浏览器中就会显示不出来，此时，就需要我们做兼容，方法如下。

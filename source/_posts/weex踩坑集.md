@@ -1,8 +1,7 @@
 ---
 title: weex踩坑集
 date: 2018-04-20 11:50:38
-tags: [weex,vue]
-categories: 编程开发
+categories: - program
 ---
 # 项目创建
 

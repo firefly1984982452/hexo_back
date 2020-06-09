@@ -1,8 +1,7 @@
 ---
 title: linux部分命令
 date: 2018-12-26 16:42:18
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 

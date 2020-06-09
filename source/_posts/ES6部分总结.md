@@ -1,8 +1,7 @@
 ---
 title: ES6部分总结
 date: 2019-10-16 15:44:34
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 # 数字

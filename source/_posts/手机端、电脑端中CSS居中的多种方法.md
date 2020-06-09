@@ -1,8 +1,7 @@
 ---
 title: 手机端、电脑端中CSS居中的多种方法
 date: 2018-04-24 11:56:41
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 # 预览

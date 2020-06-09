@@ -1,8 +1,7 @@
 ---
 title: async-await和promise用法
 date: 2019-02-26 12:15:18
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 **要实现的效果

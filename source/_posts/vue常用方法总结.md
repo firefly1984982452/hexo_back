@@ -1,8 +1,7 @@
 ---
 title: vue常用方法总结
 date: 2018-03-19 13:50:17
-tags: vue
-categories: 编程开发
+categories: - program
 ---
 
 # 公共组件

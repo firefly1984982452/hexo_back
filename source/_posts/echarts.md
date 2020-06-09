@@ -1,8 +1,7 @@
 ---
 title: echarts笔记
 date: 2018-11-20 14:35:18
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 # 条形图横向显示

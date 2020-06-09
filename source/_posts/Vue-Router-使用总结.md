@@ -1,8 +1,7 @@
 ---
 title: Vue Router 使用总结
 date: 2018-03-05 13:21:38
-tags: [vue,vue-router]
-categories: 编程开发
+categories: - program
 ---
 
 # 1. 前言

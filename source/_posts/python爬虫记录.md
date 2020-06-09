@@ -1,8 +1,7 @@
 ---
 title: python爬虫记录
 date: 2019-01-18 12:15:18
-tags:
-categories: 编程开发
+categories: - program
 ---
 
 参考：
