@@ -1,7 +1,8 @@
 ---
 title: Vue Router 使用总结
 date: 2018-03-05 13:21:38
-categories: - program
+categories: 
+- program
 ---
 
 # 1. 前言

@@ -1,7 +1,8 @@
 ---
 title: linux部分命令
 date: 2018-12-26 16:42:18
-categories: - program
+categories: 
+- program
 ---
 
 

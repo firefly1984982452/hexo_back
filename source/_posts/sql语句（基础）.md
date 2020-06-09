@@ -1,7 +1,8 @@
 ---
 title: sql语句（基础）
 date: 2019-04-17 13:25:07
-categories: - program
+categories: 
+- program
 ---
 
 # 增

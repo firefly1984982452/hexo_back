@@ -1,7 +1,8 @@
 ---
 title: 根据设计图适配rem
 date: 2018-03-09 17:02:40
-categories: - program
+categories: 
+- program
 ---
 
 # 设计图

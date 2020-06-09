@@ -1,7 +1,8 @@
 ---
 title: Vue中使用Moment.js的感想
 date: 2019-08-30 15:44:34
-categories: - program
+categories: 
+- program
 ---
 
 # 下载

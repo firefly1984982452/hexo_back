@@ -1,7 +1,8 @@
 ---
 title: js String对象
 date: 2020-06-05 13:40:32
-categories: - program
+categories: 
+- program
 ---
 
 # length

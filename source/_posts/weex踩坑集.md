@@ -1,7 +1,8 @@
 ---
 title: weex踩坑集
 date: 2018-04-20 11:50:38
-categories: - program
+categories: 
+- program
 ---
 # 项目创建
 

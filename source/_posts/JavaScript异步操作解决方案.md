@@ -1,7 +1,8 @@
 ---
 title: JavaScript异步操作解决方案
 date: 2018-05-10 13:39:15
-categories: - program
+categories: 
+- program
 ---
 
 >需求是这样的：`for`循环13次一个接口请求，请求完之后再遍历所有的数据，用另一个数组接收部分数据

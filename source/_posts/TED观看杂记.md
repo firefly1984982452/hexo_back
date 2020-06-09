@@ -1,7 +1,8 @@
 ---
 title: TED观看杂记
-date: 2019-03-14 13:30:34
-categories: - reading
+date: 2020-03-14 13:30:34
+categories: 
+- reading
 ---
 
 # 如何掌控你的自由时间

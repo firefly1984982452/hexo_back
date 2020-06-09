@@ -1,7 +1,8 @@
 ---
 title: Emmet(Zencoding)语法
 date: 2018-05-02 10:51:17
-categories: - program
+categories: 
+- program
 ---
 
 [参考原文](https://blog.csdn.net/seasunexpect/article/details/71124299)

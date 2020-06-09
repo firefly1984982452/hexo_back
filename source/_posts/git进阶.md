@@ -1,7 +1,8 @@
 ---
 title: git进阶
 date: 2018-10-24 14:35:18
-categories: - program
+categories: 
+- program
 ---
 
 # 线上版本回退

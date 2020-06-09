@@ -1,7 +1,8 @@
 ---
 title: docker初探
 date: 2018-12-26 16:15:18
-categories: - program
+categories: 
+- program
 ---
 
 docker可以理解为**容器/虚拟机/服务器**。

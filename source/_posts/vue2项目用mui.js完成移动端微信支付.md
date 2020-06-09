@@ -2,7 +2,8 @@
 title: vue2+mui.js完成移动端微信支付
 date: 2018-04-16 14:19:54
 tags:vue
-categories: - program
+categories: 
+- program
 ---
 
 >这个测试是建立在DCould公司上的，如果支付，也是DCould公司收的钱哦

@@ -1,7 +1,8 @@
 ---
 title: JavaScript之数组
 date: 2020-06-08 15:44:34
-categories: - program
+categories: 
+- program
 ---
 
 # 判断[1,2]是否为数组的方法

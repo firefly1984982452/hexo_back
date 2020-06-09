@@ -1,7 +1,8 @@
 ---
 title: js时间方法
 date: 2020-06-05 10:19:32
-categories: - program
+categories: 
+- program
 ---
 
 # 把时间戳转为时间（年月日时分秒）

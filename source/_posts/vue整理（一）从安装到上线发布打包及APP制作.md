@@ -1,7 +1,8 @@
 ---
 title: vue整理（一）从安装到上线发布打包及APP制作
 date: 2018-10-18 14:59:46
-categories: - program
+categories: 
+- program
 ---
 
 

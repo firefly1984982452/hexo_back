@@ -1,7 +1,8 @@
 ---
 title: vue打包为android apk 详情配置
 date: 2018-09-14 11:19:56
-categories: - program
+categories: 
+- program
 ---
 
 # 配置打包信息
