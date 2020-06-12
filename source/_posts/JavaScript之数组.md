@@ -295,6 +295,11 @@ function getSum(total, num) {
 
 console.log(getSum,0); // 23.6
 ```
+或：
+```
+[15.5, 2.3, 1.1, 4.7].reduce((x,y) => x+y) // 23.6
+```
+
 
 # toLocalString
 
