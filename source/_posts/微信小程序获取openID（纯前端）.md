@@ -1,6 +1,6 @@
 ---
 title: 微信小程序获取openID（纯前端）
-date: 2020-06-28 10:49:32
+date: 2020-06-29 16:49:32
 categories: 
 - program
 ---
@@ -147,56 +147,6 @@ categories:
 </script>
 
 <style>
-	.page{
-		padding: 10rpx;
-	}
-	.input {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 300rpx;
-		margin: 50rpx 0 20rpx 0;
-	}
-	.line{
-		display: flex;
-		flex-direction: row;
-	}
-	.name{
-		width: 150rpx;
-	}
-	.input-content{
-		width: 100%;
-
-	}
-	.input-time{
-		width: 100%;
-
-	}
-	.button{
-		width: 100%;
-	}
-	.list{
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-	.content{
-		width: 300rpx;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
-	}
-	.time{
-		width: 450rpx;
-		color: #666;
-	}
-	.del{
-		width: 100rpx;
-		height: 100%;
-		font-size: 10rpx;
-		color: #f00;
-	}
 </style>
 
 ```
