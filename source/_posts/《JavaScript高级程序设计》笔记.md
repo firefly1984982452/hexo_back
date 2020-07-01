@@ -124,11 +124,11 @@ test(3)
 
 但是`arguments.callee`已经被弃用了，所以可以尝试其它方法。
 
-## return ()();
+## 命名一个function
 
 ```
 function test(num) {
-    return (function fn (){
+    (function fn (){
         console.log(num)
         if(num !== 0) {
             --num;
@@ -139,30 +139,50 @@ function test(num) {
 test(3)
 ```
 
-```
-function test(num) {
-    return function fn (){
-        console.log(num)
-        if(num !== 0) {
-            --num;
-            fn();
-        }
-    };
-    fn();
-}
-test(3)()
-```
+# return和闭包
+
+## 直接return
 
 ```
-function test(num) {
-    function fn (){
-        console.log(num)
-        if(num !== 0) {
-            --num;
-            fn();
-        }
-    };
-    fn();
+var a = 0;
+function fn(){
+    var a = 12;
+    return a;
 }
-test(3)
+console.log(fn()); // 12
+console.log(a); // 0
 ```
+
+## return function
+
+```
+var a = 0;
+function fn() {
+    var a = 12;
+    return function(){
+        return a
+    };
+}
+console.log(fn()()); // 12
+console.log(a); // 0
+```
+
+## return 闭包
+
+```
+var a = 0;
+function fn() {
+    var a = 12;
+    return (function(){
+        return a
+    })();
+}
+console.log(fn()); // 12
+console.log(a); // 0
+```
+## 区别
+
+1.直接return返回的是变量，闭包返回的是执行环境（所以在return function部分就要fn()()这样调用2次）。
+2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
+3.return出来的是一个值（12），不是变量本身（a），此处的return是取得私有变量值的一种方法，跟闭包没有严格关系。
+
