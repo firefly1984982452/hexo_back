@@ -186,3 +186,79 @@ console.log(a); // 0
 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
 3.return出来的是一个值（12），不是变量本身（a），此处的return是取得私有变量值的一种方法，跟闭包没有严格关系。
 
+## 防抖和节流
+
+[可视化在线demo](http://demo.nimius.net/debounce_throttle/)
+[滚动栏在线demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
+
+[学习链接1](https://www.jianshu.com/p/f9f6b637fd6c)
+[学习链接2](https://www.jianshu.com/p/b73c2acad696)
+
+### 概念
+
+防抖：（停止后才1次）触发事件后n秒内只执行1次，如果n秒内又触发了事件，则会重新计算时间。
+节流：（几秒1次）一定时间内只能执行1次。
+
+### 应用场景
+
+防抖：
+
+- 搜索框搜索输入，只有用户停止输入时，才发送请求；
+- 手机号、邮箱号验证输入检测；
+- 窗口resize，只需等窗口调整完成后计算大小，防止重复渲染。
+
+节流：
+
+- 表单验证时重复点击提交按钮；
+- 滚动加载；
+- 浏览器搜索框联想功能。
+
+### 实现原理
+
+1、防抖
+
+正常情况下，我希望它多久执行，假设邮箱验证正常情况是每隔1秒向后台发送请求，然后用户一直不停的在输入框输入，此时会不断的清除Timeout，直到停止调用方法1秒后才正常去向后台发送请求。
+
+```
+// 防抖【防止多次触发滚动事件】
+var time = '';
+handleDebounce () {
+    console.log('调用')
+    // 清除未执行的代码，重置回初始化状态
+    if(timer){clearTimeout(timer);} 
+    //开始一个新的任务
+    timer = setTimeout(()=>{
+        console.log('函数防抖');
+    }, 1000);
+},
+```
+![image.png](https://upload-images.jianshu.io/upload_images/830956-f82dd8922209b045.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+2、节流
+
+假设浏览器一直在不停滚动，我不可能等停止了再请求，也不可能一直请求。
+
+```
+var flag = false;
+handleThrottle () {
+  console.log('调用')
+  if(!flag){return}
+  flag = false;
+  setTimeout(()=>{
+    console.log('函数节流');
+    flag = true;
+  },1000)
+}
+```
+![image.png](https://upload-images.jianshu.io/upload_images/830956-90b4fec3668256e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# prototype 和 hasOwnProperty
+
+```
+Array.prototype.arr = function(){console.log('print arr')};
+var a = [1,2,3];
+a.arr(); // 'print arr'
+Array.prototype.hasOwnProperty('arr'); // true
+a.hasOwnProperty('arr'); // false
+Array.hasOwnProperty('arr'); // false
+```
