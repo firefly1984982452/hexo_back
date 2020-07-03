@@ -262,3 +262,77 @@ Array.prototype.hasOwnProperty('arr'); // true
 a.hasOwnProperty('arr'); // false
 Array.hasOwnProperty('arr'); // false
 ```
+
+# let和闭包
+
+## let劫持作用域
+
+**用var时**
+
+```
+console.log(str);
+var str = 'hello';
+```
+
+打印出`undefined`。
+
+相当于
+
+```
+var str ;
+console.log(str);
+str = 'hello';
+```
+
+用var 的话，变量名会提升，但并不会赋值。
+
+**用let时**
+
+```
+console.log(str);
+let str = 'hello';
+```
+
+报错`VM67161:1 Uncaught ReferenceError: str is not defined`
+
+这里相当于直接`console.log('未定义变量名')`，此时的let已经劫持了var的作用域。
+
+## 用闭包作用域解释为什么用let的for循环可以劫持数据。
+
+假设我们想每隔1秒分别打印1、2、3、4、5。
+
+```
+for (var i = 1; i < 6; i++) {
+    console.log(i)
+    setTimeout(() => {
+        console.log('print'+i)
+    }, 1000 * i)
+}
+```
+
+会打印1、2、3、4、5，然后每隔1秒打印一次`'print6'`.
+
+因为`任务流`的关系，console.log(i)会先于setTimeout执行，等for循环的6次console执行完之后，队列里的setTimeout才会依次执行，而这个时候的i已经是6了。
+
+用let可以劫持i的作用域。
+
+```
+for (var i = 1; i < 6; i++) {
+    let j = i;
+    console.log(j)
+    setTimeout(() => {
+        console.log('print'+j)
+    }, 1000 * j)
+}
+```
+
+此时就是先打印1、2、3、4、5，然后每隔1秒打印'print1'、'print2'...'print5'。但是，每次都会有新的j替代原来的j，所以可以直接在for循环里面定义let i = 1;
+
+```
+for (var i = 1; i < 6; i++) {
+    console.log(i)
+    setTimeout(() => {
+        console.log('print'+i)
+    }, 1000 * i)
+}
+```
