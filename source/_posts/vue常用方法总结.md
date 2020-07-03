@@ -607,6 +607,33 @@ changeTest(){
 </el-select>
 ```
 
+# vue中让filter可以访问data里面的数据
+
+```
+var that;
+export default {
+    data() {
+        return {
+            peopleArr:[{name:xx,value:1},{name:xxx,value:2}]
+        }
+    },
+    beforeCreate(){
+        that = this;
+    },
+    filter:{
+        filterPeople(val){
+            return that.peopleArr[0].value;
+        }
+    }
+}
+```
+
+重点：
+定义that；
+在beforeCreate之前把that绑定在this(vue)上；
+在filter中使用that.
+
+
 # 使用Vuex
 
 ## 下载
