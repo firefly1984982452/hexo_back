@@ -336,3 +336,52 @@ for (var i = 1; i < 6; i++) {
     }, 1000 * i)
 }
 ```
+
+# function和object
+
+## function
+
+```
+var str = (()=> {
+    var count = 0;
+    function sum () { return ++count; };
+    function reduce () {return --count;};
+    return {
+        sum,
+        reduce
+    }
+})
+```
+此时的str是个function
+
+简化下：
+
+```
+var str = (()=> {
+    var count = 0;
+    return {
+        sum : ()=>{return ++count;},
+        reduce : ()=>{return --count;}
+    }
+})();
+str.sum(); // 1
+```
+此时的str是已经立即执行函数了，返回的是Object，是{sum:f,reduce:f}，注意，这里的str是获取不到count的，只有return的数据能获取到。
+
+## Object
+
+```
+var obj = {
+    count:0,
+    sum : ()=>{return ++obj.count;},
+    reduce : ()=>{return --obj.count;}
+}
+obj.sum(); // 1
+```
+
+这里的obj是Object，不同于str的是，它能获取到count，object里面的所有数据都能获取到。
+
+## 区别
+
+- Function只有return的方法才能获取到（闭包）
+- Function执行后返回的是对象

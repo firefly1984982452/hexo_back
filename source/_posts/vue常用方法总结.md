@@ -709,3 +709,15 @@ new Vue({
 })
 
 ```
+
+# 使用静态资源
+
+`image:require('../../assets/img/fn1.png')`
+
+# element-UI的坑
+
+## 翻页
+
+`el-pagination`翻页组件重置时`:current-page="currentPage”`的值已经是1了，内容也是1了，但是DOM没更新，要加`.sync`，变成`:current-page.sync="currentPage”`。
+
+
