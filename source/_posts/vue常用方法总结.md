@@ -633,6 +633,22 @@ export default {
 在beforeCreate之前把that绑定在this(vue)上；
 在filter中使用that.
 
+# vue中让beforeRouteEnter可以访问data里面的数据
+
+```
+beforeRouteEnter(to, from, next) {
+    if(to.name == '智慧护理工作台') {
+        next(vm=>{
+            vm.show=true;
+        })
+    }
+    next();
+},
+```
+
+重点：
+next(vm=>{vm.show=true;})
+
 
 # 使用Vuex
 

@@ -248,7 +248,7 @@ var arr = new Array(8).fill('2'); // ["2", "2", "2", "2", "2", "2", "2", "2"]
 
 遍历，**返回新数据**，对原数组不影响。
 
-原来的：
+原来的写法：
 
 ```
 for(var i in list){
@@ -260,10 +260,42 @@ for(var i in list){
 优化后：
 
 ```
-list.map(item => {
-    item.type = 1
+var newList = list.map(item => {
+    item.type = 1;
+    return item;
 })
+
+或
+
+list.map(item => {
+    item.type = 1;
+})
+var newList = list;
+
 ```
+
+当数组是数字时：
+
+```
+var arr = [4, 9, 16, 25];
+var brr = arr.map(val => val+1);
+brr; // [5, 10, 17, 26]
+arr; // [4, 9, 16, 25]
+```
+
+当数组是对象时：
+
+```
+var arr = [{name:'小明'},{name:'小红'}];
+var brr = arr.map(val=> val.sex = 1);
+var crr = arr.map(val => {val.age = 18;return val});
+arr; // [{name:'小明', sex: 1, age: 18},{name:'小红', sex: 1, age: 18}]
+brr; // [1, 1]
+crr; // [{name:'小明', sex: 1, age: 18},{name:'小红', sex: 1, age: 18}]
+```
+
+可以看到，arr原数组表面上是已经被改变的了，实际上是对象的引用，所以在map里面改变，会导致新值和旧值都改变。
+
 
 ## forEach
 
