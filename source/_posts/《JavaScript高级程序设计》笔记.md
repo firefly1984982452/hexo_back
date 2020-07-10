@@ -385,3 +385,28 @@ obj.sum(); // 1
 
 - Function只有return的方法才能获取到（闭包）
 - Function执行后返回的是对象
+
+
+# java对象
+
+
+```
+// 创建类——“人”
+public class People{
+    int age;
+}
+// 创建类——“男人”
+public class MenPeople extends People {
+    
+}
+// 创建对象
+MenPeople xm = new MenPeople();
+xm.age = 15;
+```
+
+# js对象
+
+`var xm = {age:15}`
+
+
+        https://www.jianshu.com/p/edf4d665d0df
