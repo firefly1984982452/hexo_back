@@ -409,4 +409,156 @@ xm.age = 15;
 `var xm = {age:15}`
 
 
-        https://www.jianshu.com/p/edf4d665d0df
+https://www.jianshu.com/p/edf4d665d0df
+
+https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html
+
+
+# JavaScript函数调用及this参数
+
+JS有4种方式调用函数
+
+- 作为一个函数(`function`)——`fn()`直接被调用
+- 作为一个方法(`methods`)——`obj.fn()`，关联在对象上调用，实现面向对象编程
+- 作为一个构造函数(`constructor`)——`new Fn()`，实例化一个新的对象
+- 通过`apply`或`call`方法调用
+
+对应的this的指向：
+
+- 函数调用：`window`或`undefined`
+- 方法调用：obj对象
+- 构造函数调用：实例化的对象
+- `aplly`或`call`：第一个参数
+
+详解：
+
+## 函数调用
+
+```
+function fn(){
+    console.log(this);
+}
+fn(); // window
+```
+
+严格模式下：
+
+```
+function fn(){
+    "use strict"
+    console.log(this);
+}
+fn(); // undefined
+```
+
+## 方法调用
+
+```
+var obj = {
+    fn : function(){
+        console.log(this);
+    }
+};
+obj.fn() // 返回obj对象：{fn: ƒ}
+```
+
+## 构造函数调用
+
+```
+function Cat(x,y){
+    this.x = x;
+    this.y = y;
+    console.log(this);
+}
+var c = new Cat(1,2);
+
+c // Cat{x:1,y:2} 指向c对象
+```
+
+es6写法
+
+```
+class Point{
+    constructor(x,y){
+        this.x = x;
+        this.y = y;
+        console.log(this);
+    }
+}
+var p = new Point(1,2)
+
+p // Point{x:1,y:2} 指向p对象
+```
+
+## aplly或call
+
+```
+var name = '张三';
+var age = '24';
+var obj = {
+    name: this.name, // 此处的this指向window
+    objAge: this.age, // 此处的this指向window
+    fun: function(fm,t){
+        console.log(this)
+        console.log(this.name+'年龄 '+this.age + ' 来自'+fm+' 去往'+t); // 此处的fm和t就是要传入的参数
+    }
+}
+var pd = {
+    name: '彭丹',
+    age:18
+}
+obj.fun.call(pd,'长沙','上海'); // 彭丹 年龄18 来自长沙 去往上海
+obj.fun.apply(pd,['长沙','上海']); // 彭丹 年龄18 来自长沙 去往上海
+obj.fun.bind(pd,'长沙','上海')(); // 彭丹 年龄18 来自长沙 去往上海
+obj.fun.bind(pd,['长沙','上海'])(); // 彭丹 年龄18 来自长沙上海 去往undefined
+```
+
+`this`打印出来全都是`{name: "彭丹", age: 18}`，就是第一个参数。
+
+
+# 函数构造器
+
+与`构造函数`名字类似，但无太大关系。
+
+普通生成
+
+```
+var p = new Function('x','y','return x+y');
+p(2,3)
+```
+
+动态生成
+
+```
+createFunction(){
+    let arr = Array.from(arguments);
+    var params = arr.splice(0,arr.length-1);
+    var body = arr[0];
+    return new Function(params,body);
+},
+test(){
+    var sum = this.createFunction('x','y','return x + y');
+    var chen = this.createFunction('x','y','return x * y');
+    console.log(sum(3,2)) // 5
+    console.log(chen(3,2)) // 6
+},
+```
+
+# 函数生成器(generator)
+
+```
+function* test(){
+    console.log(1);
+    yield;
+    console.log(2);
+}
+let item = test();
+item.next();
+setTimeout(()=>{
+    item.next();
+},3000)
+1
+隔3秒后
+2
+```
+
