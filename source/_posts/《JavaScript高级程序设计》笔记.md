@@ -562,3 +562,14 @@ setTimeout(()=>{
 2
 ```
 
+# let和const
+
+## let
+
+let变量不能重复定义
+没有变量提升
+暂时性死区
+
+## const
+
+const定义的变量不能修改
