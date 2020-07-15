@@ -573,3 +573,215 @@ let变量不能重复定义
 ## const
 
 const定义的变量不能修改
+
+# JavaScript面向对象
+
+[参考](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
+
+## 封装
+
+### 生成对象
+
+```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+var cat1 = new Cat('大猫','黄色');
+var cat2 = new Cat('小猫','黑色');
+
+cat1; // Cat {name: "大猫", color: "黄色"} 指向Cat对象
+cat2; // Cat {name: "小猫", color: "黑色"} 指向Cat对象
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+var arr = new Array(3).fill(2);
+var brr = new Array(5).fill(8);
+arr; // (3) [2, 2, 2] 指向Array对象
+brr; // (5) [8, 8, 8, 8, 8] 指向Array对象
+```
+
+只不过我们平时是直接用`var arr = [1,2]`的形式，和`new Array`是同一个意思。
+
+## 对象的构造函数
+
+```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+```
+
+这段代码里面的`this.name = name`就是构造函数，可以直接用es6语法糖的形式写：
+
+### es6语法糖class
+
+```
+class Cat{
+    constructor(x,y){
+        this.x = x;
+        this.y = y;
+    }
+}
+var cat1 = new Cat('大猫','黄色');
+
+cat1; // Cat {name: "大猫", color: "黄色"} 指向Cat对象
+```
+
+### constructor
+
+所以，`cat1`实例含有`constructor`属性指向它(Cat)的`构造函数`。
+
+```
+cat1.constructor === Cat; // true
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+[1,2].constructor === Array; // true
+```
+
+**其它**
+
+```
+[2].constructor(); // []
+[2].constructor() === Array.prototype.constructor();
+```
+
+### instanceof
+
+`JavaScript`还提供了`instanceof`运算符，验证`原型对象(Cat)`与`实例对象(cat1)`之间的关系。
+
+```
+cat1 instanceof Cat; // true
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+[1,2] instanceof Array; // true
+```
+
+## 原型对象添加方法
+
+### 直接添加造成的问题
+
+```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+    this.type = '猫科动物';
+    this.eat = function(){
+        console.log('吃鱼')
+    }
+}
+var cat1 = new Cat('大猫','黄色');
+var cat2 = new Cat('小猫','黑色');
+
+cat1.eat == cat2.eat; // false
+
+```
+
+此时eat方法占用了太多内存，并且它们没有指向同一个引用地址，永远不会相等。参考数组的其实是相等的。
+
+```
+[1].push == [2].push; // true
+```
+
+### 用prototype添加方法
+
+```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+Cat.prototype.type = '猫科动物';
+Cat.prototype.eat = function(){
+    console.log('吃鱼')
+}
+var cat1 = new Cat('大猫','黄色');
+var cat2 = new Cat('小猫','黑色');
+
+cat1.eat == cat2.eat; // true，它们是指向同一个内存地址下的方法
+```
+
+(就算不定义Cat的prototype，Cat也自带有prototype属性)
+
+## prototype模式的验证方法
+
+### 判断对象和实例的关系`isPrototypeOf`
+
+```
+Cat.prototype.isPrototypeOf(cat1); // true
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+Array.prototype.isPrototypeOf([]); // true
+```
+
+### 判断是本地属性还是prototype属性
+
+```
+cat1.hasOwnProperty('name'); // true
+cat1.hasOwnProperty('type'); // false
+```
+
+### in
+
+```
+'name' in cat1; // true
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+'push' in []; // true
+```
+
+### __proto__
+
+一般情况下，实例对象的`__proto__`指向原型对象的`prototype`。
+`prototype`被实例的`__proto__`指向
+`__proto__`指向构造函数的`prototype`
+
+如：
+
+```
+cat1.__proto__ === Cat.prototype; // true
+```
+
+**相当于我们平时用的数组中的**：
+
+```
+[].__proto__ === Array.prototype; // true
+```
+
+**其它情况**
+
+```
+function fn(){};
+fn.__proto__ === Function.prototype; // true
+```
+
+把函数当作对象时，生成它的函数就是`Function`原型对象。
+
+1. `Function`原型对象也同样适用此规则：
+
+```
+Function.__proto__ === Function.prototype; // true
+Function.prototype.__proto__ == Object.prototype; // true 为了不指向自身的Function.prototype造成循环引用
+```
+
+2. `Object`函数也是一个`Function`函数：
+
+```
+Object.__proto__ === Function.prototype; // true
+Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.prototype造成循环引用
+```
+
+`Object.prototype.__proto__==null`是所有函数的终点

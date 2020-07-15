@@ -42,6 +42,10 @@ function instanceof(left, right) {
 
 所以`[1,2].__proto__ === Array.prototype`也是可以验证是否为数组
 
+## prototype
+
+除了`[1,2].__proto__ === Array.prototype`之外，还有`Array.prototype.isPrototypeOf([1,2])`
+
 ## constructor
 
 ```
