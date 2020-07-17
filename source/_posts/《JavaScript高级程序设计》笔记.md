@@ -748,7 +748,7 @@ cat1.hasOwnProperty('type'); // false
 一般情况下，实例对象的`__proto__`指向原型对象的`prototype`。
 `prototype`被实例的`__proto__`指向
 `__proto__`指向构造函数的`prototype`
-
+`__proto__`存在于实例和构造函数的原型对象，而不是实例与构造函数。
 如：
 
 ```
