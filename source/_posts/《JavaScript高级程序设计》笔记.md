@@ -785,3 +785,23 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 ```
 
 `Object.prototype.__proto__==null`是所有函数的终点
+
+# DOM也有原型链
+
+```
+<html>
+  <head>
+    <title>dom原型测试</title>
+  </head>
+  <body>
+    <div id="test">test dom</div>
+    <script type="text/javascript">
+      HTMLElement.prototype.hello = function(){
+        console.log(this);
+      }
+      var div = document.getElementById('test');
+      div.hello();
+    </script>
+  </body>
+</html>
+```
