@@ -805,3 +805,105 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
   </body>
 </html>
 ```
+
+# Object.create实现类继承和克隆对象
+
+## Object.create实现类继承
+
+### 先看不用Object.create来实现继承
+
+```
+function Pd(){
+}
+Pd.prototype = Array.prototype;
+Pd.prototype.constructor = Pd;
+var pdd = new Pd();
+pdd.push(3);
+console.log(pdd); // Pd [3] __proto__:Array(0)直接就是真正的数组的__proto__
+```
+
+效果：
+
+![image.png](https://upload-images.jianshu.io/upload_images/830956-5dda88d241d8731a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 用Object.create实现继承
+
+```
+function Pd(){
+}
+Pd.prototype = Object.create(Array.prototype);
+Pd.prototype.constructor = Pd;
+var pdd = new Pd();
+pdd.push(3);
+console.log(pdd); // Pd [3] __proto__:Array[__proto__:Array(0)]就是__proto__里面包含真正的数组的__proto__
+```
+
+效果：
+
+![image.png](https://upload-images.jianshu.io/upload_images/830956-fc04b7810e0297fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 区别
+
+**写法**：
+
+`Pd.prototype = Array.prototype;`和`Pd.prototype = Object.create(Array.prototype);`
+
+**返回值**：
+
+- `Pd [3] __proto__:Array(0)`直接就是真正的数组的`__proto__`;
+- `Pd [3] __proto__:Array[__proto__:Array(0)]`就是`__proto__`里面包含真正的数组的`__proto__`。
+
+## 用Object.create克隆对象
+
+```
+var obj1 = {a:2,b:{name:'小明'}};
+var obj2 = Object.create(obj1);
+console.log(obj2); // {}
+obj2.a = 3;
+obj2.b.name = '小红';
+console.log(obj1); // {a:2,b:{name:'小红'}};
+```
+结论：obj1对象中的一级对象a:2并没有受影响，但二级对象b已经受影响。所以**Object.create克隆的对象也只能实现一级对象的深拷贝**。
+
+obj2的具体值：
+
+![image.png](https://upload-images.jianshu.io/upload_images/830956-ed702517acab50a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+# new Array()和[]比较
+
+## 性能
+
+```
+var startTime=new Date().getTime();
+var a2 = new Object();
+for(var i = 0;i<10000000;i++){
+    a2[i] = [];
+}
+var endTime=new Date().getTime();
+console.log('[]输出耗时:',endTime-startTime);
+
+var startTime2=new Date().getTime();
+var a = new Object();
+for(var i = 0;i<10000000;i++){
+    a[i] = new Array();
+}
+var endTime2=new Date().getTime();
+console.log('new Array()输出耗时:',endTime2-startTime2);
+```
+
+结果：
+
+```
+[]输出耗时: 304
+new Array()输出耗时: 600
+```
+
+每次结果不同，但大约都是`new Array()`是`[]`的两倍，时间越大，差距越大。
+
+(最好用时间差相减来计算时间，用`console.time`可能会有先后的问题导致不准确。)
+
+## 写法
+
+`[]`是字面量，JSON格式的语法是引擎直接解释的；
+`new Array()`需要调用`Array`的构造器。
