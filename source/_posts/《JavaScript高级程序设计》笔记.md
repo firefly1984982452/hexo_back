@@ -907,3 +907,94 @@ new Array()输出耗时: 600
 
 `[]`是字面量，JSON格式的语法是引擎直接解释的；
 `new Array()`需要调用`Array`的构造器。
+
+# JavaScript相等操作符（==）
+
+参考：
+[链接1](https://www.cnblogs.com/wisewrong/p/10396002.html)
+[链接2](https://blog.csdn.net/magic_xiang/article/details/83686224)
+[链接3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
+
+## 两组操作符
+
+相等：`==`（先转换再比较）
+全等：`===`（仅比较不转换）
+
+## 相等（`==`）规则
+
+**Boolean规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
+**String&Number规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
+**Object规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
+
+![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
+
+## 问题探讨
+
+```
+[] == []; // false
+{} == {}; // false
+[] == ![]; // true
+{} == !{}; // false
+```
+
+`[] == []`和`{} == {}`是因为引用的对象指向不同的指针，所以不会相等。
+
+**一、`[] == ![]`**
+
+- 1：逻辑非（`!`）的优先级高于相等操作符（`==`），所以先计算`![]`的`boolean`值`false`，此时比较的是：`[] == false`；
+- 2：根据上面提到的**boolean规则**，则需要把 `false` 转成 `0`，此时比较的是：`[] == 0`；
+- 3：根据上面提到的**Object规则**，调用空数组的toString方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
+- 4：根据上面提到的**String规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
+
+简化：
+`[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
+
+**二、`{} == !{}`**
+
+- 1：先计算`!{}`得到`false`，此时比较的是：`{} == false`；
+- 2：调用**Booean规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
+
+简化：
+`{} == !{}` 转化：`{} == false` 转化：`true == false`。
+
+# MessageChannel
+
+## MessageChannel的基本使用
+
+```
+const {port1, port2} = new MessageChannel();
+port1.onmessage = function(d) {
+    console.log(`port1接收的消息是：${d.data}`);
+}
+port2.onmessage = function(d) {
+    console.log(`port2接收的消息是：${d.data}`);
+}
+port1.postMessage('port1发送的消息');
+port2.postMessage('port2发送的消息');
+```
+
+port1发送的由port2接收，port2发送的由port1接收。
+
+也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再return出来，就是一个新的对象，所以肯定能实现深拷贝。
+
+## 使用MessageChannel实现深拷贝
+
+```
+var obj = {id:1,name:{a:'xx'}};
+
+function structuralClone(obj) {
+    return new Promise((resolve) => {
+        const {port1, port2} = new MessageChannel();
+        port2.onmessage = ev => resolve(ev.data);
+        port1.postMessage(obj);
+    })
+}
+structuralClone(obj).then(res=>{
+    console.log(res);
+    var obj3 = res;
+    obj3.name.a = 'obj3';
+    console.log(obj,obj3);
+})
+
+<!-- 用promise是为了好传数据 -->
+```
