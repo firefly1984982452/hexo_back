@@ -998,3 +998,15 @@ structuralClone(obj).then(res=>{
 
 <!-- 用promise是为了好传数据 -->
 ```
+
+# 使用lodash.cloneDeep实现深拷贝
+
+```
+import _ from 'lodash'
+var obj = {id:1,name:{a:'xx'},fn:function(){}};
+var obj2 = _.cloneDeep(obj);
+obj2.name.a = 'obj2';
+console.log(obj,obj2)
+```
+
+![image](https://img2020.cnblogs.com/blog/919128/202007/919128-20200731100645239-764277941.png)
