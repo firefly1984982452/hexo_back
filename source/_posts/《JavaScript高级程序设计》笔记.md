@@ -1003,7 +1003,7 @@ structuralClone(obj).then(res=>{
 
 ```
 import _ from 'lodash'
-var obj = {id:1,name:{a:'xx'},fn:function(){}};
+var obj = {id:1,name:{a:'xx'},fn:function(){},un:undefined};
 var obj2 = _.cloneDeep(obj);
 obj2.name.a = 'obj2';
 console.log(obj,obj2)
