@@ -98,6 +98,7 @@ console.log(obj); // {a:1,b:2} 修改失败
 ```
 Object.isFrozen(obj);// true
 ```
+
 # setTimeout
 
 // setTimeout的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。
