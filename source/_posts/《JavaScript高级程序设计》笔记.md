@@ -17,6 +17,8 @@ categories:
 
 `'null'`变为`null`：`JSON.parse('null')`
 
+---
+
 # 防篡改对象
 
 `preventExtensions`：不能增，能删改
@@ -99,9 +101,13 @@ console.log(obj); // {a:1,b:2} 修改失败
 Object.isFrozen(obj);// true
 ```
 
+---
+
 # setTimeout
 
 // setTimeout的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。
+
+---
 
 # 递归
 
@@ -139,6 +145,8 @@ function test(num) {
 }
 test(3)
 ```
+
+---
 
 # return和闭包
 
@@ -187,7 +195,9 @@ console.log(a); // 0
 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
 3.return出来的是一个值（12），不是变量本身（a），此处的return是取得私有变量值的一种方法，跟闭包没有严格关系。
 
-## 防抖和节流
+---
+
+# 防抖和节流
 
 [可视化在线demo](http://demo.nimius.net/debounce_throttle/)
 [滚动栏在线demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
@@ -253,6 +263,8 @@ handleThrottle () {
 ```
 ![image.png](https://upload-images.jianshu.io/upload_images/830956-90b4fec3668256e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+---
+
 # prototype 和 hasOwnProperty
 
 ```
@@ -263,6 +275,8 @@ Array.prototype.hasOwnProperty('arr'); // true
 a.hasOwnProperty('arr'); // false
 Array.hasOwnProperty('arr'); // false
 ```
+
+---
 
 # let和闭包
 
@@ -338,6 +352,8 @@ for (var i = 1; i < 6; i++) {
 }
 ```
 
+---
+
 # function和object
 
 ## function
@@ -387,6 +403,7 @@ obj.sum(); // 1
 - Function只有return的方法才能获取到（闭包）
 - Function执行后返回的是对象
 
+---
 
 # java对象
 
@@ -405,6 +422,8 @@ MenPeople xm = new MenPeople();
 xm.age = 15;
 ```
 
+---
+
 # js对象
 
 `var xm = {age:15}`
@@ -414,6 +433,7 @@ https://www.jianshu.com/p/edf4d665d0df
 
 https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html
 
+---
 
 # JavaScript函数调用及this参数
 
@@ -516,6 +536,7 @@ obj.fun.bind(pd,['长沙','上海'])(); // 彭丹 年龄18 来自长沙上海 �
 
 `this`打印出来全都是`{name: "彭丹", age: 18}`，就是第一个参数。
 
+---
 
 # 函数构造器
 
@@ -545,6 +566,8 @@ test(){
 },
 ```
 
+---
+
 # 函数生成器(generator)
 
 ```
@@ -562,6 +585,8 @@ setTimeout(()=>{
 隔3秒后
 2
 ```
+
+---
 
 # let和const
 
@@ -787,6 +812,8 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 
 `Object.prototype.__proto__==null`是所有函数的终点
 
+---
+
 # DOM也有原型链
 
 ```
@@ -806,6 +833,8 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
   </body>
 </html>
 ```
+
+---
 
 # Object.create实现类继承和克隆对象
 
@@ -870,6 +899,7 @@ obj2的具体值：
 
 ![image.png](https://upload-images.jianshu.io/upload_images/830956-ed702517acab50a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+---
 
 # new Array()和[]比较
 
@@ -908,6 +938,8 @@ new Array()输出耗时: 600
 
 `[]`是字面量，JSON格式的语法是引擎直接解释的；
 `new Array()`需要调用`Array`的构造器。
+
+---
 
 # JavaScript相等操作符（==）
 
@@ -958,6 +990,8 @@ new Array()输出耗时: 600
 简化：
 `{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
+---
+
 # MessageChannel
 
 ## MessageChannel的基本使用
@@ -1000,6 +1034,8 @@ structuralClone(obj).then(res=>{
 <!-- 用promise是为了好传数据 -->
 ```
 
+---
+
 # 使用lodash.cloneDeep实现深拷贝
 
 ```
@@ -1013,3 +1049,139 @@ console.log(obj,obj2)
 ![image](https://img2020.cnblogs.com/blog/919128/202007/919128-20200731100645239-764277941.png)
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghcrk94yhdj30dm033aa5.jpg)
+
+---
+
+# ES6`…`扩展（spread）/收集（rest）运算符详解
+
+## 一、扩展运算符
+
+我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
+
+### 1.代替apply
+
+```
+var test = function(a,b,c){
+  console.log(a,b,c);
+}
+var arr = [1,2,3];
+test(...arr); // 1 2 3
+```
+
+用apply的写法：
+
+```
+test.apply(null,arr);
+```
+
+### 2.代替concat
+
+```
+var arr1 = [1,2,3,4];
+var arr2 = [0,...arr1,5,6];
+console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+用concat的写法：
+
+```
+[0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+### 3.代替split
+
+```
+var str = 'hello';
+var arr3 = [...str];
+console.log(arr3); // ["h", "e", "l", "l", "o"]
+```
+
+用split的写法：
+
+```
+'hello'.split(''); // ["h", "e", "l", "l", "o"]
+```
+
+## 二、收集运算符
+
+### 1.接收不确定个数的形参
+
+此功能和`JAVA`一样，当形参传入个数不确定时可用在形参上。
+
+```
+var rest2 = function(item, ...arr){
+  console.log(item,arr);
+}
+rest2('hello',2,3,3,4); // hello [2, 3, 3, 4]
+```
+
+### 2.配合解构时使用
+
+```
+var [a,...temp] = [1,2,3,4];
+console.log(a,temp); // 1 [2, 3, 4]
+```
+
+---
+
+# `arguments`参数的3种转数组方法
+
+**方法1：Array.prototype.slice.apply**
+**方法2：Array.from**
+**方法3：[...arguments]**
+
+```
+var test3 = function(){
+    console.log(arguments);
+    var list1 = Array.prototype.slice.apply(arguments);
+    console.log(list1);
+    var list2 = Array.from(arguments);
+    console.log(list2);
+    var list3 = [...arguments];
+    console.log(list3);
+}
+test3(1,2,3,4);
+```
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
+
+---
+
+# 默认参数值
+
+假设想要的效果是这样的：
+
+```
+var foo = function(x,y){
+    x = x || 10;
+    y = y || 20;
+    console.log(x+y);
+}
+foo(1,2); // 3
+foo(); // 30
+```
+
+但是也有出错的时候：
+
+```
+foo(0,1); // 11
+```
+
+第一个参数0被解析成了false，而不是数字0进行计算。
+
+用`默认参数值`
+
+```
+var foo = function(x=10, y=20){
+    console.log(x+y);
+}
+foo(0,1); // 1
+```
+
+# 解构
+
+```
+var obj = {a:1,b:2,c:3},a,b,c,p;
+p = {a,b,c} = obj;
+console.log(p === obj); // true
+```
