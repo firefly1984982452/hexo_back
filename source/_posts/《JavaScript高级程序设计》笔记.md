@@ -883,6 +883,30 @@ console.log(pdd); // Pd [3] __proto__:Array[__proto__:Array(0)]就是__proto__�
 - `Pd [3] __proto__:Array(0)`直接就是真正的数组的`__proto__`;
 - `Pd [3] __proto__:Array[__proto__:Array(0)]`就是`__proto__`里面包含真正的数组的`__proto__`。
 
+### 用Object.create实现继承自己的类并带参数
+
+```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+var cat1 = new Cat('大猫','黄色');
+
+function Pd(name,color){
+    Cat.call(this,name,color);
+}
+Pd.prototype = Object.create(Cat.prototype);
+Pd.prototype.constructor = Pd;
+var pdd = new Pd('小猫','白色');
+
+console.log(cat1,pdd); // Cat {name: "大猫", color: "黄色"} Pd {name: "小猫", color: "白色"}
+```
+### 用原生写法实现继承自己的类并带参数
+
+```
+
+```
+
 ## 用Object.create克隆对象
 
 ```
@@ -899,6 +923,63 @@ obj2的具体值：
 
 ![image.png](https://upload-images.jianshu.io/upload_images/830956-ed702517acab50a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+---
+
+# extends继承
+
+```
+class Cat{
+    constructor(){
+        console.log('cat');
+    }
+}
+class Child extends Cat{
+};
+var cat = new Cat();
+var child = new Child();
+```
+
+继承所有参数：
+
+```
+class Cat{
+    constructor(name){
+        this.name = name;
+    }
+}
+class Child extends Cat{
+    constructor(name){
+        super(name);
+    }
+};
+var cat = new Cat('1');
+var child = new Child('2');
+console.log(cat,child); // Cat {name: "1"} Child {name: "2"}
+```
+
+---
+
+# `new.target`方法判断是否父类
+
+```
+class Cat{
+    constructor(){
+        console.log(new.target);
+        if (new.target === Cat) {
+            console.log('父类');
+        } else {
+            console.log('子类');
+        }
+    }
+}
+class Child extends Cat{
+    constructor(){
+        super();
+    }
+};
+var cat = new Cat();
+var child = new Child();
+```
 ---
 
 # new Array()和[]比较
@@ -1473,14 +1554,15 @@ console.log(ws); // [{id:1}]
 |:--:|:--:|:--:|:--:|:--:|:--:|
 |新建|`[]`|`new Map()`|`new WeakMap()`|`new Set()`|`new WeakSet()`|
 |增|`push`|`m.set(obj,'value')`|`wm.set(obj1,'value')`|`s.add(value)`|`ws.add(obj)`|
-|新建并增加|[1,2]|-|-|`new Set([4, 0, 0, 4, 1])`|-|
+|新建并增加|`[1,2]`|-|-|`new Set([4, 0, 0, 4, 1])`|-|
 |键|对象或其它|对象或其它|只接受对象|对象或其它|只接受对象|
 |删|`slice`或`splice`|`delete`|`delete`|`delete`|`delete`|
 |清除|`arr = []`|`clear`|`clear`|`clear`|`clear`|
 |改|`splice`|-|-|-|-|
 |查|`includes`、`indexOf`等|`get`或`has`|`get`或`has`|`has`|`has`|
-|键|-|`m.keys()`|-|-|-|
-|值|-|`m.values()`|-|`m.values()`|-|
+|键|`m.keys()`下标|`m.keys()`|-|`m.keys()`|-|
+|值|`m.values()`值|`m.values()`|-|`m.values()`|-|
+|迭代|`entries`|`entries`|-|`entries`|-|
 |长度|`length`|`size`|-|`size`|-|
 
 ## Map API:
