@@ -1178,6 +1178,8 @@ var foo = function(x=10, y=20){
 foo(0,1); // 1
 ```
 
+---
+
 # 解构
 
 ```
@@ -1185,3 +1187,335 @@ var obj = {a:1,b:2,c:3},a,b,c,p;
 p = {a,b,c} = obj;
 console.log(p === obj); // true
 ```
+
+---
+
+# Blob实现下载文件
+
+[参考链接](https://zhuanlan.zhihu.com/p/97768916)
+
+DOM:
+
+```
+<a id="download" @click="download">下载</a>
+```
+
+JS:
+
+```
+download(){
+    var blob = new Blob(['hello world']);
+    var url = window.URL.createObjectURL(blob);
+    var a = document.getElementById('download');
+    a.download = 'helloworld.txt';
+    a.href = url;
+},
+```
+
+---
+
+# Map
+
+为什么要用Map？因为普通数据结构无法以非字符串为键。
+
+举例：
+
+```
+var m = {};
+var x = {id:1}, y = {id:2};
+m[x] = 'foo';
+m[y] = 'bar';
+console.log(m,m[x],m[y]); // {[object Object]: "bar"} "bar" "bar"
+```
+
+对象`m`中只有一个`[object Object]`，值都是`'bar'`，它无法解析两个对象为键。
+
+## 使用Map以非字符串为键
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m);
+console.log(m.get(x));
+console.log(m.get(y));
+console.log(m.get({id:1}));
+```
+
+结果：
+
+![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghel895idrj309k05i3yo.jpg)
+
+## delete删除
+
+```
+m.delete(y);
+```
+
+## clean清除所有
+
+```
+m.clear();
+m.size; // 0
+```
+
+## size大小
+
+```
+m.size;
+```
+
+## `new Map`深拷贝
+
+```
+var m2 = m1; // 浅拷贝
+var m3 = new Map(m1); // 深拷贝
+```
+
+**深拷贝实例：**
+
+```
+var mm = new Map();
+mm.set('a',{id:1});
+var mm2 = new Map(mm);
+mm2.set('a', {id:4});
+console.log(mm2,mm);
+```
+
+**结果：**
+
+![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghelkmlwaxj30a80340st.jpg)
+
+两个value值都是对象，互不影响。
+
+## Map所有的值
+
+**方法1：`m.values()`**
+**方法2：`m.entries()`**
+
+
+### 方法1：`m.values()`
+
+返回一个迭代器，可以用spread扩展运算符（`...`）或`Array.from()`转换成数组。
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.values()); // MapIterator {"foo", "bar"}
+console.log([...m.values()]); // ["foo", "bar"]
+console.log(Array.from(m.values())); // ["foo", "bar"]
+```
+
+### 方法2：`m.entries()`
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.entries()); // MapIterator {{…} => "foo", {…} => "bar"}
+console.log([...m.entries()]); // [[{id: 1},'foo'],[{id: 2},'bar']]
+console.log([...m.entries()][0][1]); // "foo"
+console.log([...m.entries()][1][1]); // "bar"
+```
+
+## Map所有的键
+
+### keys
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log([...m.keys()]); // [{id:1},{id:2}]
+```
+
+### has判断是否有该键
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.has(y)); // true
+```
+
+## WeakMap
+
+区别：
+
+- 内部内存（特别是GC）的工作方式；
+
+- WeakMap只接受对象为键；所以对象被回收项目也会移除
+
+```
+var m = new WeakMap();
+var x = {id:1}, y = {id:2};
+m.set(x ,y);
+console.log(m.has(x)); // true
+x = null;
+console.log(m.has(x)); // false
+```
+
+---
+
+# Set
+
+Set是一个值的集合，其中的值是唯一的。
+
+API:
+
+**新建：new Set()**
+**增：add()**
+**删：delete()**
+**查:has**
+
+
+## 新建
+
+```
+var s = new Set([0,-0,1,2,NaN,2,3,NaN]);
+console.log(s); // Set(5) {0, 1, 2, NaN, 3}
+```
+
+`0`和`-0`被认为是同一个值，`NaN`与`NaN`也是相等的。
+
+## 添加（add）
+
+```
+s.add(7);
+console.log(s); // Set(6) {0, 1, 2, NaN, 3, 7}
+```
+
+## 删除（delete和clear）
+
+```
+s.delete(2);
+console.log(s); // Set(5) {0, 1, NaN, 3, 7}
+s.clear();
+console.log(s.size); // 0
+```
+
+## 查询是否存在（has)
+
+不像`Map`里面的`get`能直接取值，这里是查询是否存在该值。
+
+```
+s.has(1); // true
+```
+
+## 迭代
+
+同`Map`
+
+```
+s.keys(); // SetIterator {0, 1, NaN, 3, 7}
+s.values(); // SetIterator {0, 1, NaN, 3, 7}
+s.entries(); // SetIterator {0 => 0, 1 => 1, NaN => NaN, 3 => 3, 7 => 7}
+```
+
+虽然`keys()`和`values()`返回的值一样，但它们俩并不相等。
+
+```
+s.keys() == s.values(); // false
+```
+
+## WeakSet
+
+和Set的区别：
+
+**只能存对象**
+
+```
+var ws = new WeakSet([1,2,2,3]); // 无效：Uncaught TypeError: Invalid value used in weak set
+```
+
+WeakSet使用：
+
+```
+var obj1 = {id:1};
+var obj2 = {id:2};
+var ws = new WeakSet();
+ws.add(obj1).add(obj2).add(obj1);
+console.log(ws); // [{id:1},{id:2}]
+```
+
+添加了`obj1`两次，还是去重了。
+
+### GC
+
+```
+obj1 = null;
+console.log(ws); // [{id:1},{id:2}]
+ws.has(obj1); // false
+```
+
+虽然obj1的值看上去还在，但已经取不到了。
+
+### delete删除
+
+```
+ws.delete(obj2);
+console.log(ws); // [{id:1}]
+```
+
+---
+
+# Array、Map、WeakMap、Set、WeakSet的对比
+
+## 对比表
+
+|功能属性|Array|Map|WeakMap|Set|WeakSet|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|新建|`[]`|`new Map()`|`new WeakMap()`|`new Set()`|`new WeakSet()`|
+|增|`push`|`m.set(obj,'value')`|`wm.set(obj1,'value')`|`s.add(value)`|`ws.add(obj)`|
+|新建并增加|[1,2]|-|-|`new Set([4, 0, 0, 4, 1])`|-|
+|键|对象或其它|对象或其它|只接受对象|对象或其它|只接受对象|
+|删|`slice`或`splice`|`delete`|`delete`|`delete`|`delete`|
+|清除|`arr = []`|`clear`|`clear`|`clear`|`clear`|
+|改|`splice`|-|-|-|-|
+|查|`includes`、`indexOf`等|`get`或`has`|`get`或`has`|`has`|`has`|
+|键|-|`m.keys()`|-|-|-|
+|值|-|`m.values()`|-|`m.values()`|-|
+|长度|`length`|`size`|-|`size`|-|
+
+## Map API:
+
+- size数量
+- set()设置
+- clear()清除
+- delete()删除
+- has()存在
+- get()获取
+- keys()键
+- values()值
+- entries()迭代
+
+## WeakMap API:
+
+- set()设置
+- delete()删除
+- has()存在
+- get()获取
+- clear()清除（已弃用，但可通过new WeakMap()空对象来置空）
+
+## Set API:
+
+- size数量
+- add()添加
+- clear()清除
+- delete()删除
+- has()存在
+- keys()键
+- values()值
+- entries()迭代
+
+## WeakSet API：
+
+- add()添加
+- delete()删除
+- has()存在
