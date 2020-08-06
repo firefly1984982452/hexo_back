@@ -904,7 +904,19 @@ console.log(cat1,pdd); // Cat {name: "大猫", color: "黄色"} Pd {name: "小
 ### 用原生写法实现继承自己的类并带参数
 
 ```
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+var cat1 = new Cat('大猫','黄色');
 
+function Pd(name,color){
+  Cat.call(this,name,color);
+}
+Pd.prototype = Cat.prototype;
+Pd.prototype.constructor = Pd;
+var pdd = new Pd('小猫','白色');
+console.log(cat1,pdd); // Cat {name: "大猫", color: "黄色"} Pd {name: "小猫", color: "白色"}
 ```
 
 ## 用Object.create克隆对象
