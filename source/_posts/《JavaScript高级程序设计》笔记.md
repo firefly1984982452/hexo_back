@@ -1613,3 +1613,18 @@ console.log(ws); // [{id:1}]
 - add()添加
 - delete()删除
 - has()存在
+
+---
+
+# proxy
+
+浅拷贝：什么也不写
+
+```
+var obj = {
+  id:1
+};
+var p = new Proxy(obj,{});
+p.a = 33;
+console.log(obj); // {id:1,a:33}
+```

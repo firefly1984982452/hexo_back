@@ -46,6 +46,8 @@ Object.assign(obj1,obj2);
 
 # definedProperty
 
+递归遍历对象用defineProperty实现vue双向绑定
+
 ```
 var obj = {
 id:1,
