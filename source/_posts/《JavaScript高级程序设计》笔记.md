@@ -1712,3 +1712,12 @@ console.log('end');
 ```
 
 这里的执行顺序就是`start-->2-->end-->4-->1-->3`
+
+**注意**：
+
+```
+promise是立即执行的，创建的时候就会执行，不存在将promise推入微任务；
+resolve()是表示promise的状态为fullfilled，相当于只是定义了一个有状态的promise，并没有调用它；
+promise调用then的前提是promise的状态为fullfilled；
+只有promise调用then的时候，then里面的函数才会被推入微任务中。
+```
