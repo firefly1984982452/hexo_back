@@ -243,7 +243,7 @@ handleDebounce () {
     }, 1000);
 },
 ```
-![image.png](https://upload-images.jianshu.io/upload_images/830956-f82dd8922209b045.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho47acnm9j303q03ndfo.jpg)
 
 2、节流
 
@@ -261,7 +261,7 @@ handleThrottle () {
   },1000)
 }
 ```
-![image.png](https://upload-images.jianshu.io/upload_images/830956-90b4fec3668256e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
 
 ---
 
@@ -854,7 +854,7 @@ console.log(pdd); // Pd [3] __proto__:Array(0)直接就是真正的数组的__pr
 
 效果：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-5dda88d241d8731a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho48t4y6vj30970i275q.jpg)
 
 ### 用Object.create实现继承
 
@@ -870,7 +870,7 @@ console.log(pdd); // Pd [3] __proto__:Array[__proto__:Array(0)]就是__proto__�
 
 效果：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-fc04b7810e0297fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gho49dgk5zj30d30irjt4.jpg)
 
 ### 区别
 
@@ -933,7 +933,7 @@ console.log(obj1); // {a:2,b:{name:'小红'}};
 
 obj2的具体值：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-ed702517acab50a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gho49w7kobj306102wjra.jpg)
 
 ---
 

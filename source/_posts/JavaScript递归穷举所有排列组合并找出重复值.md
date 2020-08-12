@@ -9,11 +9,11 @@ categories:
 
 # 题目：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-1eed7ceaaf440888.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho4dd67syj30uq0fuq4p.jpg)
 
 # 解答并发现题目并不完全对
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-fca1cbed76e21750.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gho4drwyz7j30p403f74g.jpg)
 
 
 # 代码：

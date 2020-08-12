@@ -22,7 +22,7 @@ components: {
 
 **效果**：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-a24d55030d9ef3c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho4ebwcexj30si0c4gnj.jpg)
 
 **代码**：
 
@@ -85,7 +85,7 @@ export default {
 
 **效果**：
 
-![image.png](https://upload-images.jianshu.io/upload_images/830956-241f2d06ec46ed6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho4eu83qgj307606rmx5.jpg)
 
 **代码**：
 
