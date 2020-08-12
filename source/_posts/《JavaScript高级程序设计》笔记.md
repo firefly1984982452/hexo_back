@@ -1721,3 +1721,53 @@ resolve()是表示promise的状态为fullfilled，相当于只是定义了一个
 promise调用then的前提是promise的状态为fullfilled；
 只有promise调用then的时候，then里面的函数才会被推入微任务中。
 ```
+
+## setTimeout相关
+
+setTimeout并不是由JS引擎计数的，因为单线程会阻塞，会影响计数的准确，因此通过单独线程来计时并触发。
+setTiemout最小为4，不满会加成4。
+
+---
+
+# `try...catch`无法用于异步代码
+
+## 同步代码
+
+```
+try {
+    foo();
+} catch (error) {
+    console.log('异常是：'+error)
+}
+```
+
+此时会由catch捕捉到异常：
+
+```
+异常是：ReferenceError: foo is not defined
+```
+
+## 异步代码
+
+```
+function foo(){
+    setTimeout(()=>{
+        bar.arr();
+    },100);
+};
+try {
+    foo();
+} catch (error) {
+    console.log(error)
+}
+```
+
+此时无法捕捉，而是浏览器控制台报出未捕捉异常。
+
+```
+Uncaught ReferenceError: bar is not defined
+```
+
+## 对比图
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
