@@ -27,9 +27,9 @@ categories:
 
 |对象属性|增|删|改|
 |:--:|:--:|:--:|:--:|
-|preventExtensions|X|√|√|
-|seal|X|X|√|
-|freeze|X|X|X|
+|preventExtensions|×|✓|✓|
+|seal|×|×|✓|
+|freeze|×|×|×|
 
 ## 不可扩展对象preventExtensions
 
