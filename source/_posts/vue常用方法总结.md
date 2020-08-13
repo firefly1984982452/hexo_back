@@ -742,3 +742,32 @@ new Vue({
 this.$message.closeAll();
 this.$message.success('info');
 ```
+
+# 列表不缓存详情页缓存
+
+```
+meta: {
+    keepAlive: true,
+    isBack:false
+}
+```
+
+```
+beforeRouteEnter(to,from,next){
+    // 如果是从详情页回到列表页
+    console.log(from.name)
+    if(from.name == '列表详情'){
+        to.meta.isBack = true;
+    }
+    next();
+},
+activated(){
+    // 如果不是从详情页回到列表页，则刷新数据
+    if(!this.$route.meta.isBack){
+        // 在此处获取数据后不用在created里调用数据
+        this.reset();
+    }
+    this.$route.meta.isBack = false;
+},
+
+```

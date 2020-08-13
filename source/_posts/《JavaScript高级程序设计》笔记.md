@@ -856,6 +856,8 @@ console.log(pdd); // Pd [3] __proto__:Array(0)直接就是真正的数组的__pr
 
 ![image.png](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho48t4y6vj30970i275q.jpg)
 
+此时打印`Array.prototype.constructor`会发现变成了`undefined`，已经改动了原生的`Array`.
+
 ### 用Object.create实现继承
 
 ```
@@ -1771,3 +1773,207 @@ Uncaught ReferenceError: bar is not defined
 ## 对比图
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
+
+---
+
+# Promise
+
+`promise`代替`callback`回调。
+
+## promise.all
+
+**只能同时调用不受关联的prmise，如果promise2的值受promise1影响，不能用promise.all，可以用async/await**
+
+首先假设要依次调用3个`promise`的代码：
+
+```
+var pro1 = new Promise((resolve,reject) => {
+    console.log(1);
+    resolve('hello')
+})
+var pro2 = new Promise((resolve,reject) => {
+    console.log(2);
+    setTimeout(()=>{
+        resolve('world')
+    },1000);
+})
+var pro3 = new Promise((resolve,reject) => {
+    console.log(3);
+    setTimeout(()=>{
+        resolve('pdd')
+    },2000);
+})
+```
+
+如果不用`promise.all`来调用的话：
+
+```
+pro1.then((res1)=>{
+});
+pro2.then((res2)=>{
+})
+pro3.then((res3)=>{
+})
+```
+
+只有不停的用`.then`才能保证每一步都正确，此时使用`promise.all`：
+
+```
+Promise.all([pro1,pro2,pro3]).then(val=>{
+    console.log(val);
+})
+```
+
+## promise.race
+
+第一个抛出`resolve`的`promise`就是`Promise.race`获取的值。
+
+这种模式称为门闩模式、promise中称中竞态。
+
+```
+var pro2 = new Promise((resolve,reject) => {
+    console.log(2);
+    setTimeout(()=>{
+        resolve('world')
+    },1000);
+})
+var pro3 = new Promise((resolve,reject) => {
+    console.log(3);
+    setTimeout(()=>{
+        resolve('pdd')
+    },2000);
+})
+Promise.race([pro2,pro3]).then(val=>{
+    console.log(val);
+})
+```
+
+此时，pro2要花费1秒，pro3要花费2秒，谁先`resolve`，`.then`获取的`val`就是谁的。
+
+---
+
+# async/await
+
+[学习链接](https://segmentfault.com/a/1190000007535316)
+
+## 普通函数和async的区别
+
+普通函数：
+
+```
+function testAsync(){
+    return 'hello world'
+}
+testAsync(); // 'hello world'
+```
+
+`async`函数：
+
+```
+async function testAsync(){
+    return 'hello world'
+}
+testAsync(); // Promise {<fulfilled>: "hello world"}
+```
+
+`async`返回的是一个`promise`对象
+
+## await
+
+如果不用async/await：
+
+```
+async function testAsync(){
+    return new Promise(resolve => {
+        setTimeout(()=>resolve('long_time_value'), 1000);
+    })
+}
+testAsync().then(v=>{
+    console.log('get',v);
+})
+```
+
+1秒后：get long_time_value
+
+如果用的话：
+
+```
+function testAsync(){
+    return new Promise(resolve => {
+        setTimeout(()=>resolve('long_time_value'), 1000);
+    })
+}
+
+async function test(){
+    const v = await testAsync();
+    console.log(v);
+}
+test();
+```
+
+1秒后：get long_time_value
+
+### 优势：处理then链
+
+```
+function takeLongTime(n){
+    return new Promise(resolve => {
+        setTimeout(()=> resolve(n+200), n);
+    })
+}
+
+function step1(n) {
+    console.log(`step1 with ${n}`);
+    return takeLongTime(n);
+}
+
+function step2(n) {
+    console.log(`step2 with ${n}`);
+    return takeLongTime(n);
+}
+
+function step3(n) {
+    console.log(`step3 with ${n}`);
+    return takeLongTime(n);
+}
+
+function doIt(){
+    console.time("doIt");
+    const time1 = 3000;
+    step1(time1)
+        .then(time2 => step2(time2))
+        .then(time3 => step3(time3))
+        .then(result => {
+            console.log(`result is ${result}`);
+            console.timeEnd("doIt");
+        });
+}
+doIt();
+
+step1 with 3000
+VM5329:13 step2 with 3200
+VM5329:18 step3 with 3400
+VM5329:29 result is 3600
+VM5329:30 doIt: 9606.429931640625ms
+
+```
+
+每一个promise都受上一个promise影响，所以必须一个调完之后再调另外一个。
+
+再看看用async/await更改doIt方法：
+
+```
+async function doIt(){
+    console.time("doIt");
+    const time1 = 3000;
+    const time2 = await step1(time1);
+    const time3 = await step2(time2);
+    const result = await step3(time3);
+    console.log(`result is ${result}`);
+    console.timeEnd("doIt");
+}
+doIt();
+
+```
+
+结果和上一个不停用`then`链的一样，但是代码要清晰得多，而且没有回调地狱。
