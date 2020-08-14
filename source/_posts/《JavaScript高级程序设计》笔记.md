@@ -1977,3 +1977,21 @@ doIt();
 ```
 
 结果和上一个不停用`then`链的一样，但是代码要清晰得多，而且没有回调地狱。
+
+# export 和 import
+
+```
+var constant = {
+    edit:"编辑",
+    test:'2'
+}
+
+export {
+    constant
+};
+```
+
+```
+import {constant} from '../../../../utils/test';
+console.log(constant)
+```
