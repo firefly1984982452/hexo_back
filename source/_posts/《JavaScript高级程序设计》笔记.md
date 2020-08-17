@@ -1980,6 +1980,9 @@ doIt();
 
 # export 和 import
 
+## 普通使用
+
+constant.js
 ```
 var constant = {
     edit:"编辑",
@@ -1991,7 +1994,29 @@ export {
 };
 ```
 
+test.vue
 ```
-import {constant} from '../../../../utils/test';
+import {constant} from '@/utils/test';
 console.log(constant)
+```
+
+## 全局使用
+
+constant.js
+```
+export default {
+    list1:[],
+    list2:[]
+}
+```
+
+main.js
+```
+improt constant from './utils/test';
+Vue.prototype.$constant = constant;
+```
+
+test.vue
+```
+this.list = this.$constant.list1;
 ```

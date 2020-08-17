@@ -379,6 +379,8 @@ sendData() {
 }
 ```
 
+`this.$refs.child`只有在渲染完了才能获取到。
+
 # vue兄弟组件通过eventbus传值
 
 
