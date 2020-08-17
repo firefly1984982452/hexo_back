@@ -588,18 +588,6 @@ setTimeout(()=>{
 
 ---
 
-# let和const
-
-## let
-
-let变量不能重复定义
-没有变量提升
-暂时性死区
-
-## const
-
-const定义的变量不能修改
-
 # JavaScript面向对象
 
 [参考](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
@@ -1978,6 +1966,8 @@ doIt();
 
 结果和上一个不停用`then`链的一样，但是代码要清晰得多，而且没有回调地狱。
 
+---
+
 # export 和 import
 
 ## 普通使用
@@ -1989,15 +1979,18 @@ var constant = {
     test:'2'
 }
 
+var b = {};
+
 export {
-    constant
+    constant,
+    b
 };
 ```
 
 test.vue
 ```
-import {constant} from '@/utils/test';
-console.log(constant)
+import {constant,b} from '@/utils/test';
+console.log(constant,b)
 ```
 
 ## 全局使用
@@ -2006,7 +1999,8 @@ constant.js
 ```
 export default {
     list1:[],
-    list2:[]
+    list2:[],
+    b:function(){}
 }
 ```
 
@@ -2019,4 +2013,37 @@ Vue.prototype.$constant = constant;
 test.vue
 ```
 this.list = this.$constant.list1;
+```
+
+## `export`和`export default`的区别
+
+- `export`需要导出多个并需要`{}`，`export default`只需要一个`{}`导出全部（没有额外`{}`）；
+- `import`时，`export`需要导入多个，`export default`是默认的，只需要给一个名字；
+
+---
+
+# `flat()`和`flatMap()`
+
+[学习链接](https://blog.csdn.net/qq_29055201/article/details/86530254)
+
+## flat
+
+拉平数组，默认一层，填几就拉平几层嵌套，如果想拉平所有的，用`Infinity`
+
+```
+[1, 2, [3, [4, 5]]].flat()
+// [1, 2, 3, [4, 5]]
+[1, 2, [3, [4, 5]]].flat(2)
+// [1, 2, 3, 4, 5]
+[1, [2, [3]]].flat(Infinity)
+// [1, 2, 3]
+```
+
+## flatMap
+
+与map类似，不同的是可以拉平数组，但只能拉平一层，不能多层。
+
+```
+[1,[2,[3],4,5],6,[7],8].flatMap(v => v*2)
+(5) [2, NaN, 12, 14, 16]
 ```
