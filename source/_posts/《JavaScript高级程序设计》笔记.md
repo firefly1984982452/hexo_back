@@ -253,7 +253,7 @@ handleDebounce () {
 var flag = false;
 handleThrottle () {
   console.log('调用')
-  if(!flag){return}
+  if(flag){return}
   flag = false;
   setTimeout(()=>{
     console.log('函数节流');
