@@ -19,7 +19,7 @@ obj.id = 1;
 delete obj.id;
 ```
 
-# 合并两个对象
+# assign合并两个对象
 
 ```
 Object.assign(obj1,obj2);
@@ -86,4 +86,26 @@ delete obj.info.name; // 删除对象监听失败
 obj.arr.push(2); // 添加数组监听失败
 obj.arr.slice(1); // 修改数组监听失败
 
+```
+
+# is
+
+`Object.is()` 的意思是对象比较
+
+比如之前判断一个值是否为`NaN`的话可能会用`Number.isNaN()`，现在用`Object.is(NaN, NaN)`也能达到一样的效果。
+
+
+# 对象key值构建
+
+```
+var a = 'name'
+var b = {
+    [a] : '小明'
+}
+
+结果：
+
+b = {
+    name: '小明'
+}
 ```

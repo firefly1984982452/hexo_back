@@ -375,9 +375,6 @@ f2(3213,23,2,2332,32,)
 
 必须是尾参数。
 
-
-
-
 ## 箭头函数
 
 作用：
@@ -407,3 +404,114 @@ var f2 = (...values) => values;
 f1(1,2,3,4); // [1, 2, 3, 4]
 f2(1,2,3,4); // [1, 2, 3, 4]
 ```
+## 尾调用优化
+
+### 尾调用是什么
+
+**某个函数的最后一步是调用另一个函数**
+
+以下三种情况，都不属于尾调用：
+
+```
+// 情况一
+function f(x){
+  let y = g(x);
+  return y;
+}
+
+// 情况二
+function f(x){
+  return g(x) + 1;
+}
+
+// 情况三
+function f(x){
+  g(x);
+}
+```
+
+情况一：调用函数g之后，还有赋值操作；
+情况二：调用函数g之后，还有`+1`的操作；
+情况三：调用函数g之后，还隐式的调用了`return undefined`。
+
+### 尾调用优化
+
+**只保留内层函数的调用帧**
+
+```
+function f() {
+  let m = 1;
+  let n = 2;
+  return g(m + n);
+}
+f();
+
+// 等同于
+function f() {
+  return g(3);
+}
+f();
+
+// 等同于
+g(3);
+```
+
+### 尾递归
+
+**尾调用自身**
+
+例如将下面的普通递归改为尾递归
+
+```
+function factorial(n) {
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
+}
+
+factorial(5) // 120
+```
+
+此时需要保存n个记录，复杂度O(n)；
+
+尾递归只保留一个调用记录，复杂度O(1)：
+
+```
+function factorial(n, total) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5, 1) // 120
+```
+
+### 递归函数的改写
+
+**柯里化**：将多参数的函数转换成单参数的形式。（默认值正好可以用上）
+
+```
+function factorial(n, total = 1) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5) // 120
+```
+
+# 数组的扩展
+
+[链接](https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8B%E6%95%B0%E7%BB%84/)
+
+# Symbol
+
+```
+var a = Symbol('e')
+var b = Symbol('e')
+a == b //false
+
+var c = 'e'
+var d = 'e'
+c == d // true
+c === d // true
+```
+
+可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。

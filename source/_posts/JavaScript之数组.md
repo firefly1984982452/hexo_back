@@ -5,6 +5,70 @@ categories:
 - program
 ---
 
+# 扩展运算符（`...`）
+
+将数组变为参数序列
+
+```
+console.log(...[1,2,3]); // 1,2,3
+```
+
+## 代替apply
+
+```
+// ES5 的写法
+Math.max.apply(null, [14, 3, 77])
+
+// ES6 的写法
+Math.max(...[14, 3, 77])
+
+// 等同于
+Math.max(14, 3, 77);
+```
+
+## 替换push
+
+```
+// ES5的 写法
+var arr1 = [0, 1, 2];
+var arr2 = [3, 4, 5];
+Array.prototype.push.apply(arr1, arr2);
+
+// ES6 的写法
+let arr1 = [0, 1, 2];
+let arr2 = [3, 4, 5];
+arr1.push(...arr2);
+```
+
+## 应用
+
+**复制数组**
+
+单层数据数组可实现深拷贝，如果是数组对象无法实现深拷贝。
+
+**合并数组**
+
+**与解构赋值结合**
+
+```
+const [first, ...rest] = [1, 2, 3, 4, 5];
+first // 1
+rest  // [2, 3, 4, 5]
+```
+
+**字符串变为数组**
+
+```
+[...'hello']; // [ "h", "e", "l", "l", "o" ]
+```
+
+**实现Iterator接口的对象**
+
+任何定义了遍历器（Iterator）接口的对象都可以用扩展运算符转为真正的数组。
+
+如`nodeList`、`Map`和`Set`、`arguments`等。
+
+
 # 判断[1,2]是否为数组的方法
 
 **typeof 不能验证[1,2]是否为数组，返回的是'object'**
@@ -121,7 +185,7 @@ arr.sort();          //(5) [1, 122, 23, 231, 53]
 
 ```
 var arr = [23,122,1,53,231];
-arr.sort((a,b) => {return a - b}); //[1, 23, 53, 122, 231]
+arr.sort((a,b) =>  a - b); //[1, 23, 53, 122, 231]
 
 ```
 
@@ -176,6 +240,12 @@ c.join(',');       //"a,b,c,d"
 返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].values().next().value`
+
+## keys
+
+数组里的下标
+
+`[...['a', 'b', 'c'].keys()]`
 
 ## every
 
@@ -369,6 +439,10 @@ let arr = Array.from(arrayLike)
 console.log(arr) // ['tom','65','男',['jane','john','Mary']]
 ```
 
+同扩展运算符一样，只要是部署了 Iterator 接口的数据结构，Array.from都能将其转为数组。区别在于`Array.from`还能转换类数组对象。
+
+比如该类数组对象就只能用`Array.from`转换成数组，不能用`扩展运算符`转换。
+
 其它情况则不会改变，会变成`[ undefined, undefined, undefined, undefined ]`。
 
 ## Set变为数组
@@ -388,4 +462,31 @@ Array.from(new Set([1,3,3,4]), item => item + 1) //[2, 4, 5]
 
 ```
 Array.from('hello') // ["h", "e", "l", "l", "o"]
+```
+
+
+# `flat()`和`flatMap()`
+
+[学习链接](https://blog.csdn.net/qq_29055201/article/details/86530254)
+
+## flat
+
+拉平数组，默认一层，填几就拉平几层嵌套，如果想拉平所有的，用`Infinity`
+
+```
+[1, 2, [3, [4, 5]]].flat()
+// [1, 2, 3, [4, 5]]
+[1, 2, [3, [4, 5]]].flat(2)
+// [1, 2, 3, 4, 5]
+[1, [2, [3]]].flat(Infinity)
+// [1, 2, 3]
+```
+
+## flatMap
+
+与map类似，不同的是可以拉平数组，但只能拉平一层，不能多层。
+
+```
+[1,[2,[3],4,5],6,[7],8].flatMap(v => v*2)
+(5) [2, NaN, 12, 14, 16]
 ```
