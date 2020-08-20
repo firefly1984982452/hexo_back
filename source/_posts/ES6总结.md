@@ -282,3 +282,128 @@ improt {list1} from 'list'
 |字符串|`const [a, b, c] = 'hello';`|数组`[]`|`const [a,b = 5] = 'e'`|值为`undefined`|
 |数值（转对象、无意义）|`let {toString: s} = 123;`|对象`{}`|-|-|
 |布尔（转对象、无意义）|`let {toString: s} = true;`|对象`{}`|-|-|
+
+# 字符串的扩展
+
+[链接](https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/)
+
+# 数值的扩展
+
+[链接](https://firefly1984982452.github.io/2020/06/05/js%20Math%E5%92%8CNumber/)
+
+# 函数的扩展
+
+## 函数的默认参数
+
+值为`undefined`时才生效
+
+```
+function log(x, y = 'World') {
+  console.log(x, y);
+}
+
+log('Hello') // Hello World
+log('Hello', 'China') // Hello China
+log('Hello', '') // Hello
+```
+### 与解构赋值默认值结合使用
+
+**当不使用默认值时**：
+
+```
+function foo({x, y = 5}) {
+  console.log(x, y);
+}
+
+foo({}) // undefined 5
+foo({x: 1}) // 1 5
+foo({x: 1, y: 2}) // 1 2
+foo() // TypeError: Cannot read property 'x' of undefined
+```
+
+此时的x和y没有函数参数默认值，所以会报错。
+
+**使用默认值时**：
+
+```
+function foo({x, y = 5} = {}) {
+  console.log(x, y);
+}
+
+foo() // undefined 5
+```
+
+### 位置
+
+必须是尾参数，不然除非调用时显示写上undefined，如：`foo(undefined,1)`。
+
+
+### 作用域
+
+只在function内部有效
+
+### 应用
+
+- 如果省略某参数，函数仍然进行
+
+## reset参数
+
+### 使用
+
+相当于将函数自带的arguments转换成了数组。
+
+（reset参数的形式与java类似）
+
+```
+function f1(){
+    console.log(arguments)
+    console.log(Array.from(arguments))
+}
+function f2(...values){
+    console.log(values)
+}
+
+f1(3213,23,2,2332,32,);
+// Arguments(5) [3213, 23, 2, 2332, 32, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+// (5) [3213, 23, 2, 2332, 32]
+
+f2(3213,23,2,2332,32,)
+// (5) [3213, 23, 2, 2332, 32]
+```
+
+### 位置
+
+必须是尾参数。
+
+
+
+
+## 箭头函数
+
+作用：
+
+- 简化代码回调函数
+- 提升this
+
+### 使用
+
+```
+// 简写：
+data.map(val => val.id);
+// 全写：
+data.map((val) => {
+  return val.id;
+})
+```
+
+### 与箭头函数结合
+
+```
+function f1(...values){
+    return values;
+}
+var f2 = (...values) => values;
+
+f1(1,2,3,4); // [1, 2, 3, 4]
+f2(1,2,3,4); // [1, 2, 3, 4]
+```
