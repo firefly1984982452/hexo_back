@@ -234,6 +234,15 @@ c.join(',');       //"a,b,c,d"
 
 `['a', 'b', 'c'].entries().next().value`
 
+## fromEntries
+
+将键值对数组转为对象
+
+```
+const map = new Map().set('foo', true).set('bar', false);
+Object.fromEntries(map)
+```
+
 ## values
 
 和entries异曲同工
