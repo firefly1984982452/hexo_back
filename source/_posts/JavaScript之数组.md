@@ -66,7 +66,7 @@ rest  // [2, 3, 4, 5]
 
 任何定义了遍历器（Iterator）接口的对象都可以用扩展运算符转为真正的数组。
 
-如`nodeList`、`Map`和`Set`、`arguments`等。
+如`nodeList`、`Map`和`Set`、`Array`、`String`、`arguments`等。
 
 
 # 判断[1,2]是否为数组的方法

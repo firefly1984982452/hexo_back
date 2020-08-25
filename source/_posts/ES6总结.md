@@ -518,3 +518,132 @@ c === d // true
 ```
 
 可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。
+
+# Iterater和for...of循环
+
+## Iterator
+
+可遍历的类数组：
+
+`nodeList`、`Map`、`Set`、`Array`、`String`、`arguments`。
+
+都可以用`Array.from`和扩展运算符（`...`）转换为真正的数组。
+
+都可以用`for...of`遍历值。
+
+## for...of
+
+`for...of`的使用范围是所有部署了`Iterator`的对象。
+
+### 使用
+
+#### 数组
+
+```
+// 数组
+let arr = ['a', 'b', 'c'];
+for (let pair of arr) {
+  console.log(pair);
+}
+for (let pair of arr.entries()) {
+  console.log(pair);
+}
+for (let pair of arr.keys()) {
+  console.log(pair);
+}
+for (let pair of arr.values()) {
+  console.log(pair);
+}
+```
+
+#### 字符串
+
+```
+let str = "hello";
+
+for (let s of str) {
+  console.log(s); // h e l l o
+}
+```
+
+#### DOM NodeList对象
+
+```
+let paras = document.querySelectorAll("p");
+
+for (let p of paras) {
+  p.classList.add("test");
+}
+
+```
+
+#### arguments对象
+
+```
+function printArgs() {
+  for (let x of arguments) {
+    console.log(x);
+  }
+}
+printArgs('a', 'b');
+// 'a'
+// 'b'
+```
+
+### 对象
+
+遍历对象可以减少使用`Object.keys()`这一步骤。
+
+```
+let es6 = {
+  edition: 6,
+  committee: "TC39",
+  standard: "ECMA-262"
+};
+
+for (let e in es6) {
+  console.log(e);
+}
+// edition
+// committee
+// standard
+```
+
+**用`for...in`遍历对象时会报错**
+
+### 对比
+
+`for`的缺陷
+
+```
+// 取值比较麻烦
+for (var index = 0; index < myArray.length; index++) {
+  console.log(myArray[index]);
+}
+```
+
+为了解决for麻烦的问题，引入的forEach
+
+```
+// 问题：无法跳出循环
+myArray.forEach(function (value) {
+  break;
+  console.log(value);
+});
+```
+
+`for...in`的缺陷：
+
+```
+1. 会遍历所有可枚举的属性，包括原型链（是否可遍历只和该对象上的属性enumerable有关，和在哪里无关）
+2. 除了数组中的元素，会遍历数组的私有属性
+3. 专门为对象设计
+```
+
+### 对比表
+
+|功能|`for`|`forEach`|`for...in`|`for...of`|
+|:--:|:--:|:--:|:--:|:--:|
+|break|×|×|×|✓|
+|遍历数组时的`value`|下标|下标|下标|值|
+|遍历对象时的`value`|下标|下标|key|`TypeError`|
