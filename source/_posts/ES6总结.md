@@ -285,13 +285,12 @@ improt {list1} from 'list'
 
 # 字符串的扩展
 
-[链接](https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/)
-
-<iframe src="https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/"></iframe>
 
 # 数值的扩展
 
-[链接](https://firefly1984982452.github.io/2020/06/05/js%20Math%E5%92%8CNumber/)
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/js%20Math%E5%92%8CNumber/"></iframe>
+
 
 # 函数的扩展
 
@@ -501,7 +500,7 @@ factorial(5) // 120
 
 # 数组的扩展
 
-[链接](https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8B%E6%95%B0%E7%BB%84/)
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8B%E6%95%B0%E7%BB%84/"></iframe>
 
 # Symbol
 
