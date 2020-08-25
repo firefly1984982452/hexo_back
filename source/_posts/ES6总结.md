@@ -285,6 +285,8 @@ improt {list1} from 'list'
 
 # 字符串的扩展
 
+[链接](https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/)
+
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/"></iframe>
 
 # 数值的扩展
