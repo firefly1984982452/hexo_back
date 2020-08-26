@@ -646,4 +646,11 @@ myArray.forEach(function (value) {
 |:--:|:--:|:--:|:--:|:--:|
 |break|×|×|×|✓|
 |遍历数组时的`value`|下标|下标|下标|值|
-|遍历对象时的`value`|下标|下标|key|`TypeError`|
+|遍历对象时的`value`|`TypeError`|`TypeError`|key|`TypeError`|
+
+总结：
+
+`for...of`可以`bread`，遍历时是值；
+`for...in`遍历对象更优，可简写`Objec.keys()`;
+
+#
