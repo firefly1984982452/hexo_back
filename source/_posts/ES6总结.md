@@ -92,7 +92,7 @@ arr = ['world']; // 报错
 
 ## globalThis
 
-顶层对象|浏览器|Node|Web Worker|
+|顶层对象|浏览器|Node|Web Worker|
 |:--:|:--:|:--:|:--:|
 |window|✓|×|×|
 |self|✓|×|✓|
