@@ -109,3 +109,14 @@ b = {
     name: '小明'
 }
 ```
+
+# fromEntries
+
+把序列化的字符串反转为对象。
+
+```
+window.location.search = '?roomId=9&status=1&taskId=7&serviceId=1109';
+var str = window.location.search.substr(1);
+var p = new URLSearchParams(str);
+var param = Object.fromEntries(p);
+```
