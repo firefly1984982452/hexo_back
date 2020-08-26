@@ -7,9 +7,27 @@ categories:
 
 # 基本概念
 
-## JS
+## <noscript>
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
+
+## <script>中的async和defer
+
+```
+1.`<script src="script.js"></script>`
+
+读到就立即执行。
+
+2.`<script async src="script.js"></script>`
+
+和DOM并行进行（异步）。
+
+2.`<script defer src="script.js"></script>`
+
+和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
+
+
+```
 
 ## 数据类型
 
@@ -1968,7 +1986,7 @@ doIt();
 
 ---
 
-# export 和 import
+# export 和 import 和require
 
 ## 普通使用
 
@@ -2019,6 +2037,16 @@ this.list = this.$constant.list1;
 
 - `export`需要导出多个并需要`{}`，`export default`只需要一个`{}`导出全部（没有额外`{}`）；
 - `import`时，`export`需要导入多个，`export default`是默认的，只需要给一个名字；
+
+## require
+
+`require`是`AMD`规范；`import`是`ES6`规范。
+
+`require`是赋值，`import`是解构。
+
+```
+defaultImg2: require("../../../assets/img/default.png"),
+```
 
 ---
 
