@@ -1986,7 +1986,7 @@ doIt();
 
 ---
 
-# export 和 import 和require
+# export 和 import 和 require
 
 ## 普通使用
 

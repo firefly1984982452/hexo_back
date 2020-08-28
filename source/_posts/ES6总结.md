@@ -598,6 +598,10 @@ Reflect.has(obj, 'name');
 
 ## 与Proxy语法一一对应
 
+# Promise
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#Promise)
+
 # Iterater和for...of循环
 
 ## Iterator
@@ -731,3 +735,17 @@ myArray.forEach(function (value) {
 
 `for...of`可以`bread`，遍历时是值；
 `for...in`遍历对象更优，可简写`Objec.keys()`;
+
+# Generator
+
+# async
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#async/await)
+
+# Class
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#extends%E7%BB%A7%E6%89%BF)
+
+# Module
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#export%20%E5%92%8C%20import%20%E5%92%8C%20require)
