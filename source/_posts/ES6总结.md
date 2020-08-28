@@ -523,6 +523,85 @@ c === d // true
 
 可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。
 
+# Set和Map
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#Map)
+
+# Proxy
+
+```
+function observerProxy(obj){
+    let handler = {
+		get(target,key,receiver){
+			console.log('获取'+key);
+			if(typeof target[key] === 'object' && target[key] !== null) {
+				return new Proxy(target[key],handler);
+			}
+			return Reflect.get(target,key,receiver);
+		},
+        set(target,key,value,reciver){
+			console.log(target,key,value,reciver)
+			return Reflect.set(target,key,value,reciver);
+        }
+    }
+    return new Proxy(obj,handler)
+}
+var obj2 = {
+    name: '小明',
+    flag: {
+        book: {
+            name : 'js',
+            page: 325
+        },
+    }
+}
+var objTest = observerProxy(obj2)
+objTest.flag.book.page = 33
+```
+
+# Reflect
+
+## 修改Object的返回结果
+
+`Object.defineProperty(obj, name, desc)`在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
+
+```
+// 老写法
+try {
+  Object.defineProperty(target, property, attributes);
+  // success
+} catch (e) {
+  // failure
+}
+
+// 新写法
+if (Reflect.defineProperty(target, property, attributes)) {
+  // success
+} else {
+  // failure
+}
+```
+
+## 命令式编程变成函数式编程
+
+原来的：
+
+```
+'name' in obj;
+```
+
+现在的：
+
+```
+Reflect.has(obj, 'name');
+```
+
+## 与Proxy语法一一对应
+
+# Promise
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#Promise)
+
 # Iterater和for...of循环
 
 ## Iterator
@@ -648,7 +727,7 @@ myArray.forEach(function (value) {
 
 |功能|`for`|`forEach`|`for...in`|`for...of`|
 |:--:|:--:|:--:|:--:|:--:|
-|break|×|×|×|✓|
+|跳出循环|×|`try...catch`和`throw`|`return` 或 `break`|`return` 或 `break`|
 |遍历数组时的`value`|下标|下标|下标|值|
 |遍历对象时的`value`|`TypeError`|`TypeError`|key|`TypeError`|
 
@@ -657,4 +736,16 @@ myArray.forEach(function (value) {
 `for...of`可以`bread`，遍历时是值；
 `for...in`遍历对象更优，可简写`Objec.keys()`;
 
-#
+# Generator
+
+# async
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#async/await)
+
+# Class
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#extends%E7%BB%A7%E6%89%BF)
+
+# Module
+
+[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#export%20%E5%92%8C%20import%20%E5%92%8C%20require)
