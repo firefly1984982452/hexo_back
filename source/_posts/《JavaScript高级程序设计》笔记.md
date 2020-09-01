@@ -7,11 +7,11 @@ categories:
 
 # 基本概念
 
-## <noscript>
+## `<noscript>`
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
 
-## <script>中的async和defer
+## `<script>`中的`async`和`defer`
 
 ```
 1.`<script src="script.js"></script>`
