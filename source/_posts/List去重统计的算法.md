@@ -59,3 +59,14 @@ console.log(arr);
 # 别人写的
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gi6oba2y5ej30qu064q6r.jpg)
+
+```
+var ary = list.reduce((item, next) => {
+    var isHas = item.find(v => v.name === next.name && v.type === next.type);
+    if(isHas == undefined) {
+        next.total = list.filter(v => v.name == next.name && v.type == next.type).length
+        item.push(next);
+    }
+    return item;
+},[])
+```
