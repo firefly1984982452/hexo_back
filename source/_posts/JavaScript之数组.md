@@ -424,6 +424,16 @@ console.log(getSum,0); // 23.6
 [15.5, 2.3, 1.1, 4.7].reduce((x,y) => x+y) // 23.6
 ```
 
+reduce计算数组对象的和：
+
+```
+var arr = [{id:1,num:3},{id:2,num:5},{id:5,num: 8}];
+var total = arr.reduce((total,next) =>{
+    return total + next.num;
+},0)
+total; // 16
+```
+
 
 # toLocalString
 
