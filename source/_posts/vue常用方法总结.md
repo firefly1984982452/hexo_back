@@ -773,3 +773,33 @@ activated(){
 },
 
 ```
+
+# `window.eventBus`实现vue页面与普通js数据通信
+
+重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
+
+main.js
+```
+// 引入eventBus
+import EventBus from './bus/eventBus'; 
+Vue.prototype.$eventBus = EventBus;
+
+if (window) {
+  window.$eventBus = EventBus;
+}
+```
+
+page.vue
+```
+window.$eventBus.$emit('residenceData', resData.map(v => v.lx));
+```
+
+index.js
+```
+var attackSourcesName = [];
+window.$eventBus.$on('residenceData',v=>{
+    attackSourcesName = v;
+})
+```
+
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)

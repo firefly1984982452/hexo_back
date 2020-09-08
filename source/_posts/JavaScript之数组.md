@@ -388,6 +388,20 @@ crr; // [{name:'小明', sex: 1, age: 18},{name:'小红', sex: 1, age: 18}]
 
 可以看到，arr原数组表面上是已经被改变的了，实际上是对象的引用，所以在map里面改变，会导致新值和旧值都改变。
 
+**合并2个对象**
+```
+var arr = [{id:1,val: 3},{id:2,val: 5},{id:3,val:9}];
+var brr = [{id:1,val: 13},{id:2,val: 15}];
+arr.map( v => {
+    brr.map( b => {
+        if(v.id == b.id) {
+            v.val = b.val;
+        }
+    })
+    return v;
+})
+```
+
 
 ## forEach
 
