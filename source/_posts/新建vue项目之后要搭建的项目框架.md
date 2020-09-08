@@ -438,9 +438,17 @@ Vue.component('ehcart', Ehcart);
 
 ```
 <ehcart
+  ref="echarts_nevel"
   config='test'
   height="3.58rem"
   width='100%'/>
+
+let echart = this.$refs.echarts_nevel;
+let resData = res.data;
+echart.option.xAxis.data = resData.map(v => v.lx);
+echart.option.series[0].data = resData.map(v => v.vx);
+echart.resizeB(); // 如果要后期改变大小
+echart.refresh();
 ```
 
 ## 配置echarts具体内容
