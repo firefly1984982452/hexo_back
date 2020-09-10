@@ -776,6 +776,8 @@ activated(){
 
 # `window.eventBus`实现vue页面与普通js数据通信
 
+适用于`echarts.js`和`map.js`。
+
 重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
 
 main.js

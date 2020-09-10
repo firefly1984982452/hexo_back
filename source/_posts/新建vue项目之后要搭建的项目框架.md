@@ -13,9 +13,9 @@ categories:
 
 # css
 
-## res
+## rem
 
-新建一个`res.js`文件
+新建一个`rem-config.js`文件
 
 ```
 export default function() {
@@ -45,6 +45,7 @@ remConfig(); // 执行rem
 @charset "utf-8";
 /*公共样式*/
 html,body{padding:0; margin:0;cursor: default;height: 100%;}
+/*如果用了rem，body里可设置默认font-size:.16rem*/
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin: 0; padding: 0 ;}
 body{font-family:"PingFangSC","Microsoft YaHei","微软雅黑","Hiragino Sans GB","arial","Tahoma","SimSun","宋体","sans-serif";}
 h1, h2, h3, h4, h5, h6 { font-size: 100% ;}

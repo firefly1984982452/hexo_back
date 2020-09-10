@@ -158,6 +158,13 @@ color:[new echarts.graphic.LinearGradient(
     ),'#556783'],
 ```
 
+## 饼图最小区域面积
+
+```
+type: 'pie',
+minAngle: 15,
+```
+
 # js控制echarts
 
 ## `window.eventBus`实现vue页面与普通js数据通信

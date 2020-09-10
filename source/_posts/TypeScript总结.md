@@ -229,6 +229,7 @@ const emptyArr : null [] = [null,null];
 
 const arr : (number | string) [] = [1,'a',1,2,'b'];
 
+// 类型别名
 type Lady = {name: string, age: number};
 const xiaoJieJies: Lady[] = [{
     name: '小明',age:14
@@ -255,3 +256,389 @@ const arr1 : (number | string) [] = [1,'a',1,2,'b'];
 // 有约束
 const arr2 : [string,string,number] = ['a','b',3];
 ```
+
+# 接口
+
+## 定义接口
+
+```
+interface Girl {
+    name: string;
+    age: number;
+    bust: number
+}
+
+const getResume = (girl: Girl) => {
+    console.log(girl.name);
+}
+
+const xh = {
+    name: '小红',
+    age: 19,
+    bust:38
+}
+
+getResume(xh);
+```
+
+## 接口(`interface`)和类型别名(`type`)的区别
+
+- 类型别名可以直接给类型，比如`string`，但接口必须给对象。
+
+## 接口定义非必填值`?:`
+
+语法：`?:`
+
+```
+interface Girl {
+    name: string;
+    age: number;
+    bust ?: number
+}
+```
+
+## 接口允许加入任意值`[anyname:string]:any;`
+
+语法：`[anyname:string]:any;`
+
+`string`的意思是对象名是string类型，`any`的意思是对象值是任意类型。
+
+```
+interface Girl1 {
+    name: string;
+    age: number;
+    bust ?: number;
+    [anyname:string]: any;
+}
+const xh = {
+    name: '小红',
+    age: 19,
+    sex:'女',
+    hobby:'兴趣',
+    year:22
+}
+```
+
+## 接口里定义方法
+
+语法：`fun(): type`
+
+比如：`say(): string;`代表`say`方法返回`string`类型的值。
+
+```
+interface Girl1 {
+    name: string;
+    age: number;
+    bust ?: number;
+    [anyname:string]: any;
+    say(): string;
+}
+const xh = {
+    name: '小红',
+    age: 19,
+    sex:'女',
+    hobby:'兴趣',
+    year:22,
+    say(){
+        return 'hello World!';
+    }
+}
+```
+
+## 类实现接口
+
+类实现接口时必须把**所有**要必填的属性和方法实现，否则就会报错。
+
+错误的：
+```
+class XiaoJieJie implements Girl{
+}
+```
+
+正确的：
+```
+class XiaoJieJie implements Girl{
+    name = '小红';
+    age = 12;
+    bust= 90;
+    say(){
+        return '你好'
+    }
+}
+console.log(XiaoJieJie)
+```
+
+## 接口继承接口
+
+重点：
+
+- `interface...extends`；
+- `function`里面的约束定型改为新接口名；
+- 新的对象里面除了原接口约束的属性，也要把新的属性加上。
+
+```
+interface Teacher extends Girl {
+    teach():string;
+}
+
+const getResume2 = (girl: Teacher) => {
+    ...
+    girl.teach();
+}
+
+const girl2 = {
+    ... // girl的所有属性
+    teach(){
+        return 'hello';
+    }
+}
+
+getResume2(girl2);
+```
+
+## 自我总结
+
+接口更像是一种约束，约束用户的对象的属性类型。
+
+# 类
+
+## 继承与重写
+
+```
+class Lady {
+    content = 'hello world!';
+    sayHello () {
+        return this.content
+    };
+}
+
+class XiaoJieJie extends Lady {
+    sayLove () {
+        return 'I love you.'
+    };
+    sayHello () {
+        return super.sayHello() + ' 你好！';
+    }
+}
+```
+
+JAVA中类的继承
+
+```
+class Animal{
+    public void move(){
+        System.out.println("动物可以移动");
+    }
+}
+  
+class Dog extends Animal{
+    @Override // 表示方法重写
+    public void move(){
+        super.move(); // 引用父类的方法
+        System.out.println("狗可以跑和走");
+    }
+}
+```
+
+区别：
+- java中要用到`@Override`标签
+
+**@Override标签的作用与好处**
+
+- 它是伪代码，表示方法重写
+- 作为注释，帮助检查是否正确复写了父类中已有的方法
+- 编译器可以验证该方法是否在父类中已有
+- 非必填。如果没写@Override，方法名与父类一模一样，如果返回类型相同，视为重写，反之，视为新方法
+
+## 访问类型
+
+### public
+
+默认就是它
+
+### private
+
+私有，只有自己能用。
+
+```
+class Lady {
+    private content = 'hello world!';
+    private privateFn () {
+        return 'private' + this.content; // 能用
+    };
+}
+class XiaoJieJie extends Lady {
+    privateFn() { // 编译不通过
+        return 'e';
+    };
+}
+console.log(new Lady().privateFn()); // 编译不通过
+```
+
+### protected
+
+受保护，只能在自己及子类用。
+
+```
+class Lady {
+    protected protectedFn () {
+        return 'protected';
+    };
+}
+
+class XiaoJieJie extends Lady {
+    protectedFn () {
+        return 'xj';
+    }
+}
+
+console.log(new Lady().protectedFn()); // 编译不通过
+```
+
+### 对比表
+
+|类型|public|protected|private|
+|:--:|:--:|:--:|:--:|
+|自己（父类）|✓|✓|✓|
+|继承（子类）|✓|×|×|
+|外部（`new Class().fun()`）|✓|✓|×|
+
+附：JAVA异同表
+
+|类型|public|protected|private|
+|:--:|:--:|:--:|:--:|
+|自己（父类）|✓|✓|✓|
+|继承（子类）|✓|✓|×|
+|外部（`new Class().fun()`）|✓|×|×|
+
+## 构造函数
+
+### 构造函数及继承
+
+```
+class People {
+    constructor (public name: string,public sex:string) {
+        this.name = name;
+        this.sex = sex;
+    }
+}
+
+class Teacher extends People {
+    constructor (public age:number){
+        super('小明','女');
+    }
+}
+
+var people = new People('小红','女');
+console.log(people.name)
+
+var teacher = new Teacher(19);
+console.log(teacher,teacher.age);
+```
+
+ES6实现对比：
+```
+class People {
+    constructor (name,sex) {
+        this.name = name;
+        this.sex = sex;
+    }
+}
+
+class Teacher extends People {
+    constructor (name,sex,age){
+        super(name,sex);
+        this.age = age;
+    }
+}
+
+var people = new People('小红','女');
+console.log(people.name)
+
+var teacher = new Teacher('小明','女',19);
+console.log(teacher,teacher.age);
+```
+
+JAVA实现对比：
+```
+
+class People {
+    public String name;
+    public int sex;
+    public People (String name){System.out.println(name)};
+    public People (int sex ){};
+    public People (Stirng name, int sex){}
+    public People (){}
+}
+
+public class Teacher extends People {
+...
+}
+```
+
+## 抽象类
+
+```
+abstract class Girl{
+    abstract skill()  //因为没有具体的方法，所以我们这里不写括号
+
+}
+
+class Waiter extends Girl{
+    skill(){
+        console.log('大爷，请喝水！')
+    }
+}
+
+class BaseTeacher extends Girl{
+    skill(){
+        console.log('大爷，来个泰式按摩吧！')
+    }
+}
+
+class seniorTeacher extends Girl{
+    skill(){
+        console.log('大爷，来个SPA全身按摩吧！')
+    }
+}
+```
+
+其它：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
+
+
+### 多态
+
+多态是同一个行为具有多个不同表现形式或形态的能力。
+比如打印机有打印方法，彩色打印机类打印方法是彩色，黑色打印机类打印方法是黑色。
+
+java中多态的实现方式
+
+- 方式一：重写
+- 方式二：接口
+- 方式三：抽象类和抽象方法
+
+```
+abstract class Animal {  
+    abstract void eat();  
+}  
+  
+class Cat extends Animal {  
+    public void eat() {  
+        System.out.println("吃鱼");  
+    }  
+    public void work() {  
+        System.out.println("抓老鼠");  
+    }  
+}  
+  
+class Dog extends Animal {  
+    public void eat() {  
+        System.out.println("吃骨头");  
+    }  
+    public void work() {  
+        System.out.println("看家");  
+    }  
+}
+```
+
+其它：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
