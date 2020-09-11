@@ -576,34 +576,181 @@ public class Teacher extends People {
 }
 ```
 
+## get和set
+
+```
+class XiaoJieJie {
+    constructor(private _age:number,private _name: string){
+    }
+    get age(){
+        return this._age-2;
+    };
+    set age(age:number){
+        this._age = age;
+    }
+    get name(){
+        return this._name+'人';
+    };
+    set name(name:string){
+        this._name = name;
+    }
+}
+
+const xj =  new XiaoJieJie(18,'小明');
+console.log(xj,xj.age); // XiaoJieJie { _age: 18, _name: '小明' } 16
+```
+
+编译如果无法通过需要加上es5：
+
+```
+tsc demo.ts -t es5
+node demo.js
+```
+
+java中
+
+```
+class Stutent1{
+    private String name;
+    private int age;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public void showStu1(){
+        System.out.println("学生叫做"+name+",年龄"+age);
+    }
+}
+```
+
+## static装饰符
+
+不用new新建就可以创建
+
+```
+class Girl {
+    static sayLove(){
+        return '你好';
+    }
+}
+
+console.log(Girl.sayLove());
+```
+不用new Girl()就可以调用方法了。
+
+## 只读属性readonly
+
+```
+class XiaoJieJie {
+    constructor(private readonly _age:number,private _name: string){
+    }
+    get age(){
+        return this._age-2;
+    }
+    set age(age:number){ // 报错
+        this._age = age;
+    }
+    get name(){
+        return this._name+'人';
+    };
+    set name(name:string){
+        this._name = name;
+    }
+}
+
+const xj =  new XiaoJieJie(18,'小明');
+xj.name = '小红';
+xj.age = 33; // 报错
+console.log(xj,xj.age);
+```
+
 ## 抽象类
 
+### 不加abstract时
+
+特点：
+
+- 普通的类继承
+- 普通的重写
+- 可以调用父类
+
 ```
-abstract class Girl{
-    abstract skill()  //因为没有具体的方法，所以我们这里不写括号
-
-}
-
-class Waiter extends Girl{
+class Girl {
     skill(){
-        console.log('大爷，请喝水！')
+        conso.log('skill)
     }
 }
 
-class BaseTeacher extends Girl{
+class Girl1 extends Girl {
     skill(){
-        console.log('大爷，来个泰式按摩吧！')
+        console.log('cooking');
     }
 }
 
-class seniorTeacher extends Girl{
+class Girl2 extends Girl {
     skill(){
-        console.log('大爷，来个SPA全身按摩吧！')
+        console.log('make cloths')
     }
 }
+
+class Girl3 extends Girl {
+    skill(){
+        console.log('do gardening')
+    }
+}
+
+console.log(new Girl1().skill())
+console.log(new Girl2().skill())
+console.log(new Girl3().skill())
+console.log(new Girl().skill())
+
 ```
 
-其它：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
+### 加abstract关键字时
+
+特点：
+
+- 不能调用父类
+- abstract方法不能有具体实现内容
+
+```
+abstract class Girl {
+    abstract skill()
+}
+
+class Girl1 extends Girl {
+    skill(){
+        console.log('cooking');
+    }
+}
+
+class Girl2 extends Girl {
+    skill(){
+        console.log('make cloths')
+    }
+}
+
+class Girl3 extends Girl {
+    skill(){
+        console.log('do gardening')
+    }
+}
+
+console.log(new Girl1().skill())
+console.log(new Girl2().skill())
+console.log(new Girl3().skill())
+
+```
+
+区别：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
 
 
 ### 多态
