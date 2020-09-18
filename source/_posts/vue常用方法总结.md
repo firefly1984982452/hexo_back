@@ -745,6 +745,34 @@ this.$message.closeAll();
 this.$message.success('info');
 ```
 
+## 手动控制popover弹层的显示与隐藏状态
+
+```
+<popover ref="popover"></popover>
+ 
+// ElementUI并没有给我们明确控制popover弹层显示与关闭状态的方法，但是通过ref获取元素之后发现，元素上面已经内置关闭和打开的方法，
+// 开启 doShow()   开启调用的方法(一般都是手动触发,不常用)
+// 关闭 doClose()  关闭弹层调用的方法(用于刚刚我们说到的场景)
+```
+
+表格中多个popover
+
+```
+<template slot-scope="scope">
+  <div class="operation">
+    <el-popover trigger="click"  :ref="`popover-${scope.$index}`"  placement="top" width="100" >
+      <p class="el-icon-warning">  确定删除</p>
+      <div style="text-align: right; margin: 0">
+        <el-button size="mini" type="text" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >取消</el-button>
+        <el-button type="primary" size="mini" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >确定</el-button>
+      </div>
+      <span slot="reference">删除</span>
+    </el-popover>
+  </div>
+</template>
+
+```
+
 # 列表不缓存详情页缓存
 
 ```
