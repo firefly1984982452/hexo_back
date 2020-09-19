@@ -576,34 +576,181 @@ public class Teacher extends People {
 }
 ```
 
+## get和set
+
+```
+class XiaoJieJie {
+    constructor(private _age:number,private _name: string){
+    }
+    get age(){
+        return this._age-2;
+    };
+    set age(age:number){
+        this._age = age;
+    }
+    get name(){
+        return this._name+'人';
+    };
+    set name(name:string){
+        this._name = name;
+    }
+}
+
+const xj =  new XiaoJieJie(18,'小明');
+console.log(xj,xj.age); // XiaoJieJie { _age: 18, _name: '小明' } 16
+```
+
+编译如果无法通过需要加上es5：
+
+```
+tsc demo.ts -t es5
+node demo.js
+```
+
+java中
+
+```
+class Stutent1{
+    private String name;
+    private int age;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public void showStu1(){
+        System.out.println("学生叫做"+name+",年龄"+age);
+    }
+}
+```
+
+## static装饰符
+
+不用new新建就可以创建
+
+```
+class Girl {
+    static sayLove(){
+        return '你好';
+    }
+}
+
+console.log(Girl.sayLove());
+```
+不用new Girl()就可以调用方法了。
+
+## 只读属性readonly
+
+```
+class XiaoJieJie {
+    constructor(private readonly _age:number,private _name: string){
+    }
+    get age(){
+        return this._age-2;
+    }
+    set age(age:number){ // 报错
+        this._age = age;
+    }
+    get name(){
+        return this._name+'人';
+    };
+    set name(name:string){
+        this._name = name;
+    }
+}
+
+const xj =  new XiaoJieJie(18,'小明');
+xj.name = '小红';
+xj.age = 33; // 报错
+console.log(xj,xj.age);
+```
+
 ## 抽象类
 
+### 不加abstract时
+
+特点：
+
+- 普通的类继承
+- 普通的重写
+- 可以调用父类
+
 ```
-abstract class Girl{
-    abstract skill()  //因为没有具体的方法，所以我们这里不写括号
-
-}
-
-class Waiter extends Girl{
+class Girl {
     skill(){
-        console.log('大爷，请喝水！')
+        conso.log('skill)
     }
 }
 
-class BaseTeacher extends Girl{
+class Girl1 extends Girl {
     skill(){
-        console.log('大爷，来个泰式按摩吧！')
+        console.log('cooking');
     }
 }
 
-class seniorTeacher extends Girl{
+class Girl2 extends Girl {
     skill(){
-        console.log('大爷，来个SPA全身按摩吧！')
+        console.log('make cloths')
     }
 }
+
+class Girl3 extends Girl {
+    skill(){
+        console.log('do gardening')
+    }
+}
+
+console.log(new Girl1().skill())
+console.log(new Girl2().skill())
+console.log(new Girl3().skill())
+console.log(new Girl().skill())
+
 ```
 
-其它：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
+### 加abstract关键字时
+
+特点：
+
+- 不能调用父类
+- abstract方法不能有具体实现内容
+
+```
+abstract class Girl {
+    abstract skill()
+}
+
+class Girl1 extends Girl {
+    skill(){
+        console.log('cooking');
+    }
+}
+
+class Girl2 extends Girl {
+    skill(){
+        console.log('make cloths')
+    }
+}
+
+class Girl3 extends Girl {
+    skill(){
+        console.log('do gardening')
+    }
+}
+
+console.log(new Girl1().skill())
+console.log(new Girl2().skill())
+console.log(new Girl3().skill())
+
+```
+
+区别：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
 
 
 ### 多态
@@ -642,3 +789,204 @@ class Dog extends Animal {
 ```
 
 其它：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
+
+# 配置项tsconfig.json
+
+`tsconfig.json`为配置文件，该配置文件通过`tsc --init`命令行来生成。
+
+## include、exclude、files
+
+直接在命令行输入`tsc`不带任何文件的话会默认编译所有文件。
+
+`include`属性是用来指定要编译的文件
+
+```
+{
+  "include":["demo.ts"],
+  "compilerOptions": {
+      //any something
+      //........
+  }
+}
+```
+
+`exclude`属性是用来指定不要编译的文件
+
+```
+{
+  "exclude":["demo.ts"],
+  "compilerOptions": {
+      //any something
+      //........
+  }
+}
+```
+
+`files`属性是用来指定要编译的文件，和`include`相同
+
+```
+{
+  "files":["demo.ts"],
+  "compilerOptions": {
+      //any something
+      //........
+  }
+}
+```
+## compilerOptions配置
+
+- `removeComments`：编译文件是否显示注释
+- `static`：是否按严格模式编译和书写
+- `nolmplicitAny`：是否允许注解类型any不用声明
+- `strictNullChecks`：是否允许非空检查
+- `rootDir`：项目文件夹
+- `outDir`：编译文件夹
+
+# 联合类型和类型保护
+
+## 联合类型
+
+```
+interface Waiter {
+    anjiao: boolean,
+    say:()=>{}
+}
+
+interface Teacher {
+    anjiao: boolean,
+    skill:()=>{}
+}
+
+function test(animal: Waiter | Teacher){})
+```
+
+上例就是联合类型，`function test(animal: Waiter | Teacher){animal.say()})`会报错，所以需要类型保护。
+
+## 类型保护-类型断言
+
+根据具体的值来断言用哪个接口
+
+```
+function test(animal: Waiter | Teacher){
+    // 方法一：类型断言：根据某个值来判断用哪个方法
+    if(animal.anjiao){
+        console.log((animal as Waiter).say());
+    } else {
+        console.log((animal as Teacher).skill());
+    }
+}
+```
+
+## 类型保护-in语法
+
+判断在对象中是否存在该方法
+
+```
+function test(animal: Waiter | Teacher){
+    // 方法二：in语法：判断在对象中是否存在该方法
+    if('skill' in animal){
+        console.log(animal.skill());
+    } else {
+        console.log(animal.say());
+    }
+}
+
+```
+
+## 断言和in的实例
+
+```
+interface Waiter {
+    anjiao: boolean,
+    say:()=>{}
+}
+
+interface Teacher {
+    anjiao: boolean,
+    skill:()=>{}
+}
+
+function test(animal: Waiter | Teacher){
+    // 方法一：类型断言：根据某个值来判断用哪个方法
+    if(animal.anjiao){
+        console.log((animal as Waiter).say());
+    } else {
+        console.log((animal as Teacher).skill());
+    }
+    // 方法二：in语法：判断在对象中是否存在该方法
+    if('skill' in animal){
+        console.log(animal.skill());
+    } else {
+        console.log(animal.say());
+    }
+}
+
+const xiaohong : Teacher = {
+    anjiao: false,
+    skill(){
+        return '你好';
+    }
+}
+const xiaoming : Waiter = {
+    anjiao: true,
+    say(){
+        return 'hello';
+    },
+    
+}
+
+test(xiaohong);
+test(xiaoming);
+```
+
+## 类型保护-typeof语法
+
+判断是不是不同的类型
+
+```
+function add(first: string | number, second: string | number){
+    if(typeof first == 'string' || typeof second == 'string'){
+        return `${first}${second}`;
+    }
+    return first + second;
+}
+console.log(add(1,'2')) // 12
+console.log(add(1,2)) // 3
+```
+
+## 类型保护-instanceof语法
+
+```
+
+class NumberObj{
+    count: number
+}
+
+function addObj(first: object , second: object | NumberObj) {
+    if (first instanceof NumberObj && second instanceof NumberObj) {
+        return first.count + second.count;
+    }
+    return 0;
+}
+
+// 当是普通object时
+const obj1 : {
+    count: number
+} = {
+    count: 1
+}
+const obj2 : {
+    count: number
+} = {
+    count: 3
+}
+console.log(addObj(obj1,obj2)) // 0
+
+
+// 当是NumberObj对象时
+const obj3 = new NumberObj();
+obj3.count = 45;
+const obj4 = new NumberObj();
+obj4.count = 435;
+console.log(addObj(obj3,obj4)) // 480
+```
