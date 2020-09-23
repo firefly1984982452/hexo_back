@@ -138,3 +138,195 @@ console.log(nameObj.name == 'a');
 
 
 # 使用代理控制访问
+
+通过Proxy构造器创建代理
+
+```
+const emperor = {name: 'pdd'};
+const representative = new Proxy(emperor, {
+    get : (target, key) => {
+        console.log('get:' + key);
+        return key in target ? target[key] : 'error!';
+    },
+    set: (target, key, value) => {
+        console.log('set:' + key);
+        target[key] = value;
+    }
+});
+console.log(emperor.name === 'pdd',representative.name === 'pdd'); // true true
+console.log(emperor.name1,representative.name1); // undefined "error!"
+```
+
+## 使用代理记录日志
+
+上同
+
+## 使用代理检测性能-apply
+
+**代理的作用有利于原函数的复用**
+
+假设不用代理：
+
+判断一个数是否大于2
+```
+function isPrime(number){
+    if(number < 2) {
+        return false;
+    } else {
+        return true;
+    }
+}
+```
+写完后如果要检测该函数的性能，执行了多久，这时就要修改代码，加上`console.time`和`console.timeEnd`，**不利于代码的复用**，如下：
+
+```
+function isPrime(number){
+    console.time('isPrime');
+    if(number < 2) {
+        console.timeEnd('isPrime');
+        return false;
+    } else {
+        console.timeEnd('isPrime');
+        return true;
+    }
+}
+```
+
+或
+
+```
+function isPrime(number){
+    if(number < 2) {
+        return false;
+    } else {
+        return true;
+    }
+}
+// 正常打印
+function test1(num){
+    console.time('test')
+    const result = isPrime(num);
+    console.timeEnd('test');
+    return result;
+}
+// 隔2秒后再获取时间
+function test2(num){
+    console.time('test')
+    setTimeout(() => {
+        const result = isPrime(num);
+        console.timeEnd('test');
+        return result;
+    }, 2000);
+}
+test1(23); // test: 0.00390625 ms
+test2(23); // test: 2001.0390625 ms
+```
+
+**用代理解决**：
+
+```
+function isPrime(number){
+    if(number < 2) {
+        return false;
+    } else {
+        return true;
+    }
+}
+// 正常打印
+isPrime1 = new Proxy(isPrime, {
+    apply: (target, thisArg, args) => {
+        console.time('isPrime');
+        const result = target.apply(thisArg, args);
+        console.timeEnd('isPrime');
+        return result;
+    }
+})
+// 隔2秒后再获取时间
+isPrime2 = new Proxy(isPrime, {
+    apply: (target, thisArg, args) => {
+        console.time('isPrime');
+        setTimeout(() => {
+            const result = target.apply(thisArg, args);
+            console.timeEnd('isPrime');
+            return result;
+        }, 2000); 
+    }
+})
+isPrime1(23); // isPrime: 0.00390625 ms
+isPrime2(23); // isPrime: 2001.0390625 ms
+```
+
+## 使用代理计算值-apply
+
+**apply方法拦截函数的调用、call和apply操作**。
+
+```
+function sum (a,b) { return a+b };
+var proxy = new Proxy(sum, {
+    apply(target, thisArg, args) {
+        // return Reflect.apply(...arguments) * 2;
+        // 或
+        return target.apply(thisArg, args) * 2;
+    }
+})
+// 以下调用全都是*2后的结果
+proxy(1,2); // 6
+proxy.call(null, 4,5); // 18
+proxy.apply(null, [29,239]); // 536
+Reflect.apply(proxy, null, [32,10]); // 84
+```
+
+## apply实现负数组
+
+```
+function createNegativeArrayProxy(array) {
+    return new Proxy(array, {
+        get: (target, index) => {
+            index = index < 0 ? target.length + Number(index) : index;
+            return target[index];
+        }
+    })
+}
+var arr = createNegativeArrayProxy(['a', 'b', 'c', 'd']);
+console.log(arr[1],arr[-2]); // b c
+```
+
+普通方法实现暂时想不到，下标也无法获取。
+
+## proxy总结
+
+- 代理可以代理`对象`、`函数`、`数组`；
+
+- 代理的过程中，可以在`get`和`set`中进行拦截和设置新的参数方法；
+
+- 代理的过程中，可以通过`apply`绑定拦截原来的函数。
+
+[JS Proxy 的优势以及使用场景](https://www.suibianlu.com/c/p/14220.html)
+
+
+# 总结
+
+1. 使用访问器方法（getter和setter）可以控制对象
+
+- 通过内容的Object.definedProperty方法访问属性
+- 通过对象字面量中使用get和set语法
+- 通过ES6的class语法
+
+<br />
+
+- 读取对象时会隐式调用get，写入对象时会隐式调用set
+- get可以定义计算属性，set可以实现数据验证与日志记录
+
+2. 使用代理（proxy）可以控制对象
+
+- 代理可以定义对象交互时的行为
+- 所有的交互行为必须通过代理
+
+3. 使用代理（proxy）可以实现以下内容
+
+- 日志记录
+- 性能测量
+- 数据校验
+- 数组负索引
+
+4. 使用代理（proxy）效率不高，需进行性能测验
