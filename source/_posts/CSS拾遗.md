@@ -226,3 +226,37 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 参数3：模糊距离
 参数4：阴影大小，默认可省略不写时为0。
 参数4：颜色。
+
+# 清除浮动
+
+父元素：
+
+```
+.content-box::after{
+  clear: both;
+  content: '';
+  display: block;
+}
+```
+
+# display
+
+## inline
+
+- 不会独占一行
+- width和height无效
+- margin和padding中的left/right有效，top/bottom无效
+
+## block
+
+- 独占一行
+- width和height正常
+- marin和padding正常
+
+## inline-table
+
+行内表格
+
+### table-cell
+
+所有内容在一行
