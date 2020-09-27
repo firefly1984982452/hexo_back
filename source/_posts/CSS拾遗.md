@@ -260,3 +260,67 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 ### table-cell
 
 所有内容在一行
+
+# width和height
+
+## table
+
+Table表格中，定了width，如果其它的内容很高，内容少的可能会撑成一列高。
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj589b1p14j30aa08z75k.jpg)
+
+## 不适合用width:100%的情况
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj589e73jxj308i0bl3yn.jpg)
+
+子元素`width:100%`会获取父元素长度，如果设置了`width:100%`反而适得其反。
+
+## 按钮内文字会自动换行
+
+## box-sizing
+
+- content-box：默认值
+- border-box：将border变成里面消化的值
+
+## 内联元素
+
+- `display: inline-block;`会控制当前元素以自己的内容为长度，不受父元素影响。
+
+- 内联元素如果`display`改为了`block`，不用再设置`width:100%`。
+
+
+## 让元素heigth支持100%的方法
+
+方法一：
+
+`html,body{heigth:100%}`
+
+
+方法二：
+
+使用绝对定位
+
+```
+height: 100%;
+position: absolute;
+```
+
+## max-width/min-width和max-height/min-height
+
+**超越!important**
+
+```
+<img src="./floor.jpeg" style="width: 300px!important;" />
+img{min-width: 400px;}
+```
+
+最终生效的是`400px`。
+
+**min-width覆盖max-width**
+
+如果`min-width`和`max-width`冲突时，取`min-width`的值。
+
+```
+min-width: 400px;
+max-width: 350px;
+```

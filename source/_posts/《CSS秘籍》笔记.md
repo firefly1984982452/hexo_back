@@ -325,3 +325,43 @@ filter: drop-shadow(5px 5px 5px #000);
 ```
 
 参数：x轴、y轴、阴影、颜色。
+
+# 通过阴影弱化背景
+
+```
+box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
+```
+
+# 通过阴影弱化背景
+
+重点：用伪元素设置blur
+
+```
+.cover{
+  width: 600px;
+  height: 500px;
+  position: relative;
+}
+.cover::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 500px;
+  filter: blur(5px);
+  background: url('./floor.jpeg') center center no-repeat;
+  z-index: -1;
+}
+.content{
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #fbb;
+}
+<div class="cover">
+  <div class="content">我是内容</div>
+</div>
+```
