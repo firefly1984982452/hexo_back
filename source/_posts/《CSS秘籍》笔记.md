@@ -365,3 +365,25 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
   <div class="content">我是内容</div>
 </div>
 ```
+
+# 滚动提示
+
+```
+background-image: radial-gradient(at top, rgba(0,0,0,0.2), rgba(0,0,0,0));
+background-repeat: no-repeat;
+background-size: 100% 15px;
+background-attachment: local, scroll;
+```
+
+# width自适应关键字
+
+- `fill-available`：撑满空间，100%
+- `fit-content`：内容最大宽度。文字超过会换行。
+- `max-content`：内容最大宽度。如果文字超过显示区域了也不会换行，所以会有200%的可能。
+- `min-content`：内容最小宽度。比如图片是200px，文字是300px，就取200px。
+
+# table表格控制列宽
+
+`table-layout: fixed;`
+
+通常都是根据内容多少自动计算宽度的。
