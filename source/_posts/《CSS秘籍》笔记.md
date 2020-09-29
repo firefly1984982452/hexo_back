@@ -387,3 +387,12 @@ background-attachment: local, scroll;
 `table-layout: fixed;`
 
 通常都是根据内容多少自动计算宽度的。
+
+# 满屏背景和固定宽度
+
+```
+main{
+  width: 1000px; // 可不写
+  margin:0 calc(50% - 500px;)
+}
+```
