@@ -396,3 +396,31 @@ main{
   margin:0 calc(50% - 500px;)
 }
 ```
+
+# 紧贴底部的页脚
+
+## 方法1：中间内容用calc
+
+```
+header{
+  height: 100px;
+  background-color: #bbf;
+}
+.main{
+  background-color: #fbb;
+  min-height: calc(100% - 200px);
+}
+footer{
+  height: 100px;
+  background-color: #bfb;
+}
+```
+
+# 方法2：用flex
+
+```
+body{
+  display: flex;
+  flex-direction: column;
+}
+```
