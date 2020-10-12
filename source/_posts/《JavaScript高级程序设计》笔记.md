@@ -362,7 +362,7 @@ for (var i = 1; i < 6; i++) {
 此时就是先打印1、2、3、4、5，然后每隔1秒打印'print1'、'print2'...'print5'。但是，每次都会有新的j替代原来的j，所以可以直接在for循环里面定义let i = 1;
 
 ```
-for (var i = 1; i < 6; i++) {
+for (let i = 1; i < 6; i++) {
     console.log(i)
     setTimeout(() => {
         console.log('print'+i)
