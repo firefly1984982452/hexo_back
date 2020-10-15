@@ -392,6 +392,14 @@ import Vue from "vue"
 export default new Vue();
 ```
 
+`main.js`里设置为通用：
+
+```
+// 引入eventBus
+import EventBus from './bus/eventBus'; 
+Vue.prototype.$eventBus = EventBus;
+```
+
 兄组件`child1.vue`
 
 ```

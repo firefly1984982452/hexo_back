@@ -424,3 +424,25 @@ body{
   flex-direction: column;
 }
 ```
+
+# 打字动画
+
+用`width:0`到`width:100%`模拟出打字效果。
+
+```
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+p{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 18s;
+}
+```
+
+# 结语
+
+阅读耗时10小时，开始于2020-09-22，结束于2020-10-15，耗时24天。
