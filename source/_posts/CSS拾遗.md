@@ -324,3 +324,16 @@ img{min-width: 400px;}
 min-width: 400px;
 max-width: 350px;
 ```
+
+# `:root`选择器
+
+```
+:root{
+  color: red;
+}
+html{
+  color: green;
+}
+```
+
+最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
