@@ -841,3 +841,10 @@ window.$eventBus.$on('residenceData',v=>{
 ```
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)
+
+# 新标签页打开链接
+
+```
+var routerUrl = this.$router.resolve({path:'/elder/contract'})
+window.open(routerUrl.href,'_blank');
+```

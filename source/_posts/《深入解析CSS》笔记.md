@@ -165,3 +165,54 @@ p{
   color: var(--main-color);
 }
 ```
+
+---
+
+# 元素宽度3：7无法排列一行的问题
+
+宽度比例为3：7时无法排列一行：
+
+```
+.left{
+  width: 70%;
+  height: 80px;
+  border: 1px solid #fbf;
+  float: left;
+}
+.right{
+  float: left;
+  width: 30%;
+  height: 80px;
+  border: 1px solid #fbf;
+}
+...
+<div class="left"></div>
+<div class="right"></div>
+```
+
+## 方法1：对应样式加上`box-sizing:border-box;`
+
+```
+.left{
+  box-sizing: border-box;
+  width: 70%;
+  height: 80px;
+  border: 1px solid #fbf;
+  float: left;
+}
+.right{
+  box-sizing: border-box;
+  float: left;
+  width: 30%;
+  height: 80px;
+  border: 1px solid #fbf;
+}
+```
+
+## 方法2：所有样式加上`box-sizing:border-box;`
+
+```
+*{
+  box-sizing: border-box;
+}
+```
