@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-[链接](https://jspang.com/detailed?id=66#toc28)
+[链接](https://jspang.com/detailed?id=63)
 
 # 安装及使用
 
@@ -992,3 +992,366 @@ const obj4 = new NumberObj();
 obj4.count = 435;
 console.log(addObj(obj3,obj4)) // 480
 ```
+
+# 枚举
+
+```
+enum Data {
+    MASSAGE,
+    STATU,
+    DATA
+}
+console.log(Data[1],Data.DATA,Data)
+```
+
+打印出来是：
+
+```
+STATU
+2
+{
+  '0': 'MASSAGE',
+  '1': 'STATU',
+  '2': 'DATA',
+  MASSAGE: 0,
+  STATU: 1,
+  DATA: 2
+}
+```
+
+即`Data[1]`不是第`2`个，而是属性为`1`的的值。
+
+枚举可以自定义值：
+
+```
+enum Data {
+    MASSAGE = 'success',
+    STATU = 3,
+    DATA
+}
+```
+
+打印：
+
+```
+undefined
+4 
+{ '3': 'STATU', '4': 'DATA', MASSAGE: 'success', STATU: 3, DATA: 4 }
+```
+
+如果是数字，会累加。
+
+枚举可实现的，对象也可以实现，但是它可以实现`反射映射`。
+
+# 泛型
+
+## 在方法中使用
+
+```
+function join<T>(first: T, second: T){
+    return `${first}${second}`;
+}
+console.log(join <string> ('peng','dan')) // 'pengdan'
+console.log(join <number> (3,2)) // 32
+```
+
+参数1和参数2可以是任意类型，但2者得同时是同一类型。
+
+优化：
+
+```
+function join<T1,T2>(first: T1, second: T2){
+    return `${first}${second}`;
+}
+console.log(join <number,string> (3,'date')) // 3date
+```
+
+## 在类中使用
+
+```
+class SelectGirl {
+    constructor (private girls: string){}
+    getGirl(index: number): string {
+        return this.girls[index];
+    }
+}
+const selectGirl = new SelectGirl(['小A','小B','小C']);
+```
+
+这时只能使用string类型的，改为泛型即可使用任意类型。
+
+```
+class SelectGirl<T> {
+    constructor (private girls: T){}
+    getGirl(index: number): T {
+        return this.girls[index];
+    }
+}
+const selectGirl1 = new SelectGirl(['小A','小B','小C']);
+const selectGirl2 = new SelectGirl([1,2,3]);
+
+```
+
+# 搭建浏览器开发环境
+
+1. 建立好文件夹后，打开 `VSCode`，把文件夹拉到编辑器当中，然后打开终端，运行`npm init -y`,创建`package.json`文件。
+2. 生成文件后，我们接着在终端中运行`tsc -init`,生成`tsconfig.json`文件。
+3. 新建`src`和`build`文件夹，再建一个`index.html`文件。
+4. 在`src`目录下，新建一个`page.ts`文件，这就是我们要编写的`ts`文件了。
+5. 配置`tsconfig.json`文件，设置`outDir`和`rootDir`(在 15 行左右)，也就是设置需要编译的文件目录，和编译好的文件目录。
+6. 然后编写`index.html`，引入`<script src="./build/page.js"></script>`,当让我们现在还没有`page.js`文件。
+7. 编写`page.ts`文件，加入一句输出`console.log('jspang.com')`,再在控制台输入`tsc`,就会生成`page.js`文件
+8. 再到浏览器中查看`index.html`文件，如果按`F12`可以看到`jspang.com`，说明我们的搭建正常了。
+
+# 命名空间namespace
+
+## 当不使用命名空间时
+
+在page.ts文件里，写出下面的代码：
+
+```
+class Header {
+  constructor() {
+    const elem = document.createElement("div");
+    elem.innerText = "This is Header";
+    document.body.appendChild(elem);
+  }
+}
+
+class Content {
+  constructor() {
+    const elem = document.createElement("div");
+    elem.innerText = "This is Content";
+    document.body.appendChild(elem);
+  }
+}
+
+class Footer {
+  constructor() {
+    const elem = document.createElement("div");
+    elem.innerText = "This is Footer";
+    document.body.appendChild(elem);
+  }
+}
+
+class Page {
+  constructor() {
+    new Header();
+    new Content();
+    new Footer();
+  }
+}
+```
+
+写完后我们用`tsc`进行编译一次，然后修改`index.html`文件，在`<body>`标签里引入`<script>`标签，并实例化`Page`，代码如下:
+
+```
+<body>
+  <script>new Page();</script>
+</body>
+```
+
+此时控制台(Console)中，分别输入`Header`、`Content`、`Footer`和`Page`都时可以拿到对应的变量的,说明他们全都是全局变量。
+
+## 使用命名空间
+
+用namespace和export导出，用Home.page()实例化。
+
+```
+namespace Home {
+  class Header {
+    constructor() {
+      const elem = document.createElement("div");
+      elem.innerText = "This is Header";
+      document.body.appendChild(elem);
+    }
+  }
+
+  class Content {
+    constructor() {
+      const elem = document.createElement("div");
+      elem.innerText = "This is Content";
+      document.body.appendChild(elem);
+    }
+  }
+
+  class Footer {
+    constructor() {
+      const elem = document.createElement("div");
+      elem.innerText = "This is Footer";
+      document.body.appendChild(elem);
+    }
+  }
+
+  export class Page {
+    constructor() {
+      new Header();
+      new Content();
+      new Footer();
+    }
+  }
+}
+```
+
+```
+new Home.Page();
+```
+
+## 组件化
+
+新建一个`components.ts`文件作为组件
+
+```
+namespace Components {
+  export class Header1 {
+    constructor() {
+      const elem = document.createElement("div");
+      elem.innerText = "A";
+      document.body.appendChild(elem);
+    }
+  }
+}
+```
+
+在`page.ts`里面使用
+
+```
+namespace Home {
+  export class Page {
+    constructor() {
+      new Components.Header1();
+    }
+  }
+}
+```
+
+在`index.html`中引用新编辑的文件
+
+```
+<script src="./build/page.js"></script>
+<script src="./build/components.js"></script>
+```
+
+## 多文件编译成一个文件
+
+将`tsconfig.json`中的`"module":"commonjs"`改为`"module":"amd"`；
+然后修改`outFile`配置项。
+
+```
+{
+  "outFile": "./build/page.js"
+}
+```
+
+此时`index.html`文件不引用`component.js`也可以正常使用了。
+
+## 子命名空间
+
+在`Components.ts`文件下编写：
+
+```
+namespace Components {
+  export namespace SubComponents {
+    export class Test {}
+  }
+
+  //someting ...
+}
+```
+
+使用：`Components.SubComponents.Test`
+
+# 使用import和export
+
+修改`compontens.ts`，删除`namespace`
+
+```
+export class Header1 {
+    constructor() {
+    const elem = document.createElement("div");
+    elem.innerText = "A";
+    document.body.appendChild(elem);
+    }
+}
+
+export class Content1 {
+    constructor() {
+    const elem = document.createElement("div");
+    elem.innerText = "B";
+    document.body.appendChild(elem);
+    }
+}
+```
+
+## 直接使用
+
+`page.ts`：
+
+```
+import { Header1, Content1 } from "./components";
+export class Page {
+  constructor() {
+    new Header1();
+    new Content1();
+  }
+}
+```
+
+`html`：
+
+```
+<script>new Home.Page();</script>
+```
+
+## 使用require
+
+**引入：**
+
+```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
+```
+
+**使用`default`关键字：**
+
+```
+import { Header1, Content1 } from "./components";
+export default class Page {
+  constructor() {
+    new Header1();
+    new Content1();
+  }
+}
+```
+
+**使用：**
+
+```
+<script>
+    require(['page'], function(page){
+        new page.default();
+    })
+</script>
+```
+
+# 使用parcel打包
+
+安装
+
+```
+yarn add --dev parcel@next
+```
+
+修改`package.json`里边的代码。
+
+{
+
+  "scripts": {
+    "test": "parcel ./src/index.html"
+  },
+}
+
+输入`yarn test`，打包出地址：`http://localhost:1234`
+
+# 结语
+
+学习开始于2020-09-01，结束于2020-10-26，耗时55天。
