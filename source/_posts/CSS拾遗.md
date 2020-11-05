@@ -337,3 +337,61 @@ html{
 ```
 
 最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
+
+# 文字渐变
+
+```
+background: linear-gradient(to bottom, #8AF0FF,#3780E6);;
+-webkit-background-clip: text;
+color: transparent;
+```
+
+# 单行居中显示文字，多行居左显示，最多两行超过用省略号结尾
+
+前2项条件：
+
+```
+<h2><p>咽喉痛无发热</p></h2>
+<h2><p>上呼吸道感染，咽喉痛无发热</p></h2>
+<h2><p>老人主诉头晕多日，饭后胸闷，结合体检情况，考虑为交感神经。</p></h2>
+
+...
+
+h2{
+  text-align: center;
+}
+p{
+  text-align: left;
+  display: inline-block;
+}
+```
+
+第3项条件关键代码
+
+display: -webkit-box; // 设置display，将对象作为弹性伸缩盒子模型显示
+-webkit-line-clamp: 2; // 限制在一个块元素显示的文本的行数
+-webkit-box-orient: vertical; // 规定框的子元素应该被水平或垂直排列
+
+配合 overflow : hidden 和 text-overflow: ellipsis 即可实现 webkit 内核下的多行省略
+
+```
+p {
+    display: inline-block;
+    text-align: left;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+h2{
+    text-align: center;
+}
+```
+
+但是单行也会居左，而不是居中，所以要同样再嵌套一层。
+
+```
+<h2><p><em>单行居中，多行居左<em></p></h2>
+```

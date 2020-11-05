@@ -2077,3 +2077,21 @@ defaultImg2: require("../../../assets/img/default.png"),
 [1,[2,[3],4,5],6,[7],8].flatMap(v => v*2)
 (5) [2, NaN, 12, 14, 16]
 ```
+
+# 常量
+
+## 常量变量
+
+```
+const PI = 3.14
+```
+
+## 常量对象
+
+```
+var OBJ = {
+    name: '姓名',
+    age: 12
+}
+Object.freeze(OBJ);
+```

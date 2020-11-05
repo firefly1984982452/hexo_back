@@ -216,3 +216,24 @@ p{
   box-sizing: border-box;
 }
 ```
+
+# transform
+
+```
+/* 转换中心 */
+transform-origin: top;
+/* 旋转 */
+transform: rotate(45deg); 
+/* 平移 */
+transform: translate(20px, 10px);
+/* 缩放 */
+transform: scale(.5);
+/* 倾斜 */
+transform: skew(45deg);
+```
+
+也可以所有属性合并：
+
+```
+transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
+```
