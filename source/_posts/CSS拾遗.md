@@ -395,3 +395,193 @@ h2{
 ```
 <h2><p><em>单行居中，多行居左<em></p></h2>
 ```
+
+# reset.css
+
+作者推荐了`normalize.css`替代传统的`reset.css`。
+[链接](https://github.com/chokcoco/iCSS/issues/5)
+
+# 抗锯齿渲染`-webkit-font-smoothing`
+
+`-webkit-font-smoothing`有3个属性值：
+
+- `none`: 对像素低的文本好，会有严重的锯齿；
+- `subpixel-antialiased`: 默认值，有轻微锯齿；
+- `antialiased`: 抗锯齿很好。
+
+抗锯齿：`body{-webkit-font-smoothing: antialiased;}`
+
+`Gecko`内核的抗锯齿效果：
+
+`-moz-osx-font-smoothing: inherit | grayscale;`这个属性也是更清晰的作用。
+
+# 粘性布局：`position:sticky`
+
+重点：
+
+```
+position: sticky;
+top: 0;
+```
+
+sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
+
+# InterSectionObserver异步观察
+
+学习链接：
+
+[链接1](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
+[链接2](https://www.jianshu.com/p/84a86e41eb2b)
+
+## 使用API
+
+```
+/**
+  * 新建实例
+  * callback：回调函数
+  * option：配置项，非必填
+  */
+var io = new InterSectionObserver(callback,option);
+
+// 开始观察
+io.observe(document.getElementById('imgID'));
+
+// 停止观察
+io.unobserve(element);
+
+// 关闭观察器
+io.disconnect();
+```
+
+## 返回IntersectionObserverEntry对象
+
+`IntersectionObserverEntry`对象提供目标元素的信息，一共有六个属性。
+
+```
+{
+  time: 3893.92,
+  rootBounds: ClientRect {
+    bottom: 920,
+    height: 1024,
+    left: 0,
+    right: 1024,
+    top: 0,
+    width: 920
+  },
+  boundingClientRect: ClientRect {
+     // ...
+  },
+  intersectionRect: ClientRect {
+    // ...
+  },
+  intersectionRatio: 0.54,
+  target: element
+}
+```
+
+每个属性的含义如下。
+
+```
+time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+target：被观察的目标元素，是一个 DOM 节点对象
+rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
+boundingClientRect：目标元素的矩形区域的信息
+intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
+intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
+```
+
+## 懒加载图片实例
+
+```
+const io = new IntersectionObserver(callback);
+let imgs = document.querySelectorAll('[data-src]');
+function callback(entries){
+  entries.forEach((item) => {
+    if(item.isIntersecting){
+      item.target.src = item.target.dataset.src 
+      io.unobserve(item.target)	
+    }
+    
+  })
+} 
+
+imgs.forEach((item)=>{
+  io.observe(item)
+})
+```
+
+# 文字描边-webkit-text-stroke
+
+```
+-webkit-text-stroke: 1px #fff;
+```
+
+# 文字颜色-webkit-text-fill-color
+
+```
+a{
+  -webkit-text-fill-color: red;
+  color: green;
+}
+```
+
+它们俩同样都是设置文字颜色，但就算`color`在下面，也是`-webkit-text-fill-color`的权重更高，优先级更高。
+
+# `:focus`与`:focus-within`
+
+如果只使用`:focus`，它不能包含子元素的聚焦事件（比如输入框、按钮聚焦）。
+
+以下内容无效：
+
+```
+.container:focus input {
+  width: 230px;
+}
+```
+
+用:focus-within解决：
+
+```
+.container:focus-within input {
+  width: 230px;
+}
+```
+
+当父元素聚焦时，`input`内容也会随之改变。
+
+## 例子：不同的登录状态
+
+![image](https://user-images.githubusercontent.com/8554143/43560900-2ef72358-9647-11e8-8123-ecfc45828c3d.gif)
+
+```
+img{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.g-container{
+  margin: 200px 0 0 0;
+}
+.g-username:focus-within img{
+  display: block;
+}
+.g-password:focus-within img{
+  display: block;
+}
+
+...
+
+<div class="g-container">
+    <h2>登录</h2>
+    <div class="g-username">
+        <input name="loginPhoneOrEmail" maxlength="64" placeholder="请输入手机号或邮箱" class="input">
+        <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="g-username">
+    </div>
+
+    <div class="g-password">
+        <input name="loginPassword" type="password" maxlength="64" placeholder="请输入密码" class="input">
+        <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="g-password">
+    </div>
+</div>
+```
