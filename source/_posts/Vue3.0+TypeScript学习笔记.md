@@ -421,3 +421,126 @@ export default defineComponent({
 </script>
 
 ```
+
+# teleport
+
+瞬间移动组件、独立组件。
+
+## 普通组件
+
+Modal.vue
+
+```
+<template>
+    <div>modal</div>
+</template>
+
+<script lang="ts">
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
+```
+
+app.vue使用
+
+```
+<modal />
+//...
+import modal from "./components/Modal.vue";
+const app = {
+  name: "App",
+  components: {
+    modal,
+  },
+  //...
+}
+//...
+```
+
+## 使用teleport
+
+更改modal.vue
+```
+<template>
+    <teleport to="#modal">
+    <div>modal</div>
+    </teleport>
+</template>
+```
+
+在html中使用
+
+```
+<body>
+  <div id="app"></div>
+  <div id="modal"></div>
+</body>
+```
+
+如果在`app.vue`中没使用`<modal />`组件的话，页面会保留`modal`的`dom`，但`modal`中的内容不会显示。
+
+如果在`app.vue`中使用了`<modal/ >`组件 的话，页面会显`示modal`中的内容。
+
+# Suspense异步请求组件
+
+## 1. 编写AsyncShow.vue异步返回数据的组件
+
+```
+<template>
+  <h1>{{result}}</h1>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+    setup() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                return resolve({result: 'pengdan'})
+            },2000);
+        })
+    }
+})
+</script>
+```
+
+## 2. 引用
+
+```
+import AsyncShow from "./components/AsyncShow.vue";
+
+...
+
+const app = {
+  name: "App",
+  components: { AsyncShow },
+  setup() {
+    return {};
+  },
+};
+
+```
+
+## 3. 使用
+
+```
+<div>
+  <Suspense>
+    <template #default>
+      <AsyncShow />
+    </template>
+    <template #fallback>
+      <h1>loading</h1>
+    </template>
+  </Suspense>
+</div>
+```
+
+这里页面上会先显示loading，2秒钟后显示返回的数据。
+

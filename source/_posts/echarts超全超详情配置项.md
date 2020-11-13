@@ -165,6 +165,25 @@ type: 'pie',
 minAngle: 15,
 ```
 
+## y轴文字过长显示省略号
+
+```
+axisLabel: {
+    textStyle: {
+        fontSize: getAdapterFont(6),
+        color: '#fff'
+    },
+    interval: 0,
+    formatter: function(value) {
+        if (value.length > 5) {
+        return value.substring(0, 5) + "...";
+        } else {
+        return value;
+        }
+    }
+},
+```
+
 # js控制echarts
 
 ## `window.eventBus`实现vue页面与普通js数据通信
