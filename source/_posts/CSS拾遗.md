@@ -426,7 +426,7 @@ top: 0;
 
 sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
 
-# InterSectionObserver异步观察
+# InterSectionObserver异步视口观察
 
 学习链接：
 

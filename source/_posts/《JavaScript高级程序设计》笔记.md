@@ -1698,8 +1698,8 @@ fun : function(){
 ## 事件循环（`Event Loop`）、宏任务（`macrotask`）、微任务（`microtask`）
 
 事件循环（`Event Loop`）：执行完宏任务后，将微任务排队添加任务，执行后再循环检查有没有宏任务……所以整个过程称为事件循环。
-宏任务（`macrotask`）：主代码、setTimeout、setInterval
-微任务（`microtask`）：promise、process.nextTick
+宏任务（`macrotask`）：主代码、setTimeout、setInterval、setImmediate(IE)、MessageChannel
+微任务（`microtask`）：promise、process.nextTick、MutationObserver
 
 执行顺序：先宏任务--》执行结束后--》再执行所有微任务--》渲染--》下一个宏任务
 
@@ -2094,4 +2094,230 @@ var OBJ = {
     age: 12
 }
 Object.freeze(OBJ);
+```
+
+# MutationObserver:监听DOM节点的变动
+
+监听DOM节点的变动
+## 基本使用
+
+```
+<body>
+    <div id="content">
+      hi
+    </div>
+    <script>
+      var callback = function(mutationList, observer) {
+        for(var mutation of mutationList) {
+          console.log(mutation)
+        }
+      };
+      var observer = new MutationObserver(callback);
+      var targetNode = document.getElementById('content');
+      observer.observe(targetNode.firstChild,{
+        characterData: true
+      })
+      setTimeout(() => {
+        targetNode.firstChild.data = 'hello'
+      },3000)
+    </script>
+</body>
+```
+
+3秒钟之后，id为content的DOM变成了'hello'，此时的MutationObserver就已经监听到了改变，可以进行下一步的操作。
+
+## 实现vue.$nexttick
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="isShow">
+        <input type="text" ref="userName" />
+    </div>
+    <button @click="showInput">点击显示输入框</button>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isShow: false
+        },
+        methods:{
+            showInput(){
+                this.isShow = true
+                this.mynextTick(()=>{
+                    this.$refs.userName.focus()
+                })
+
+            },
+            mynextTick(func){
+                var textNode = document.createTextNode(0)//新建文本节点
+                var that = this
+                var callback = function(mutationsList, observer) {
+                    func.call(that);
+                    // 或
+                    // fanc();
+                }
+                var observer = new MutationObserver(callback);
+
+                observer.observe(textNode,{characterData:true })
+                textNode.data = 1//修改文本信息，触发dom更新
+            }
+        }
+
+    })
+</script>
+```
+
+# MessageChannel实现vue.$nexttick
+
+```
+<!DOCTYPE html>
+
+<html lang="en-zh">
+  <head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="isShow">
+          <input type="text" ref="userName" />
+      </div>
+      <button @click="showInput">点击显示输入框</button>
+    </div>
+  </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      isShow: false
+    },
+    methods: {
+      showInput(){
+        this.isShow = true;
+        this.myNextTick(() => {
+          this.$refs.userName.focus();
+        })
+      },
+      myNextTick(fanc){
+        var that = this;
+        const ch = new MessageChannel();
+        const port1 = ch.port1;
+        const port2 = ch.port2;
+
+        port2.onmessage = (() => {
+          fanc();
+        })
+        port1.postMessage(1);
+
+      }
+    }
+  })
+</script>
+
+```
+
+# window.resize下监听某DOM的改变：ResizeObserver
+
+```
+<textarea style="width: 100%;" id="main"></textarea>
+
+...
+
+let mainEl = document.querySelector('#main');
+var ro = new ResizeObserver( entries => {
+  console.log(entries);
+})
+ro.observe(mainEl);
+```
+
+# lighthouse前端性能优化工具
+
+```
+npm install -g lighthouse
+
+lighthouse https://www.cnblogs.com/
+```
+
+生成html页面
+
+# valueOf、toString和Symbol.toPrimitive
+
+对象转基本类型时，先调用`valueOf`,再调用`toString`，如果有`Symbol.toPrimitive`的话优先级是最高的。
+
+## valueOf
+
+如果有valueOf和toString时，valueOf的优先级高：
+
+```
+let a = {
+    valueOf() {
+        return 1;
+    },
+    toString() {
+        return '2';
+    },
+}
+console.log( a + '10'); // 110
+```
+
+## toString
+
+当只有toString时，才会调用它：
+
+```
+let a = {
+    toString() {
+        return '2';
+    },
+}
+console.log(a+203); // 2203
+```
+
+## Symbol.toPrimitive
+
+优先级最高，还可根据不同的类型转换成Number类型和String类型：
+
+```
+
+let obj = {
+    [Symbol.toPrimitive](hint) {
+        switch (hint) {
+        case 'number':
+            return 1234;
+            break;
+            
+        case 'string':
+            return 'str';
+            break;
+            
+        case 'default':
+            return 'default';
+            break;
+            
+        
+        default:
+            break;
+        }
+    }
+}
+console.log(2 * obj); // 2468
+console.log(2 + obj); // 2default
+console.log('default' === obj); // false
+console.log(String(obj)); /// str
 ```
