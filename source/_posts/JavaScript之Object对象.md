@@ -1,5 +1,5 @@
 ---
-title: JavaScript之对象
+title: JavaScript之Object对象
 date: 2020-08-05 15:44:34
 categories: 
 - program

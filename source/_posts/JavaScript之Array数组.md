@@ -1,5 +1,5 @@
 ---
-title: JavaScript之数组
+title: JavaScript之Array数组
 date: 2020-06-08 15:44:34
 categories: 
 - program

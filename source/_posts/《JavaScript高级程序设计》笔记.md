@@ -2362,3 +2362,71 @@ window.postMessage("hi there!", location.origin);
 ```
 
 此时点击页面B的发送消息按钮就能在页面A接收消息了。
+
+
+# JSON的更多参数用法
+
+## JSON.stringify
+
+新建一个普通对象
+
+```
+var settings = {
+  username: 'lydiahallie',
+  level: 19,
+  health: 90,
+};
+```
+
+### 普通用法
+
+```
+var data = JSON.stringify(settings); // "{"username":"lydiahallie","level":19,"health":90}"
+```
+
+### 参数2：参数过滤
+
+```
+var data = JSON.stringify(settings, ['level', 'health']); // "{"level":19,"health":90}"
+```
+
+### 参数3：参数排版
+
+```
+var data = JSON.stringify(settings, undefined, 2);
+
+```
+打印出来：
+
+```
+"{
+  "username": "lydiahallie",
+  "level": 19,
+  "health": 90
+}"
+```
+不再是一行，而是有了排版的字符串。
+
+## JSON.parse
+
+## 参数1：普通用法
+
+```
+SON.parse('{"p": 5}'); // {p: 5}
+```
+
+## 参数2：过滤函数
+
+```
+JSON.parse('{"p": 5}',((key,value)=>{
+    console.log(key,value);
+    return value*20;
+}))
+```
+
+返回：
+
+```
+p 5
+{p: 100}
+```
