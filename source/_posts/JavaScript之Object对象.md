@@ -95,6 +95,12 @@ obj.arr.slice(1); // 修改数组监听失败
 比如之前判断一个值是否为`NaN`的话可能会用`Number.isNaN()`，现在用`Object.is(NaN, NaN)`也能达到一样的效果。
 
 
+# 判断对象{}是否为空
+
+```
+if(Object.keys(obj).length === 0){...}
+```
+
 # 对象key值构建
 
 ```

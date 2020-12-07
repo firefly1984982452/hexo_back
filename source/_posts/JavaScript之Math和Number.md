@@ -48,7 +48,11 @@ Math.floor(-4.1); // -5 按最小的取
 
 `Math.randow()*(24-5)+5`
 
+## 随机整数
 
+```
+Math.floor(Math.random() * number)
+```
 # number
 
 ## isFinite 是否为数字型
@@ -91,4 +95,29 @@ parseFloat();
 
 Number('3e'); // NaN
 parseInt('3e'); // 3
+```
+
+# 次方
+
+`Math.pow(2, 3)`代表 2的3 次方
+
+# 取随机字符串
+
+先转为16进制，再去掉前两位小数点
+
+`Math.random().toString(16).subString(2)`
+
+# 保留小数点后两位
+
+## 四舍五入
+
+```
+parseFloat((a).toFixed(2));//toFixed只能针对数字类型才能使用
+```
+
+## 非四舍五入
+
+```
+var b = parseFloat(price).toFixed(3);
+this.all_price = b.substring(0,b.toString().length - 1);
 ```

@@ -5,6 +5,27 @@ categories:
 - program
 ---
 
+# Vue过滤器
+
+```
+filters: {
+   returnBill: function(value) {
+      var bills = ["否", "是"];
+      return bills[value];
+   }
+}
+```
+
+# vue循环时怎么绑定图片地址及href跳转地址
+
+```
+<li v-for="v in sites">
+	<a :href="v.herf">
+		<img v-bind:src="v.url"/>
+		<span>{{ v.text }}</span>
+	</a>
+</li>
+```
 # 公共组件
 
 ## 引入公共组件
@@ -84,7 +105,6 @@ this.axios.post(url,params).then((res) => {
 	console.log(err);
 });
 ```
-
 
 
 # vue-cli快速构建项目
@@ -858,5 +878,56 @@ beforeRouteUpdate(to,form,next){
     console.log('路由更新之前：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
     next()
     console.log('路由更新之后：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
+}
+```
+
+# 限制input只能输入number
+
+在.number修饰符无效的情况下
+
+方法一：
+```
+<el-input v-model.number=“value”v-on:input="limitNumber" placeholder="请输入电话"></el-input>
+
+    limitNumber (e) {
+      return this.value = e.replace(/[^\d]/g,'');
+    },
+```
+
+方法二：
+
+```
+<el-input v-model.number=“value” v-number-only placeholder="请输入电话"></el-input>
+```
+
+封装个自定义指令放在标签上
+
+```
+directives: {
+  numberOnly: {
+    bind: function(el) {
+      el.handler = function() {
+        el.value = Number(el.value.replace(/\D+/, ''))
+      }
+      el.addEventListener('input', el.handler)
+    },
+    unbind: function(el) {
+      el.removeEventListener('input', el.handler)
+    }
+  }
+},
+```
+
+方法三：
+
+```
+<el-input v-model.number=“value” oninput="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入电话"></el-input>
+```
+
+方法四：
+
+```
+if(Number.isNaN(Number(this.searchForm.contactPhone))){
+  return this.$message.error('联系电话只能输入数字！')
 }
 ```

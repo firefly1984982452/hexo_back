@@ -100,7 +100,23 @@ arr = ['world']; // 报错
 |global|×|×|✓|
 |globalThis(ES2020)|✓|✓|✓|
 
----
+
+## 常量变量
+
+```
+const PI = 3.14
+```
+
+## 常量对象
+
+```
+var OBJ = {
+    name: '姓名',
+    age: 12
+}
+Object.freeze(OBJ);
+```
+
 
 # 变量的解构赋值
 
@@ -139,6 +155,76 @@ let [x = 1] = [null];
 x // null
 ```
 
+
+# ES6`…`扩展（spread）/收集（rest）运算符详解
+
+## 一、扩展运算符
+
+我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
+
+### 1.代替apply
+
+```
+var test = function(a,b,c){
+  console.log(a,b,c);
+}
+var arr = [1,2,3];
+test(...arr); // 1 2 3
+```
+
+用apply的写法：
+
+```
+test.apply(null,arr);
+```
+
+### 2.代替concat
+
+```
+var arr1 = [1,2,3,4];
+var arr2 = [0,...arr1,5,6];
+console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+用concat的写法：
+
+```
+[0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+### 3.代替split
+
+```
+var str = 'hello';
+var arr3 = [...str];
+console.log(arr3); // ["h", "e", "l", "l", "o"]
+```
+
+用split的写法：
+
+```
+'hello'.split(''); // ["h", "e", "l", "l", "o"]
+```
+
+## 二、收集运算符
+
+### 1.接收不确定个数的形参
+
+此功能和`JAVA`一样，当形参传入个数不确定时可用在形参上。
+
+```
+var rest2 = function(item, ...arr){
+  console.log(item,arr);
+}
+rest2('hello',2,3,3,4); // hello [2, 3, 3, 4]
+```
+
+### 2.配合解构时使用
+
+```
+var [a,...temp] = [1,2,3,4];
+console.log(a,temp); // 1 [2, 3, 4]
+```
 
 ## 对象
 
@@ -182,6 +268,35 @@ y // 3
 
 var {x: y = 3} = {x: 5};
 y // 5
+```
+
+假设想要的效果是这样的：
+
+```
+var foo = function(x,y){
+    x = x || 10;
+    y = y || 20;
+    console.log(x+y);
+}
+foo(1,2); // 3
+foo(); // 30
+```
+
+但是也有出错的时候：
+
+```
+foo(0,1); // 11
+```
+
+第一个参数0被解析成了false，而不是数字0进行计算。
+
+用`默认参数值`
+
+```
+var foo = function(x=10, y=20){
+    console.log(x+y);
+}
+foo(0,1); // 1
 ```
 
 ### 注意点
@@ -283,6 +398,7 @@ improt {list1} from 'list'
 |字符串|`const [a, b, c] = 'hello';`|数组`[]`|`const [a,b = 5] = 'e'`|值为`undefined`|
 |数值（转对象、无意义）|`let {toString: s} = 123;`|对象`{}`|-|-|
 |布尔（转对象、无意义）|`let {toString: s} = true;`|对象`{}`|-|-|
+
 
 # 字符串的扩展
 
@@ -524,9 +640,314 @@ c === d // true
 
 可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。
 
-# Set和Map
 
-[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#Map)
+# Map
+
+为什么要用Map？因为普通数据结构无法以非字符串为键。
+
+举例：
+
+```
+var m = {};
+var x = {id:1}, y = {id:2};
+m[x] = 'foo';
+m[y] = 'bar';
+console.log(m,m[x],m[y]); // {[object Object]: "bar"} "bar" "bar"
+```
+
+对象`m`中只有一个`[object Object]`，值都是`'bar'`，它无法解析两个对象为键。
+
+## 使用Map以非字符串为键
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m);
+console.log(m.get(x));
+console.log(m.get(y));
+console.log(m.get({id:1}));
+```
+
+结果：
+
+![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghel895idrj309k05i3yo.jpg)
+
+## delete删除
+
+```
+m.delete(y);
+```
+
+## clean清除所有
+
+```
+m.clear();
+m.size; // 0
+```
+
+## size大小
+
+```
+m.size;
+```
+
+## `new Map`深拷贝
+
+```
+var m2 = m1; // 浅拷贝
+var m3 = new Map(m1); // 深拷贝
+```
+
+**深拷贝实例：**
+
+```
+var mm = new Map();
+mm.set('a',{id:1});
+var mm2 = new Map(mm);
+mm2.set('a', {id:4});
+console.log(mm2,mm);
+```
+
+**结果：**
+
+![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghelkmlwaxj30a80340st.jpg)
+
+两个value值都是对象，互不影响。
+
+## Map所有的值
+
+**方法1：`m.values()`**
+**方法2：`m.entries()`**
+
+
+### 方法1：`m.values()`
+
+返回一个迭代器，可以用spread扩展运算符（`...`）或`Array.from()`转换成数组。
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.values()); // MapIterator {"foo", "bar"}
+console.log([...m.values()]); // ["foo", "bar"]
+console.log(Array.from(m.values())); // ["foo", "bar"]
+```
+
+### 方法2：`m.entries()`
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.entries()); // MapIterator {{…} => "foo", {…} => "bar"}
+console.log([...m.entries()]); // [[{id: 1},'foo'],[{id: 2},'bar']]
+console.log([...m.entries()][0][1]); // "foo"
+console.log([...m.entries()][1][1]); // "bar"
+```
+
+## Map所有的键
+
+### keys
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log([...m.keys()]); // [{id:1},{id:2}]
+```
+
+### has判断是否有该键
+
+```
+var m = new Map();
+var x = {id:1}, y = {id:2};
+m.set(x , 'foo');
+m.set(y , 'bar');
+console.log(m.has(y)); // true
+```
+
+## WeakMap
+
+区别：
+
+- 内部内存（特别是GC）的工作方式；
+
+- WeakMap只接受对象为键；所以对象被回收项目也会移除
+
+```
+var m = new WeakMap();
+var x = {id:1}, y = {id:2};
+m.set(x ,y);
+console.log(m.has(x)); // true
+x = null;
+console.log(m.has(x)); // false
+```
+
+---
+
+# Set
+
+Set是一个值的集合，其中的值是唯一的。
+
+API:
+
+**新建：new Set()**
+**增：add()**
+**删：delete()**
+**查:has**
+
+
+## 新建
+
+```
+var s = new Set([0,-0,1,2,NaN,2,3,NaN]);
+console.log(s); // Set(5) {0, 1, 2, NaN, 3}
+```
+
+`0`和`-0`被认为是同一个值，`NaN`与`NaN`也是相等的。
+
+## 添加（add）
+
+```
+s.add(7);
+console.log(s); // Set(6) {0, 1, 2, NaN, 3, 7}
+```
+
+## 删除（delete和clear）
+
+```
+s.delete(2);
+console.log(s); // Set(5) {0, 1, NaN, 3, 7}
+s.clear();
+console.log(s.size); // 0
+```
+
+## 查询是否存在（has)
+
+不像`Map`里面的`get`能直接取值，这里是查询是否存在该值。
+
+```
+s.has(1); // true
+```
+
+## 迭代
+
+同`Map`
+
+```
+s.keys(); // SetIterator {0, 1, NaN, 3, 7}
+s.values(); // SetIterator {0, 1, NaN, 3, 7}
+s.entries(); // SetIterator {0 => 0, 1 => 1, NaN => NaN, 3 => 3, 7 => 7}
+```
+
+虽然`keys()`和`values()`返回的值一样，但它们俩并不相等。
+
+```
+s.keys() == s.values(); // false
+```
+
+## WeakSet
+
+和Set的区别：
+
+**只能存对象**
+
+```
+var ws = new WeakSet([1,2,2,3]); // 无效：Uncaught TypeError: Invalid value used in weak set
+```
+
+WeakSet使用：
+
+```
+var obj1 = {id:1};
+var obj2 = {id:2};
+var ws = new WeakSet();
+ws.add(obj1).add(obj2).add(obj1);
+console.log(ws); // [{id:1},{id:2}]
+```
+
+添加了`obj1`两次，还是去重了。
+
+### GC
+
+```
+obj1 = null;
+console.log(ws); // [{id:1},{id:2}]
+ws.has(obj1); // false
+```
+
+虽然obj1的值看上去还在，但已经取不到了。
+
+### delete删除
+
+```
+ws.delete(obj2);
+console.log(ws); // [{id:1}]
+```
+
+---
+
+# Array、Map、WeakMap、Set、WeakSet的对比
+
+## 对比表
+
+|功能属性|Array|Map|WeakMap|Set|WeakSet|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|新建|`[]`|`new Map()`|`new WeakMap()`|`new Set()`|`new WeakSet()`|
+|增|`push`|`m.set(obj,'value')`|`wm.set(obj1,'value')`|`s.add(value)`|`ws.add(obj)`|
+|新建并增加|`[1,2]`|-|-|`new Set([4, 0, 0, 4, 1])`|-|
+|键|对象或其它|对象或其它|只接受对象|对象或其它|只接受对象|
+|删|`slice`或`splice`|`delete`|`delete`|`delete`|`delete`|
+|清除|`arr = []`|`clear`|`clear`|`clear`|`clear`|
+|改|`splice`|-|-|-|-|
+|查|`includes`、`indexOf`等|`get`或`has`|`get`或`has`|`has`|`has`|
+|键|`m.keys()`下标|`m.keys()`|-|`m.keys()`|-|
+|值|`m.values()`值|`m.values()`|-|`m.values()`|-|
+|迭代|`entries`|`entries`|-|`entries`|-|
+|长度|`length`|`size`|-|`size`|-|
+
+## Map API:
+
+- size数量
+- set()设置
+- clear()清除
+- delete()删除
+- has()存在
+- get()获取
+- keys()键
+- values()值
+- entries()迭代
+
+## WeakMap API:
+
+- set()设置
+- delete()删除
+- has()存在
+- get()获取
+- clear()清除（已弃用，但可通过new WeakMap()空对象来置空）
+
+## Set API:
+
+- size数量
+- add()添加
+- clear()清除
+- delete()删除
+- has()存在
+- keys()键
+- values()值
+- entries()迭代
+
+## WeakSet API：
+
+- add()添加
+- delete()删除
+- has()存在
+
 
 # Proxy
 
@@ -599,9 +1020,81 @@ Reflect.has(obj, 'name');
 
 ## 与Proxy语法一一对应
 
+
 # Promise
 
-[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#Promise)
+`promise`代替`callback`回调。
+
+## promise.all
+
+**只能同时调用不受关联的prmise，如果promise2的值受promise1影响，不能用promise.all，可以用async/await**
+
+首先假设要依次调用3个`promise`的代码：
+
+```
+var pro1 = new Promise((resolve,reject) => {
+    console.log(1);
+    resolve('hello')
+})
+var pro2 = new Promise((resolve,reject) => {
+    console.log(2);
+    setTimeout(()=>{
+        resolve('world')
+    },1000);
+})
+var pro3 = new Promise((resolve,reject) => {
+    console.log(3);
+    setTimeout(()=>{
+        resolve('pdd')
+    },2000);
+})
+```
+
+如果不用`promise.all`来调用的话：
+
+```
+pro1.then((res1)=>{
+});
+pro2.then((res2)=>{
+})
+pro3.then((res3)=>{
+})
+```
+
+只有不停的用`.then`才能保证每一步都正确，此时使用`promise.all`：
+
+```
+Promise.all([pro1,pro2,pro3]).then(val=>{
+    console.log(val);
+})
+```
+
+## promise.race
+
+第一个抛出`resolve`的`promise`就是`Promise.race`获取的值。
+
+这种模式称为门闩模式、promise中称中竞态。
+
+```
+var pro2 = new Promise((resolve,reject) => {
+    console.log(2);
+    setTimeout(()=>{
+        resolve('world')
+    },1000);
+})
+var pro3 = new Promise((resolve,reject) => {
+    console.log(3);
+    setTimeout(()=>{
+        resolve('pdd')
+    },2000);
+})
+Promise.race([pro2,pro3]).then(val=>{
+    console.log(val);
+})
+```
+
+此时，pro2要花费1秒，pro3要花费2秒，谁先`resolve`，`.then`获取的`val`就是谁的。
+
 
 # Iterater和for...of循环
 
@@ -739,14 +1232,196 @@ myArray.forEach(function (value) {
 
 # Generator
 
-# async
 
-[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#async/await)
+# async/await
+
+[学习链接](https://segmentfault.com/a/1190000007535316)
+
+## 普通函数和async的区别
+
+普通函数：
+
+```
+function testAsync(){
+    return 'hello world'
+}
+testAsync(); // 'hello world'
+```
+
+`async`函数：
+
+```
+async function testAsync(){
+    return 'hello world'
+}
+testAsync(); // Promise {<fulfilled>: "hello world"}
+```
+
+`async`返回的是一个`promise`对象
+
+## await
+
+如果不用async/await：
+
+```
+async function testAsync(){
+    return new Promise(resolve => {
+        setTimeout(()=>resolve('long_time_value'), 1000);
+    })
+}
+testAsync().then(v=>{
+    console.log('get',v);
+})
+```
+
+1秒后：get long_time_value
+
+如果用的话：
+
+```
+function testAsync(){
+    return new Promise(resolve => {
+        setTimeout(()=>resolve('long_time_value'), 1000);
+    })
+}
+
+async function test(){
+    const v = await testAsync();
+    console.log(v);
+}
+test();
+```
+
+1秒后：get long_time_value
+
+### 优势：处理then链
+
+```
+function takeLongTime(n){
+    return new Promise(resolve => {
+        setTimeout(()=> resolve(n+200), n);
+    })
+}
+
+function step1(n) {
+    console.log(`step1 with ${n}`);
+    return takeLongTime(n);
+}
+
+function step2(n) {
+    console.log(`step2 with ${n}`);
+    return takeLongTime(n);
+}
+
+function step3(n) {
+    console.log(`step3 with ${n}`);
+    return takeLongTime(n);
+}
+
+function doIt(){
+    console.time("doIt");
+    const time1 = 3000;
+    step1(time1)
+        .then(time2 => step2(time2))
+        .then(time3 => step3(time3))
+        .then(result => {
+            console.log(`result is ${result}`);
+            console.timeEnd("doIt");
+        });
+}
+doIt();
+
+step1 with 3000
+VM5329:13 step2 with 3200
+VM5329:18 step3 with 3400
+VM5329:29 result is 3600
+VM5329:30 doIt: 9606.429931640625ms
+
+```
+
+每一个promise都受上一个promise影响，所以必须一个调完之后再调另外一个。
+
+再看看用async/await更改doIt方法：
+
+```
+async function doIt(){
+    console.time("doIt");
+    const time1 = 3000;
+    const time2 = await step1(time1);
+    const time3 = await step2(time2);
+    const result = await step3(time3);
+    console.log(`result is ${result}`);
+    console.timeEnd("doIt");
+}
+doIt();
+
+```
+
+结果和上一个不停用`then`链的一样，但是代码要清晰得多，而且没有回调地狱。
 
 # Class
 
 [链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#extends%E7%BB%A7%E6%89%BF)
 
-# Module
 
-[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#export%20%E5%92%8C%20import%20%E5%92%8C%20require)
+# export 和 import 和 require
+
+## 普通使用
+
+constant.js
+```
+var constant = {
+    edit:"编辑",
+    test:'2'
+}
+
+var b = {};
+
+export {
+    constant,
+    b
+};
+```
+
+test.vue
+```
+import {constant,b} from '@/utils/test';
+console.log(constant,b)
+```
+
+## 全局使用
+
+constant.js
+```
+export default {
+    list1:[],
+    list2:[],
+    b:function(){}
+}
+```
+
+main.js
+```
+improt constant from './utils/test';
+Vue.prototype.$constant = constant;
+```
+
+test.vue
+```
+this.list = this.$constant.list1;
+```
+
+## `export`和`export default`的区别
+
+- `export`需要导出多个并需要`{}`，`export default`只需要一个`{}`导出全部（没有额外`{}`）；
+- `import`时，`export`需要导入多个，`export default`是默认的，只需要给一个名字；
+
+## require
+
+`require`是`AMD`规范；`import`是`ES6`规范。
+
+`require`是赋值，`import`是解构。
+
+```
+defaultImg2: require("../../../assets/img/default.png"),
+```
