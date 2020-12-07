@@ -932,7 +932,7 @@ if(Number.isNaN(Number(this.searchForm.contactPhone))){
 }
 ```
 
-## vue简单的双向绑定原理
+## vue2简单的双向绑定原理
 
 ```
 <div id="div"></div>

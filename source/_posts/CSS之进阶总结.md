@@ -969,17 +969,6 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 参数4：阴影大小，默认可省略不写时为0。
 参数4：颜色。
 
-# 清除浮动
-
-父元素：
-
-```
-.content-box::after{
-  clear: both;
-  content: '';
-  display: block;
-}
-```
 
 # display
 
@@ -1339,7 +1328,15 @@ img{
 3、使用邻近元素clear:both
 4、使用伪类:before元素clear:both
 
+父元素：
 
+```
+.content-box::after{
+  clear: both;
+  content: '';
+  display: block;
+}
+```
 # 左边定宽，右边自适应
 
 1、使用flex
