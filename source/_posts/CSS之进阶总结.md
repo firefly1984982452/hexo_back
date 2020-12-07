@@ -1327,3 +1327,28 @@ img{
     </div>
 </div>
 ```
+
+# font-size:10px
+
+字体如果需求是小于`12px`的话，可以先设置字体为`20px`，再使用`transfrom:scale(0.5)`进行缩放。（也可以使用图片，但不推荐）
+
+# 清除浮动
+
+1、使用空元素clear:both
+2、overflow:hidden
+3、使用邻近元素clear:both
+4、使用伪类:before元素clear:both
+
+
+# 左边定宽，右边自适应
+
+1、使用flex
+2、右边的width: calc(100% - 100px)
+3、使用float
+
+## BFC
+
+BFC是特性（功能），不是定义。
+
+比如float，position、absolute
+

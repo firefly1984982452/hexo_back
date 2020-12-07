@@ -1183,3 +1183,214 @@ JSON.parse('{"p": 5}',((key,value)=>{
 p 5
 {p: 100}
 ```
+
+
+# 11、与JAVA相通的概念
+
+## MVC、MVVM
+
+### MVC
+
+Model层:模型层，比如图片放一个类，标题放一个类
+View层：显示页面，如xml
+Controller层：控制Model的读取、存储。如MainActivity
+
+## MVVM
+
+MVVM实现了View和Model的自动同步，当Model的属性改变时，我们不再手动操作DOM，也就是双向绑定。
+
+Model层：后端传递的数据
+View层：页面
+ViewModel层：视图模型，连接Model和View的桥梁。将Model转为View（将后端数据显示给前端）用的是数据绑定，将View转为Model（将前端数据转给后端）用的DOM监听，这种实现方法称为为**数据的双向绑定**。
+
+## 类
+
+js里面的类和其它OOP里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
+
+## jsBridge
+
+js与android的通信
+
+### android代码：
+
+java发消息给js：
+`webview.send()`
+java收js的消息
+`webview.registerHander('name',new Bridge(){})`
+
+
+### javaScript代码：
+
+js发消息给java
+`window.WebViewJavaScriptBridge.send()`
+js收java的消息
+`document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
+
+# hybird
+
+```
+$(".company_color").click(function(){
+  var u = navigator.userAgent;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+  var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  var company_name = $(this).text();
+  if(isAndroid) {
+    var msg = window.mrlou.androidIs("2",company_name);
+  } else if(isIos) {
+    //iosPhone()这个方法，ios会自动监听，并接收我传过来的值，用msg接收它传给我的值
+    broker("2",company_name);
+  }
+})
+```
+
+# 8、HTTP
+
+## 协议
+
+客户端和服务器之间传输数据的规范，全称是“超文本传输协议”。
+
+## 协议请求
+
+GET、POST和OPTION
+
+## GET和POST的区别
+
+- GET产生1个TCP数据包，POST产生2个TCP数据包（GET请求会把header和data一并发出去，POST会先发header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok）
+- GET参数直接显示在地址栏，不能传输敏感信息
+- GET请求的地址可以收藏
+- GET请求会被主动缓存
+- GET请求参数会被保留在浏览记录中
+- GET请求参数有长度限制（不同浏览器不同限制）
+- GET只能URL传参
+
+## HTTP和HTTPS的区别
+
+- HTTPS=HTTP+SSL证书
+
+- HTTP是超文本传输协议，信息是明文传输；HTTPS则是具有安全性的SSL加密协议传输
+
+## 跨域
+
+[更全跨域方法链接](https://segmentfault.com/a/1190000011145364)
+
+- jsonp跨域
+- 跨域资源共享（CORS）
+- nodejs中间件代理跨域
+- iframe
+
+## jsonp
+
+把JS、CSS、IMG等静态资源分离到独立域名的服务器上。
+**缺点：只能实现GET请求**。
+
+### 原生实现
+
+```
+<script>
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+
+  // 传参一个回调函数名给后端，方便后端返回时执行这个在前端定义的回调函数
+  script.src = 'http://www.domain2.com:8080/login?user=admin&callback=handleCallback';
+  document.head.appendChild(script);
+
+  // 回调执行函数
+  function handleCallback(res) {
+      alert(JSON.stringify(res));
+  }
+</script>
+```
+
+ ### jquery ajax
+
+```
+$.ajax({
+    url: 'http://www.domain2.com:8080/login',
+    type: 'get',
+    dataType: 'jsonp',  // 请求方式为jsonp
+    jsonpCallback: "handleCallback",    // 自定义回调函数名
+    data: {}
+});
+```
+
+### vue.js：
+
+```
+this.$http.jsonp('http://www.domain2.com:8080/login', {
+    params: {},
+    jsonp: 'handleCallback'
+}).then((res) => {
+    console.log(res); 
+})
+```
+## CORS
+
+普通跨域请求，只需要服务端设置`Access-Control-Allow-Origin`即可；若要携带`cookie`请求，前后端都要设置。
+
+### 原生ajax
+
+```
+// 前端设置是否带cookie
+xhr.withCredentials = true;
+```
+
+### jQuery ajax
+
+```
+$.ajax({
+    ...
+   xhrFields: {
+       withCredentials: true    // 前端设置是否带cookie
+   },
+   crossDomain: true,   // 会让请求头中包含跨域的额外信息，但不会含cookie
+    ...
+});
+```
+
+### vue框架 axios设置
+
+```
+axios.defaults.withCredentials = true
+```
+### Nodejs中间件代理跨域
+
+如`proxy`中间件
+
+## 缓存
+
+一般是在`html`中的`meta`标签上定义属性
+
+方法一：
+
+```
+<meta http-equiv="Pragma" content="no-cache">
+```
+
+方法二：
+
+```
+<meta http-equiv="expires" content="mon, 18 apr 2016 14:30:00 GMT">
+```
+
+请求--判断max-age是否过期（没过期就直接在缓存数据库中得到数据）--过期后判断属性是否字段一致，再使用缓存。
+
+# session和cookie
+
+cookie是在客户端，session是在服务端。
+一般如果想跳过cookie的限制，就用session。
+
+
+# HTML渲染过程
+
+1、解析HTML，构成DOM
+2、解析CSS，形成CSS对象模型
+3、将CSS和DOM合并，构成渲染模型
+4、绘制
+
+重绘：corlor、borde、visibility，只会小变动；
+重排（回流）：DOM操作、CSS属性改变、伪类操作，会大变动。
+
+# 前端路由和后端路由
+
+前端路由（#）：hash值或pushStatu
+后端路由（/）：通过URL跳转到具体的html页面，每次跳转都重新访问服务端，服务端返回页面。

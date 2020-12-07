@@ -931,3 +931,29 @@ if(Number.isNaN(Number(this.searchForm.contactPhone))){
   return this.$message.error('联系电话只能输入数字！')
 }
 ```
+
+## vue简单的双向绑定原理
+
+```
+<div id="div"></div>
+<input type="text" name="" id="test" value="" />
+  <script>
+  var obj = {}
+  Object.defineProperty(obj,'age',{
+    get:function() {console.log('get')},
+    set:function(newValue) {
+      document.getElementById('test').value = newValue
+      document.getElementById('div').innerHTML = newValue
+    }
+  })
+  document.addEventListener('input',(e)=> {
+    obj.age = e.target.value
+  })
+  </script>
+```
+
+## v-if与v-show
+
+`v-if`：整个元素删除；适用于条件少变动时。
+`v-show`：用`display:none`；适用于频繁切换。
+**eCharts中要使用v-if**
