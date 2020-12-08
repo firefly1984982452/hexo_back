@@ -1,5 +1,5 @@
 ---
-title: nextTick源码分析：MutationObserver和MessageChannel
+title: vue2源码-nextTick分析：MutationObserver和MessageChannel
 date: 2020-11-16 14:35:18
 categories: 
 - program

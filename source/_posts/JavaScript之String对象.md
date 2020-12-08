@@ -101,3 +101,18 @@ categories:
 去掉两边的空字符串
 
 `' we '.trim()` // "we"
+
+# 其它技巧
+
+
+## 金钱格式化toLocalString
+
+```
+var num = 1234567890;
+num.toLocalString();    //'1,234,567,890'
+num.toLocaleString('en-US'); // 效果相同
+```
+
+## 单行写一个评级组件
+
+"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate);定义一个变量rate是1到5的值

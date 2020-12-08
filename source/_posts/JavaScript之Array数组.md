@@ -532,3 +532,43 @@ Array.from('hello') // ["h", "e", "l", "l", "o"]
 # 取出数组中最大的数值
 
 `Math.max(...[14, 3, 77])`
+
+
+# `arguments`参数的3种转数组方法
+
+**方法1：Array.prototype.slice.apply**
+**方法2：Array.from**
+**方法3：[...arguments]**
+
+```
+var test3 = function(){
+    console.log(arguments);
+    var list1 = Array.prototype.slice.apply(arguments);
+    console.log(list1);
+    var list2 = Array.from(arguments);
+    console.log(list2);
+    var list3 = [...arguments];
+    console.log(list3);
+}
+test3(1,2,3,4);
+```
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
+
+
+# forEach跳出循环
+
+```
+var BreakException= {};
+
+try {
+    [1,2,3].forEach(function(i) {
+        if(i === 2) throw BreakException;
+        console.log(i);
+    });
+} catch(e) {
+    if (e!==BreakException) throw e;
+}
+
+//forEach是函数，不是语法，因此没有直接break的语法。如果要中止，可使用 Array.every 或 Array.some。
+```

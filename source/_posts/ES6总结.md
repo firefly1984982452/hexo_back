@@ -1361,8 +1361,6 @@ doIt();
 
 # Class
 
-[链接](https://firefly1984982452.github.io/2020/06/28/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/#extends%E7%BB%A7%E6%89%BF)
-
 
 # export 和 import 和 require
 

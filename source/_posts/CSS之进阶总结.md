@@ -221,8 +221,6 @@ Class
 
 尽量不要使用`!important`，下次会使用更多的`!important`去覆盖它。
 
----
-
 # 继承
 
 文字相关：font-family、color、font-size、font-style等。
@@ -283,7 +281,6 @@ p{
 
 设置了`color:unset`值的`<p>`的颜色忽略了原来的`green`，读取了`html,body`的值`red`。
 
----
 
 # 简写属性
 
@@ -299,7 +296,6 @@ p{
 
 如：`text-shodow`、`background-position`.
 
----
 
 # em和rem
 
@@ -328,7 +324,6 @@ p{
 
 [更多](https://firefly1984982452.github.io/2018/03/09/%E6%A0%B9%E6%8D%AE%E8%AE%BE%E8%AE%A1%E5%9B%BE%E9%80%82%E9%85%8Drem/)
 
----
 
 ## 应用
 
@@ -343,7 +338,6 @@ p{
 
 p标签的大小都是父元素的一半。
 
----
 
 # 视口的相对单位
 
@@ -352,7 +346,6 @@ vh：1/100的视口高度；
 vmax：1/100的视口中较大的一方的长度；
 vmin：1/100的视口中较小的一方的长度；
 
----
 
 # css变量
 
@@ -457,6 +450,72 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
+# background-origin
+
+背景区域的位置，有如下属性：
+
+- `content-box`：padding值会起效，以padding开始的单位开始显示背景；
+
+- `padding-box`：padding不会影响背影，直接从border里面开如显示背影；
+
+- `border-box`：border不会影响背景，直接把border的内容也算在背影里面，背景会减去border的长度。
+
+# background-image
+
+背景图，有如下属性：
+
+- `url()`：图片地址
+
+- `line-gradient`：创建线性渐变的图片
+
+- `redial-gradient`：创建径向渐变的图片
+
+- `repeating-line-gradient`：创建重复线性渐变的图片
+
+- `repeating-redial-gradient`：创建重复径向渐变的图片
+
+与`background-size`组合的话，可以生成条纹背景。
+
+## line-gradient
+
+背景2色平铺
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
+
+```
+background: linear-gradient(#ff0 50%, #f00 50%);
+background-size: 100% 50%;
+```
+
+## repeating-line-gradient
+
+背景2色任意角度平铺
+
+![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
+
+```
+background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
+```
+# box-shadow
+
+例：
+
+`box-shadow: 50px 50px 0 20px #ffb;`
+
+图：
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0nvzcynqj308y069dfn.jpg)
+
+解析：
+
+参数1：X轴，图中为30，因为50-20=30；
+参数2：Y轴，图中为30，因为50-20=30；
+参数3：模糊距离
+参数4：阴影大小，默认可省略不写时为0。
+参数4：颜色。
+
+
+
 # background
 
 让背景图在距离右边和底部都是20px，如图：
@@ -512,6 +571,22 @@ background-size: 100% 50%;
 
 ```
 background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
+```
+
+# linear-gradient：切角效果
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
+
+```
+width: 200px;
+height: 200px;
+background:#ffb;
+background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
+      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
+      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
+      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
+background-size:50% 50%;
+background-repeat:no-repeat;
 ```
 
 # transform：平形四边形
@@ -573,20 +648,26 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 }
 ```
 
-# linear-gradient：切角效果
 
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
+# transform
 
 ```
-width: 200px;
-height: 200px;
-background:#ffb;
-background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
-      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
-      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
-      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
-background-size:50% 50%;
-background-repeat:no-repeat;
+/* 转换中心 */
+transform-origin: top;
+/* 旋转 */
+transform: rotate(45deg); 
+/* 平移 */
+transform: translate(20px, 10px);
+/* 缩放 */
+transform: scale(.5);
+/* 倾斜 */
+transform: skew(45deg);
+```
+
+也可以所有属性合并：
+
+```
+transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
 # `transform: perspective`：梯形效果
@@ -663,13 +744,11 @@ filter: drop-shadow(5px 5px 5px #000);
 
 参数：x轴、y轴、阴影、颜色。
 
-# 通过阴影弱化背景
+## 通过阴影弱化背景
 
 ```
 box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 ```
-
-# 通过阴影弱化背景
 
 重点：用伪元素设置blur
 
@@ -703,6 +782,55 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 </div>
 ```
 
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# CSS基础
 # 滚动提示
 
 ```
@@ -778,28 +906,6 @@ p{
   white-space: nowrap;
   animation: typing 18s;
 }
-```
-
-
-# transform
-
-```
-/* 转换中心 */
-transform-origin: top;
-/* 旋转 */
-transform: rotate(45deg); 
-/* 平移 */
-transform: translate(20px, 10px);
-/* 缩放 */
-transform: scale(.5);
-/* 倾斜 */
-transform: skew(45deg);
-```
-
-也可以所有属性合并：
-
-```
-transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
 
@@ -904,72 +1010,6 @@ line-height: normal;
 line-height: 150%;
 line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 ```
-
-# background-origin
-
-背景区域的位置，有如下属性：
-
-- `content-box`：padding值会起效，以padding开始的单位开始显示背景；
-
-- `padding-box`：padding不会影响背影，直接从border里面开如显示背影；
-
-- `border-box`：border不会影响背景，直接把border的内容也算在背影里面，背景会减去border的长度。
-
-# background-image
-
-背景图，有如下属性：
-
-- `url()`：图片地址
-
-- `line-gradient`：创建线性渐变的图片
-
-- `redial-gradient`：创建径向渐变的图片
-
-- `repeating-line-gradient`：创建重复线性渐变的图片
-
-- `repeating-redial-gradient`：创建重复径向渐变的图片
-
-与`background-size`组合的话，可以生成条纹背景。
-
-## line-gradient
-
-背景2色平铺
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
-
-```
-background: linear-gradient(#ff0 50%, #f00 50%);
-background-size: 100% 50%;
-```
-
-## repeating-line-gradient
-
-背景2色任意角度平铺
-
-![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
-
-```
-background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
-```
-# box-shadow
-
-例：
-
-`box-shadow: 50px 50px 0 20px #ffb;`
-
-图：
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0nvzcynqj308y069dfn.jpg)
-
-解析：
-
-参数1：X轴，图中为30，因为50-20=30；
-参数2：Y轴，图中为30，因为50-20=30；
-参数3：模糊距离
-参数4：阴影大小，默认可省略不写时为0。
-参数4：颜色。
-
-
 # display
 
 ## inline
@@ -1157,70 +1197,6 @@ top: 0;
 
 sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
 
-# InterSectionObserver异步视口观察
-
-学习链接：
-
-[链接1](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
-[链接2](https://www.jianshu.com/p/84a86e41eb2b)
-
-## 使用API
-
-```
-/**
-  * 新建实例
-  * callback：回调函数
-  * option：配置项，非必填
-  */
-var io = new InterSectionObserver(callback,option);
-
-// 开始观察
-io.observe(document.getElementById('imgID'));
-
-// 停止观察
-io.unobserve(element);
-
-// 关闭观察器
-io.disconnect();
-```
-
-## 返回IntersectionObserverEntry对象
-
-`IntersectionObserverEntry`对象提供目标元素的信息，一共有六个属性。
-
-```
-{
-  time: 3893.92,
-  rootBounds: ClientRect {
-    bottom: 920,
-    height: 1024,
-    left: 0,
-    right: 1024,
-    top: 0,
-    width: 920
-  },
-  boundingClientRect: ClientRect {
-     // ...
-  },
-  intersectionRect: ClientRect {
-    // ...
-  },
-  intersectionRatio: 0.54,
-  target: element
-}
-```
-
-每个属性的含义如下。
-
-```
-time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
-target：被观察的目标元素，是一个 DOM 节点对象
-rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
-boundingClientRect：目标元素的矩形区域的信息
-intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
-intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
-```
-
 ## 懒加载图片实例
 
 ```
@@ -1343,7 +1319,7 @@ img{
 2、右边的width: calc(100% - 100px)
 3、使用float
 
-## BFC
+# BFC
 
 BFC是特性（功能），不是定义。
 

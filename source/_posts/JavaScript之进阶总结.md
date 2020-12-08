@@ -116,9 +116,6 @@ Object.isFrozen(obj);// true
 ```
 
 
-# setTimeout
-
-// setTimeout的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。
 
 
 # 递归
@@ -271,17 +268,6 @@ handleThrottle () {
 ```
 ![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
 
-# prototype 和 hasOwnProperty
-
-```
-Array.prototype.arr = function(){console.log('print arr')};
-var a = [1,2,3];
-a.arr(); // 'print arr'
-Array.prototype.hasOwnProperty('arr'); // true
-a.hasOwnProperty('arr'); // false
-Array.hasOwnProperty('arr'); // false
-```
-
 
 # let和闭包
 
@@ -357,207 +343,6 @@ for (let i = 1; i < 6; i++) {
 }
 ```
 
-# function和object
-
-## function
-
-```
-var str = (()=> {
-    var count = 0;
-    function sum () { return ++count; };
-    function reduce () {return --count;};
-    return {
-        sum,
-        reduce
-    }
-})
-```
-此时的str是个function
-
-简化下：
-
-```
-var str = (()=> {
-    var count = 0;
-    return {
-        sum : ()=>{return ++count;},
-        reduce : ()=>{return --count;}
-    }
-})();
-str.sum(); // 1
-```
-此时的str是已经立即执行函数了，返回的是Object，是{sum:f,reduce:f}，注意，这里的str是获取不到count的，只有return的数据能获取到。
-
-## Object
-
-```
-var obj = {
-    count:0,
-    sum : ()=>{return ++obj.count;},
-    reduce : ()=>{return --obj.count;}
-}
-obj.sum(); // 1
-```
-
-这里的obj是Object，不同于str的是，它能获取到count，object里面的所有数据都能获取到。
-
-## 区别
-
-- Function只有return的方法才能获取到（闭包）
-- Function执行后返回的是对象
-
-
-# JavaScript函数调用及this参数
-
-JS有4种方式调用函数
-
-- 作为一个函数(`function`)——`fn()`直接被调用
-- 作为一个方法(`methods`)——`obj.fn()`，关联在对象上调用，实现面向对象编程
-- 作为一个构造函数(`constructor`)——`new Fn()`，实例化一个新的对象
-- 通过`apply`或`call`方法调用
-
-对应的this的指向：
-
-- 函数调用：`window`或`undefined`
-- 方法调用：obj对象
-- 构造函数调用：实例化的对象
-- `aplly`或`call`：第一个参数
-
-详解：
-
-## 函数调用
-
-```
-function fn(){
-    console.log(this);
-}
-fn(); // window
-```
-
-严格模式下：
-
-```
-function fn(){
-    "use strict"
-    console.log(this);
-}
-fn(); // undefined
-```
-
-## 方法调用
-
-```
-var obj = {
-    fn : function(){
-        console.log(this);
-    }
-};
-obj.fn() // 返回obj对象：{fn: ƒ}
-```
-
-## 构造函数调用
-
-```
-function Cat(x,y){
-    this.x = x;
-    this.y = y;
-    console.log(this);
-}
-var c = new Cat(1,2);
-
-c // Cat{x:1,y:2} 指向c对象
-```
-
-es6写法
-
-```
-class Point{
-    constructor(x,y){
-        this.x = x;
-        this.y = y;
-        console.log(this);
-    }
-}
-var p = new Point(1,2)
-
-p // Point{x:1,y:2} 指向p对象
-```
-
-## aplly或call
-
-```
-var name = '张三';
-var age = '24';
-var obj = {
-    name: this.name, // 此处的this指向window
-    objAge: this.age, // 此处的this指向window
-    fun: function(fm,t){
-        console.log(this)
-        console.log(this.name+'年龄 '+this.age + ' 来自'+fm+' 去往'+t); // 此处的fm和t就是要传入的参数
-    }
-}
-var pd = {
-    name: '彭丹',
-    age:18
-}
-obj.fun.call(pd,'长沙','上海'); // 彭丹 年龄18 来自长沙 去往上海
-obj.fun.apply(pd,['长沙','上海']); // 彭丹 年龄18 来自长沙 去往上海
-obj.fun.bind(pd,'长沙','上海')(); // 彭丹 年龄18 来自长沙 去往上海
-obj.fun.bind(pd,['长沙','上海'])(); // 彭丹 年龄18 来自长沙上海 去往undefined
-```
-
-`this`打印出来全都是`{name: "彭丹", age: 18}`，就是第一个参数。
-
-# 函数构造器
-
-与`构造函数`名字类似，但无太大关系。
-
-普通生成
-
-```
-var p = new Function('x','y','return x+y');
-p(2,3)
-```
-
-动态生成
-
-```
-createFunction(){
-    let arr = Array.from(arguments);
-    var params = arr.splice(0,arr.length-1);
-    var body = arr[0];
-    return new Function(params,body);
-},
-test(){
-    var sum = this.createFunction('x','y','return x + y');
-    var chen = this.createFunction('x','y','return x * y');
-    console.log(sum(3,2)) // 5
-    console.log(chen(3,2)) // 6
-},
-```
-
----
-
-# 函数生成器(generator)
-
-```
-function* test(){
-    console.log(1);
-    yield;
-    console.log(2);
-}
-let item = test();
-item.next();
-setTimeout(()=>{
-    item.next();
-},3000)
-1
-隔3秒后
-2
-```
-
----
-
 # JavaScript相等操作符（==）
 
 参考：
@@ -607,85 +392,6 @@ setTimeout(()=>{
 简化：
 `{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
-# MessageChannel
-
-## MessageChannel的基本使用
-
-```
-const {port1, port2} = new MessageChannel();
-port1.onmessage = function(d) {
-    console.log(`port1接收的消息是：${d.data}`);
-}
-port2.onmessage = function(d) {
-    console.log(`port2接收的消息是：${d.data}`);
-}
-port1.postMessage('port1发送的消息');
-port2.postMessage('port2发送的消息');
-```
-
-port1发送的由port2接收，port2发送的由port1接收。
-
-也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再return出来，就是一个新的对象，所以肯定能实现深拷贝。
-
-## 使用MessageChannel实现深拷贝
-
-```
-var obj = {id:1,name:{a:'xx'}};
-
-function structuralClone(obj) {
-    return new Promise((resolve) => {
-        const {port1, port2} = new MessageChannel();
-        port2.onmessage = ev => resolve(ev.data);
-        port1.postMessage(obj);
-    })
-}
-structuralClone(obj).then(res=>{
-    console.log(res);
-    var obj3 = res;
-    obj3.name.a = 'obj3';
-    console.log(obj,obj3);
-})
-
-<!-- 用promise是为了好传数据 -->
-```
-
----
-
-# 使用lodash.cloneDeep实现深拷贝
-
-```
-import _ from 'lodash'
-var obj = {id:1,name:{a:'xx'},fn:function(){},un:undefined};
-var obj2 = _.cloneDeep(obj);
-obj2.name.a = 'obj2';
-console.log(obj,obj2)
-```
-
-![image](https://img2020.cnblogs.com/blog/919128/202007/919128-20200731100645239-764277941.png)
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghcrk94yhdj30dm033aa5.jpg)
-
-# `arguments`参数的3种转数组方法
-
-**方法1：Array.prototype.slice.apply**
-**方法2：Array.from**
-**方法3：[...arguments]**
-
-```
-var test3 = function(){
-    console.log(arguments);
-    var list1 = Array.prototype.slice.apply(arguments);
-    console.log(list1);
-    var list2 = Array.from(arguments);
-    console.log(list2);
-    var list3 = [...arguments];
-    console.log(list3);
-}
-test3(1,2,3,4);
-```
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
-
 # Blob实现下载文件
 
 [参考链接](https://zhuanlan.zhihu.com/p/97768916)
@@ -708,7 +414,6 @@ download(){
 },
 ```
 
----
 
 # JS运行机制
 
@@ -806,6 +511,7 @@ promise调用then的前提是promise的状态为fullfilled；
 setTimeout并不是由JS引擎计数的，因为单线程会阻塞，会影响计数的准确，因此通过单独线程来计时并触发。
 setTiemout最小为4，不满会加成4。
 
+setTimeout的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。
 # `try...catch`无法用于异步代码
 
 ## 同步代码
@@ -848,156 +554,6 @@ Uncaught ReferenceError: bar is not defined
 ## 对比图
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
-
-# MutationObserver:监听DOM节点的变动
-
-监听DOM节点的变动
-## 基本使用
-
-```
-<body>
-    <div id="content">
-      hi
-    </div>
-    <script>
-      var callback = function(mutationList, observer) {
-        for(var mutation of mutationList) {
-          console.log(mutation)
-        }
-      };
-      var observer = new MutationObserver(callback);
-      var targetNode = document.getElementById('content');
-      observer.observe(targetNode.firstChild,{
-        characterData: true
-      })
-      setTimeout(() => {
-        targetNode.firstChild.data = 'hello'
-      },3000)
-    </script>
-</body>
-```
-
-3秒钟之后，id为content的DOM变成了'hello'，此时的MutationObserver就已经监听到了改变，可以进行下一步的操作。
-
-## 实现vue.$nexttick
-
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>example</title>
-</head>
-<body>
-<div id="app">
-    <div v-if="isShow">
-        <input type="text" ref="userName" />
-    </div>
-    <button @click="showInput">点击显示输入框</button>
-</div>
-
-</body>
-</html>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            isShow: false
-        },
-        methods:{
-            showInput(){
-                this.isShow = true
-                this.mynextTick(()=>{
-                    this.$refs.userName.focus()
-                })
-
-            },
-            mynextTick(func){
-                var textNode = document.createTextNode(0)//新建文本节点
-                var that = this
-                var callback = function(mutationsList, observer) {
-                    func.call(that);
-                    // 或
-                    // fanc();
-                }
-                var observer = new MutationObserver(callback);
-
-                observer.observe(textNode,{characterData:true })
-                textNode.data = 1//修改文本信息，触发dom更新
-            }
-        }
-
-    })
-</script>
-```
-
-# MessageChannel实现vue.$nexttick
-
-```
-<!DOCTYPE html>
-
-<html lang="en-zh">
-  <head>
-    <meta charset="utf-8" />
-    <style type="text/css">
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <div v-if="isShow">
-          <input type="text" ref="userName" />
-      </div>
-      <button @click="showInput">点击显示输入框</button>
-    </div>
-  </body>
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  var app = new Vue({
-    el: '#app',
-    data: {
-      isShow: false
-    },
-    methods: {
-      showInput(){
-        this.isShow = true;
-        this.myNextTick(() => {
-          this.$refs.userName.focus();
-        })
-      },
-      myNextTick(fanc){
-        var that = this;
-        const ch = new MessageChannel();
-        const port1 = ch.port1;
-        const port2 = ch.port2;
-
-        port2.onmessage = (() => {
-          fanc();
-        })
-        port1.postMessage(1);
-
-      }
-    }
-  })
-</script>
-
-```
-
-# window.resize下监听某DOM的改变：ResizeObserver
-
-```
-<textarea style="width: 100%;" id="main"></textarea>
-
-...
-
-let mainEl = document.querySelector('#main');
-var ro = new ResizeObserver( entries => {
-  console.log(entries);
-})
-ro.observe(mainEl);
-```
 
 # lighthouse前端性能优化工具
 
@@ -1185,7 +741,7 @@ p 5
 ```
 
 
-# 11、与JAVA相通的概念
+# 与JAVA相通的概念
 
 ## MVC、MVVM
 
@@ -1243,7 +799,7 @@ $(".company_color").click(function(){
 })
 ```
 
-# 8、HTTP
+# HTTP
 
 ## 协议
 
@@ -1394,3 +950,20 @@ cookie是在客户端，session是在服务端。
 
 前端路由（#）：hash值或pushStatu
 后端路由（/）：通过URL跳转到具体的html页面，每次跳转都重新访问服务端，服务端返回页面。
+
+
+# localStorage标签页通信
+
+page1
+
+```
+localStorage.setItem('send','sendValue');
+```
+
+page2
+
+```
+window.addEventListener('storage', (e) => {
+    console.log(e)
+})
+```

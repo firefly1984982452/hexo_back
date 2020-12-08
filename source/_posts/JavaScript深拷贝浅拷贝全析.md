@@ -167,7 +167,7 @@ structuralClone(obj).then(res=>{
 
 ![image](https://img2020.cnblogs.com/blog/919128/202007/919128-20200731133645338-66683973.png)
 
-## 方法3：lodash.cloneDeep
+## 方法3：用lodash.cloneDeep
 
 ```
 import _ from 'lodash'
@@ -177,4 +177,4 @@ obj2.name.a = 'obj2';
 console.log(obj,obj2)
 ```
 
-![image](https://img2020.cnblogs.com/blog/919128/202007/919128-20200731100645239-764277941.png)
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghcrk94yhdj30dm033aa5.jpg)

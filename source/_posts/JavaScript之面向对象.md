@@ -470,3 +470,14 @@ new Array()输出耗时: 600
 `new Array()`需要调用`Array`的构造器。
 
 ---
+
+# prototype 和 hasOwnProperty
+
+```
+Array.prototype.arr = function(){console.log('print arr')};
+var a = [1,2,3];
+a.arr(); // 'print arr'
+Array.prototype.hasOwnProperty('arr'); // true
+a.hasOwnProperty('arr'); // false
+Array.hasOwnProperty('arr'); // false
+```
