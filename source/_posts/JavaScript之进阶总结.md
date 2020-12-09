@@ -870,3 +870,44 @@ window.addEventListener('storage', (e) => {
     console.log(e)
 })
 ```
+
+
+# 打开下载后立马关闭
+
+- 1.excel
+
+```
+var adom = document.createElement("a");
+adom.setAttribute("href",url);
+adom.width = "0px";
+adom.height = "0px";
+adom.setAttribute("target","_blank")
+document.body.appendChild(adom)
+adom.click();
+adom.remove();
+```
+- 2.image
+
+```
+fetch(url).then(res => res.blob()).then((blob) => {
+  // 创建隐藏的可下载链接
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = URL.createObjectURL(blob);
+  a.download = this.peopleList[i].peopleName;
+  document.body.appendChild(a);
+  a.click();
+  // 移除元素
+  document.body.removeChild(a);
+})
+```
+
+
+# 冒泡事件
+
+`event.stopProgation`能阻止冒泡事件
+
+# 默认事件
+
+`event.preventDefault`能阻止如`<a>`的默认`href`事件
+

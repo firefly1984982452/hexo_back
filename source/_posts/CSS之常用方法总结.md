@@ -168,14 +168,6 @@ border-width: 10px;
 width: -webkit-fill-available;
 ```
 
-# 雪碧图（sprite）
-```
-background: url(xxx) no-repeat;
-width: 64px;
-height: 64px;
-background-position: 0 -64px;
-```
-
 # html自适应手机
 
 ```
@@ -334,15 +326,6 @@ container{
 ```
 
 
-# 冒泡事件
-
-`event.stopProgation`能阻止冒泡事件
-
-# 默认事件
-
-`event.preventDefault`能阻止如`<a>`的默认`href`事件
-
-
 # 添加标签栏logo
 
 ```
@@ -374,65 +357,7 @@ text-decoration:overline 上划线样式
 <!--禁止缓存 end-->
 ```
 
-# 打开下载后立马关闭
-
-- 1.excel
-
-```
-var adom = document.createElement("a");
-adom.setAttribute("href",url);
-adom.width = "0px";
-adom.height = "0px";
-adom.setAttribute("target","_blank")
-document.body.appendChild(adom)
-adom.click();
-adom.remove();
-```
-- 2.image
-
-```
-fetch(url).then(res => res.blob()).then((blob) => {
-  // 创建隐藏的可下载链接
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = URL.createObjectURL(blob);
-  a.download = this.peopleList[i].peopleName;
-  document.body.appendChild(a);
-  a.click();
-  // 移除元素
-  document.body.removeChild(a);
-})
-```
-
-
-# base64转码
-
-## 英文
-
-```
-var string = 'Hello World!';
-btoa(string) // "SGVsbG8gV29ybGQh"
-atob('SGVsbG8gV29ybGQh') // "Hello World!"
-```
-
-## 中文
-
-```
-function b64Encode(str) {
-  return btoa(encodeURIComponent(str));
-}
-
-function b64Decode(str) {
-  return decodeURIComponent(atob(str));
-}
-
-b64Encode('你好') // "JUU0JUJEJUEwJUU1JUE1JUJE"
-b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
-
-```
-
 # js打印相关
-
 
 ## 打印方法
 
