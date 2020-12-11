@@ -9,8 +9,9 @@ categories:
 
 - ResizeObserver：resize监听
 - MutationObserver:监听DOM节点的变动
-- MessageChannel：管道通信
 - InterSectionObserver：异步视口观察
+- PerformanceObserver：监测性能
+- ReportingObserver：汇报
 
 
 # ResizeObserver：resize监听
@@ -110,102 +111,6 @@ ro.observe(mainEl);
     })
 </script>
 ```
-
-# MessageChannel：管道通信
-
-## MessageChannel的基本使用
-
-```
-const {port1, port2} = new MessageChannel();
-port1.onmessage = function(d) {
-    console.log(`port1接收的消息是：${d.data}`);
-}
-port2.onmessage = function(d) {
-    console.log(`port2接收的消息是：${d.data}`);
-}
-port1.postMessage('port1发送的消息');
-port2.postMessage('port2发送的消息');
-```
-
-port1发送的由port2接收，port2发送的由port1接收。
-
-也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再return出来，就是一个新的对象，所以肯定能实现深拷贝。
-
-## 使用MessageChannel实现深拷贝
-
-```
-var obj = {id:1,name:{a:'xx'}};
-
-function structuralClone(obj) {
-    return new Promise((resolve) => {
-        const {port1, port2} = new MessageChannel();
-        port2.onmessage = ev => resolve(ev.data);
-        port1.postMessage(obj);
-    })
-}
-structuralClone(obj).then(res=>{
-    console.log(res);
-    var obj3 = res;
-    obj3.name.a = 'obj3';
-    console.log(obj,obj3);
-})
-
-<!-- 用promise是为了好传数据 -->
-```
-
-## MessageChannel实现vue.$nexttick
-
-```
-<!DOCTYPE html>
-
-<html lang="en-zh">
-  <head>
-    <meta charset="utf-8" />
-    <style type="text/css">
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <div v-if="isShow">
-          <input type="text" ref="userName" />
-      </div>
-      <button @click="showInput">点击显示输入框</button>
-    </div>
-  </body>
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  var app = new Vue({
-    el: '#app',
-    data: {
-      isShow: false
-    },
-    methods: {
-      showInput(){
-        this.isShow = true;
-        this.myNextTick(() => {
-          this.$refs.userName.focus();
-        })
-      },
-      myNextTick(fanc){
-        var that = this;
-        const ch = new MessageChannel();
-        const port1 = ch.port1;
-        const port2 = ch.port2;
-
-        port2.onmessage = (() => {
-          fanc();
-        })
-        port1.postMessage(1);
-
-      }
-    }
-  })
-</script>
-
-```
-
 
 # InterSectionObserver：异步视口观察
 

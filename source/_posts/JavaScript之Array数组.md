@@ -125,7 +125,13 @@ function instanceof(left, right) {
 ({}).toString.call([1,2]) === '[object Array]'
 ({}).toString.bind([1,2])() === '[object Array]'
 ```
+# toString
 
+将数组转换为字符串：
+```
+["Banana", "Orange", "Apple", "Mango"].toString();
+// Banana,Orange,Apple,Mango
+```
 # 截取
 
 ## slice
@@ -151,6 +157,19 @@ arr.slice(1,3);      //(2) ["B", "C"]
 ```
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 arr.splice(1,3);     //(3) ["B", "C", "D"]
+```
+
+## split：分隔
+
+```
+'a,b,c'.split(','); // 
+```
+
+## replace和replaceAll：替换
+
+```
+'12333345'.replace('3','0'); // "12033345"
+'12333345'.replaceAll('3','0'); // "12000045"
 ```
 
 # 在开头或末尾增加或删除
@@ -199,7 +218,7 @@ arr.reverse();       //(5) [53, 231, 23, 122, 1]
 ```
 
 
-# cancat
+# concat
 
 合并两个数组
 
@@ -289,7 +308,7 @@ function c(element,index,array){
 (3) [12, 130, 44]
 ```
 
-## indexOf
+## indexOf和lastIndexOf
 
 与String类似，Array也可以通过indexOf()来搜索一个指定的元素的位置：
 
@@ -412,6 +431,25 @@ arr.map( v => {
 
 遍历，每个元素执行回调函数，**返回undefined**。
 
+
+**forEach跳出循环**
+
+```
+var BreakException= {};
+
+try {
+    [1,2,3].forEach(function(i) {
+        if(i === 2) throw BreakException;
+        console.log(i);
+    });
+} catch(e) {
+    if (e!==BreakException) throw e;
+}
+
+//forEach是函数，不是语法，因此没有直接break的语法。如果要中止，可使用 Array.every 或 Array.some。
+```
+
+
 ## reduce
 
 将数组计算为一个值
@@ -453,6 +491,9 @@ var total = arr.reduce((total,next) =>{
 total; // 16
 ```
 
+## reduceRight
+
+用法上同，区别是从后往前。
 
 # toLocalString
 
@@ -555,20 +596,3 @@ test3(1,2,3,4);
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
 
-
-# forEach跳出循环
-
-```
-var BreakException= {};
-
-try {
-    [1,2,3].forEach(function(i) {
-        if(i === 2) throw BreakException;
-        console.log(i);
-    });
-} catch(e) {
-    if (e!==BreakException) throw e;
-}
-
-//forEach是函数，不是语法，因此没有直接break的语法。如果要中止，可使用 Array.every 或 Array.some。
-```
