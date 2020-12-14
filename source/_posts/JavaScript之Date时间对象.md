@@ -5,6 +5,25 @@ categories:
 - program
 ---
 
+# date所有方法
+
+```
+var date = new Date();
+let print =
+`新建时间对象：new Date()：${date}\n` +
+`时间戳：+date：${+date}\n` +
+`时间戳：date.getTime：${date.getTime}\n` +
+`获取年：date.getFullYear()：${date.getFullYear()}\n` +
+`获取月：date.getMonth()+1：${date.getMonth()+1}\n` +
+`获取日：date.getDate()：${date.getDate()}\n` +
+`获取周几：date.getDay()：${date.getDay()}\n` +
+`获取时：date.getHours()：${date.getHours()}\n` +
+`获取分：date.getMinutes()：${date.getMinutes()}\n` +
+`获取秒：date.getSeconds()：${date.getSeconds()}\n` +
+`获取毫秒：date.getMilliseconds()：${date.getMilliseconds()}\n`;
+console.log(print);
+```
+
 # 把时间戳转为时间（年月日时分秒）
 
 ```
