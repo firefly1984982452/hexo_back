@@ -23,6 +23,22 @@ categories:
 `'ewfwef'.charAt(53)` // ""
 `'ewfwef'[59]` // undefined
 
+# charCodeAt()
+
+返回uniccode/accsic编码
+
+```
+'a'.charCodeAt(0); // 97
+```
+
+# fromCharCode()
+
+将 Unicode 编码转为一个字符:
+
+```
+String.fromCharCode(65); // A
+```
+
 # concat()
 
 合并两个字符串
@@ -34,6 +50,24 @@ categories:
 返回字符首次出现的位置
 
 `'abcc'.indexOf('c')` // 2
+
+# lastIndexOf()
+
+上次，倒数。
+
+# match
+
+## 检索字符串
+
+```
+'hello world'.match('world'); // ["world", index: 6, input: "hello world", groups: undefined]
+```
+
+## 匹配正则
+
+```
+"1 plus 2 equal 3".match(/\d/g); // ["1", "2", "3"]
+```
 
 # includes()
 
@@ -51,6 +85,14 @@ categories:
 替换
 
 `'abc'.replace('b','d')` // "adc"
+
+# search()
+
+返回下标
+
+```
+'hello world'.search('wor'); // 6
+```
 
 # split()
 

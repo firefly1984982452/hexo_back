@@ -53,6 +53,11 @@ Math.floor(-4.1); // -5 按最小的取
 ```
 Math.floor(Math.random() * number)
 ```
+
+## 最大最小数
+
+Math.max
+Math.min
 # number
 
 ## isFinite 是否为数字型

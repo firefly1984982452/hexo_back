@@ -172,7 +172,7 @@ arr.splice(1,3);     //(3) ["B", "C", "D"]
 '12333345'.replaceAll('3','0'); // "12000045"
 ```
 
-# 在开头或末尾增加或删除
+# 增加或删除
 
 ## push和pop
 
@@ -189,6 +189,33 @@ arr.pop();           //['A', 'B', 'C', 'D', 'E', 'F', 'G']
 shift()删除数组第一个数据；
 unshift()删除数姐最后一个数据。
 
+## concat
+
+合并两个数组
+
+```
+var a = ['a','b'];
+var b = ['c','d']
+var c = a.concat(b);
+c //(4) ["a", "b", "c", "d"]
+```
+
+## join
+
+```
+c.join(',');       //"a,b,c,d"
+```
+
+## copyWithin
+
+复制指定值（数组中的值）到指定位置
+
+```
+//  将 3 号位复制到 0 号位
+[1, 2, 3, 4, 5].copyWithin(0, 3, 4)
+// [4, 2, 3, 4, 5]
+```
+
 # 排序
 
 ## sort
@@ -197,7 +224,7 @@ unshift()删除数姐最后一个数据。
 
 ```
 var arr = [23,122,1,53,231]
-arr.sort();          //(5) [1, 122, 23, 231, 53]
+arr.sort(); // [1, 122, 23, 231, 53]
 ```
 
 升序
@@ -218,62 +245,7 @@ arr.reverse();       //(5) [53, 231, 23, 122, 1]
 ```
 
 
-# concat
-
-合并两个数组
-
-```
-var a = ['a','b'];
-var b = ['c','d']
-var c = a.concat(b);
-c                  //(4) ["a", "b", "c", "d"]
-```
-
-# join
-
-```
-c.join(',');       //"a,b,c,d"
-```
-
-# copyWithin
-
-复制指定值（数组中的值）到指定位置
-
-```
-//  将 3 号位复制到 0 号位
-[1, 2, 3, 4, 5].copyWithin(0, 3, 4)
-// [4, 2, 3, 4, 5]
-```
-
 # 查询和过滤
-
-## entries
-
-返回迭代器，一般和`next`一起使用
-
-`['a', 'b', 'c'].entries().next().value`
-
-## fromEntries
-
-将键值对数组转为对象
-
-```
-const map = new Map().set('foo', true).set('bar', false);
-Object.fromEntries(map)
-```
-
-## values
-
-和entries异曲同工
-返回迭代器，一般和`next`一起使用
-
-`['a', 'b', 'c'].values().next().value`
-
-## keys
-
-数组里的下标
-
-`[...['a', 'b', 'c'].keys()]`
 
 ## every
 
@@ -335,21 +307,15 @@ arr.indexOf(124);    //1
 //true
 ```
 
+# 生成数组
 
-# fill
-
-填充
+## fill：填充
 
 ```
 var arr = new Array(8).fill('2'); // ["2", "2", "2", "2", "2", "2", "2", "2"]
 ```
 
-# 用最短的代码实现一个长度为m(6)且值都n(8)的数组
-
-`Array(6).fill('8')`
-
-
-# of
+## of
 
 ```
 new Array(3); // [empty × 3]
@@ -359,6 +325,34 @@ Array.of(3); // [3]
 可用于回调函数生成数组。
 
 # 遍历
+
+## entries
+
+返回迭代器，一般和`next`一起使用
+
+`['a', 'b', 'c'].entries().next().value`
+
+## fromEntries
+
+将键值对数组转为对象
+
+```
+const map = new Map().set('foo', true).set('bar', false);
+Object.fromEntries(map)
+```
+
+## values
+
+和entries异曲同工
+返回迭代器，一般和`next`一起使用
+
+`['a', 'b', 'c'].values().next().value`
+
+## keys
+
+数组里的下标
+
+`[...['a', 'b', 'c'].keys()]`
 
 ## map
 
