@@ -69,6 +69,15 @@ String.fromCharCode(65); // A
 "1 plus 2 equal 3".match(/\d/g); // ["1", "2", "3"]
 ```
 
+# raw：模板字符串
+
+```
+String.raw`${2+3}`; // 5
+
+var s = String.raw`hello\n`;
+s === "hello\\n"; // true
+```
+
 # includes()
 
 判断字符串中是否包含某字符串

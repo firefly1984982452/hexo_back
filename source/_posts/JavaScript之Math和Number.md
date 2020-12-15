@@ -77,7 +77,32 @@ Number.isFinite(1.2) ; // true
 
 ## isNaN 是否为NaN
 
-`Number.isNaN()`
+window.isNaN和Number.isNaN的区别
+
+window.isNaN：能否转换为数字
+Number.isNaN：是否NaN
+
+```
+//isNaN
+console.log(isNaN(null));            //false
+console.log(isNaN(true));            //false
+console.log(isNaN(false));           //false
+console.log(isNaN(0));               //false
+console.log(isNaN(undefined));       //true
+console.log(isNaN("AB"));            //true
+console.log(isNaN({a: 1}));          //true
+console.log(isNaN(NaN));             //true
+
+//Number.isNaN
+console.log(Number.isNaN(null));      //false
+console.log(Number.isNaN(true));      //false
+console.log(Number.isNaN(false));     //false
+console.log(Number.isNaN(0));         //false
+console.log(Number.isNaN(undefined)); //false
+console.log(Number.isNaN("AB"));      //false
+console.log(Number.isNaN({a: 1}));    //false
+console.log(Number.isNaN(NaN));       //true
+```
 
 ## 安全范围
 
