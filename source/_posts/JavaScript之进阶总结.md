@@ -185,6 +185,51 @@ handleThrottle () {
 ![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
 
 
+# 事件委托（事件代理）
+
+如下代码：因为`li`的点击事件一定会事件冒泡到`ul`上，所以将点击事件写在`ul`上即可委托。
+
+```
+<ul id="ul">
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+<script>
+  let ul = document.querySelector('##ul')
+  ul.addEventListener('click', event => {
+    console.log(event.target)
+  })
+</script>
+```
+
+vue中使用
+
+```
+<div  @click="handleClick">
+    <span 
+        v-for="(item,index) of 10000"  
+        :key="index">
+        {{item}}
+    </span>
+</div>
+
+...
+
+handleClick(e){
+    console.log(e.target.innerText);
+},
+```
+
+事件代理的方式相对于直接给目标注册事件来说，有以下优点
+
+- 节省内存
+- 不需要给子节点注销事件
+
+
+
 # let和闭包
 
 ## let劫持作用域
@@ -652,6 +697,8 @@ GET、POST和OPTION
 - 跨域资源共享（CORS）
 - nodejs中间件代理跨域
 - iframe
+- document.domain
+- postMessage
 
 ## jsonp
 
@@ -727,9 +774,31 @@ $.ajax({
 ```
 axios.defaults.withCredentials = true
 ```
-### Nodejs中间件代理跨域
+## Nodejs中间件代理跨域
 
 如`proxy`中间件
+
+## document.domain
+该方式只能用于二级域名相同的情况下，比如 `a.test.com` 和 `b.test.com` 适用于该方式。
+
+只需要给页面添加 `document.domain = 'test.com'` 表示二级域名都相同就可以实现跨域
+
+## postMessage
+
+这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息。
+
+```
+// 发送消息端
+window.parent.postMessage('message', 'http://test.com')
+// 接收消息端
+var mc = new MessageChannel()
+mc.addEventListener('message', event => {
+  var origin = event.origin || event.originalEvent.origin
+  if (origin === 'http://test.com') {
+    console.log('验证通过')
+  }
+})
+```
 
 ## 缓存
 
