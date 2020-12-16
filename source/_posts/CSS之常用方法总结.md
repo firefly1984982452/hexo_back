@@ -357,7 +357,7 @@ text-decoration:overline 上划线样式
 <!--禁止缓存 end-->
 ```
 
-# js打印相关
+# 打印相关
 
 ## 打印方法
 
