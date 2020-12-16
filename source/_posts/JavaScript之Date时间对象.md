@@ -16,10 +16,10 @@ let print =
 `获取年：date.getFullYear()：${date.getFullYear()}\n` +
 `获取月：date.getMonth()+1：${date.getMonth()+1}\n` +
 `获取日：date.getDate()：${date.getDate()}\n` +
-`获取周几：date.getDay()：${date.getDay()}\n` +
-`获取时：date.getHours()：${date.getHours()}\n` +
-`获取分：date.getMinutes()：${date.getMinutes()}\n` +
-`获取秒：date.getSeconds()：${date.getSeconds()}\n` +
+`获取周几：date.getDay()：${['日', '一', '二', '三', '四', '五', '六'][date.getDay()]}\n` +
+`获取时：date.getHours()：${date.getHours() > 10 ? date.getHours() : '0' + date.getHours()}\n` +
+`获取分：date.getMinutes()：${date.getMinutes() > 10 ? date.getMinutes() : '0' + date.getMinutes()}\n` +
+`获取秒：date.getSeconds()：${date.getSeconds() > 10 ? date.getSeconds() : '0' + date.getSeconds()}\n` +
 `获取毫秒：date.getMilliseconds()：${date.getMilliseconds()}\n`;
 console.log(print);
 ```

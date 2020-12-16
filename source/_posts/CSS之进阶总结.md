@@ -318,11 +318,78 @@ p{
 
 ## rem
 
-`rem`是计算出不同尺寸的相对值
 
-例如不同的移动端设备的长高大小是不一样的值。
+## 全代码
 
-[更多](https://firefly1984982452.github.io/2018/03/09/%E6%A0%B9%E6%8D%AE%E8%AE%BE%E8%AE%A1%E5%9B%BE%E9%80%82%E9%85%8Drem/)
+假设是移动端`375*667`
+
+```
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			
+			html {
+				font-size: 100px;
+			}
+			
+			.content {
+				width: 3.75rem;
+				height: 1.2rem;
+				background-color: red;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="content">
+			测试文字
+		</div>
+		<script type="text/javascript">
+			(function() {
+				var width = window.screen.width;
+				console.log(width);
+				var scaleSize = 100,
+					designSize = 375;
+				var size = width / (designSize / scaleSize);
+				document.getElementsByTagName('html')[0].style.fontSize = (size) + 'px';
+			})();
+		</script>
+
+	</body>
+
+</html>
+```
+
+## 手机适配
+
+`<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />`
+
+## 不同宽度下不同的font-size
+
+```
+(function() {
+	//首先取得当得屏幕宽度
+	var width = window.screen.width;
+	var scaleSize = 100,
+		designSize = 375;
+		//用当得宽度除以（设计尺寸除以缩放尺寸）
+	var size = width / (designSize / scaleSize);
+	//设置font-size
+	document.getElementsByTagName('html')[0].style.fontSize = (size) + 'px';
+})();
+```
+
 
 
 ## 应用
