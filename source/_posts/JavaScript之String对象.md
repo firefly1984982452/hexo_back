@@ -166,4 +166,4 @@ num.toLocaleString('en-US'); // 效果相同
 
 ## 单行写一个评级组件
 
-"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate);定义一个变量rate是1到5的值
+`"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate)`;定义一个变量rate是1到5的值

@@ -47,12 +47,12 @@ var obj = {
 obj.sum(); // 1
 ```
 
-这里的obj是Object，不同于str的是，它能获取到count，object里面的所有数据都能获取到。
+这里的`obj`是`Object`，不同于`str`的是，它能获取到`count`，`object`里面的所有数据都能获取到。
 
 ## 区别
 
-- Function只有return的方法才能获取到（闭包）
-- Function执行后返回的是对象
+- `Function`只有`return`的方法才能获取到（闭包）
+- `Function`执行后返回的是对象
 
 
 # JavaScript函数调用及this参数

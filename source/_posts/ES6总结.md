@@ -82,7 +82,7 @@ function func() {
 - 不允许删除
 - 初始化必须赋值
 
-const只能保证指向的指针是固定的。如果是数组，是可改的。
+`const`只能保证指向的指针是固定的。如果是数组，是可改的。
 
 ```
 const arr = [];
@@ -124,7 +124,7 @@ Object.freeze(OBJ);
 
 ### 用法
 
-**用法：只要等号两边的模式相同，左边的变量就会被赋予对应的值，解析失败返回undefined。（按次序）**
+**用法：只要等号两边的模式相同，左边的变量就会被赋予对应的值，解析失败返回`undefined`。（按次序）**
 
 ```
 let [x, , y] = [1, 2, 3];
@@ -143,7 +143,7 @@ z // []
 
 ### 默认值
 
-**默认值：数组成员严格等于===，默认值才生效**
+**默认值：数组成员严格等于`===`，默认值才生效**
 
 ```
 let [foo = true] = [];
@@ -230,7 +230,7 @@ console.log(a,temp); // 1 [2, 3, 4]
 
 ### 使用
 
-**使用：变量与属性同名即可取到值，解析失败返回undefined**
+**使用：变量与属性同名即可取到值，解析失败返回`undefined`**
 
 ```
 let { bar, foo } = { foo: 'aaa', bar: 'bbb' };
@@ -245,7 +245,7 @@ baz // undefined
 
 所以如果变量名与属性名不一致，必须写成全称：
 
-（字义name变量接收对象里的title字段）
+（字义`name`变量接收对象里的`title`字段）
 ```
 let {title:name} = {title:'小明',sex:'男'};
 title // 小明
@@ -288,7 +288,7 @@ foo(); // 30
 foo(0,1); // 11
 ```
 
-第一个参数0被解析成了false，而不是数字0进行计算。
+第一个参数0被解析成了`false`，而不是数字0进行计算。
 
 用`默认参数值`
 
@@ -301,7 +301,7 @@ foo(0,1); // 1
 
 ### 注意点
 
-（1）将一个已声明的变量解构时注意不要将{}放于行首，JavaScript会解析为代码块
+（1）将一个已声明的变量解构时注意不要将`{}`放于行首，`JavaScript`会解析为代码块
 
 ```
 // 错误的写法
@@ -367,9 +367,9 @@ let y = 2;
 ```
 （2）提取对象的属性
 
-（3）遍历Map
+（3）遍历`Map`
 
-任何部署了 Iterator 接口的对象，都可以用for...of循环遍历
+任何部署了 `Iterator` 接口的对象，都可以用`for...of`循环遍历
 
 ```
 const map = new Map();
@@ -455,12 +455,12 @@ foo() // undefined 5
 
 ### 位置
 
-必须是尾参数，不然除非调用时显示写上undefined，如：`foo(undefined,1)`。
+必须是尾参数，不然除非调用时显示写上`undefined`，如：`foo(undefined,1)`。
 
 
 ### 作用域
 
-只在function内部有效
+只在`function`内部有效
 
 ### 应用
 
@@ -470,9 +470,9 @@ foo() // undefined 5
 
 ### 使用
 
-相当于将函数自带的arguments转换成了数组。
+相当于将函数自带的`arguments`转换成了数组。
 
-（reset参数的形式与java类似）
+（`reset`参数的形式与`java`类似）
 
 ```
 function f1(){
@@ -500,7 +500,7 @@ f2(3213,23,2,2332,32,)
 作用：
 
 - 简化代码回调函数
-- 提升this
+- 提升`this`
 
 ### 使用
 
@@ -550,9 +550,9 @@ function f(x){
 }
 ```
 
-情况一：调用函数g之后，还有赋值操作；
-情况二：调用函数g之后，还有`+1`的操作；
-情况三：调用函数g之后，还隐式的调用了`return undefined`。
+- 情况一：调用函数g之后，还有赋值操作；
+- 情况二：调用函数g之后，还有`+1`的操作；
+- 情况三：调用函数g之后，还隐式的调用了`return undefined`。
 
 ### 尾调用优化
 
@@ -591,9 +591,9 @@ function factorial(n) {
 factorial(5) // 120
 ```
 
-此时需要保存n个记录，复杂度O(n)；
+此时需要保存`n`个记录，复杂度`O(n)`；
 
-尾递归只保留一个调用记录，复杂度O(1)：
+尾递归只保留`1`个调用记录，复杂度`O(1)`：
 
 ```
 function factorial(n, total) {
@@ -638,12 +638,12 @@ c == d // true
 c === d // true
 ```
 
-可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是Symbol就能保证值的唯一性。
+可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是`Symbol`就能保证值的唯一性。
 
 
 # Map
 
-为什么要用Map？因为普通数据结构无法以非字符串为键。
+为什么要用`Map`？因为普通数据结构无法以非字符串为键。
 
 举例：
 
@@ -724,7 +724,7 @@ console.log(mm2,mm);
 
 ### 方法1：`m.values()`
 
-返回一个迭代器，可以用spread扩展运算符（`...`）或`Array.from()`转换成数组。
+返回一个迭代器，可以用`spread`扩展运算符（`...`）或`Array.from()`转换成数组。
 
 ```
 var m = new Map();
@@ -775,9 +775,9 @@ console.log(m.has(y)); // true
 
 区别：
 
-- 内部内存（特别是GC）的工作方式；
+- 内部内存（特别是`GC`）的工作方式；
 
-- WeakMap只接受对象为键；所以对象被回收项目也会移除
+- `WeakMap`只接受对象为键；所以对象被回收项目也会移除
 
 ```
 var m = new WeakMap();
@@ -792,14 +792,14 @@ console.log(m.has(x)); // false
 
 # Set
 
-Set是一个值的集合，其中的值是唯一的。
+`Set`是一个值的集合，其中的值是唯一的。
 
 API:
 
-**新建：new Set()**
-**增：add()**
-**删：delete()**
-**查:has**
+- **新建：new Set()**
+- **增：add()**
+- **删：delete()**
+- **查:has**
 
 
 ## 新建
@@ -853,7 +853,7 @@ s.keys() == s.values(); // false
 
 ## WeakSet
 
-和Set的区别：
+和`Set`的区别：
 
 **只能存对象**
 
@@ -861,7 +861,7 @@ s.keys() == s.values(); // false
 var ws = new WeakSet([1,2,2,3]); // 无效：Uncaught TypeError: Invalid value used in weak set
 ```
 
-WeakSet使用：
+`WeakSet`使用：
 
 ```
 var obj1 = {id:1};
@@ -881,7 +881,7 @@ console.log(ws); // [{id:1},{id:2}]
 ws.has(obj1); // false
 ```
 
-虽然obj1的值看上去还在，但已经取不到了。
+虽然`obj1`的值看上去还在，但已经取不到了。
 
 ### delete删除
 
@@ -1027,7 +1027,7 @@ Reflect.has(obj, 'name');
 
 ## promise.all
 
-**只能同时调用不受关联的prmise，如果promise2的值受promise1影响，不能用promise.all，可以用async/await**
+**只能同时调用不受关联的`prmise`，如果`promise2`的值受`promise1`影响，不能用`promise.all`，可以用`async/await`**
 
 首先假设要依次调用3个`promise`的代码：
 
@@ -1073,7 +1073,7 @@ Promise.all([pro1,pro2,pro3]).then(val=>{
 
 第一个抛出`resolve`的`promise`就是`Promise.race`获取的值。
 
-这种模式称为门闩模式、promise中称中竞态。
+这种模式称为门闩模式、`promise`中称中`竞态`。
 
 ```
 var pro2 = new Promise((resolve,reject) => {
@@ -1199,7 +1199,7 @@ for (var index = 0; index < myArray.length; index++) {
 }
 ```
 
-为了解决for麻烦的问题，引入的forEach
+为了解决`for`麻烦的问题，引入的`forEach`
 
 ```
 // 问题：无法跳出循环
@@ -1261,7 +1261,7 @@ testAsync(); // Promise {<fulfilled>: "hello world"}
 
 ## await
 
-如果不用async/await：
+如果不用`async/await`：
 
 ```
 async function testAsync(){
@@ -1339,9 +1339,9 @@ VM5329:30 doIt: 9606.429931640625ms
 
 ```
 
-每一个promise都受上一个promise影响，所以必须一个调完之后再调另外一个。
+每一个`promise`都受上一个`promise`影响，所以必须一个调完之后再调另外一个。
 
-再看看用async/await更改doIt方法：
+再看看用`async/await`更改`doIt`方法：
 
 ```
 async function doIt(){

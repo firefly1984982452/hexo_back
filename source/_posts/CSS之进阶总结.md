@@ -223,9 +223,9 @@ Class
 
 # 继承
 
-文字相关：font-family、color、font-size、font-style等。
-列表相关：list-style、list-style-type、list-style-position等。
-表格相关：border-spacing。
+- 文字相关：`font-family`、`color`、`font-size`、`font-style`等。
+- 列表相关：`list-style`、`list-style-type`、`list-style-position`等。
+- 表格相关：`border-spacing`。
 
 **比如border不能继承是因为不通用，有的得加上，有的加上得删掉。**
 
@@ -331,6 +331,7 @@ p{
 ```
 
 此时`<p>`标签的`font-size`就是`40px`；
+
 但是如果`<p>`标签里面还包含了一个`<p>`标签，如：`<p><p>no!</p>I'm not going.</p>`，此时最里面的`<p>`标签的`font-size`就是`60px`;
 
 ## rem
@@ -425,11 +426,12 @@ p标签的大小都是父元素的一半。
 
 # 视口的相对单位
 
+```
 vm：1/100的视口宽度；
 vh：1/100的视口高度；
 vmax：1/100的视口中较大的一方的长度；
 vmin：1/100的视口中较小的一方的长度；
-
+```
 
 # css变量
 
@@ -498,12 +500,13 @@ p{
 
 解析：
 
+```
 参数1：X轴，图中为30，因为50-20=30；
 参数2：Y轴，图中为30，因为50-20=30；
 参数3：模糊距离
 参数4：阴影大小，默认可省略不写时为0。
 参数4：颜色。
-
+```
 
 ## border-image
 
@@ -1234,11 +1237,13 @@ p{
 
 第3项条件关键代码
 
+```
 display: -webkit-box; // 设置display，将对象作为弹性伸缩盒子模型显示
 -webkit-line-clamp: 2; // 限制在一个块元素显示的文本的行数
 -webkit-box-orient: vertical; // 规定框的子元素应该被水平或垂直排列
+```
 
-配合 overflow : hidden 和 text-overflow: ellipsis 即可实现 webkit 内核下的多行省略
+配合 `overflow : hidden` 和 `text-overflow: ellipsis` 即可实现 `webkit` 内核下的多行省略
 
 ```
 p {
@@ -1395,10 +1400,10 @@ img{
 
 # 清除浮动
 
-1、使用空元素clear:both
-2、overflow:hidden
-3、使用邻近元素clear:both
-4、使用伪类:before元素clear:both
+- 1、使用空元素clear:both
+- 2、overflow:hidden
+- 3、使用邻近元素clear:both
+- 4、使用伪类:before元素clear:both
 
 父元素：
 

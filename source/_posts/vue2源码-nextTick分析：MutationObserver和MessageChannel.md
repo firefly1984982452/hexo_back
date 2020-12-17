@@ -233,4 +233,4 @@ vue2中在2018年12月20号用MutationObser替换了MessageChannel（有很多�
 1
 ```
 
-并不是按顺序执行，而是先宏任务MutationObserver，再微任务MessageChannel。
+并不是按顺序执行，而是先宏任务`MutationObserver`，再微任务`MessageChannel`。

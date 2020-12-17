@@ -64,7 +64,7 @@ rest  // [2, 3, 4, 5]
 
 **实现Iterator接口的对象**
 
-任何定义了遍历器（Iterator）接口的对象都可以用扩展运算符转为真正的数组。
+任何定义了遍历器（`Iterator`）接口的对象都可以用扩展运算符转为真正的数组。
 
 如`nodeList`、`Map`和`Set`、`Array`、`String`、`arguments`等。
 
@@ -180,7 +180,7 @@ arr.splice(1,3);     //(3) ["B", "C", "D"]
 
 ## push和pop
 
-push()向Array的末尾添加若干元素，pop()则把Array的最后一个元素删除掉.
+`push()`向`Array`的末尾添加若干元素，`pop()`则把`Array`的最后一个元素删除掉.
 
 ```
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -190,8 +190,8 @@ arr.pop();           //['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 ## shift和unshift
 
-shift()删除数组第一个数据；
-unshift()删除数姐最后一个数据。
+`shift()`删除数组第一个数据；
+`unshift()`删除数姐最后一个数据。
 
 ## concat
 
@@ -286,7 +286,7 @@ function c(element,index,array){
 
 ## indexOf和lastIndexOf
 
-与String类似，Array也可以通过indexOf()来搜索一个指定的元素的位置：
+与`String`类似，`Array`也可以通过`indexOf()`来搜索一个指定的元素的位置：
 
 ```
 var arr = [123,124,'124'];
@@ -305,7 +305,9 @@ arr.indexOf(124);    //1
 ```
 
 ## includes
+
 返回是否有这个值
+
 ```
 [1,2,3].includes(2)
 //true
