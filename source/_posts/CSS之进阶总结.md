@@ -229,7 +229,24 @@ Class
 
 **比如border不能继承是因为不通用，有的得加上，有的加上得删掉。**
 
----
+
+# position
+
+- relative
+- absolute
+- fixed
+- sticky
+## sticky：粘性布局
+
+重点：
+
+```
+position: sticky;
+top: 0;
+```
+
+sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
+
 
 # CSS特殊值：initial、inherit、unset
 
@@ -464,8 +481,37 @@ p{
 
 # CSS3部分
 
+# 边框
 
-# 背景与边框
+- border-radius
+- box-shadow
+- border-image
+
+## box-shadow
+
+
+`box-shadow: 50px 50px 0 20px #ffb;`
+
+图：
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0nvzcynqj308y069dfn.jpg)
+
+解析：
+
+参数1：X轴，图中为30，因为50-20=30；
+参数2：Y轴，图中为30，因为50-20=30；
+参数3：模糊距离
+参数4：阴影大小，默认可省略不写时为0。
+参数4：颜色。
+
+
+## border-image
+
+`border-image-repeat`: 重复（`repeat`）、拉伸（`stretch`）或铺满（`round`）。
+
+```
+border-image: url(border.png) 30 round;
+```
 
 ## 半透明边框
 
@@ -517,7 +563,9 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
-# background-origin
+# background
+
+## 【1】background-origin
 
 背景区域的位置，有如下属性：
 
@@ -527,7 +575,7 @@ outline-offset: 10px;
 
 - `border-box`：border不会影响背景，直接把border的内容也算在背影里面，背景会减去border的长度。
 
-# background-image
+## 【2】background-image
 
 背景图，有如下属性：
 
@@ -543,7 +591,7 @@ outline-offset: 10px;
 
 与`background-size`组合的话，可以生成条纹背景。
 
-## line-gradient
+### 【2.1】linear-gradient
 
 背景2色平铺
 
@@ -554,7 +602,48 @@ background: linear-gradient(#ff0 50%, #f00 50%);
 background-size: 100% 50%;
 ```
 
-## repeating-line-gradient
+#### 【2.1.1】linear-gradient：条纹背景
+
+##### 背景为上下2色分割
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0f2emiabj308x05lq2r.jpg)
+
+`backgorund-image: linear-gradient(#ff0 50%, #f00 50%)`
+
+##### 背景2色平铺
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
+
+```
+background: linear-gradient(#ff0 50%, #f00 50%);
+background-size: 100% 50%;
+```
+
+##### 背景2色任意角度平铺
+
+![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
+
+```
+background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
+```
+
+#### 【2.1.2】linear-gradient：切角效果
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
+
+```
+width: 200px;
+height: 200px;
+background:#ffb;
+background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
+      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
+      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
+      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
+background-size:50% 50%;
+background-repeat:no-repeat;
+```
+
+### 【2.2】repeating-linear-gradient
 
 背景2色任意角度平铺
 
@@ -563,33 +652,14 @@ background-size: 100% 50%;
 ```
 background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
 ```
-# box-shadow
 
-例：
-
-`box-shadow: 50px 50px 0 20px #ffb;`
-
-图：
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0nvzcynqj308y069dfn.jpg)
-
-解析：
-
-参数1：X轴，图中为30，因为50-20=30；
-参数2：Y轴，图中为30，因为50-20=30；
-参数3：模糊距离
-参数4：阴影大小，默认可省略不写时为0。
-参数4：颜色。
-
-
-
-# background
+## 【3】background-position位置
 
 让背景图在距离右边和底部都是20px，如图：
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gizlk17h0ej303b03i74d.jpg)
 
-## background-position
+### 【3.1】background-position
 
 方法一：
 ```
@@ -607,56 +677,35 @@ background-origin: content-box;
 
 `background-origin:content-box;`和`padding:20px`结合起来的效果和方法一一样。
 
-## calc
+### 【3.2】calc
 
 ```
 background: url(img_url) no-repeat;
 background-position: calc(100% - 20px, 100% - 20px);
 ```
 
-
-# linear-gradient：条纹背景
-
-## 背景为上下2色分割
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0f2emiabj308x05lq2r.jpg)
-
-`backgorund-image: linear-gradient(#ff0 50%, #f00 50%)`
-
-## 背景2色平铺
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
+# transform
 
 ```
-background: linear-gradient(#ff0 50%, #f00 50%);
-background-size: 100% 50%;
+/* 转换中心 */
+transform-origin: top;
+/* 旋转 */
+transform: rotate(45deg); 
+/* 平移 */
+transform: translate(20px, 10px);
+/* 缩放 */
+transform: scale(.5);
+/* 倾斜 */
+transform: skew(45deg);
 ```
 
-## 背景2色任意角度平铺
-
-![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
+也可以所有属性合并：
 
 ```
-background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%); 
+transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
-# linear-gradient：切角效果
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
-
-```
-width: 200px;
-height: 200px;
-background:#ffb;
-background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
-      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
-      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
-      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
-background-size:50% 50%;
-background-repeat:no-repeat;
-```
-
-# transform：平形四边形
+## skewX：平形四边形
 
 `transform: skewX(-45deg);`
 
@@ -683,9 +732,9 @@ background-repeat:no-repeat;
 }
 ```
 
-# rotate菱形图片
+## rotate：菱形图片
 
-## 正方形
+### 正方形
 
 ```
 .lin{
@@ -703,7 +752,7 @@ background-repeat:no-repeat;
 
 **如果不用`scale(1.5)`的话就是八角形**。
 
-## 长方形
+### 长方形
 
 ```
 .lin-long > img{
@@ -716,28 +765,7 @@ background-repeat:no-repeat;
 ```
 
 
-# transform
-
-```
-/* 转换中心 */
-transform-origin: top;
-/* 旋转 */
-transform: rotate(45deg); 
-/* 平移 */
-transform: translate(20px, 10px);
-/* 缩放 */
-transform: scale(.5);
-/* 倾斜 */
-transform: skew(45deg);
-```
-
-也可以所有属性合并：
-
-```
-transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
-```
-
-# `transform: perspective`：梯形效果
+## perspective：梯形效果
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0mzj9rt8j307o041t8i.jpg)
 
@@ -763,7 +791,6 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
   transform: perspective(30px)rotateX(5deg);
 }
 ```
-
 
 # 阴影
 
@@ -1253,17 +1280,6 @@ h2{
 
 `-moz-osx-font-smoothing: inherit | grayscale;`这个属性也是更清晰的作用。
 
-# 粘性布局：`position:sticky`
-
-重点：
-
-```
-position: sticky;
-top: 0;
-```
-
-sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
-
 ## 懒加载图片实例
 
 ```
@@ -1284,13 +1300,13 @@ imgs.forEach((item)=>{
 })
 ```
 
-# 文字描边-webkit-text-stroke
+# 文字描边：-webkit-text-stroke
 
 ```
 -webkit-text-stroke: 1px #fff;
 ```
 
-# 文字颜色-webkit-text-fill-color
+# 文字颜色：-webkit-text-fill-color
 
 ```
 a{
