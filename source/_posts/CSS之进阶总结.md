@@ -686,17 +686,22 @@ background-position: calc(100% - 20px, 100% - 20px);
 
 # transform
 
+[所有旋转效果](https://c.runoob.com/codedemo/3391)
+
 ```
 /* 转换中心 */
 transform-origin: top;
 /* 旋转 */
 transform: rotate(45deg); 
+/* 倾斜 */
+transform: skew(45deg);
+/* 梯形效果 */
+transform: perspective(45deg);
 /* 平移 */
 transform: translate(20px, 10px);
 /* 缩放 */
 transform: scale(.5);
-/* 倾斜 */
-transform: skew(45deg);
+
 ```
 
 也可以所有属性合并：
@@ -705,34 +710,7 @@ transform: skew(45deg);
 transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
-## skewX：平形四边形
-
-`transform: skewX(-45deg);`
-
-**skewX默认会把字体内容也旋转，解决方式是加伪元素**
-
-```
-.box{
-  position: relative;
-  width: 100px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-.box::before{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: -1;
-  background-color: #ffb;
-  transform: skewX(-45deg);
-}
-```
-
-## rotate：菱形图片
+## 【1】rotate：旋转
 
 ### 正方形
 
@@ -764,8 +742,34 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 }
 ```
 
+## 【2】skewX：倾斜
 
-## perspective：梯形效果
+`transform: skewX(-45deg);`
+
+**skewX默认会把字体内容也旋转，解决方式是加伪元素**
+
+```
+.box{
+  position: relative;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+.box::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #ffb;
+  transform: skewX(-45deg);
+}
+```
+
+## 【3】perspective：梯形效果
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0mzj9rt8j307o041t8i.jpg)
 
@@ -792,9 +796,9 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 }
 ```
 
-# 阴影
+# 各种阴影
 
-## 边框阴影：box-shadow
+## 【1】边框阴影：box-shadow
 
 ### 单侧阴影
 
@@ -812,7 +816,7 @@ box-shadow: 15px 0 5px -10px #000;
 box-shadow: 15px 0 5px -10px #000, -15px 0 5px -10px #000;
 ```
 
-## 文字阴影：text-shadow
+## 【2】文字阴影：text-shadow
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gj0ojj9giyj305602i3yg.jpg)
 
@@ -822,7 +826,7 @@ text-shadow: 5px 5px 5px #f00;
 
 参数：x轴、y轴、阴影、颜色。
 
-## 多边形阴影：drop-shadow
+## 【3】多边形阴影：drop-shadow
 
 **文字也会有阴影**
 
@@ -838,7 +842,7 @@ filter: drop-shadow(5px 5px 5px #000);
 
 参数：x轴、y轴、阴影、颜色。
 
-## 通过阴影弱化背景
+## 【4】通过阴影弱化背景
 
 ```
 box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
@@ -924,7 +928,7 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 
 
 
-# CSS基础
+# CSS其它基础
 # 滚动提示
 
 ```
@@ -1106,6 +1110,11 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 ```
 # display
 
+- inline
+- block
+- inline-table
+- table-cell
+
 ## inline
 
 - 不会独占一行
@@ -1203,14 +1212,6 @@ html{
 
 最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
 
-# 文字渐变
-
-```
-background: linear-gradient(to bottom, #8AF0FF,#3780E6);;
--webkit-background-clip: text;
-color: transparent;
-```
-
 # 单行居中显示文字，多行居左显示，最多两行超过用省略号结尾
 
 前2项条件：
@@ -1266,20 +1267,6 @@ h2{
 作者推荐了`normalize.css`替代传统的`reset.css`。
 [链接](https://github.com/chokcoco/iCSS/issues/5)
 
-# 抗锯齿渲染`-webkit-font-smoothing`
-
-`-webkit-font-smoothing`有3个属性值：
-
-- `none`: 对像素低的文本好，会有严重的锯齿；
-- `subpixel-antialiased`: 默认值，有轻微锯齿；
-- `antialiased`: 抗锯齿很好。
-
-抗锯齿：`body{-webkit-font-smoothing: antialiased;}`
-
-`Gecko`内核的抗锯齿效果：
-
-`-moz-osx-font-smoothing: inherit | grayscale;`这个属性也是更清晰的作用。
-
 ## 懒加载图片实例
 
 ```
@@ -1300,13 +1287,39 @@ imgs.forEach((item)=>{
 })
 ```
 
-# 文字描边：-webkit-text-stroke
+# 文字相关
+
+## 【1】文字渐变
+
+```
+background: linear-gradient(to bottom, #8AF0FF,#3780E6);;
+-webkit-background-clip: text;
+color: transparent;
+```
+
+## 【2】抗锯齿渲染`-webkit-font-smoothing`
+
+`-webkit-font-smoothing`有3个属性值：
+
+- `none`: 对像素低的文本好，会有严重的锯齿；
+- `subpixel-antialiased`: 默认值，有轻微锯齿；
+- `antialiased`: 抗锯齿很好。
+
+抗锯齿：`body{-webkit-font-smoothing: antialiased;}`
+
+`Gecko`内核的抗锯齿效果：
+
+`-moz-osx-font-smoothing: inherit | grayscale;`这个属性也是更清晰的作用。
+
+## 【3】文字描边：-webkit-text-stroke
 
 ```
 -webkit-text-stroke: 1px #fff;
 ```
 
-# 文字颜色：-webkit-text-fill-color
+## 【4】文字阴影：text-shadow
+
+## 【5】文字颜色：-webkit-text-fill-color
 
 ```
 a{
@@ -1316,6 +1329,10 @@ a{
 ```
 
 它们俩同样都是设置文字颜色，但就算`color`在下面，也是`-webkit-text-fill-color`的权重更高，优先级更高。
+
+## 【6】font-size:10px
+
+字体如果需求是小于`12px`的话，可以先设置字体为`20px`，再使用`transfrom:scale(0.5)`进行缩放。（也可以使用图片，但不推荐）
 
 # `:focus`与`:focus-within`
 
@@ -1375,10 +1392,6 @@ img{
     </div>
 </div>
 ```
-
-# font-size:10px
-
-字体如果需求是小于`12px`的话，可以先设置字体为`20px`，再使用`transfrom:scale(0.5)`进行缩放。（也可以使用图片，但不推荐）
 
 # 清除浮动
 
