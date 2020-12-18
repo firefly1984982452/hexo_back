@@ -67,3 +67,15 @@ let b;
 # 尾调用
 
 某个函数的最后一步是调用另一个函数
+
+# RESTful / REST API / REST
+
+通信、域名、API、版本、GET/POST等风格规范。
+
+比如：
+
+```
+DELETE /orders/{orderId}
+
+GET /cards/886333
+```
