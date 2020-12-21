@@ -543,6 +543,7 @@ Array.from('hello') // ["h", "e", "l", "l", "o"]
 - 递归
 - `reduce()`递归
 - 迭代 + 展开运算符
+- `toString()`
 
 ## 【1】`flat()`和`flatMap()`
 
@@ -613,6 +614,13 @@ while (arr.some(Array.isArray)) {
   arr = [].concat(...arr);
 }
 console.log(arr)
+```
+
+## 【6】`toString()`
+
+```
+const arr = [1, [1,2], [1,2,3,[4,4,4]]];
+var strArr = arr.toString().split(',');
 ```
 
 # 取出数组中最大的数值
