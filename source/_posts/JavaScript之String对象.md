@@ -89,11 +89,19 @@ s === "hello\\n"; // true
 
 `'e'.repeat(30)` // "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
-# replace()
+## replace和replaceAll：替换
 
-替换
+```
+'12333345'.replace('3','0'); // "12033345"
+'12333345'.replaceAll('3','0'); // "12000045"
+```
 
-`'abc'.replace('b','d')` // "adc"
+正则
+
+```
+const arr = [1, [1,2], [1,2,3]];
+JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
+```
 
 # search()
 

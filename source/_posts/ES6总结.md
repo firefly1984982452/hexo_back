@@ -9,6 +9,17 @@ categories:
 
 # let、const和globalThis
 
+## 对比表
+
+|区别项|let|var|const|
+|:--:|:--:|:--:|:--:|
+|挂载window|×|全局作用域时，是|×|
+|是否有变量提升|×|✓|×|
+|作用域|块级作用域|全局作用域或函数作用域|块级作用域|
+|是否可重复声明|×|✓|×|
+|暂时性死区|✓|×|✓|
+|值不变|v|×|常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据|
+
 ## let
 
 - 只在块级作用域内起效
@@ -72,6 +83,20 @@ function func() {
 }
 ```
 
+### ES5手动实现let
+
+如上，变成`IIFE`写法
+
+```
+(function(){
+  var a = 1;
+  console.log(a);
+})();
+console.log(a);
+```
+
+此时，外面的`a`会报错`Uncaught ReferenceError: a is not defined`
+
 ## const
 
 - 只在块级作用域内起效
@@ -91,6 +116,38 @@ arr.length = 0; // []
 arr = ['world']; // 报错
 ```
 
+### ES5手动实现const
+
+**方法1：`Object.defineProperty`**
+
+```
+function _const (key,value) {
+    window[key] = value;
+    Object.defineProperty(window, key, {
+        enumerable: false, // for...of和Object.keys不能获取到该属性
+        configurable: false, // 是否能被删除
+        get: function () {
+            return value;
+        },
+        set: function () {
+            throw new TypeError('error')
+        }
+    })
+}
+_const('cc', 35);
+cc = 1; // error
+delete cc; //false
+Object.keys(window).indexOf('cc'); // -1
+```
+
+**方法2：`Object.freeze`**
+
+```
+var f = Object.freeze({'name':'admin'});
+f.name = 'hello'; // 严格模式下是会报错的
+f.name; // 打印出admin ,值没有被改变
+```
+
 ## globalThis
 
 |顶层对象|浏览器|Node|Web Worker|
@@ -99,23 +156,6 @@ arr = ['world']; // 报错
 |self|✓|×|✓|
 |global|×|×|✓|
 |globalThis(ES2020)|✓|✓|✓|
-
-
-## 常量变量
-
-```
-const PI = 3.14
-```
-
-## 常量对象
-
-```
-var OBJ = {
-    name: '姓名',
-    age: 12
-}
-Object.freeze(OBJ);
-```
 
 
 # 变量的解构赋值

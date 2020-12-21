@@ -169,13 +169,6 @@ arr.splice(1,3);     //(3) ["B", "C", "D"]
 'a,b,c'.split(','); // 
 ```
 
-## replace和replaceAll：替换
-
-```
-'12333345'.replace('3','0'); // "12033345"
-'12333345'.replaceAll('3','0'); // "12000045"
-```
-
 # 增加或删除
 
 ## push和pop
@@ -543,12 +536,19 @@ Array.from(new Set([1,3,3,4]), item => item + 1) //[2, 4, 5]
 Array.from('hello') // ["h", "e", "l", "l", "o"]
 ```
 
+# 数组扁平化
 
-# `flat()`和`flatMap()`
+- `flat()`
+- 序列化后正则
+- 递归
+- `reduce()`递归
+- 迭代 + 展开运算符
+
+## 【1】`flat()`和`flatMap()`
 
 [学习链接](https://blog.csdn.net/qq_29055201/article/details/86530254)
 
-## flat
+### flat
 
 拉平数组，默认一层，填几就拉平几层嵌套，如果想拉平所有的，用`Infinity`
 
@@ -561,13 +561,58 @@ Array.from('hello') // ["h", "e", "l", "l", "o"]
 // [1, 2, 3]
 ```
 
-## flatMap
+### flatMap
 
 与map类似，不同的是可以拉平数组，但只能拉平一层，不能多层。
 
 ```
 [1,[2,[3],4,5],6,[7],8].flatMap(v => v*2)
 (5) [2, NaN, 12, 14, 16]
+```
+
+## 【2】序列化后正则
+
+```
+const arr = [1, [1,2], [1,2,3]];
+var str = JSON.stringify(arr).replace(/(\[|\])/g,'');
+var list = `[${str}]`;
+var result = JSON.parse(list);
+```
+
+## 【3】递归
+
+```
+const arr = [1, [1,2], [1,2,3],[1,2,[3,4]]];
+function flat(arr) {
+    let result = [];
+    for(let i of arr){
+        i instanceof Array ? result = result.concat(flat(i)) : result.push(i);
+    }
+    return result;
+}
+flat(arr);
+```
+
+## 【4】`reduce()`递归
+
+```
+const arr = [1, [1,2], [1,2,3],[1,2,[3,4]]];
+function flat(arr) {
+    return arr.reduce((prev,cur) => {
+        return prev.concat(cur instanceof Array ? flat(cur) : cur);
+    }, [])
+}
+flat(arr);
+```
+
+## 【5】迭代 + 展开运算符
+
+```
+let arr = [1, [1,2], [1,2,3,[4,4,4]]]
+while (arr.some(Array.isArray)) {
+  arr = [].concat(...arr);
+}
+console.log(arr)
 ```
 
 # 取出数组中最大的数值
