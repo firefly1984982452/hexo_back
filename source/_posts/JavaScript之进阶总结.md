@@ -5,13 +5,11 @@ categories:
 - program
 ---
 
-# 基本概念
-
-## `<noscript>`
+# `<noscript>`
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
 
-## `<script>`中的`async`和`defer`
+# `<script>`中的`async`和`defer`
 
 ```
 1.`<script src="script.js"></script>`
@@ -27,7 +25,7 @@ categories:
 和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
 ```
 
-## `typeof null`为什么返回`object`
+# `typeof null`为什么返回`object`
 
 `null`是空对象指针，所以`typeof null`返回的是`object`，
 
@@ -1029,3 +1027,4 @@ ws.send(
 `node server.js`
 
 此时，一个运行在chrome，一个运行在firefox，就已经能实现通信。
+
