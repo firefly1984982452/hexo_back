@@ -1,5 +1,5 @@
 ---
-title: JavaScript之时间方法
+title: JavaScript之Date时间对象
 date: 2020-06-05 10:19:32
 categories: 
 - program
