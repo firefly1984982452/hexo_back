@@ -152,18 +152,17 @@ config/index.js
 </el-input>
 ```
 
-`onkeypress="return event.keyCode>=48&&event.keyCode<=57"`是按下时触发
+- `onkeypress="return event.keyCode>=48&&event.keyCode<=57"`是按下时触发
 
-`onkeyup="value=value.replace(/[^\d]/g,'') "`是输入后触发
+- `onkeyup="value=value.replace(/[^\d]/g,'') "`是输入后触发
 
-`v-model.number`同样也只能输入数字，但是输入的非数字仍然会显示在输入框，看不去不友好。
+- `v-model.number`同样也只能输入数字，但是输入的非数字仍然会显示在输入框，看不去不友好。
 
-`v-model.number`和`onkeyup="value=value.replace(/[^\d]/g,'') "`同时使用时可能会出错。
+- `v-model.number`和`onkeyup="value=value.replace(/[^\d]/g,'') "`同时使用时可能会出错。
 
-`oninput="value=value.replace(/[^0-9A-Za-z.]/g,'')"`
+- `oninput="value=value.replace(/[^0-9A-Za-z.]/g,'')"`
 
-*tips:*
-`<input type="number" name="" id="" value="" />`
+- `<input type="number" class="el-input__inner" v-model="value"/>`
 
 这句代码在PC端和手机端会有兼容性问题
 

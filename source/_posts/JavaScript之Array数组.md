@@ -438,9 +438,11 @@ try {
 } catch(e) {
     if (e!==BreakException) throw e;
 }
-
-//forEach是函数，不是语法，因此没有直接break的语法。如果要中止，可使用 Array.every 或 Array.some。
 ```
+
+`forEach`是函数，不是语法，因此没有直接`break`的语法。如果要中止，可使用 `Array.every` 或 `Array.some`。
+
+普通的`for`循环可以用`break`终止。
 
 
 ## reduce
