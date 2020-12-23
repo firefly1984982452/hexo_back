@@ -164,8 +164,6 @@ config/index.js
 
 - `<input type="number" class="el-input__inner" v-model="value"/>`
 
-这句代码在PC端和手机端会有兼容性问题
-
 ------------
 
 
