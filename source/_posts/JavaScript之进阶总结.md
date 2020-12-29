@@ -9,6 +9,8 @@ categories:
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
 
+---
+
 # `<script>`中的`async`和`defer`
 
 ```
@@ -25,12 +27,16 @@ categories:
 和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
 ```
 
+---
+
+
 # `typeof null`为什么返回`object`
 
 `null`是空对象指针，所以`typeof null`返回的是`object`，
 
 `'null'`变为`null`：`JSON.parse('null')`
 
+---
 
 # 递归
 
@@ -68,6 +74,8 @@ function test(num) {
 }
 test(3)
 ```
+
+---
 
 # return和闭包
 
@@ -115,6 +123,8 @@ console.log(a); // 0
 - 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用2次）。
 - 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
 - 3.`return`出来的是一个值（`12`），不是变量本身（`a`），此处的`return`是取得私有变量值的一种方法，跟闭包没有严格关系。
+
+---
 
 # 防抖和节流
 
@@ -182,6 +192,7 @@ handleThrottle () {
 ```
 ![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
 
+---
 
 # 事件委托（事件代理）
 
@@ -226,7 +237,7 @@ handleClick(e){
 - 节省内存
 - 不需要给子节点注销事件
 
-
+---
 
 # let和闭包
 
@@ -302,6 +313,9 @@ for (let i = 1; i < 6; i++) {
 }
 ```
 
+---
+
+
 # JavaScript相等操作符（==）
 
 参考：
@@ -351,6 +365,8 @@ for (let i = 1; i < 6; i++) {
 简化：
 `{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
+---
+
 # Blob实现下载文件
 
 [参考链接](https://zhuanlan.zhihu.com/p/97768916)
@@ -373,6 +389,7 @@ download(){
 },
 ```
 
+---
 
 # `try...catch`无法用于异步代码
 
@@ -417,6 +434,8 @@ Uncaught ReferenceError: bar is not defined
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
 
+---
+
 # lighthouse前端性能优化工具
 
 ```
@@ -426,6 +445,8 @@ lighthouse https://www.cnblogs.com/
 ```
 
 生成html页面
+
+---
 
 # valueOf、toString和Symbol.toPrimitive
 
@@ -493,6 +514,8 @@ console.log('default' === obj); // false
 console.log(String(obj)); /// str
 ```
 
+---
+
 # window.postMessage
 
 知识点：
@@ -534,6 +557,7 @@ window.postMessage("hi there!", location.origin);
 
 此时点击页面B的发送消息按钮就能在页面A接收消息了。
 
+---
 
 # JSON的更多参数用法
 
@@ -602,6 +626,7 @@ p 5
 {p: 100}
 ```
 
+---
 
 # 与JAVA相通的概念
 
@@ -644,6 +669,8 @@ js发消息给java
 js收java的消息
 `document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
 
+---
+
 # hybird
 
 ```
@@ -660,6 +687,8 @@ $(".company_color").click(function(){
   }
 })
 ```
+
+---
 
 # HTTP
 
@@ -823,11 +852,14 @@ mc.addEventListener('message', event => {
 
 请求--判断max-age是否过期（没过期就直接在缓存数据库中得到数据）--过期后判断属性是否字段一致，再使用缓存。
 
+---
+
 # session和cookie
 
 cookie是在客户端，session是在服务端。
 一般如果想跳过cookie的限制，就用session。
 
+---
 
 # HTML渲染过程
 
@@ -840,11 +872,14 @@ cookie是在客户端，session是在服务端。
 - 重绘：corlor、borde、visibility，只会小变动；
 - 重排（回流）：DOM操作、CSS属性改变、伪类操作，会大变动。
 
+---
+
 # 前端路由和后端路由
 
 - 前端路由（#）：hash值或pushStatu
 - 后端路由（/）：通过URL跳转到具体的html页面，每次跳转都重新访问服务端，服务端返回页面。
 
+---
 
 # localStorage标签页通信
 
@@ -862,6 +897,7 @@ window.addEventListener('storage', (e) => {
 })
 ```
 
+---
 
 # 打开下载后立马关闭
 
@@ -893,16 +929,19 @@ fetch(url).then(res => res.blob()).then((blob) => {
 })
 ```
 
+---
 
 # 冒泡事件
 
 `event.stopProgation`能阻止冒泡事件
 
+---
+
 # 默认事件
 
 `event.preventDefault`能阻止如`<a>`的默认`href`事件
 
-
+---
 
 # webSocekt多人通信
 
@@ -1027,6 +1066,8 @@ ws.send(
 `node server.js`
 
 此时，一个运行在chrome，一个运行在firefox，就已经能实现通信。
+
+---
 
 # JavaScript编码规范
 

@@ -8,7 +8,7 @@ categories:
 
 # CSS编码技巧
 
-## 尽量减少代码重复
+## 【1】尽量减少代码重复
 
 - `line-height`写倍数
 - `font-size`写百分比
@@ -31,7 +31,7 @@ height:20px;
 line-heigth:1.5;
 ```
 
-## 代码易维护vs．代码量少
+## 【2】代码易维护vs．代码量少
 
 比如：我们不需要左边框
 
@@ -50,7 +50,7 @@ border-color: #fff;
 border-style: solid;
 ```
 
-## currentColor
+## 【3】currentColor
 
 ```
 p{
@@ -63,7 +63,7 @@ p{
 
 p标签的边框会直接获取到color的颜色。
 
-## 合理使用简写
+## 【4】合理使用简写
 
 ```
 background: red;
@@ -71,32 +71,7 @@ background-color: red;
 ```
 这2者的差距在后者如果在添加`background-image`之类的属性就会导致不一样的效果。
 
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # 文档分析注释
 
@@ -144,6 +119,8 @@ import './assets/css/public.css';
 
 中间最后留5行以后，好在全览时看起来像个段落。
 
+---
+
 # 代码顺序
 
 1. Reset；
@@ -151,6 +128,8 @@ import './assets/css/public.css';
 3. 对象和抽象内容；
 4. 子元素
 5. 修补异常
+
+---
 
 # 命名规范
 
@@ -163,46 +142,14 @@ import './assets/css/public.css';
 .ul_li-display{}
 ```
 
+---
+
 # BEM 命名
 
 块（Block）、元素（Element）、修饰符（Modifier）
 例：`class="button button--state-danger"`
 
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# CSS其它基础知识
-
 
 # 优先级及优化
 
@@ -221,6 +168,8 @@ Class
 
 尽量不要使用`!important`，下次会使用更多的`!important`去覆盖它。
 
+---
+
 # 继承
 
 - 文字相关：`font-family`、`color`、`font-size`、`font-style`等。
@@ -229,13 +178,14 @@ Class
 
 **比如border不能继承是因为不通用，有的得加上，有的加上得删掉。**
 
+---
 
 # position
 
-- relative
-- absolute
-- fixed
-- sticky
+- `relative`
+- `absolute`
+- `fixed`
+- `sticky`
 ## sticky：粘性布局
 
 重点：
@@ -245,12 +195,13 @@ position: sticky;
 top: 0;
 ```
 
-sticky必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
+`sticky`必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
 
+---
 
 # CSS特殊值：initial、inherit、unset
 
-## 初始值：initial
+## 【1】初始值：initial
 
 ```
 html,body{
@@ -266,7 +217,7 @@ p{
 
 设置了`color:initial`值的`<p>`的颜色既不是`red`也不是`green`，而是`黑色`。
 
-## 继承：inherit
+## 【2】继承：inherit
 
 ```
 html,body{
@@ -282,7 +233,7 @@ p{
 
 设置了`color:inherit`值的`<p>`的颜色继承了`html,body`是`red`。
 
-## 复原：unset
+## 【3】复原：unset
 
 ```
 html,body{
@@ -298,6 +249,7 @@ p{
 
 设置了`color:unset`值的`<p>`的颜色忽略了原来的`green`，读取了`html,body`的值`red`。
 
+---
 
 # 简写属性
 
@@ -313,10 +265,11 @@ p{
 
 如：`text-shodow`、`background-position`.
 
+---
 
 # em和rem
 
-## em
+## 【1】em
 
 `em`是相当于`html,body`里面的`font-size`的`倍数`
 
@@ -334,66 +287,14 @@ p{
 
 但是如果`<p>`标签里面还包含了一个`<p>`标签，如：`<p><p>no!</p>I'm not going.</p>`，此时最里面的`<p>`标签的`font-size`就是`60px`;
 
-## rem
+## 【2】rem
 
 
-## 全代码
-
-假设是移动端`375*667`
-
-```
-<!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<style type="text/css">
-			* {
-				padding: 0;
-				margin: 0;
-				box-sizing: border-box;
-			}
-			
-			html {
-				font-size: 100px;
-			}
-			
-			.content {
-				width: 3.75rem;
-				height: 1.2rem;
-				background-color: red;
-				font-size: 16px;
-			}
-		</style>
-	</head>
-
-	<body>
-		<div class="content">
-			测试文字
-		</div>
-		<script type="text/javascript">
-			(function() {
-				var width = window.screen.width;
-				console.log(width);
-				var scaleSize = 100,
-					designSize = 375;
-				var size = width / (designSize / scaleSize);
-				document.getElementsByTagName('html')[0].style.fontSize = (size) + 'px';
-			})();
-		</script>
-
-	</body>
-
-</html>
-```
-
-## 手机适配
+## 【3】手机适配
 
 `<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />`
 
-## 不同宽度下不同的font-size
+## 【4】不同宽度下不同的font-size
 
 ```
 (function() {
@@ -408,9 +309,7 @@ p{
 })();
 ```
 
-
-
-## 应用
+## 【5】应用
 
 ```
 .main{
@@ -423,6 +322,7 @@ p{
 
 p标签的大小都是父元素的一半。
 
+---
 
 # 视口的相对单位
 
@@ -432,6 +332,8 @@ vh：1/100的视口高度；
 vmax：1/100的视口中较大的一方的长度；
 vmin：1/100的视口中较小的一方的长度；
 ```
+
+---
 
 # css变量
 
@@ -444,52 +346,15 @@ p{
 }
 ```
 
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# CSS3部分
 
 # 边框
 
-- border-radius
-- box-shadow
-- border-image
+- `border-radius`
+- `box-shadow`
+- `border-image`
 
-## box-shadow
+## 【1】box-shadow
 
 
 `box-shadow: 50px 50px 0 20px #ffb;`
@@ -508,7 +373,7 @@ p{
 参数4：颜色。
 ```
 
-## border-image
+## 【2】border-image
 
 `border-image-repeat`: 重复（`repeat`）、拉伸（`stretch`）或铺满（`round`）。
 
@@ -516,7 +381,7 @@ p{
 border-image: url(border.png) 30 round;
 ```
 
-## 半透明边框
+## 【3】半透明边框
 
 `rgba`或`hsla`
 
@@ -526,9 +391,9 @@ border: solid 3px;
 border-color: rgba(255,255,0,.2);
 ```
 
-## 多重边框
+## 【4】多重边框
 
-### 用box-shadow
+### 【4.1】用box-shadow
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gizk2ty7otj304304aa9x.jpg)
 
@@ -537,7 +402,7 @@ background: #fbfb;
 box-shadow: 0 0 0 5px #f00, 0 0 0 10px #ff0, 0 0 0 15px #00f;
 ```
 
-### 用outline
+### 【4.2】用outline
 
 ![image](https://wx4.sinaimg.cn/mw1024/0069qZtTgy1gizka5updnj3042044746.jpg)
 
@@ -549,9 +414,9 @@ border: 5px solid #f00;
 
 **outline和border的区别**：
 
-- outline不占空间，border占空间
-- 设置圆角（border-radius）之后，border边框会贴紧，outline不会
-- outline-set可以设置边距
+- `outline`不占空间，`border`占空间
+- 设置圆角（`border-radius`）之后，`border`边框会贴紧，`outline`不会
+- `outline-set`可以设置边距
 
 **区别的图片**
 ![image](https://wx1.sinaimg.cn/mw1024/0069qZtTgy1gizkad0s9lj304k04aweg.jpg)
@@ -566,17 +431,19 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
+---
+
 # background
 
 ## 【1】background-origin
 
 背景区域的位置，有如下属性：
 
-- `content-box`：padding值会起效，以padding开始的单位开始显示背景；
+- `content-box`：`padding`值会起效，以`padding`开始的单位开始显示背景；
 
-- `padding-box`：padding不会影响背影，直接从border里面开如显示背影；
+- `padding-box`：`padding`不会影响背影，直接从`border`里面开如显示背影；
 
-- `border-box`：border不会影响背景，直接把border的内容也算在背影里面，背景会减去border的长度。
+- `border-box`：`border`不会影响背景，直接把`border`的内容也算在背影里面，背景会减去`border`的长度。
 
 ## 【2】background-image
 
@@ -715,7 +582,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 ## 【1】rotate：旋转
 
-### 正方形
+### 【1.1】正方形
 
 ```
 .lin{
@@ -733,7 +600,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 **如果不用`scale(1.5)`的话就是八角形**。
 
-### 长方形
+### 【1.2】长方形
 
 ```
 .lin-long > img{
@@ -799,11 +666,13 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 }
 ```
 
+---
+
 # 各种阴影
 
 ## 【1】边框阴影：box-shadow
 
-### 单侧阴影
+### 【1.1】单侧阴影
 
 ![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0ob24z97j306y03qmwy.jpg)
 
@@ -811,7 +680,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 box-shadow: 15px 0 5px -10px #000;
 ```
 
-### 多侧阴影
+### 【1.2】多侧阴影
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0ob7xfq6j307d03sjr7.jpg)
 
@@ -941,6 +810,8 @@ background-size: 100% 15px;
 background-attachment: local, scroll;
 ```
 
+---
+
 # width自适应关键字
 
 - `fill-available`：撑满空间，100%
@@ -948,11 +819,15 @@ background-attachment: local, scroll;
 - `max-content`：内容最大宽度。如果文字超过显示区域了也不会换行，所以会有200%的可能。
 - `min-content`：内容最小宽度。比如图片是200px，文字是300px，就取200px。
 
+---
+
 # table表格控制列宽
 
 `table-layout: fixed;`
 
 通常都是根据内容多少自动计算宽度的。
+
+---
 
 # 满屏背景和固定宽度
 
@@ -962,6 +837,8 @@ main{
   margin:0 calc(50% - 500px;)
 }
 ```
+
+---
 
 # 紧贴底部的页脚
 
@@ -991,6 +868,8 @@ body{
 }
 ```
 
+---
+
 # 打字动画
 
 用`width:0`到`width:100%`模拟出打字效果。
@@ -1009,6 +888,7 @@ p{
 }
 ```
 
+---
 
 # `pointer-events`实现鼠标穿透效果
 
@@ -1099,6 +979,8 @@ p{
 
 ![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gij2iyzdf5j31hb0twu0x.jpg)
 
+---
+
 # line-height深入理解
 
 行高的几种值：`px`、`normal`、`%`、`number`、`inherit`
@@ -1111,62 +993,66 @@ line-height: normal;
 line-height: 150%;
 line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 ```
+
+---
+
 # display
 
-- inline
-- block
-- inline-table
-- table-cell
+- `inline`
+- `block`
+- `inline-table`
+- `table-cell`
 
-## inline
+## 【1】inline
 
 - 不会独占一行
-- width和height无效
-- margin和padding中的left/right有效，top/bottom无效
+- `width`和`height`无效
+- `margin`和`padding`中的`left/right`有效，`top/bottom`无效
 
-## block
+## 【2】block
 
 - 独占一行
-- width和height正常
-- marin和padding正常
+- `width`和`height`正常
+- `marin`和`padding`正常
 
-## inline-table
+## 【3】inline-table
 
 行内表格
 
-### table-cell
+### 【4】table-cell
 
 所有内容在一行
 
+---
+
 # width和height
 
-## table
+## 【1】table
 
 Table表格中，定了width，如果其它的内容很高，内容少的可能会撑成一列高。
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj589b1p14j30aa08z75k.jpg)
 
-## 不适合用width:100%的情况
+## 【2】不适合用width:100%的情况
 
 ![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj589e73jxj308i0bl3yn.jpg)
 
 子元素`width:100%`会获取父元素长度，如果设置了`width:100%`反而适得其反。
 
-## 按钮内文字会自动换行
+## 【3】按钮内文字会自动换行
 
-## box-sizing
+## 【4】box-sizing
 
-- content-box：默认值
-- border-box：将border变成里面消化的值
+- `content-box`：默认值
+- `border-box`：将`border`变成里面消化的值
 
-## 内联元素
+## 【5】内联元素
 
 - `display: inline-block;`会控制当前元素以自己的内容为长度，不受父元素影响。
 
 - 内联元素如果`display`改为了`block`，不用再设置`width:100%`。
 
-
-## 让元素heigth支持100%的方法
+## 【6】让元素heigth支持100%的方法
 
 方法一：
 
@@ -1182,7 +1068,7 @@ height: 100%;
 position: absolute;
 ```
 
-## max-width/min-width和max-height/min-height
+## 【7】max-width/min-width和max-height/min-height
 
 **超越!important**
 
@@ -1202,6 +1088,8 @@ min-width: 400px;
 max-width: 350px;
 ```
 
+---
+
 # `:root`选择器
 
 ```
@@ -1214,6 +1102,8 @@ html{
 ```
 
 最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
+
+---
 
 # 单行居中显示文字，多行居左显示，最多两行超过用省略号结尾
 
@@ -1267,6 +1157,8 @@ h2{
 <h2><p><em>单行居中，多行居左<em></p></h2>
 ```
 
+---
+
 # reset.css
 
 作者推荐了`normalize.css`替代传统的`reset.css`。
@@ -1291,6 +1183,8 @@ imgs.forEach((item)=>{
   io.observe(item)
 })
 ```
+
+---
 
 # 文字相关
 
@@ -1338,6 +1232,8 @@ a{
 ## 【6】font-size:10px
 
 字体如果需求是小于`12px`的话，可以先设置字体为`20px`，再使用`transfrom:scale(0.5)`进行缩放。（也可以使用图片，但不推荐）
+
+---
 
 # `:focus`与`:focus-within`
 
@@ -1398,12 +1294,14 @@ img{
 </div>
 ```
 
+---
+
 # 清除浮动
 
-- 1、使用空元素clear:both
-- 2、overflow:hidden
-- 3、使用邻近元素clear:both
-- 4、使用伪类:before元素clear:both
+- 1、使用空元素`clear:both`
+- 2、`overflow:hidden`
+- 3、使用邻近元素`clear:both`
+- 4、使用伪类`:before`元素`clear:both`
 
 父元素：
 
@@ -1414,15 +1312,20 @@ img{
   display: block;
 }
 ```
+
+---
+
 # 左边定宽，右边自适应
 
-1、使用flex
-2、右边的width: calc(100% - 100px)
-3、使用float
+1、使用`flex`
+2、右边的`width: calc(100% - 100px)`
+3、使用`float`
+
+---
 
 # BFC
 
-BFC是特性（功能），不是定义。
+`BFC`是特性（功能），不是定义。
 
-比如float，position、absolute
+比如`float`，`position`、`absolute`
 

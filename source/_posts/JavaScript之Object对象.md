@@ -12,6 +12,7 @@ var obj = {};
 obj.id = 1;
 ```
 
+---
 
 # 删
 
@@ -19,34 +20,41 @@ obj.id = 1;
 delete obj.id;
 ```
 
+---
+
 # assign合并两个对象
 
 ```
 Object.assign(obj1,obj2);
 ```
 
+---
+
 # 深拷贝
 
 [链接](https://firefly1984982452.github.io/2020/07/31/JavaScript%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%85%A8%E6%9E%90/)
 
-方法1：JSON.parse(JSON.stringify())
+方法1：`JSON.parse(JSON.stringify())`
 
-方法2：MessageChannel
+方法2：`MessageChannel`
 
-方法3：lodash.cloneDeep
+方法3：`lodash.cloneDeep`
 
+---
 
 # 遍历
 
-`Object.keys()`
+- `Object.keys()`
 
-`Object.values()`
+- `Object.values()`
 
-`for...in`
+- `for...in`
+
+---
 
 # definedProperty
 
-递归遍历对象用defineProperty实现vue双向绑定
+递归遍历对象用`defineProperty`实现`vue`双向绑定
 
 ```
 var obj = {
@@ -88,18 +96,24 @@ obj.arr.slice(1); // 修改数组监听失败
 
 ```
 
+---
+
 # is
 
 `Object.is()` 的意思是对象比较
 
 比如之前判断一个值是否为`NaN`的话可能会用`Number.isNaN()`，现在用`Object.is(NaN, NaN)`也能达到一样的效果。
 
+---
 
-# 判断对象{}是否为空
+
+# 判断对象`{}`是否为空
 
 ```
 if(Object.keys(obj).length === 0){...}
 ```
+
+---
 
 # 对象key值构建
 
@@ -116,6 +130,8 @@ b = {
 }
 ```
 
+---
+
 # fromEntries
 
 把序列化的字符串反转为对象。
@@ -127,6 +143,7 @@ var p = new URLSearchParams(str);
 var param = Object.fromEntries(p);
 ```
 
+---
 
 # 防篡改对象
 
@@ -140,9 +157,9 @@ var param = Object.fromEntries(p);
 |seal|×|×|✓|
 |freeze|×|×|×|
 
-## 不可扩展对象preventExtensions
+## 不可扩展对象`preventExtensions`
 
-**Object.preventExtensions**不能增，能删改
+**`Object.preventExtensions`**不能增，能删改
 
 ```
 var obj = {a:1,b:2};
@@ -155,17 +172,17 @@ obj.b = 'hello'
 console.log(obj); // {b: "hello"} 修改成功
 ```
 
-检测是否不可扩展**Object.isExtensible(obj)**
+检测是否不可扩展**`Object.isExtensible(obj)`**
 
-(false是不可扩展，true是正常对象)
+(`false`是不可扩展，`true`是正常对象)
 
 ```
 Object.isExtensible(obj);// false
 ```
 
-## 密封的对象seal
+## 密封的对象`seal`
 
-**Object.seal**不能增删，能改
+**`Object.seal`**不能增删，能改
 
 ```
 var obj = {a:1,b:2};
@@ -180,15 +197,15 @@ console.log(obj); // {a:1,b: "hello"} 修改成功
 
 检测是否密封**Object.isSealed(obj)**
 
-(false是正常，true是已经密封了)
+(`false`是正常，`true`是已经密封了)
 
 ```
 Object.isSealed(obj);// true
 ```
 
-## 冻结的对象freeze
+## 冻结的对象`freeze`
 
-**Object.freeze**不能增删改
+**`Object.freeze`**不能增删改
 
 ```
 var obj = {a:1,b:2};
@@ -203,15 +220,13 @@ console.log(obj); // {a:1,b:2} 修改失败
 
 检测是否冻结**Object.isFrozen(obj)**
 
-(false是正常，true是已经冻结了)
+(`false`是正常，`true`是已经冻结了)
 
 ```
 Object.isFrozen(obj);// true
 ```
 
-
-
-
+---
 
 # entries 分割对象
 

@@ -7,9 +7,11 @@ categories:
 
 [链接](https://es6.ruanyifeng.com/)
 
+---
+
 # let、const和globalThis
 
-## 对比表
+## 【1】对比表
 
 |区别项|let|var|const|
 |:--:|:--:|:--:|:--:|
@@ -20,7 +22,7 @@ categories:
 |暂时性死区|✓|×|✓|
 |值不变|v|×|常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据|
 
-## let
+## 【2】let
 
 - 只在块级作用域内起效
 - 不存在变量提升
@@ -28,7 +30,7 @@ categories:
 - 不允许重复声明
 - 块级作用域替代IIFE立即执行函数
 
-### 不存在变量提升
+### 【2.1】不存在变量提升
 
 ```
 // var 的情况
@@ -40,7 +42,7 @@ console.log(bar); // 报错ReferenceError
 let bar = 2;
 ```
 
-### 暂时性死区
+### 【2.2】暂时性死区
 
 ```
 var tmp = 123;
@@ -51,7 +53,7 @@ if (true) {
 }
 ```
 
-### 不允许重复声明
+### 【2.3】不允许重复声明
 
 ```
 // 报错
@@ -67,7 +69,7 @@ function func() {
 }
 ```
 
-### 块级作用域替代IIFE立即执行函数
+### 【2.4】块级作用域替代IIFE立即执行函数
 
 ```
 // IIFE 写法
@@ -83,7 +85,7 @@ function func() {
 }
 ```
 
-### ES5手动实现let
+### 【2.5】ES5手动实现let
 
 如上，变成`IIFE`写法
 
@@ -97,7 +99,7 @@ console.log(a);
 
 此时，外面的`a`会报错`Uncaught ReferenceError: a is not defined`
 
-## const
+## 【3】const
 
 - 只在块级作用域内起效
 - 不存在变量提升
@@ -148,7 +150,7 @@ f.name = 'hello'; // 严格模式下是会报错的
 f.name; // 打印出admin ,值没有被改变
 ```
 
-## globalThis
+## 【4】globalThis
 
 |顶层对象|浏览器|Node|Web Worker|
 |:--:|:--:|:--:|:--:|
@@ -157,12 +159,24 @@ f.name; // 打印出admin ,值没有被改变
 |global|×|×|✓|
 |globalThis(ES2020)|✓|✓|✓|
 
+---
 
 # 变量的解构赋值
 
-## 数组
+## 【1】对比表
 
-### 用法
+|值|用法|括号|默认值|默认值生效条件|
+|:--:|:--:|:--:|:--:|:--:|
+|数组|`let [a, b] = [1, 2];`|数组`[]`|`let [foo = true] = [];`|值为`undefined`|
+|对象|`let { foo } = { foo: 'aaa'};`|对象`{}`|`let {foo} = {bar: 'baz'};`|值为`undefined`|
+|字符串|`const [a, b, c] = 'hello';`|数组`[]`|`const [a,b = 5] = 'e'`|值为`undefined`|
+|数值（转对象、无意义）|`let {toString: s} = 123;`|对象`{}`|-|-|
+|布尔（转对象、无意义）|`let {toString: s} = true;`|对象`{}`|-|-|
+
+
+## 【2】数组
+
+### 【2.1】用法
 
 **用法：只要等号两边的模式相同，左边的变量就会被赋予对应的值，解析失败返回`undefined`。（按次序）**
 
@@ -181,7 +195,7 @@ y // undefined
 z // []
 ```
 
-### 默认值
+### 【2.2】默认值
 
 **默认值：数组成员严格等于`===`，默认值才生效**
 
@@ -195,80 +209,9 @@ let [x = 1] = [null];
 x // null
 ```
 
+## 【3】对象
 
-# ES6`…`扩展（spread）/收集（rest）运算符详解
-
-## 一、扩展运算符
-
-我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
-
-### 1.代替apply
-
-```
-var test = function(a,b,c){
-  console.log(a,b,c);
-}
-var arr = [1,2,3];
-test(...arr); // 1 2 3
-```
-
-用apply的写法：
-
-```
-test.apply(null,arr);
-```
-
-### 2.代替concat
-
-```
-var arr1 = [1,2,3,4];
-var arr2 = [0,...arr1,5,6];
-console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
-```
-
-用concat的写法：
-
-```
-[0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
-```
-
-### 3.代替split
-
-```
-var str = 'hello';
-var arr3 = [...str];
-console.log(arr3); // ["h", "e", "l", "l", "o"]
-```
-
-用split的写法：
-
-```
-'hello'.split(''); // ["h", "e", "l", "l", "o"]
-```
-
-## 二、收集运算符
-
-### 1.接收不确定个数的形参
-
-此功能和`JAVA`一样，当形参传入个数不确定时可用在形参上。
-
-```
-var rest2 = function(item, ...arr){
-  console.log(item,arr);
-}
-rest2('hello',2,3,3,4); // hello [2, 3, 3, 4]
-```
-
-### 2.配合解构时使用
-
-```
-var [a,...temp] = [1,2,3,4];
-console.log(a,temp); // 1 [2, 3, 4]
-```
-
-## 对象
-
-### 使用
+### 【3.1】使用
 
 **使用：变量与属性同名即可取到值，解析失败返回`undefined`**
 
@@ -294,7 +237,7 @@ title // 小明
 在解构中，**左边是模式，右边是赋值**。
 
 
-### 默认值
+### 【3.2】默认值
 
 **默认值：对象属性严格等于===，默认值才生效**
 
@@ -339,7 +282,7 @@ var foo = function(x=10, y=20){
 foo(0,1); // 1
 ```
 
-### 注意点
+### 【3.3】注意点
 
 （1）将一个已声明的变量解构时注意不要将`{}`放于行首，`JavaScript`会解析为代码块
 
@@ -369,7 +312,7 @@ first // 1
 last // 3
 ```
 
-## 字符串
+## 【4】字符串
 
 字符串直接转换为数组赋值
 
@@ -384,7 +327,7 @@ let {length : len} = 'hello';
 len // 5
 ```
 
-## 数值和布尔值
+## 【5】数值和布尔值
 
 如果等号右边是数值和布尔值，会转换成对象。
 
@@ -396,7 +339,7 @@ let {toString: s} = true;
 s === Boolean.prototype.toString // true
 ```
 
-## 用途
+## 【6】用途
 
 (1) 变换变量的值
 
@@ -429,31 +372,95 @@ for (let [key, value] of map) {
 improt {list1} from 'list'
 ```
 
-## 对比表
+---
 
-|值|用法|括号|默认值|默认值生效条件|
-|:--:|:--:|:--:|:--:|:--:|
-|数组|`let [a, b] = [1, 2];`|数组`[]`|`let [foo = true] = [];`|值为`undefined`|
-|对象|`let { foo } = { foo: 'aaa'};`|对象`{}`|`let {foo} = {bar: 'baz'};`|值为`undefined`|
-|字符串|`const [a, b, c] = 'hello';`|数组`[]`|`const [a,b = 5] = 'e'`|值为`undefined`|
-|数值（转对象、无意义）|`let {toString: s} = 123;`|对象`{}`|-|-|
-|布尔（转对象、无意义）|`let {toString: s} = true;`|对象`{}`|-|-|
+# ES6`…`扩展（spread）/收集（rest）运算符详解
 
+## 【1】扩展运算符
+
+我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
+
+### 【1.1】代替apply
+
+```
+var test = function(a,b,c){
+  console.log(a,b,c);
+}
+var arr = [1,2,3];
+test(...arr); // 1 2 3
+```
+
+用apply的写法：
+
+```
+test.apply(null,arr);
+```
+
+### 【1.2】代替concat
+
+```
+var arr1 = [1,2,3,4];
+var arr2 = [0,...arr1,5,6];
+console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+用concat的写法：
+
+```
+[0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
+```
+
+### 【1.3】代替split
+
+```
+var str = 'hello';
+var arr3 = [...str];
+console.log(arr3); // ["h", "e", "l", "l", "o"]
+```
+
+用split的写法：
+
+```
+'hello'.split(''); // ["h", "e", "l", "l", "o"]
+```
+
+## 【2】收集运算符
+
+### 【2.1】接收不确定个数的形参
+
+此功能和`JAVA`一样，当形参传入个数不确定时可用在形参上。
+
+```
+var rest2 = function(item, ...arr){
+  console.log(item,arr);
+}
+rest2('hello',2,3,3,4); // hello [2, 3, 3, 4]
+```
+
+### 【2.2】配合解构时使用
+
+```
+var [a,...temp] = [1,2,3,4];
+console.log(a,temp); // 1 [2, 3, 4]
+```
+
+---
 
 # 字符串的扩展
 
-[链接](https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/)
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BString%E5%AF%B9%E8%B1%A1/"></iframe>
 
-<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/js%20String%E5%AF%B9%E8%B1%A1/"></iframe>
+---
 
 # 数值的扩展
 
-<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/js%20Math%E5%92%8CNumber/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BMath%E5%92%8CNumber/"></iframe>
 
+---
 
 # 函数的扩展
 
-## 函数的默认参数
+## 【1】函数的默认参数
 
 值为`undefined`时才生效
 
@@ -466,7 +473,7 @@ log('Hello') // Hello World
 log('Hello', 'China') // Hello China
 log('Hello', '') // Hello
 ```
-### 与解构赋值默认值结合使用
+### 【1.1】与解构赋值默认值结合使用
 
 **当不使用默认值时**：
 
@@ -493,22 +500,22 @@ function foo({x, y = 5} = {}) {
 foo() // undefined 5
 ```
 
-### 位置
+### 【1.2】位置
 
 必须是尾参数，不然除非调用时显示写上`undefined`，如：`foo(undefined,1)`。
 
 
-### 作用域
+### 【1.3】作用域
 
 只在`function`内部有效
 
-### 应用
+### 【1.4】应用
 
 - 如果省略某参数，函数仍然进行
 
-## reset参数
+## 【2】reset参数
 
-### 使用
+### 【2.1】使用
 
 相当于将函数自带的`arguments`转换成了数组。
 
@@ -531,18 +538,18 @@ f2(3213,23,2,2332,32,)
 // (5) [3213, 23, 2, 2332, 32]
 ```
 
-### 位置
+### 【2.2】位置
 
 必须是尾参数。
 
-## 箭头函数
+## 【3】箭头函数
 
 作用：
 
 - 简化代码回调函数
 - 提升`this`
 
-### 使用
+### 【3.1】使用
 
 ```
 // 简写：
@@ -553,7 +560,7 @@ data.map((val) => {
 })
 ```
 
-### 与箭头函数结合
+### 【3.2】与箭头函数结合
 
 ```
 function f1(...values){
@@ -564,9 +571,9 @@ var f2 = (...values) => values;
 f1(1,2,3,4); // [1, 2, 3, 4]
 f2(1,2,3,4); // [1, 2, 3, 4]
 ```
-## 尾调用优化
+## 【4】尾调用优化
 
-### 尾调用是什么
+### 【4.1】尾调用是什么
 
 **某个函数的最后一步是调用另一个函数**
 
@@ -594,7 +601,7 @@ function f(x){
 - 情况二：调用函数g之后，还有`+1`的操作；
 - 情况三：调用函数g之后，还隐式的调用了`return undefined`。
 
-### 尾调用优化
+### 【4.2】尾调用优化
 
 **只保留内层函数的调用帧**
 
@@ -616,7 +623,7 @@ f();
 g(3);
 ```
 
-### 尾递归
+### 【4.3】尾递归
 
 **尾调用自身**
 
@@ -644,7 +651,7 @@ function factorial(n, total) {
 factorial(5, 1) // 120
 ```
 
-### 递归函数的改写
+### 【4.4】递归函数的改写
 
 **柯里化**：将多参数的函数转换成单参数的形式。（默认值正好可以用上）
 
@@ -657,13 +664,19 @@ function factorial(n, total = 1) {
 factorial(5) // 120
 ```
 
+---
+
 # 数组的扩展
 
-<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8B%E6%95%B0%E7%BB%84/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8BArray%E6%95%B0%E7%BB%84/"></iframe>
+
+---
 
 # 对象
 
-<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/08/05/JavaScript%E4%B9%8B%E5%AF%B9%E8%B1%A1/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/08/05/JavaScript%E4%B9%8BObject%E5%AF%B9%E8%B1%A1/"></iframe>
+
+---
 
 # Symbol
 
@@ -680,8 +693,9 @@ c === d // true
 
 可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是`Symbol`就能保证值的唯一性。
 
+---
 
-# Map
+# Map和weakMap
 
 为什么要用`Map`？因为普通数据结构无法以非字符串为键。
 
@@ -697,7 +711,7 @@ console.log(m,m[x],m[y]); // {[object Object]: "bar"} "bar" "bar"
 
 对象`m`中只有一个`[object Object]`，值都是`'bar'`，它无法解析两个对象为键。
 
-## 使用Map以非字符串为键
+## 【1】使用Map以非字符串为键
 
 ```
 var m = new Map();
@@ -714,26 +728,26 @@ console.log(m.get({id:1}));
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghel895idrj309k05i3yo.jpg)
 
-## delete删除
+## 【2】delete删除
 
 ```
 m.delete(y);
 ```
 
-## clean清除所有
+## 【3】clean清除所有
 
 ```
 m.clear();
 m.size; // 0
 ```
 
-## size大小
+## 【4】size大小
 
 ```
 m.size;
 ```
 
-## `new Map`深拷贝
+## 【5】`new Map`深拷贝
 
 ```
 var m2 = m1; // 浅拷贝
@@ -756,13 +770,13 @@ console.log(mm2,mm);
 
 两个value值都是对象，互不影响。
 
-## Map所有的值
+## 【6】Map所有的值
 
 **方法1：`m.values()`**
 **方法2：`m.entries()`**
 
 
-### 方法1：`m.values()`
+### 【6.1】方法1：`m.values()`
 
 返回一个迭代器，可以用`spread`扩展运算符（`...`）或`Array.from()`转换成数组。
 
@@ -776,7 +790,7 @@ console.log([...m.values()]); // ["foo", "bar"]
 console.log(Array.from(m.values())); // ["foo", "bar"]
 ```
 
-### 方法2：`m.entries()`
+### 【6.2】方法2：`m.entries()`
 
 ```
 var m = new Map();
@@ -789,9 +803,9 @@ console.log([...m.entries()][0][1]); // "foo"
 console.log([...m.entries()][1][1]); // "bar"
 ```
 
-## Map所有的键
+## 【7】Map所有的键
 
-### keys
+### 【7.1】keys
 
 ```
 var m = new Map();
@@ -801,7 +815,7 @@ m.set(y , 'bar');
 console.log([...m.keys()]); // [{id:1},{id:2}]
 ```
 
-### has判断是否有该键
+### 【7.2】has判断是否有该键
 
 ```
 var m = new Map();
@@ -811,7 +825,7 @@ m.set(y , 'bar');
 console.log(m.has(y)); // true
 ```
 
-## WeakMap
+## 【8】WeakMap
 
 区别：
 
@@ -830,7 +844,7 @@ console.log(m.has(x)); // false
 
 ---
 
-# Set
+# Set和weakSet
 
 `Set`是一个值的集合，其中的值是唯一的。
 
@@ -842,7 +856,7 @@ API:
 - **查:has**
 
 
-## 新建
+## 【1】新建
 
 ```
 var s = new Set([0,-0,1,2,NaN,2,3,NaN]);
@@ -851,14 +865,14 @@ console.log(s); // Set(5) {0, 1, 2, NaN, 3}
 
 `0`和`-0`被认为是同一个值，`NaN`与`NaN`也是相等的。
 
-## 添加（add）
+## 【2】添加（add）
 
 ```
 s.add(7);
 console.log(s); // Set(6) {0, 1, 2, NaN, 3, 7}
 ```
 
-## 删除（delete和clear）
+## 【3】删除（delete和clear）
 
 ```
 s.delete(2);
@@ -867,7 +881,7 @@ s.clear();
 console.log(s.size); // 0
 ```
 
-## 查询是否存在（has)
+## 【4】查询是否存在（has)
 
 不像`Map`里面的`get`能直接取值，这里是查询是否存在该值。
 
@@ -875,7 +889,7 @@ console.log(s.size); // 0
 s.has(1); // true
 ```
 
-## 迭代
+## 【5】迭代
 
 同`Map`
 
@@ -891,7 +905,7 @@ s.entries(); // SetIterator {0 => 0, 1 => 1, NaN => NaN, 3 => 3, 7 => 7}
 s.keys() == s.values(); // false
 ```
 
-## WeakSet
+## 【6】WeakSet
 
 和`Set`的区别：
 
@@ -913,7 +927,7 @@ console.log(ws); // [{id:1},{id:2}]
 
 添加了`obj1`两次，还是去重了。
 
-### GC
+### 【6.1】GC
 
 ```
 obj1 = null;
@@ -923,7 +937,7 @@ ws.has(obj1); // false
 
 虽然`obj1`的值看上去还在，但已经取不到了。
 
-### delete删除
+### 【6.2】delete删除
 
 ```
 ws.delete(obj2);
@@ -934,7 +948,7 @@ console.log(ws); // [{id:1}]
 
 # Array、Map、WeakMap、Set、WeakSet的对比
 
-## 对比表
+## 【1】对比表
 
 |功能属性|Array|Map|WeakMap|Set|WeakSet|
 |:--:|:--:|:--:|:--:|:--:|:--:|
@@ -951,7 +965,7 @@ console.log(ws); // [{id:1}]
 |迭代|`entries`|`entries`|-|`entries`|-|
 |长度|`length`|`size`|-|`size`|-|
 
-## Map API:
+## 【2】Map API:
 
 - size数量
 - set()设置
@@ -963,7 +977,7 @@ console.log(ws); // [{id:1}]
 - values()值
 - entries()迭代
 
-## WeakMap API:
+## 【3】WeakMap API:
 
 - set()设置
 - delete()删除
@@ -971,7 +985,7 @@ console.log(ws); // [{id:1}]
 - get()获取
 - clear()清除（已弃用，但可通过new WeakMap()空对象来置空）
 
-## Set API:
+## 【4】Set API:
 
 - size数量
 - add()添加
@@ -982,12 +996,13 @@ console.log(ws); // [{id:1}]
 - values()值
 - entries()迭代
 
-## WeakSet API：
+## 【5】WeakSet API：
 
 - add()添加
 - delete()删除
 - has()存在
 
+---
 
 # Proxy
 
@@ -1020,6 +1035,8 @@ var obj2 = {
 var objTest = observerProxy(obj2)
 objTest.flag.book.page = 33
 ```
+
+---
 
 # Reflect
 
@@ -1060,6 +1077,7 @@ Reflect.has(obj, 'name');
 
 ## 与Proxy语法一一对应
 
+---
 
 # Promise
 
@@ -1135,6 +1153,7 @@ Promise.race([pro2,pro3]).then(val=>{
 
 此时，pro2要花费1秒，pro3要花费2秒，谁先`resolve`，`.then`获取的`val`就是谁的。
 
+---
 
 # Iterater和for...of循环
 
@@ -1270,8 +1289,11 @@ myArray.forEach(function (value) {
 `for...of`可以`bread`，遍历时是值；
 `for...in`遍历对象更优，可简写`Objec.keys()`;
 
+---
+
 # Generator
 
+---
 
 # async/await
 
@@ -1399,12 +1421,17 @@ doIt();
 
 结果和上一个不停用`then`链的一样，但是代码要清晰得多，而且没有回调地狱。
 
+---
+
 # Class
 
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/12/07/JavaScript%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"></iframe>
+
+---
 
 # export 和 import 和 require
 
-## 普通使用
+## 【1】普通使用
 
 constant.js
 ```
@@ -1427,7 +1454,7 @@ import {constant,b} from '@/utils/test';
 console.log(constant,b)
 ```
 
-## 全局使用
+## 【2】全局使用
 
 constant.js
 ```
@@ -1449,12 +1476,12 @@ test.vue
 this.list = this.$constant.list1;
 ```
 
-## `export`和`export default`的区别
+## 【3】`export`和`export default`的区别
 
 - `export`需要导出多个并需要`{}`，`export default`只需要一个`{}`导出全部（没有额外`{}`）；
 - `import`时，`export`需要导入多个，`export default`是默认的，只需要给一个名字；
 
-## require
+## 【4】require
 
 `require`是`AMD`规范；`import`是`ES6`规范。
 

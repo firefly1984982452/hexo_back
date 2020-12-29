@@ -12,6 +12,7 @@ categories:
 font-size: 14px;
 ```
 
+---
 
 # 检查边距
 ```
@@ -21,18 +22,19 @@ outline: solid #f00 1px !important; }
 ```
 ![a7b789a9gy1fow4hu8khhj206203qwea.jpg](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gho4csuijuj306203qdfx.jpg)
 
+---
 
 # 手机端、电脑端中CSS居中的多种方法
 
-## 预览
+## 【1】预览
 
 [案例预览](https://firefly1984982452.github.io/css-center/)
 [案例下载地址](https://github.com/firefly1984982452/css-center)
 
 
-## 布局
+## 【2】布局
 
-### 首先，让我们的背景宽和高都是100%
+### 【2.1】首先，让我们的背景宽和高都是100%
 
 ```
 html,body{
@@ -44,7 +46,7 @@ html,body{
 
 ```
 
-### html页面
+### 【2.2】html页面
 
 ```
 <div class="box">
@@ -54,7 +56,7 @@ html,body{
 </div>
 ```
 
-### 基础的CSS
+### 【2.3】基础的CSS
 
 ```
 * {
@@ -83,9 +85,9 @@ html,body{
 
 **tips:因为我的布局很简单，页面也不多，所以我用了`*`号选择器**
 
-## absolute方法实现
+## 【3】absolute方法实现
 
-### 固定宽高
+### 【3.1】固定宽高
 
 ```
 .box{
@@ -102,7 +104,7 @@ html,body{
 }
 ```
 
-### 百分比宽高
+### 【3.2】百分比宽高
 
 ```
 .box{
@@ -120,7 +122,7 @@ html,body{
 
 **重点：`transform: translate(-50%,-50%);`**
 
-## 块级元素实现水平居中
+## 【3】块级元素实现水平居中
 
 ```
 .box{
@@ -132,7 +134,7 @@ html,body{
 }
 ```
 
-## flex方法实现
+## 【4】flex方法实现
 
 ```
 .box{
@@ -145,12 +147,13 @@ html,body{
 }
 ```
 
-## 文本居中
+## 【5】文本居中
 
 - 文字水平居中：`text-align:center;`
 
 - 文字垂直居中：`line-height:height`
 
+---
 
 # CSS做三角形
 
@@ -162,11 +165,15 @@ border-style: solid;
 border-width: 10px;
 ```
 
+---
+
 # width 100% 自适应
 
 ```
 width: -webkit-fill-available;
 ```
+
+---
 
 # html自适应手机
 
@@ -174,15 +181,17 @@ width: -webkit-fill-available;
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 ```
 
+---
+
 # 最后一个li不显示border（类推）
 
-## 方法一
+## 【1】方法一：`first-child`
 
 ```
 li{border-top:1px solid #000;}
 li:first-child{border-top:none;}
 ```
-## 方法二
+## 【2】方法二：`*+*`
 
 ```
 li+li{
@@ -190,11 +199,13 @@ li+li{
 }
 ```
 
-## 方法三
+## 【3】方法三：`:not(:last-child)`
 
 ```
 li:not(:last-child)...
 ```
+
+---
 
 # 禁用左键
 
@@ -206,12 +217,15 @@ $(document).ready(function(){
 })
 ```
 
+---
+
 # 文字换行
 
 ```
 word-wrap:break-word;
 ```
 
+---
 
 # 改变控制台面样式
 
@@ -221,11 +235,16 @@ console.log("%c来自:console","color:red;font-size:50px");
 ![Image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho4c77d8dj30bj02odfq.jpg)
 
 
+---
+
 # css禁止鼠标点击
 
 `pointer-events:none;`
 
+---
+
 # 限定N行
+
 ```
 display: -webkit-box;
 overflow: hidden;
@@ -243,6 +262,8 @@ word-wrap: break-word;
  }
 ```
 
+---
+
 # 新版本上线（指导蒙版）
 
 ```
@@ -256,6 +277,8 @@ top: 12px;
 ```
 
 ![Image.png](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho4b225hlj30k60ffn1c.jpg)
+
+---
 
 # flex小记
 
@@ -294,6 +317,8 @@ top: 12px;
 }
 ```
 
+---
+
 # flex中的space-evenly
 
 **均匀分布**
@@ -325,6 +350,7 @@ container{
 }
 ```
 
+---
 
 # 添加标签栏logo
 
@@ -334,9 +360,13 @@ container{
 
 *tips:vue-cli项目中，要把.ico文件放在static文件中，并重新编译运行*
 
+---
+
 # CSS让段落开头自动空两格代码
 
 `text-indent:2em;`
+
+---
 
 # 文字效果
 
@@ -346,6 +376,8 @@ text-decoration:underline 下划线样式
 text-decoration:line-through 删除线样式-贯穿线样式
 text-decoration:overline 上划线样式
 ```
+
+---
 
 # 禁止缓存
 
@@ -357,15 +389,17 @@ text-decoration:overline 上划线样式
 <!--禁止缓存 end-->
 ```
 
+---
+
 # 打印相关
 
-## 打印方法
+## 【1】打印方法
 
 `window.print();`
 
-## 局部打印
+## 【2】局部打印
 
-### media属性
+### 【2.1】media属性
 
 ```
 <style type="text/css" media=print>
@@ -377,7 +411,7 @@ text-decoration:overline 上划线样式
 
 - 在正常的html文件中有效，但我试了在vue中无效
 
-### 媒体查询
+### 【2.2】媒体查询
 
 ```
 <style type="text/css">
@@ -391,6 +425,8 @@ text-decoration:overline 上划线样式
 
 - 亲测有效
 
+
+---
 
 # 更改自带的scorll滚动条样式
 

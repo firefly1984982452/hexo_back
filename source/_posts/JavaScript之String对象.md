@@ -5,13 +5,17 @@ categories:
 - program
 ---
 
-# length
+# 查询过滤
 
-长度
+1. `charAt`
+2. `charCodeAt`
+3. `fromCharCode`
+4. `indexOf`
+5. `lastIndexOf`
+6. `includes`
+7. `search`
 
-`'wejfoiwe'.length` // 8
-
-# charAt()
+## 【1】charAt()
 
 返回指定位置的字符
 
@@ -23,7 +27,7 @@ categories:
 `'ewfwef'.charAt(53)` // ""
 `'ewfwef'[59]` // undefined
 
-# charCodeAt()
+## 【2】charCodeAt()
 
 返回uniccode/accsic编码
 
@@ -31,7 +35,7 @@ categories:
 'a'.charCodeAt(0); // 97
 ```
 
-# fromCharCode()
+## 【3】fromCharCode()
 
 将 Unicode 编码转为一个字符:
 
@@ -39,21 +43,80 @@ categories:
 String.fromCharCode(65); // A
 ```
 
+## 【4】indexOf()
+
+返回字符首次出现的位置
+
+`'abcc'.indexOf('c')` // 2
+
+## 【5】lastIndexOf()
+
+上同，倒数。
+
+## 【6】includes()
+
+判断字符串中是否包含某字符串
+
+`'abcc'.includes('c')` // true
+
+## 【7】search()
+
+返回下标
+
+```
+'hello world'.search('wor'); // 6
+```
+
+---
+
+# 截取和分割
+
+1. `split`
+2. `substr`
+3. `substring`
+4. `slice`
+
+## 【1】split()
+
+分割为数组
+
+`'abcd'.split('')` // ["a", "b", "c", "d"]
+
+**tips：把字符串变为数组最快的方法**
+
+`'abc'.split(' ')` // ['abc']
+
+## 【2】substr()
+
+截取（位置，个数）
+
+`'abcdefg'.substr(2,3)` // "cde"
+
+## 【3】substring()
+
+截取（开始位置，结束位置）
+
+`'abcdefg'.substring(2,3)` // "c"
+`'abcdefg'.substring(2)` // "cdefg"
+`'abcdefg'.substring(2,-9)` // "ab" **与slice的区别**
+
+## 【4】slice()
+
+截取（开始位置，结束位置）
+
+`'abcdefg'.slice(2,3)` // "c"
+`'abcdefg'.slice(2)` // "cdefg"
+`'abcdefg'.slice(2,-9)` // "" **与substring的区别**
+
+---
+
 # concat()
 
 合并两个字符串
 
 `'w'.concat('e')` // 'we'
 
-# indexOf()
-
-返回字符首次出现的位置
-
-`'abcc'.indexOf('c')` // 2
-
-# lastIndexOf()
-
-上次，倒数。
+---
 
 # match
 
@@ -69,6 +132,8 @@ String.fromCharCode(65); // A
 "1 plus 2 equal 3".match(/\d/g); // ["1", "2", "3"]
 ```
 
+---
+
 # raw：模板字符串
 
 ```
@@ -78,11 +143,8 @@ var s = String.raw`hello\n`;
 s === "hello\\n"; // true
 ```
 
-# includes()
+---
 
-判断字符串中是否包含某字符串
-
-`'abcc'.includes('c')` // true
 # repeat
 
 重复并返回
@@ -103,57 +165,23 @@ const arr = [1, [1,2], [1,2,3]];
 JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
 ```
 
-# search()
+---
 
-返回下标
+# 大小写更换
 
-```
-'hello world'.search('wor'); // 6
-```
-
-# split()
-
-分割为数组
-
-`'abcd'.split('')` // ["a", "b", "c", "d"]
-
-**tips：把字符串变为数组最快的方法**
-
-`'abc'.split(' ')` // ['abc']
-
-# substr()
-
-截取（位置，个数）
-
-`'abcdefg'.substr(2,3)` // "cde"
-
-# substring()
-
-截取（开始位置，结束位置）
-
-`'abcdefg'.substring(2,3)` // "c"
-`'abcdefg'.substring(2)` // "cdefg"
-`'abcdefg'.substring(2,-9)` // "ab" **与slice的区别**
-
-# slice()
-
-截取（开始位置，结束位置）
-
-`'abcdefg'.slice(2,3)` // "c"
-`'abcdefg'.slice(2)` // "cdefg"
-`'abcdefg'.slice(2,-9)` // "" **与substring的区别**
-
-# toLowerCase()
+## toLowerCase()
 
 把字符串变为小写
 
 `'B'.toLowerCase()` // "b"
 
-# toUpperCase()
+## toUpperCase()
 
 把字符串变为大写
 
 `'a'.toUpperCase()` // "A"
+
+---
 
 # trim()
 
@@ -161,8 +189,9 @@ JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
 
 `' we '.trim()` // "we"
 
-# 其它技巧
+---
 
+# 其它技巧
 
 ## 金钱格式化toLocalString
 

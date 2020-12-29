@@ -7,7 +7,7 @@ categories:
 
 # 扩展运算符（`...`）
 
-将数组变为参数序列
+用法：将数组变为参数序列
 
 ```
 console.log(...[1,2,3]); // 1,2,3
@@ -42,13 +42,13 @@ arr1.push(...arr2);
 
 ## 应用
 
-**复制数组**
+**【1】复制数组**
 
 单层数据数组可实现深拷贝，如果是数组对象无法实现深拷贝。
 
-**合并数组**
+**【2】合并数组**
 
-**与解构赋值结合**
+**【3】与解构赋值结合**
 
 ```
 const [first, ...rest] = [1, 2, 3, 4, 5];
@@ -56,30 +56,37 @@ first // 1
 rest  // [2, 3, 4, 5]
 ```
 
-**字符串变为数组**
+**【4】字符串变为数组**
 
 ```
 [...'hello']; // [ "h", "e", "l", "l", "o" ]
 ```
 
-**实现Iterator接口的对象**
+**【5】实现Iterator接口的对象**
 
 任何定义了遍历器（`Iterator`）接口的对象都可以用扩展运算符转为真正的数组。
 
 如`nodeList`、`Map`和`Set`、`Array`、`String`、`arguments`等。
 
+---
 
 # 判断[1,2]是否为数组的方法
 
 **typeof 不能验证[1,2]是否为数组，返回的是'object'**
 
-## Array.isArray
+1. `Array.isArray`
+2. `instanceof`
+3. `prototype`
+4. `constructor`
+5. `apply`、`call`、`bind`
+
+## 【1】Array.isArray
 
 ```
 Array.isArray([1,2]) // true
 ```
 
-## instanceof
+## 【2】instanceof
 
 ```
 [1,2] instanceof Array
@@ -106,11 +113,11 @@ function instanceof(left, right) {
 
 所以`[1,2].__proto__ === Array.prototype`也是可以验证是否为数组
 
-## prototype
+## 【3】prototype
 
 除了`[1,2].__proto__ === Array.prototype`之外，还有`Array.prototype.isPrototypeOf([1,2])`
 
-## constructor
+## 【4】constructor
 
 ```
 [1,2].constructor === Array
@@ -118,7 +125,7 @@ function instanceof(left, right) {
 
 同上理
 
-## apply、call、bind
+## 【5】apply、call、bind
 
 ```
 ({}).toString.apply([1,2]) === '[object Array]'
@@ -132,9 +139,24 @@ function instanceof(left, right) {
 ["Banana", "Orange", "Apple", "Mango"].toString();
 // Banana,Orange,Apple,Mango
 ```
+
+# toLocalString
+
+```
+[1,2,3,4,5].toLocaleString()
+"1,2,3,4,5"
+```
+
+---
+
 # 截取
 
-## slice
+1. `slice`
+2. `splice`
+3. `split`
+4. `length`
+
+## 【1】slice
 
 不修改原数据
 
@@ -148,7 +170,7 @@ arr.slice(1,3);      //(2) ["B", "C"]
 
 ```
 
-## splice
+## 【2】splice
 
 修改原数据
 
@@ -163,15 +185,28 @@ var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 arr.splice(1,3);     //(3) ["B", "C", "D"]
 ```
 
-## split：分隔
+## 【3】split：分隔
 
 ```
 'a,b,c'.split(','); // 
 ```
 
+## 【4】length
+```
+[1,2,3,4,5,6,7].length = 2; // [1,2]
+```
+
+---
+
 # 增加或删除
 
-## push和pop
+1. `push`和`pop`
+2. `shift`和`unshift`
+3. `concat`
+4. `join`
+5. `copyWithin`
+
+## 【1】push和pop
 
 `push()`向`Array`的末尾添加若干元素，`pop()`则把`Array`的最后一个元素删除掉.
 
@@ -181,12 +216,12 @@ arr.push('h');       //['A', 'B', 'C', 'D', 'E', 'F', 'G','h'];
 arr.pop();           //['A', 'B', 'C', 'D', 'E', 'F', 'G']
 ```
 
-## shift和unshift
+## 【2】shift和unshift
 
 `shift()`删除数组第一个数据；
 `unshift()`删除数姐最后一个数据。
 
-## concat
+## 【3】concat
 
 合并两个数组
 
@@ -197,13 +232,13 @@ var c = a.concat(b);
 c //(4) ["a", "b", "c", "d"]
 ```
 
-## join
+## 【4】join
 
 ```
 c.join(',');       //"a,b,c,d"
 ```
 
-## copyWithin
+## 【5】copyWithin
 
 复制指定值（数组中的值）到指定位置
 
@@ -212,6 +247,8 @@ c.join(',');       //"a,b,c,d"
 [1, 2, 3, 4, 5].copyWithin(0, 3, 4)
 // [4, 2, 3, 4, 5]
 ```
+
+---
 
 # 排序
 
@@ -241,43 +278,49 @@ var arr = [23,122,1,53,231]
 arr.reverse();       //(5) [53, 231, 23, 122, 1]
 ```
 
+---
 
 # 查询和过滤
 
-## every
+1. `every`
+2. `some`
+3. `filter`
+4. `indexOf`和`lastIndexOf`
+5. `find`和`findIndex`
+6. `includes`
+
+## 【1】every
 
 检查数组的每个元素是否符合条件
 
 ```
-function c(element,index,array){
-    return (element > 10)
-}
-[12, 54, 18, 130, 44].every(c)
+[12, 54, 18, 130, 44].every(val => val > 10)
 //true
-[12, 5, 8, 130, 44].every(c)
+[12, 5, 8, 130, 44].every(val => val > 10)
 //false
 ```
 
-## some
-和every异曲同工
+## 【2】some
+
+检查是否有1个达到条件
+
 ```
-function c(element,index,array){
-    return (element > 10)
-}
-[12, 54, 18, 130, 44].some(c)
+[12, 54, 18, 130, 44].some(val => val > 10)
 //true
-[2, 5, 8, 3, 4].some(c)
+[2, 5, 8, 3, 4].some(val => val > 10)
 //false
 ```
 
-## filter
+## 【3】filter
+
+找出所有符合条件的元素
 
 ```
 [12, 5, 8, 130, 44].filter( num => num >10)
 (3) [12, 130, 44]
 ```
 
-## indexOf和lastIndexOf
+## 【4】indexOf和lastIndexOf
 
 与`String`类似，`Array`也可以通过`indexOf()`来搜索一个指定的元素的位置：
 
@@ -288,16 +331,16 @@ arr.indexOf(124);    //1
 
 注意了，数字124和字符串'124'是不同的元素。
 
-## find和findIndex
+## 【5】find和findIndex
 
 ```
-[12, 5, 8, 130, 44].find((ele)=>{return ele>10})
+[12, 5, 8, 130, 44].find(ele => ele>10)
 //12
-[12, 5, 8, 130, 44].findIndex((ele)=>{return ele>20})
-//3
+[12, 5, 8, 130, 44].findIndex(ele => ele === 8})
+//2
 ```
 
-## includes
+## 【6】includes
 
 返回是否有这个值
 
@@ -305,6 +348,8 @@ arr.indexOf(124);    //1
 [1,2,3].includes(2)
 //true
 ```
+
+---
 
 # 生成数组
 
@@ -323,15 +368,26 @@ Array.of(3); // [3]
 
 可用于回调函数生成数组。
 
+---
+
 # 遍历
 
-## entries
+1. `entries`
+2. `fromEntries`
+3. `values`
+4. `keys`
+5. `map`
+6. `forEach`
+7. `reduce`
+8. `reduceRight`
+
+## 【1】entries
 
 返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].entries().next().value`
 
-## fromEntries
+## 【2】fromEntries
 
 将键值对数组转为对象
 
@@ -340,20 +396,20 @@ const map = new Map().set('foo', true).set('bar', false);
 Object.fromEntries(map)
 ```
 
-## values
+## 【3】values
 
 和entries异曲同工
 返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].values().next().value`
 
-## keys
+## 【4】keys
 
 数组里的下标
 
 `[...['a', 'b', 'c'].keys()]`
 
-## map
+## 【5】map
 
 遍历，**返回新数据**，对原数组不影响。
 
@@ -420,7 +476,7 @@ arr.map( v => {
 ```
 
 
-## forEach
+## 【6】forEach
 
 遍历，每个元素执行回调函数，**返回undefined**。
 
@@ -445,7 +501,7 @@ try {
 普通的`for`循环可以用`break`终止。
 
 
-## reduce
+## 【7】reduce
 
 将数组计算为一个值
 
@@ -486,16 +542,11 @@ var total = arr.reduce((total,next) =>{
 total; // 16
 ```
 
-## reduceRight
+## 【8】reduceRight
 
 用法上同，区别是从后往前。
 
-# toLocalString
-
-```
-arr.toLocaleString()
-"1,2,3,4,5"
-```
+---
 
 # from
 
@@ -538,14 +589,16 @@ Array.from(new Set([1,3,3,4]), item => item + 1) //[2, 4, 5]
 Array.from('hello') // ["h", "e", "l", "l", "o"]
 ```
 
+---
+
 # 数组扁平化
 
-- `flat()`
-- 序列化后正则
-- 递归
-- `reduce()`递归
-- 迭代 + 展开运算符
-- `toString()`
+1. `flat()`
+2. 序列化后正则
+3. 递归
+4. `reduce()`递归
+5. 迭代 + 展开运算符
+6. `toString()`
 
 ## 【1】`flat()`和`flatMap()`
 
@@ -625,10 +678,13 @@ const arr = [1, [1,2], [1,2,3,[4,4,4]]];
 var strArr = arr.toString().split(',');
 ```
 
+---
+
 # 取出数组中最大的数值
 
 `Math.max(...[14, 3, 77])`
 
+---
 
 # `arguments`参数的3种转数组方法
 
@@ -652,3 +708,6 @@ test3(1,2,3,4);
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
 
 <img src="https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg"/>
+
+<img src="https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg" referrerpolicy=”no-referrer”/>
+

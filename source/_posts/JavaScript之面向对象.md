@@ -29,17 +29,19 @@ xm.age = 15;
 `var xm = {age:15}`
 
 
-https://www.jianshu.com/p/edf4d665d0df
+[JS中的类](https://www.jianshu.com/p/edf4d665d0df)
 
-https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html
+[JS对象与JAVA对象的区别](https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html)
+
+---
 
 # JavaScript面向对象
 
 [参考](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
 
-## 封装
+## 【1】封装
 
-### 生成对象
+### 【1.1】生成对象
 
 ```
 function Cat(name,color){
@@ -64,7 +66,7 @@ brr; // (5) [8, 8, 8, 8, 8] 指向Array对象
 
 只不过我们平时是直接用`var arr = [1,2]`的形式，和`new Array`是同一个意思。
 
-## 对象的构造函数
+## 【2】对象的构造函数
 
 ```
 function Cat(name,color){
@@ -75,7 +77,7 @@ function Cat(name,color){
 
 这段代码里面的`this.name = name`就是构造函数，可以直接用es6语法糖的形式写：
 
-### es6语法糖class
+### 【2.1】es6语法糖class
 
 ```
 class Cat{
@@ -89,7 +91,7 @@ var cat1 = new Cat('大猫','黄色');
 cat1; // Cat {name: "大猫", color: "黄色"} 指向Cat对象
 ```
 
-### constructor
+### 【2.2】constructor
 
 所以，`cat1`实例含有`constructor`属性指向它(Cat)的`构造函数`。
 
@@ -110,7 +112,7 @@ cat1.constructor === Cat; // true
 [2].constructor() === Array.prototype.constructor();
 ```
 
-### instanceof
+### 【2.3】instanceof
 
 `JavaScript`还提供了`instanceof`运算符，验证`原型对象(Cat)`与`实例对象(cat1)`之间的关系。
 
@@ -124,11 +126,11 @@ cat1 instanceof Cat; // true
 [1,2] instanceof Array; // true
 ```
 
-## 原型对象添加方法
+## 【3】原型对象添加方法
 
 并不能说对象有原型，只能说对象的构造器有原型。
 
-### 直接添加造成的问题
+### 【3.1】直接添加造成的问题
 
 ```
 function Cat(name,color){
@@ -152,7 +154,7 @@ cat1.eat == cat2.eat; // false
 [1].push == [2].push; // true
 ```
 
-### 用prototype添加方法
+### 【3.2】用prototype添加方法
 
 ```
 function Cat(name,color){
@@ -171,9 +173,9 @@ cat1.eat == cat2.eat; // true，它们是指向同一个内存地址下的方法
 
 (就算不定义Cat的prototype，Cat也自带有prototype属性)
 
-## prototype模式的验证方法
+## 【4】prototype模式的验证方法
 
-### 判断对象和实例的关系`isPrototypeOf`
+### 【4.1】判断对象和实例的关系`isPrototypeOf`
 
 ```
 Cat.prototype.isPrototypeOf(cat1); // true
@@ -185,14 +187,14 @@ Cat.prototype.isPrototypeOf(cat1); // true
 Array.prototype.isPrototypeOf([]); // true
 ```
 
-### 判断是本地属性还是prototype属性
+### 【4.2】判断是本地属性还是prototype属性
 
 ```
 cat1.hasOwnProperty('name'); // true
 cat1.hasOwnProperty('type'); // false
 ```
 
-### in
+### 【4.3】in
 
 ```
 'name' in cat1; // true
@@ -204,7 +206,7 @@ cat1.hasOwnProperty('type'); // false
 'push' in []; // true
 ```
 
-### __proto__
+### 【4.4】__proto__
 
 一般情况下，实例对象的`__proto__`指向原型对象的`prototype`。
 `prototype`被实例的`__proto__`指向

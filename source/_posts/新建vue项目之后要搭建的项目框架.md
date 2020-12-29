@@ -18,15 +18,25 @@ categories:
 新建一个`rem-config.js`文件
 
 ```
+function resizeHtml() {
+  //首先取得当前窗口宽度
+  var width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+  var scaleSize = 100,
+    designSize = 1920;
+  //获得的宽度除以（设计尺寸除以缩放尺寸）
+  var size = (width / (designSize / scaleSize));
+  //设置font-size
+  document.getElementsByTagName("html")[0].style.fontSize = size + "px";
+}
+
 export default function() {
-	//首先取得当得屏幕宽度
-	var width = window.screen.width;
-	var scaleSize = 100,
-		designSize = 1920;
-		//用当得宽度除以（设计尺寸除以缩放尺寸）
-	var size = width / (designSize / scaleSize);
-	//设置font-size
-	document.getElementsByTagName('html')[0].style.fontSize = (size) + 'px';
+  resizeHtml();
+  window.addEventListener("resize", function() {
+    resizeHtml();
+  });
 }
 ```
 
@@ -455,8 +465,8 @@ echart.refresh();
 ## 配置echarts具体内容
 
 ```
-
-  export const option = {
+import {getAdapterFont} from '../../assets/js/common'
+export const option = {
     tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)'
@@ -464,7 +474,8 @@ echart.refresh();
     legend: {
         orient: 'vertical',
         left: 10,
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+        fontSize: getAdapterFont(20)
     },
     series: [
         {
@@ -495,6 +506,35 @@ echart.refresh();
             ]
         }
     ]
+}
+```
+
+## echarts其它公用方法common.js
+
+common.js
+
+```
+/*
+生成guid
+*/
+export const guid = function () {
+    let guid = ''
+    for (let i = 1; i <= 32; i++) {
+      let n = Math.floor(Math.random() * 16.0).toString(16)
+      guid += n
+    }
+    return guid
+  }
+
+// 适配分辨率的echarts-一般字体
+export const getAdapterFont = (e = 7) => {
+    e = e || 0
+    let wid = document.body.clientWidth
+    if (wid < 3000) {
+      return document.body.clientWidth / 1000 * e
+    } else {
+      return 1920 / 1000 * e * 1.5
+    }
 }
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: JavaScript之观察者模式(Obverse)
+title: JavaScript之观察者模式-Obverse
 date: 2020-12-08 15:44:34
 categories: 
 - program
@@ -7,16 +7,16 @@ categories:
 
 # 知识点
 
-- ResizeObserver：resize监听
-- MutationObserver:监听DOM节点的变动
-- InterSectionObserver：异步视口观察
-- PerformanceObserver：监测性能
-- ReportingObserver：汇报
+- `ResizeObserver`：resize监听
+- `MutationObserver`:监听DOM节点的变动
+- `InterSectionObserver`：异步视口观察
+- `PerformanceObserver`：监测性能
+- `ReportingObserver`：汇报
 
 
 # ResizeObserver：resize监听
 
-window.resize下监听某DOM的改变：
+`window.resize`下监听某`DOM`的改变：
 
 ```
 <textarea style="width: 100%;" id="main"></textarea>
@@ -57,7 +57,7 @@ ro.observe(mainEl);
 </body>
 ```
 
-3秒钟之后，id为content的DOM变成了'hello'，此时的MutationObserver就已经监听到了改变，可以进行下一步的操作。
+3秒钟之后，id为`content`的`DOM`变成了`'hello'`，此时的`MutationObserver`就已经监听到了改变，可以进行下一步的操作。
 
 ## 实现vue.$nexttick
 

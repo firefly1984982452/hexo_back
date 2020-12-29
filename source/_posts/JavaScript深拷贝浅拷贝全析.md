@@ -9,15 +9,15 @@ categories:
 
 用浅拷贝如果改变obj2的对象，obj1不会再改变，它们不会引用一个值，但如果对象里面还有对象，就会失效，它们是同一个引用。
 
-**方法1：用Object.create克隆对象**
+**方法1：用`Object.create`克隆对象**
 
-**方法2：数组用concat**
+**方法2：数组用`concat`**
 
-**方法3：对象用assign**
+**方法3：对象用`assign`**
 
-**方法4：扩展运算符（...）**
+**方法4：扩展运算符（`...`）**
 
-## 方法1：用Object.create克隆对象
+## 方法1：用`Object.create`克隆对象
 
 **用法：**
 
@@ -43,7 +43,7 @@ console.log(obj1,obj2);
 
 **结论：**
 
-obj1对象中的一级对象a:2并没有受影响，但二级对象b已经受影响。所以**Object.create克隆的对象也只能实现一级对象的深拷贝**。
+obj1对象中的一级对象a:2并没有受影响，但二级对象b已经受影响。所以**`Object.create`克隆的对象也只能实现一级对象的深拷贝**。
 
 
 ## 方法2：数组用concat
@@ -124,13 +124,15 @@ console.log(obj,obj2)
 
 obj的一级对象(id)的确不受影响，但对象里面的对象(name.a)还是引用同一个指针，不能实现深拷贝。
 
+---
+
 # 深拷贝
 
-**方法1：JSON.parse(JSON.stringify())**
+**方法1：`JSON.parse(JSON.stringify())`**
 
-**方法2：MessageChannel**
+**方法2：`MessageChannel`**
 
-**方法3：lodash.cloneDeep**
+**方法3：`lodash.cloneDeep`**
 
 用深拷贝的话，就算对象里面还有对象，也不会是同一个引用，但是会忽略`undefined`和`function`，用方法3不会忽略`function`和`undefined`。
 

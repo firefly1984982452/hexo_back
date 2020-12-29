@@ -26,10 +26,10 @@ console.log(nijia, nijia.getSkillLevel() == 100);
 
 ## 定义getter与setter
 
-在JavaScript中，可以通过两种方式定义getter和setter：
+在`JavaScript`中，可以通过两种方式定义`getter`和`setter`：
 
-- 通过对象字面量定义，或在ES6的class中定义。
-- 通过使用内置的Object.defineProperty方法。
+- 通过对象字面量定义，或在`ES6`的`class`中定义。
+- 通过使用内置的`Object.defineProperty`方法。
 
 ```
 const ninjaCollection = {
@@ -70,7 +70,7 @@ console.log(ninjiaoCollectionClass.firstNinja);
 
 ### Object.defineProperty
 
-控制私有变量，下例中_skillLevel是私有的，skillLevel是公有的。
+控制私有变量，下例中`_skillLevel`是私有的，`skillLevel`是公有的。
 ```
 function Ninja() {
     let _skillLevel = 0;
@@ -139,7 +139,7 @@ console.log(nameObj.name == 'a');
 
 # 使用代理控制访问
 
-通过Proxy构造器创建代理
+通过`Proxy`构造器创建代理
 
 ```
 const emperor = {name: 'pdd'};
@@ -306,27 +306,25 @@ console.log(arr[1],arr[-2]); // b c
 
 # 总结
 
-1. 使用访问器方法（getter和setter）可以控制对象
-
-- 通过内容的Object.definedProperty方法访问属性
-- 通过对象字面量中使用get和set语法
-- 通过ES6的class语法
-
+1.使用访问器方法（`getter`和`setter`）可以控制对象
+- 通过内容的`Object.definedProperty`方法访问属性
+- 通过对象字面量中使用`get`和`set`语法
+- 通过`ES6`的`class`语法
 <br />
+- 读取对象时会隐式调用`get`，写入对象时会隐式调用`set`
+- `get`可以定义计算属性，`set`可以实现数据验证与日志记录
 
-- 读取对象时会隐式调用get，写入对象时会隐式调用set
-- get可以定义计算属性，set可以实现数据验证与日志记录
 
-2. 使用代理（proxy）可以控制对象
-
+2.使用代理（`proxy`）可以控制对象
 - 代理可以定义对象交互时的行为
 - 所有的交互行为必须通过代理
 
-3. 使用代理（proxy）可以实现以下内容
 
+3.使用代理（`proxy`）可以实现以下内容
 - 日志记录
 - 性能测量
 - 数据校验
 - 数组负索引
 
-4. 使用代理（proxy）效率不高，需进行性能测验
+
+4.使用代理（`proxy`）效率不高，需进行性能测验

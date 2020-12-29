@@ -56,8 +56,21 @@ Math.floor(Math.random() * number)
 
 ## 最大最小数
 
-Math.max
-Math.min
+`Math.max`
+`Math.min`
+
+## 次方
+
+`Math.pow(2, 3)`代表 2的3 次方
+
+## 取随机字符串
+
+先转为16进制，再去掉前两位小数点
+
+`Math.random().toString(16).subString(2)`
+
+---
+
 # number
 
 ## isFinite 是否为数字型
@@ -77,10 +90,10 @@ Number.isFinite(1.2) ; // true
 
 ## isNaN 是否为NaN
 
-window.isNaN和Number.isNaN的区别
+`window.isNaN`和`Number.isNaN`的区别
 
-window.isNaN：能否转换为数字
-Number.isNaN：是否NaN
+- `window.isNaN`：能否转换为数字
+- `Number.isNaN`：是否`NaN`
 
 ```
 //isNaN
@@ -133,15 +146,7 @@ parseInt('3e'); // 3
 parseInt('0x10'); // 16
 ```
 
-# 次方
-
-`Math.pow(2, 3)`代表 2的3 次方
-
-# 取随机字符串
-
-先转为16进制，再去掉前两位小数点
-
-`Math.random().toString(16).subString(2)`
+---
 
 # 保留小数点后两位
 

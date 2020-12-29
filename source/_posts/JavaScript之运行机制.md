@@ -23,46 +23,54 @@ fun : function(){
 }
 ```
 
+---
+
 # 多进程
 
 每个tab标签页有一个独立的进程（有的可能会合并）
 
 比如：
-- Browser进程：主进程；
+- `Browser`进程：主进程；
 - 第三方插件进程；
-- GPU进程；
+- `GPU`进程；
 - 浏览器渲染进程。
+
+---
 
 # 单线程
 
 浏览器的渲染进程是`多个线程`的，是多个，这些线程还是一个一个执行完了才执行下一个，所以`JS引擎是单线程`的。
 
 比如：
-- GUI渲染线程
-- JS引擎线程
+- `GUI`渲染线程
+- `JS`引擎线程
 - 事件触发线程
 - 定时触发器线程
+
+---
 
 # 浏览器渲染流程
 
 **沉浸树（render树）**：
 
-- 1.处理HTML标签构建DOM树；
-- 2.处理CSS标签构建CSSOM树；
-- 3.DOM和CSSOM树被组合形成渲染树（render树）；
-- 4.布局render树，计算尺寸、位置；
-- 5.绘制render树，绘制页面像素信息；
-- 6.发给图形处理器（GPU），显示在屏幕上。
+- 1.处理`HTML`标签构建`DOM`树；
+- 2.处理`CSS`标签构建`CSSOM`树；
+- 3.`DOM`和`CSSOM`树被组合形成渲染树（`render`树）；
+- 4.布局`render`树，计算尺寸、位置；
+- 5.绘制`render`树，绘制页面像素信息；
+- 6.发给图形处理器（`GPU`），显示在屏幕上。
 
 **CSS是否会阻塞dom树渲染？**
 
-由上面的流程可知，不知阻塞DOM树，但会阻塞CSSOM树。
+由上面的流程可知，不知阻塞`DOM`树，但会阻塞`CSSOM`树。
+
+---
 
 # 事件循环（`Event Loop`）、宏任务（`macrotask`）、微任务（`microtask`）
 
 事件循环（`Event Loop`）：执行完宏任务后，将微任务排队添加任务，执行后再循环检查有没有宏任务……所以整个过程称为事件循环。
-宏任务（`macrotask`）：主代码、setTimeout、setInterval、setImmediate(IE)、MessageChannel
-微任务（`microtask`）：promise、process.nextTick、MutationObserver
+宏任务（`macrotask`）：主代码、`setTimeout`、`setInterval`、`setImmediate(IE)`、`MessageChannel`
+微任务（`microtask`）：`promise`、`process.nextTick`、`MutationObserver`
 
 执行顺序：先宏任务--》执行结束后--》再执行所有微任务--》渲染--》下一个宏任务
 
@@ -94,6 +102,8 @@ resolve()是表示promise的状态为fullfilled，相当于只是定义了一个
 promise调用then的前提是promise的状态为fullfilled；
 只有promise调用then的时候，then里面的函数才会被推入微任务中。
 ```
+
+---
 
 # WebWorker
 
@@ -183,10 +193,11 @@ JS引擎是单线程的，本质上还是没有改变。
 `live-server`
 ```
 
+---
 
 # setTimeout相关
 
-setTimeout并不是由JS引擎计数的，因为单线程会阻塞，会影响计数的准确，因此通过单独线程来计时并触发。
-setTiemout最小为4，不满会加成4。
+`setTimeout`并不是由`JS`引擎计数的，因为单线程会阻塞，会影响计数的准确，因此通过单独线程来计时并触发。
+`setTiemout`最小为4，不满会加成4。
 
-setTimeout的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。
+`setTimeout`的时间假设设置为1000，不是说1秒后立马会执行，而是尽快执行，把任务添加到了队列中，如果排到它了，就立马执行。

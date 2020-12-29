@@ -117,6 +117,10 @@ let clientScreenMsg =
 console.log(clientScreenMsg);
 ```
 
+- devicePixelRatio: 设备像素比
+
+一般的电脑显示器都是1倍，但有部分笔记本电脑的分辨率是2倍。
+
 # Number相关
 
 - isFinite 是否为数字型
