@@ -5,30 +5,7 @@ categories:
 - program
 ---
 
-# Vue过滤器
-
-```
-filters: {
-   returnBill: function(value) {
-      var bills = ["否", "是"];
-      return bills[value];
-   }
-}
-```
-
-# vue循环时怎么绑定图片地址及href跳转地址
-
-```
-<li v-for="v in sites">
-	<a :href="v.herf">
-		<img v-bind:src="v.url"/>
-		<span>{{ v.text }}</span>
-	</a>
-</li>
-```
 # 公共组件
-
-## 引入公共组件
 
 ```
 import Vue from 'vue'
@@ -41,9 +18,10 @@ Vue.use(VueResource)
 Vue.component('six-button', SixiButton)
 ```
 
+---
 # 路由跳转及传参
 
-## 直接跳转
+## 【1】直接跳转
 
 A.vue
 ```
@@ -64,7 +42,7 @@ this.$route.params
 
 **此处push的必须是name，不能是path，如果要用path的话，可以用query**
 
-## 地址栏'/'传参
+## 【2】地址栏'/'传参
 
 router.js
 
@@ -83,15 +61,17 @@ A.vue
 获取：`this.$route.params.order_id`
 
 
-## 地址栏'?'传参
+## 【3】地址栏'?'传参
 
 地址：`http://localhost:8080/#/success?id=257`
 
 获取：`this.$route.query.id`
 
+---
 
+# axios网络模块
 
-# axios网络请求
+## 【1】axios网络请求
 
 `this.axios.post().then().catch();`
 
@@ -106,27 +86,36 @@ this.axios.post(url,params).then((res) => {
 });
 ```
 
+## 【2】设置请求头带cooike
 
-# vue-cli快速构建项目
+```
+import axios from 'axios'
+axios.defaults.withCredentials=true;//让ajax携带cookie
+Vue.prototype.$axios = axios;
+```
 
-## 安装webpack
+---
+
+# vue-cli快速构建vue2项目
+
+## 【1】安装webpack
 `npm install -g webpack`
 
-## 安装vue-cli
+## 【2】安装vue-cli
 `npm install -g vue-cli`
 
-## 初始化
+## 【3】初始化
 `vue init webpack myVueStudy`
 
 初始化过程中有些需要填的选项，直接按`enter`键就可以了。
 
-## 安装模块
+## 【4】安装模块
 `npm install`
 
-## 运行
+## 【5】运行
 `npm run dev`
 
-## 打包
+## 【6】打包
 
 config/index.js
 `assetsPublicPath: './',`
@@ -134,14 +123,11 @@ config/index.js
 `npm run build`
 
 
+---
 
-# 绝对地址和相对址引用
+# 限制input、el-input只能输入数字
 
-`<img src="~static/20180315130936.png"/>`
-
-
-
-# el-input 只能输入数字
+## 方法一：事件监听
 
 ```
 <el-input 
@@ -158,29 +144,46 @@ config/index.js
 
 - `v-model.number`同样也只能输入数字，但是输入的非数字仍然会显示在输入框，看不去不友好。
 
-- `v-model.number`和`onkeyup="value=value.replace(/[^\d]/g,'') "`同时使用时可能会出错。
-
-- `oninput="value=value.replace(/[^0-9A-Za-z.]/g,'')"`
-
 - `<input type="number" class="el-input__inner" v-model="value"/>`
+
+- `oninput="value=value.replace(/[^0-9.]/g,'')"`是input触发
+
+
+## 方法二：自定义指令
+
+```
+<el-input v-model.number=“value” v-number-only placeholder="请输入电话"></el-input>
+```
+
+封装个自定义指令放在标签上
+
+```
+directives: {
+  numberOnly: {
+    bind: function(el) {
+      el.handler = function() {
+        el.value = Number(el.value.replace(/\D+/, ''))
+      }
+      el.addEventListener('input', el.handler)
+    },
+    unbind: function(el) {
+      el.removeEventListener('input', el.handler)
+    }
+  }
+},
+```
+
+## 方法三：最后验证
+
+```
+if(Number.isNaN(Number(this.searchForm.contactPhone))){
+  return this.$message.error('联系电话只能输入数字！')
+}
+```
 
 ------------
 
-
-# weex篇
-
-## 部署
-
-`npm run dev` 运行
-
-`npm run serve` 热更新
-
-`npm run build` 打包
-
-将`dist/index.js`里面的文件替换到Android中`assets/dist/index.js`和`assets/index.js`中
-
-
-# vue中做一些监听事件
+# vue中监听键盘事件
 
 ```
 created(){
@@ -194,143 +197,60 @@ created(){
 },
 ```
 
+---
 # vue获取后端数据应该在created还是mounted方法
 
-看情况了，一般放到created里面就可以了，这样可以及早发请求获取数据，如果有依赖dom必须存在的情况，就放到`mounted(){this.$nextTick(() => { /* code */ })}`里面
+看情况了，一般放到`created`里面就可以了，这样可以及早发请求获取数据，如果有依赖`dom`必须存在的情况，就放到`mounted(){this.$nextTick(() => { /* code */ })}`里面。
 
-# vue的target:blank跳转
+---
 
-```
-    let routeUrl = this.$router.resolve({
-    path: '/peoManager/peopleDetails',
-    query: {index: index, peopleID: item.peopleID}
-    })
-    window.open(routeUrl.href, '_blank')
-```
-
-# 消息无缝滚动
+# vue中新标签用target:blank跳转
 
 ```
- export default {
-data() {
-  return {
-      animate:false,
-      items:[
-          {name:"马云"},
-          {name:"雷军"},
-          {name:"王勤"}
-      ]
-  }
-},
-created(){
-    setInterval(this.scroll,1000)
-},
-methods: {
-    scroll(){
-       this.animate=true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
-       setTimeout(()=>{      //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
-               this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
-               this.items.shift();               //删除数组的第一个元素
-               this.animate=false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
-       },500)
-    }
-}
+let routeUrl = this.$router.resolve({
+  path: '/peoManager/peopleDetails',
+  query: {index: index, peopleID: item.peopleID}
+})
+window.open(routeUrl.href, '_blank')
 ```
 
-[参考](https://segmentfault.com/a/1190000012272194)
+---
 
-# 图片错误时显示默认图片
+# mode模式区别
 
-```
-<img v-bind:src="userData.photo" :onerror="logo" class="img-box4">  
-
-data: () => ({  
-    logo: 'this.src="' + require('../assets/img.png') + '"'
-}) 
-```
-
-懒加载方法：
-
-`<img v-lazy:background-image="{src: item.pic_url, error: 'http://bpic.588ku.com/back_pic/03/53/97/65579958bb0ec9a.jpg!r850/fw/400', loading: 'default_banner'}" />`
-
-注意：`error`里的图片得是网络图片，用本地图片我设置了很久都没有效果。
-
-# 引入mui
-
-复制mui.min.js进去
-
-在vue页面中引入
-
-`import mui from '../../js/mui.js';`
-
-在严格模式下报错
-
-在.babel.rc中加入如下代码，排除mui相关的js就可以了：
-
-```
-
-{
-"presets": [ "es2015" ],
-"ignore": [
-"./src/lib/mui/mui.min.js",
-"./src/lib/mui/mui.picker.js",
-"./src/lib/mui/mui.poppicker.js"
-]
-}
-```
-
-# axios篇
-
-## 设置请求头带cooike
-
-```
-import axios from 'axios'
-axios.defaults.withCredentials=true;//让ajax携带cookie
-Vue.prototype.$axios = axios;
-```
-
-# mode模式
-
-## history
+## 【1】history
 
 优点：地址栏不会有`#`号，利于`SEO`优化
 
 缺点：线上刷新后会404，需要前后台都配置才行
 
-## hash
+## 【2】hash
 
 优点：线上线下都没有刷新异常的问题
 
 缺点：地址栏有`#`号，对`SEO`不友好
 
-# vue中nextTick使用
+---
 
-```
-//改变数据
-var msg = 'change';
-
-//想要立即使用刚刚赋的值‘change’，此时是不行的，DOM并没有更新
-console.log(vm.$el.textContext);//不能得到 'change'
-
-//这样可以获取，nextTick会在DOM更新后获取
-this.$nextTick(()=>{
-    console.log(vm.$el.textContext);//可以得到 'change'
-})
-```
-
-# vue项目中的for循环引发的血案
+# vue项目for循环注意事项
 
 项目中用了
 ```
 v-for="(item) in arr"
 ```
+
 改成
 ```
 v-for="item in arr"
 ```
+
+运行没有问题，但打包会报错
+
+---
+
 # vue父子组件相互通信
 
-## 子 => 父 传值
+## 【1】子 => 父 传值
 
 ### child.vue
 
@@ -350,7 +270,7 @@ get(val){
 }
 ```
 
-## 父 => 子 传值
+## 【2】父 => 子 传值
 
 ### father.vue
 
@@ -373,7 +293,7 @@ watch:{
 ...
 ```
 
-## 父 => 子 调方法
+## 【3】父 => 子 调方法
 
 ### father.vue
 
@@ -398,7 +318,9 @@ sendData() {
 
 `this.$refs.child`只有在渲染完了才能获取到。
 
-# vue兄弟组件通过eventbus传值
+---
+
+# vue兄弟组件用eventbus通信
 
 
 新建`bus.js`
@@ -435,6 +357,303 @@ mounted() {
     })
 },
 ```
+
+---
+
+# `window.eventBus`实现vue页面与普通js数据通信
+
+适用于`echarts.js`和`map.js`。
+
+重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
+
+main.js
+```
+// 引入eventBus
+import EventBus from './bus/eventBus'; 
+Vue.prototype.$eventBus = EventBus;
+
+if (window) {
+  window.$eventBus = EventBus;
+}
+```
+
+page.vue
+```
+window.$eventBus.$emit('residenceData', resData.map(v => v.lx));
+```
+
+index.js
+```
+var attackSourcesName = [];
+window.$eventBus.$on('residenceData',v=>{
+    attackSourcesName = v;
+})
+```
+
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)
+
+---
+
+
+# filter访问data数据
+
+```
+var that;
+export default {
+    data() {
+        return {
+            peopleArr:[{name:xx,value:1},{name:xxx,value:2}]
+        }
+    },
+    beforeCreate(){
+        that = this;
+    },
+    filter:{
+        filterPeople(val){
+            return that.peopleArr[0].value;
+        }
+    }
+}
+```
+
+重点：
+- 定义`that`；
+- 在`beforeCreate`之前把`that`绑定在`this`(`vue`)上；
+- 在`filter`中使用`that`.
+
+---
+# Vue导航守卫BeforeRouteEnter、BeforeRouteUpdate
+
+## beforeRouteEnter用法：keepAlive-列表不缓存详情页缓存
+
+```
+meta: {
+    keepAlive: true,
+    isBack:false
+}
+```
+
+```
+beforeRouteEnter(to,from,next){
+    // 如果是从详情页回到列表页
+    console.log(from.name)
+    if(from.name == '列表详情'){
+        to.meta.isBack = true;
+    }
+    next();
+},
+activated(){
+    // 如果不是从详情页回到列表页，则刷新数据
+    if(!this.$route.meta.isBack){
+        // 在此处获取数据后不用在created里调用数据
+        this.reset();
+    }
+    this.$route.meta.isBack = false;
+},
+
+```
+
+
+## beforeRouteEnter访问data里面的数据
+
+```
+beforeRouteEnter(to, from, next) {
+    if(to.name == '智慧护理工作台') {
+        next(vm=>{
+            vm.show=true;
+        })
+    }
+    next();
+},
+```
+
+重点：
+`next(vm=>{vm.show=true;})`
+
+
+
+## beforeRouteUpdate
+
+当页面路由不变，参数改变时用它
+
+```
+beforeRouteUpdate(to,form,next){
+    console.log('路由更新之前：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
+    next()
+    console.log('路由更新之后：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
+}
+```
+
+---
+
+# 使用Vuex
+
+## 下载
+
+`npm install vuex --save`
+
+## `main.vue`
+
+```
+import { mapState,mapMutations } from 'vuex';
+...
+computed: {
+    ...mapState({
+    tabsList: 'tabsList'
+    })
+},
+methods: {
+    ...mapMutations(["handleTabsList"]),
+}
+```
+这样就可以直接在`vue`文件中写`this.tabsList`来获取vuex中的值。
+如：
+
+原来：
+```
+this.$store.commit('handleTabsList',this.$store.state.tabsList)
+```
+
+现在：
+```
+this.handleTabsList(this.tabsList)
+
+```
+
+## store.js
+
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    state: {
+        tabsList: [] || localStorage.getItem('tabsList')
+    },
+    mutations: {
+        handleTabsList: (state, tabsList) => {
+            state.tabsList = tabsList
+            localStorage.setItem('tabsList', JSON.stringify(tabsList))
+        }
+    },
+    actions: {
+
+    },
+    getters: {
+        tabsList: (state) => state.tabsList
+    }
+})
+```
+
+## main.js
+
+```
+import store from './store'
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
+})
+
+```
+
+---
+
+# 使用静态资源
+
+`image:require('../../assets/img/fn1.png')`
+
+---
+
+# element-UI的坑
+
+## 翻页
+
+`el-pagination`翻页组件重置时`:current-page="currentPage”`的值已经是1了，内容也是1了，但是DOM没更新，要加`.sync`，变成`:current-page.sync="currentPage”`。
+
+## 关闭element中的多条消息（只显示一条）
+
+```
+this.$message.closeAll();
+this.$message.success('info');
+```
+
+## 让el-select可以绑定对象
+
+```
+<el-select value-key="name">
+  <el-option
+    v-for="item in list"
+    :key="item.id"
+    :label="item.name"
+    :value="item">
+  </el-option>
+</el-select>
+```
+
+## 手动控制popover弹层的显示与隐藏状态
+
+```
+<popover ref="popover"></popover>
+ 
+// ElementUI并没有给我们明确控制popover弹层显示与关闭状态的方法，但是通过ref获取元素之后发现，元素上面已经内置关闭和打开的方法，
+// 开启 doShow()   开启调用的方法(一般都是手动触发,不常用)
+// 关闭 doClose()  关闭弹层调用的方法(用于刚刚我们说到的场景)
+```
+
+表格中多个popover
+
+```
+<template slot-scope="scope">
+  <div class="operation">
+    <el-popover trigger="click"  :ref="`popover-${scope.$index}`"  placement="top" width="100" >
+      <p class="el-icon-warning">  确定删除</p>
+      <div style="text-align: right; margin: 0">
+        <el-button size="mini" type="text" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >取消</el-button>
+        <el-button type="primary" size="mini" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >确定</el-button>
+      </div>
+      <span slot="reference">删除</span>
+    </el-popover>
+  </div>
+</template>
+
+```
+
+---
+
+# vue2简单的双向绑定原理
+
+```
+<div id="div"></div>
+<input type="text" name="" id="test" value="" />
+  <script>
+  var obj = {}
+  Object.defineProperty(obj,'age',{
+    get:function() {console.log('get')},
+    set:function(newValue) {
+      document.getElementById('test').value = newValue
+      document.getElementById('div').innerHTML = newValue
+    }
+  })
+  document.addEventListener('input',(e)=> {
+    obj.age = e.target.value
+  })
+  </script>
+```
+
+---
+# v-if与v-show
+
+`v-if`：整个元素删除；适用于条件少变动时。
+`v-show`：用`display:none`；适用于频繁切换。
+
+---
+
 
 # vue下swiper的使用
 
@@ -497,6 +716,8 @@ components: {
     heidth:100px!important;
 }
 ```
+
+---
 
 # vue国际化i18n使用
 
@@ -607,7 +828,7 @@ new Vue({
 }
 ```
 
-# 使用vue-i18n
+## 使用vue-i18n
 
 ```
 <h1 >{{$t('common.home')}}</h1>
@@ -621,336 +842,90 @@ changeTest(){
 },
 ```
 
-# 让el-select可以绑定对象
+---
+
+
+
+# 消息无缝滚动
 
 ```
-<el-select value-key="name">
-  <el-option
-    v-for="item in list"
-    :key="item.id"
-    :label="item.name"
-    :value="item">
-  </el-option>
-</el-select>
-```
-
-# vue中让filter可以访问data里面的数据
-
-```
-var that;
 export default {
-    data() {
-        return {
-            peopleArr:[{name:xx,value:1},{name:xxx,value:2}]
-        }
-    },
-    beforeCreate(){
-        that = this;
-    },
-    filter:{
-        filterPeople(val){
-            return that.peopleArr[0].value;
-        }
+  data() {
+    return {
+        animate:false,
+        items:[
+            {name:"马云"},
+            {name:"雷军"},
+            {name:"王勤"}
+        ]
     }
-}
-```
-
-重点：
-定义that；
-在beforeCreate之前把that绑定在this(vue)上；
-在filter中使用that.
-
-# vue中让beforeRouteEnter可以访问data里面的数据
-
-```
-beforeRouteEnter(to, from, next) {
-    if(to.name == '智慧护理工作台') {
-        next(vm=>{
-            vm.show=true;
-        })
-    }
-    next();
-},
-```
-
-重点：
-next(vm=>{vm.show=true;})
-
-
-# 使用Vuex
-
-## 下载
-
-`npm install vuex --save`
-
-## `main.vue`
-
-```
-import { mapState,mapMutations } from 'vuex';
-...
-computed: {
-    ...mapState({
-    tabsList: 'tabsList'
-    })
-},
-methods: {
-    ...mapMutations(["handleTabsList"]),
-}
-```
-这样就可以直接在`vue`文件中写`this.tabsList`来获取vuex中的值。
-如：
-
-原来：
-```
-this.$store.commit('handleTabsList',this.$store.state.tabsList)
-```
-
-现在：
-```
-this.handleTabsList(this.tabsList)
-
-```
-
-## store.js
-
-```
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-    state: {
-        tabsList: [] || localStorage.getItem('tabsList')
-    },
-    mutations: {
-        handleTabsList: (state, tabsList) => {
-            state.tabsList = tabsList
-            localStorage.setItem('tabsList', JSON.stringify(tabsList))
-        }
-    },
-    actions: {
-
-    },
-    getters: {
-        tabsList: (state) => state.tabsList
-    }
-})
-```
-
-## main.js
-
-```
-import store from './store'
-
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
-})
-
-```
-
-# 使用静态资源
-
-`image:require('../../assets/img/fn1.png')`
-
-# element-UI的坑
-
-## 翻页
-
-`el-pagination`翻页组件重置时`:current-page="currentPage”`的值已经是1了，内容也是1了，但是DOM没更新，要加`.sync`，变成`:current-page.sync="currentPage”`。
-
-# 关闭element中的多条消息（只显示一条）
-
-```
-this.$message.closeAll();
-this.$message.success('info');
-```
-
-## 手动控制popover弹层的显示与隐藏状态
-
-```
-<popover ref="popover"></popover>
- 
-// ElementUI并没有给我们明确控制popover弹层显示与关闭状态的方法，但是通过ref获取元素之后发现，元素上面已经内置关闭和打开的方法，
-// 开启 doShow()   开启调用的方法(一般都是手动触发,不常用)
-// 关闭 doClose()  关闭弹层调用的方法(用于刚刚我们说到的场景)
-```
-
-表格中多个popover
-
-```
-<template slot-scope="scope">
-  <div class="operation">
-    <el-popover trigger="click"  :ref="`popover-${scope.$index}`"  placement="top" width="100" >
-      <p class="el-icon-warning">  确定删除</p>
-      <div style="text-align: right; margin: 0">
-        <el-button size="mini" type="text" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >取消</el-button>
-        <el-button type="primary" size="mini" @click="scope._self.$refs[`popover-${scope.$index}`].doClose()" >确定</el-button>
-      </div>
-      <span slot="reference">删除</span>
-    </el-popover>
-  </div>
-</template>
-
-```
-
-# 列表不缓存详情页缓存
-
-```
-meta: {
-    keepAlive: true,
-    isBack:false
-}
-```
-
-```
-beforeRouteEnter(to,from,next){
-    // 如果是从详情页回到列表页
-    console.log(from.name)
-    if(from.name == '列表详情'){
-        to.meta.isBack = true;
-    }
-    next();
-},
-activated(){
-    // 如果不是从详情页回到列表页，则刷新数据
-    if(!this.$route.meta.isBack){
-        // 在此处获取数据后不用在created里调用数据
-        this.reset();
-    }
-    this.$route.meta.isBack = false;
-},
-
-```
-
-# `window.eventBus`实现vue页面与普通js数据通信
-
-适用于`echarts.js`和`map.js`。
-
-重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
-
-main.js
-```
-// 引入eventBus
-import EventBus from './bus/eventBus'; 
-Vue.prototype.$eventBus = EventBus;
-
-if (window) {
-  window.$eventBus = EventBus;
-}
-```
-
-page.vue
-```
-window.$eventBus.$emit('residenceData', resData.map(v => v.lx));
-```
-
-index.js
-```
-var attackSourcesName = [];
-window.$eventBus.$on('residenceData',v=>{
-    attackSourcesName = v;
-})
-```
-
-![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)
-
-# 新标签页打开链接
-
-```
-var routerUrl = this.$router.resolve({path:'/elder/contract'})
-window.open(routerUrl.href,'_blank');
-```
-
-# beforeRouteUpdate
-
-当页面路由不变，参数改变时用它
-
-```
-beforeRouteUpdate(to,form,next){
-    console.log('路由更新之前：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
-    next()
-    console.log('路由更新之后：从to获取参数', to.params, '从this.$route获取参数', this.$route.params)
-}
-```
-
-# 限制input只能输入number
-
-在.number修饰符无效的情况下
-
-方法一：
-```
-<el-input v-model.number=“value”v-on:input="limitNumber" placeholder="请输入电话"></el-input>
-
-    limitNumber (e) {
-      return this.value = e.replace(/[^\d]/g,'');
-    },
-```
-
-方法二：
-
-```
-<el-input v-model.number=“value” v-number-only placeholder="请输入电话"></el-input>
-```
-
-封装个自定义指令放在标签上
-
-```
-directives: {
-  numberOnly: {
-    bind: function(el) {
-      el.handler = function() {
-        el.value = Number(el.value.replace(/\D+/, ''))
-      }
-      el.addEventListener('input', el.handler)
-    },
-    unbind: function(el) {
-      el.removeEventListener('input', el.handler)
+  },
+  created(){
+      setInterval(this.scroll,1000)
+  },
+  methods: {
+    scroll(){
+       this.animate=true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
+       setTimeout(()=>{      //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
+          this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
+          this.items.shift();               //删除数组的第一个元素
+          this.animate=false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
+       },500)
     }
   }
-},
-```
-
-方法三：
-
-```
-<el-input v-model.number=“value” oninput="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入电话"></el-input>
-```
-
-方法四：
-
-```
-if(Number.isNaN(Number(this.searchForm.contactPhone))){
-  return this.$message.error('联系电话只能输入数字！')
 }
 ```
 
-## vue2简单的双向绑定原理
+[参考](https://segmentfault.com/a/1190000012272194)
+
+---
+
+# 图片错误时显示默认图片
 
 ```
-<div id="div"></div>
-<input type="text" name="" id="test" value="" />
-  <script>
-  var obj = {}
-  Object.defineProperty(obj,'age',{
-    get:function() {console.log('get')},
-    set:function(newValue) {
-      document.getElementById('test').value = newValue
-      document.getElementById('div').innerHTML = newValue
-    }
-  })
-  document.addEventListener('input',(e)=> {
-    obj.age = e.target.value
-  })
-  </script>
+<img v-bind:src="userData.photo" :onerror="logo" class="img-box4">  
+
+data: () => ({  
+    logo: 'this.src="' + require('../assets/img.png') + '"'
+}) 
 ```
 
-## v-if与v-show
+懒加载方法：
 
-`v-if`：整个元素删除；适用于条件少变动时。
-`v-show`：用`display:none`；适用于频繁切换。
-**eCharts中要使用v-if**
+`<img v-lazy:background-image="{src: item.pic_url, error: 'http://bpic.588ku.com/back_pic/03/53/97/65579958bb0ec9a.jpg!r850/fw/400', loading: 'default_banner'}" />`
+
+注意：`error`里的图片得是网络图片，用本地图片我设置了很久都没有效果。
+
+---
+
+# 图片中绝对地址和相对址引用
+
+`<img src="~static/20180315130936.png"/>`
+
+---
+
+# 引入不能npm下载的js（如mui）
+
+复制`mui.min.js`进去
+
+在`vue`页面中引入
+
+`import mui from '../../js/mui.js';`
+
+在严格模式下报错
+
+在`.babel.rc`中加入如下代码，排除mui相关的js就可以了：
+
+```
+
+{
+"presets": [ "es2015" ],
+"ignore": [
+"./src/lib/mui/mui.min.js",
+"./src/lib/mui/mui.picker.js",
+"./src/lib/mui/mui.poppicker.js"
+]
+}
+```
+
+---

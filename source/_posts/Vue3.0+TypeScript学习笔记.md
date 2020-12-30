@@ -19,7 +19,7 @@ yarn global add @vue/cli
 
 使用`vue --version`检查版本大于`@vue/cli 4.5.6`即可。
 
-## vue-cli命令行搭建
+## 【1】vue-cli命令行搭建
 
 9步式对话。
 
@@ -28,12 +28,14 @@ yarn global add @vue/cli
 3.选择TypeScript
 4.创建完成后使用`yarn serve`运行项目
 
-## vue-cli图形界面搭建
+## 【2】vue-cli图形界面搭建
 
 1.使用`vue ui`创建
 2.打开运行的`http://localhost:80`
 3.创建新项目
 4.创建完成后使用`yarn serve`运行项目
+
+---
 
 # setup和ref
 
@@ -78,9 +80,11 @@ export default defineComponent({
 
 `setup`函数代替了`vue2`中的`data`和`methods`属性
 
+---
+
 # 优化程序
 
-## reactive优化
+## 【1】reactive优化
 
 为什么要用reactive，因为不用的话，在方法里面要用`selectGirl.value`才能获取到值。
 
@@ -117,7 +121,7 @@ export default {
 </script>
 ```
 
-## 给data增加类型注解优化
+## 【2】给data增加类型注解优化
 
 `data`变量没有作`类型注解`，而是采用了`TypeScript`的`类型推断`。
 
@@ -130,7 +134,7 @@ interface DataProps {
 const data: DataProps = ...
 ```
 
-## 用toRefs优化DOM中的对象
+## 【3】用toRefs优化DOM中的对象
 
 引入：
 
@@ -173,9 +177,11 @@ DOM:
 <div>你选择了【{{ selectGirl }}】为你服务</div>
 ```
 
+---
+
 # 生命周期
 
-## 对比
+## 【1】对比
 
 ```
 Vue2--------------vue3
@@ -192,7 +198,7 @@ deactivated   -> onDeactivated
 errorCaptured -> onErrorCaptured
 ```
 
-## 使用
+## 【2】使用
 
 ```
 setup() {
@@ -227,7 +233,7 @@ setup() {
   },
 ```
 
-## 和vue2的生命周期也能混合使用
+## 【3】和vue2的生命周期也能混合使用
 
 ```
 setup() {
@@ -250,9 +256,11 @@ updated() {
 },
 ```
 
+---
+
 # onRenderTracked()和onRenderTriggered()钩子函数
 
-## onRenderTracked状态跟踪
+## 【1】onRenderTracked状态跟踪
 
 只要页面中有`update`的情况，就会跟踪生成`event`。
 
@@ -267,7 +275,7 @@ onRenderTracked((event) => {
 });
 ```
 
-## onRenderTriggered状态触发
+## 【2】onRenderTriggered状态触发
 
 只有发生变化的值才会触发
 
@@ -287,6 +295,7 @@ event:
 - target 目前页面中的响应变量和函数
 ```
 
+---
 # watch
 
 例子上说`methods`无法改变`document.title`，要用`watch`监听后改，但我尝试后都是可以的。
@@ -311,9 +320,11 @@ return {
 }
 ```
 
+---
+
 # 模块化
 
-## 模块化JS功能
+## 【1】模块化JS功能
 
 假设有很多页面需要公用一个时间函数，这时先新建一个`ts`文件，实现这个功能。
 
@@ -359,7 +370,7 @@ export default defineComponent({
 </script>
 ```
 
-## 模块化组件
+## 【2】模块化组件
 
 随机图片展示：
 
@@ -422,11 +433,13 @@ export default defineComponent({
 
 ```
 
+---
+
 # teleport
 
 瞬间移动组件、独立组件。
 
-## 普通组件
+## 【1】普通组件
 
 Modal.vue
 
@@ -462,7 +475,7 @@ const app = {
 //...
 ```
 
-## 使用teleport
+## 【2】使用teleport
 
 更改modal.vue
 ```
@@ -486,9 +499,11 @@ const app = {
 
 如果在`app.vue`中使用了`<modal/ >`组件 的话，页面会显`示modal`中的内容。
 
+---
+
 # Suspense异步请求组件
 
-## 1. 编写AsyncShow.vue异步返回数据的组件
+## 【1】编写AsyncShow.vue异步返回数据的组件
 
 ```
 <template>
@@ -510,7 +525,7 @@ export default defineComponent({
 </script>
 ```
 
-## 2. 引用
+## 【2】引用
 
 ```
 import AsyncShow from "./components/AsyncShow.vue";
@@ -527,7 +542,7 @@ const app = {
 
 ```
 
-## 3. 使用
+## 【3】使用
 
 ```
 <div>

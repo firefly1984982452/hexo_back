@@ -9,11 +9,13 @@ categories:
 
 # 搭建
 
-用`vue-cli`新建好项目
+用`vue-cli`[创建](https://firefly1984982452.github.io/2018/03/19/vue%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/#vue-cli%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE)好项目
+
+---
 
 # css
 
-## rem
+## 【1】rem
 
 新建一个`rem-config.js`文件
 
@@ -47,7 +49,7 @@ import remConfig from './config/rem-config'; // 配置rem
 remConfig(); // 执行rem
 ```
 
-## 初始化css
+## 【2】初始化css
 
 新建`reset.css`
 
@@ -83,11 +85,11 @@ input[type="number"]{-moz-appearance:textfield;}
 </style>
 ```
 
-## 字体文件
+## 【3】字体文件
 
 一般设计稿上会用其它字体。
 
-1.首先新建font文件夹，把所有的ttf字体放入，注意一定要是小写后缀名，大写后缀可能会导致报错。
+1.首先新建`font`文件夹，把所有的`ttf`字体放入，注意一定要是小写后缀名，大写后缀可能会导致报错。
 
 2.然后新建一个`font.css`文件记录所有字体
 
@@ -114,6 +116,8 @@ import './config/font-family-config.css'; // 配置字体
 font-family: 'PINGFANG-REGULAR';
 ```
 
+---
+
 # 组件
 
 公用组件全局配置
@@ -133,9 +137,11 @@ Vue.component('Box', Box);
 </div>
 ```
 
+---
+
 # 路由
 
-## 定义主页及路由跳转文件
+## 【1】定义主页及路由跳转文件
 
 ```
 home.vue
@@ -144,7 +150,7 @@ page1.vue
 page2.vue
 ```
 
-## 在route.js里面定义
+## 【2】在route.js里面定义
 
 ```
 import Vue from 'vue'
@@ -184,7 +190,7 @@ export default new Router({
 
 ```
 
-## 在home里面跳转
+## 【3】在home里面跳转
 
 ```
 ...
@@ -227,323 +233,26 @@ export default new Router({
   }
 ```
 
+---
+
 # vuex
 
 [链接](https://firefly1984982452.github.io/2018/03/19/vue%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/#%E4%BD%BF%E7%94%A8Vuex)
+
+---
 
 # eventBus
 
 [链接](https://firefly1984982452.github.io/2018/03/19/vue%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/#vue%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E9%80%9A%E8%BF%87eventbus%E4%BC%A0%E5%80%BC)
 
+---
+
 # 配置echarts
 
-## 下载
+[链接](https://firefly1984982452.github.io/2020/09/08/echarts%E8%B6%85%E5%85%A8%E8%B6%85%E8%AF%A6%E6%83%85%E9%85%8D%E7%BD%AE%E9%A1%B9/#%E5%9C%A8vue%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8)
 
-```
-npm install echarts --save
-```
-
-## 写echarts组件
-
-```
-<template>
-  <div :style="{width: width, height:height}">
-      <div class="echarts" :id="domID" :style="{width: width,height:height,cursor: 'col-resize'}"></div>
-  </div>
-</template>
-
-<script>
-import echarts from 'echarts'
-import { guid } from '../assets/js/common'
-export default {
-  data () {
-    return {
-      hasError: false,
-      err: '',
-      domID: 'd_' + guid(),
-      option: null,
-      chart: null
-    }
-  },
-  props: {
-    width: {
-      default: '100%',
-      type: String
-    },
-    height: {
-      default: '100%',
-      type: String
-    },
-    config: {
-      default: '',
-      type: String
-    },
-    hand: {
-      default: 'false',
-      type: String
-    }
-  },
-  created () {
-    this.option = require('../config/echartsConfig/' + this.config).option
-  },
-  mounted: function () {
-    window.addEventListener(
-        "resize",this.resizeB,false
-    )
-    try {
-      if (this.option == null) {
-        this.err = '找不到配置信息'
-        this.hasError = true
-      } else {
-        this.chart = echarts.init(document.getElementById(this.domID))
-        document.getElementById(this.domID).style.height = '100%'
-        this.chart.setOption(this.option)
-        this.chart.on('click', (params) => {
-          this.$bus.emit('dataFromE', params)
-          if (this.option.selfTitle === '事件统计') {
-            if (params.componentType === 'xAxis') {
-              this.option.xAxis.axisLabel.textStyle.color = (value, index) => {
-                return value === params.value ? '#40F6B9' : '#89ADBF'
-              }
-              this.option.series[0].itemStyle.normal = {
-                barBorderRadius: [5, 5, 0, 0],
-                color: (value, index) => {
-                  return value.name === params.value ? new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: 'rgba(66,255,190,1)'},
-                      {offset: 1, color: 'rgba(66,255,190,0.13)'}
-                    ]
-                  ) : new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: 'rgba(0,226,255,1)'},
-                      {offset: 1, color: 'rgba(0,193,255,0.13)'}
-                    ]
-                  )
-                }
-              }
-            } else {
-              this.option.xAxis.axisLabel.textStyle.color = (value, index) => {
-                return value === params.name ? '#40F6B9' : '#89ADBF'
-              }
-              this.option.series[0].itemStyle.normal = {
-                barBorderRadius: [5, 5, 0, 0],
-                color: (value, index) => {
-                  return value.name === params.name ? new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: 'rgba(66,255,190,1)'},
-                      {offset: 1, color: 'rgba(66,255,190,0.13)'}
-                    ]
-                  ) : new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: 'rgba(0,226,255,1)'},
-                      {offset: 1, color: 'rgba(0,193,255,0.13)'}
-                    ]
-                  )
-                }
-              }
-            }
-            this.chart.setOption(this.option)
-          }
-        })
-      }
-    } catch (e) {
-      this.err = e.message
-      this.hasError = true
-    }
-  },
-  activated () {
-    let timer = setTimeout(() => {
-      this.raiseSroll()
-      clearTimeout(timer)
-    }, 400)
-    window.onresize =() => {
-        this.resizeB
-    }
-    window.addEventListener(
-        "resize",this.resizeB,false
-    )
-  },
-  deactivated () {
-    window.removeEventListener("resize",this.resizeB);
-    this.raiseSroll(false)
-  },
-  methods: {
-    refresh: function () {
-      this.chart.setOption(this.option)
-    },
-    dispatchAction (e) {
-      setTimeout(() => {
-        this.chart.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 0,
-          dataIndex: 0
-        })
-        this.chart.on('mouseout', (params) => {
-          this.chart.dispatchAction({
-            type: 'highlight',
-            seriesIndex: 0,
-            dataIndex: 0
-          })
-        })
-        this.chart.on('mouseover', (params) => {
-          if (params.name === e[0].name) {
-            this.chart.dispatchAction({
-              type: 'highlight',
-              seriesIndex: 0,
-              dataIndex: 0
-            })
-          } else {
-            this.chart.dispatchAction({
-              type: 'downplay',
-              seriesIndex: 0,
-              dataIndex: 0
-            })
-          }
-        })
-      }, 400)
-      this.chart.setOption(this.option)
-    },
-    resizeB: function () {
-      let timer1 = setTimeout(() => {
-        this.chart.resize()
-        // console.log('调用了改变echart自适应')
-        this.refresh()
-        clearTimeout(timer1)
-      }, 400)
-    }
-  }
-}
-</script>
-
-<style scoped>
-.echarts {
-  height: 100% !important;
-}
-.echarts div {
-  height: 100% !important;
-}
-</style>
-<style>
-  .handClass>div>canvas{
-    cursor: col-resize !important;
-  }
-</style>
-
-```
-
-## main.js里面定义
-
-和常规的注册全局组件一样的写法
-
-```
-// 引入echarts公用组件
-import Ehcart from '@/components/echarts'; 
-Vue.component('ehcart', Ehcart);
-```
-
-## 在vue里面使用
-
-```
-<ehcart
-  ref="echarts_nevel"
-  config='test'
-  height="3.58rem"
-  width='100%'/>
-
-let echart = this.$refs.echarts_nevel;
-let resData = res.data;
-echart.option.xAxis.data = resData.map(v => v.lx);
-echart.option.series[0].data = resData.map(v => v.vx);
-echart.resizeB(); // 如果要后期改变大小
-echart.refresh();
-```
-
-## 配置echarts具体内容
-
-```
-import {getAdapterFont} from '../../assets/js/common'
-export const option = {
-    tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ({d}%)'
-    },
-    legend: {
-        orient: 'vertical',
-        left: 10,
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
-        fontSize: getAdapterFont(20)
-    },
-    series: [
-        {
-            name: '访问来源',
-            type: 'pie',
-            radius: ['50%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '30',
-                    fontWeight: 'bold'
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: [
-                {value: 335, name: '直接访问'},
-                {value: 310, name: '邮件营销'},
-                {value: 234, name: '联盟广告'},
-                {value: 135, name: '视频广告'},
-                {value: 1548, name: '搜索引擎'}
-            ]
-        }
-    ]
-}
-```
-
-## echarts其它公用方法common.js
-
-common.js
-
-```
-/*
-生成guid
-*/
-export const guid = function () {
-    let guid = ''
-    for (let i = 1; i <= 32; i++) {
-      let n = Math.floor(Math.random() * 16.0).toString(16)
-      guid += n
-    }
-    return guid
-  }
-
-// 适配分辨率的echarts-一般字体
-export const getAdapterFont = (e = 7) => {
-    e = e || 0
-    let wid = document.body.clientWidth
-    if (wid < 3000) {
-      return document.body.clientWidth / 1000 * e
-    } else {
-      return 1920 / 1000 * e * 1.5
-    }
-}
-```
-
+---
 # 写README.MD
-
-
-## xx
-
-> xxUI
 
 ### 项目结构
 ```

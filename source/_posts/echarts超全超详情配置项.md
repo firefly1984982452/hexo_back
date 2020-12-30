@@ -13,9 +13,314 @@ categories:
 [官方实例链接](https://echarts.apache.org/examples/zh/index.html)
 [官方Gallery更多实例链接](https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all)
 
+---
+
 # 在vue中如何使用
 
-[链接](https://firefly1984982452.github.io/2020/05/08/%E6%96%B0%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%90%8E%E8%A6%81%E6%90%AD%E5%BB%BA%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%A1%86%E6%9E%B6)
+
+## 【1】下载
+
+```
+npm install echarts --save
+```
+
+## 【2】写echarts组件
+
+```
+<template>
+  <div :style="{width: width, height:height}">
+      <div class="echarts" :id="domID" :style="{width: width,height:height,cursor: 'col-resize'}"></div>
+  </div>
+</template>
+
+<script>
+import echarts from 'echarts'
+import { guid } from '../assets/js/common'
+export default {
+  data () {
+    return {
+      hasError: false,
+      err: '',
+      domID: 'd_' + guid(),
+      option: null,
+      chart: null
+    }
+  },
+  props: {
+    width: {
+      default: '100%',
+      type: String
+    },
+    height: {
+      default: '100%',
+      type: String
+    },
+    config: {
+      default: '',
+      type: String
+    },
+    hand: {
+      default: 'false',
+      type: String
+    }
+  },
+  created () {
+    this.option = require('../config/echartsConfig/' + this.config).option
+  },
+  mounted: function () {
+    window.addEventListener(
+        "resize",this.resizeB,false
+    )
+    try {
+      if (this.option == null) {
+        this.err = '找不到配置信息'
+        this.hasError = true
+      } else {
+        this.chart = echarts.init(document.getElementById(this.domID))
+        document.getElementById(this.domID).style.height = '100%'
+        this.chart.setOption(this.option)
+        this.chart.on('click', (params) => {
+          this.$bus.emit('dataFromE', params)
+          if (this.option.selfTitle === '事件统计') {
+            if (params.componentType === 'xAxis') {
+              this.option.xAxis.axisLabel.textStyle.color = (value, index) => {
+                return value === params.value ? '#40F6B9' : '#89ADBF'
+              }
+              this.option.series[0].itemStyle.normal = {
+                barBorderRadius: [5, 5, 0, 0],
+                color: (value, index) => {
+                  return value.name === params.value ? new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: 'rgba(66,255,190,1)'},
+                      {offset: 1, color: 'rgba(66,255,190,0.13)'}
+                    ]
+                  ) : new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: 'rgba(0,226,255,1)'},
+                      {offset: 1, color: 'rgba(0,193,255,0.13)'}
+                    ]
+                  )
+                }
+              }
+            } else {
+              this.option.xAxis.axisLabel.textStyle.color = (value, index) => {
+                return value === params.name ? '#40F6B9' : '#89ADBF'
+              }
+              this.option.series[0].itemStyle.normal = {
+                barBorderRadius: [5, 5, 0, 0],
+                color: (value, index) => {
+                  return value.name === params.name ? new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: 'rgba(66,255,190,1)'},
+                      {offset: 1, color: 'rgba(66,255,190,0.13)'}
+                    ]
+                  ) : new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      {offset: 0, color: 'rgba(0,226,255,1)'},
+                      {offset: 1, color: 'rgba(0,193,255,0.13)'}
+                    ]
+                  )
+                }
+              }
+            }
+            this.chart.setOption(this.option)
+          }
+        })
+      }
+    } catch (e) {
+      this.err = e.message
+      this.hasError = true
+    }
+  },
+  activated () {
+    let timer = setTimeout(() => {
+      this.raiseSroll()
+      clearTimeout(timer)
+    }, 400)
+    window.onresize =() => {
+        this.resizeB
+    }
+    window.addEventListener(
+        "resize",this.resizeB,false
+    )
+  },
+  deactivated () {
+    window.removeEventListener("resize",this.resizeB);
+    this.raiseSroll(false)
+  },
+  methods: {
+    refresh: function () {
+      this.chart.setOption(this.option)
+    },
+    dispatchAction (e) {
+      setTimeout(() => {
+        this.chart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: 0
+        })
+        this.chart.on('mouseout', (params) => {
+          this.chart.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: 0
+          })
+        })
+        this.chart.on('mouseover', (params) => {
+          if (params.name === e[0].name) {
+            this.chart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 0,
+              dataIndex: 0
+            })
+          } else {
+            this.chart.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 0,
+              dataIndex: 0
+            })
+          }
+        })
+      }, 400)
+      this.chart.setOption(this.option)
+    },
+    resizeB: function () {
+      let timer1 = setTimeout(() => {
+        this.chart.resize()
+        // console.log('调用了改变echart自适应')
+        this.refresh()
+        clearTimeout(timer1)
+      }, 400)
+    }
+  }
+}
+</script>
+
+<style scoped>
+.echarts {
+  height: 100% !important;
+}
+.echarts div {
+  height: 100% !important;
+}
+</style>
+<style>
+  .handClass>div>canvas{
+    cursor: col-resize !important;
+  }
+</style>
+
+```
+
+## 【3】main.js里面定义
+
+和常规的注册全局组件一样的写法
+
+```
+// 引入echarts公用组件
+import Ehcart from '@/components/echarts'; 
+Vue.component('ehcart', Ehcart);
+```
+
+## 【4】在vue里面使用
+
+```
+<ehcart
+  ref="echarts_nevel"
+  config='test'
+  height="3.58rem"
+  width='100%'/>
+
+let echart = this.$refs.echarts_nevel;
+let resData = res.data;
+echart.option.xAxis.data = resData.map(v => v.lx);
+echart.option.series[0].data = resData.map(v => v.vx);
+echart.resizeB(); // 如果要后期改变大小
+echart.refresh();
+```
+
+## 【5】配置echarts具体内容
+
+```
+import {getAdapterFont} from '../../assets/js/common'
+export const option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 10,
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+        fontSize: getAdapterFont(20)
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                {value: 335, name: '直接访问'},
+                {value: 310, name: '邮件营销'},
+                {value: 234, name: '联盟广告'},
+                {value: 135, name: '视频广告'},
+                {value: 1548, name: '搜索引擎'}
+            ]
+        }
+    ]
+}
+```
+
+## 【6】echarts其它公用方法common.js
+
+common.js
+
+```
+/*
+生成guid
+*/
+export const guid = function () {
+    let guid = ''
+    for (let i = 1; i <= 32; i++) {
+      let n = Math.floor(Math.random() * 16.0).toString(16)
+      guid += n
+    }
+    return guid
+  }
+
+// 适配分辨率的echarts-一般字体
+export const getAdapterFont = (e = 7) => {
+    e = e || 0
+    let wid = document.body.clientWidth
+    if (wid < 3000) {
+      return document.body.clientWidth / 1000 * e
+    } else {
+      return 1920 / 1000 * e * 1.5
+    }
+}
+```
+
+
+---
 
 # 常见通用配置项
 
@@ -144,9 +449,11 @@ option = {
 };
 ```
 
+---
+
 # 组件其它设置
 
-## 颜色渐变
+## 【1】颜色渐变
 
 ```
 color:[new echarts.graphic.LinearGradient(
@@ -158,14 +465,14 @@ color:[new echarts.graphic.LinearGradient(
     ),'#556783'],
 ```
 
-## 饼图最小区域面积
+## 【2】饼图最小区域面积
 
 ```
 type: 'pie',
 minAngle: 15,
 ```
 
-## y轴文字过长显示省略号
+## 【3】y轴文字过长显示省略号
 
 ```
 axisLabel: {
@@ -184,9 +491,11 @@ axisLabel: {
 },
 ```
 
+---
+
 # js控制echarts
 
-## `window.eventBus`实现vue页面与普通js数据通信
+## 【1】`window.eventBus`实现vue页面与普通js数据通信
 
 重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
 
@@ -216,7 +525,7 @@ window.$eventBus.$on('residenceData',v=>{
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)
 
-## echarts与elementUI中的carousel走马灯结合的轮播
+## 【2】echarts与elementUI中的carousel走马灯结合的轮播
 
 ```
 <el-carousel :interval="3000" arrow="always" class="img-box">
@@ -258,13 +567,15 @@ resizeB: function () {
 }
 ```
 
-## 普通的控制显示隐藏
+## 【3】普通的控制显示隐藏
 
-用`v-if`，不要用`v-show`，这样就会重新生成DOM，而不是显示隐藏。
+用`v-if`，不要用`v-show`，这样就会重新生成`DOM`，而不是显示隐藏。
+
+---
 
 # 常用图表——折线图、柱状图、饼图
 
-## 折线图-line
+## 【1】折线图-line
 
 ```
 option = {
@@ -284,9 +595,9 @@ option = {
 
 ```
 
-## 柱状图-bar
+## 【2】柱状图-bar
 
-### 柱状图横/竖向显示
+### 【2.1】柱状图横/竖向显示
 
 竖向
 ```
@@ -310,7 +621,7 @@ yAxis: {
 },
 ```
 
-### 堆叠
+### 【2.2】堆叠
 
 重点：所有数据有一个共同的`stack`，如`stack: '总量'`。
 
@@ -337,9 +648,9 @@ series: [
 ]
 ```
 
-## 饼图-pie
+## 【3】饼图-pie
 
-### 普通饼图
+### 【3.1】普通饼图
 
 重点：`type: 'pie',radius: '55%',`
 
@@ -360,7 +671,7 @@ series: [
 ]
 ```
 
-### 圆环饼图
+### 【3.2】圆环饼图
 
 重点：`type: 'pie',radius: ['50%', '70%'],`
 
@@ -381,9 +692,11 @@ series: [
 ]
 ```
 
+---
+
 # 其它不常用echarts图
 
-## 仪表盘
+## 【1】仪表盘
 
 ![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gijgt6p502j306h05owf2.jpg)
 
@@ -612,7 +925,7 @@ export const option = {
 }
 ```
 
-## 滚动柱状图排行榜
+## 【2】滚动柱状图排行榜
 
 ![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gijgurb2syj30cw07eq4h.jpg)
 
