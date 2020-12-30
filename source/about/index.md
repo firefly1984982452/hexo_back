@@ -18,10 +18,3 @@ echarts；
 node后台接口、docker；
 小程序；
 MySQL、photoShop等等
-
-# 爱好
-
-## 1.阅读
-
-不求甚解。这是我对自己读书的评价，无褒无贬。
-
