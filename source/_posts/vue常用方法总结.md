@@ -5,6 +5,99 @@ categories:
 - program
 ---
 
+
+## vue绑定内联样式
+
+```
+<div :style="styleData">
+```
+
+```
+data:{
+  styleData: {
+    color: '#f00',
+    fontSize: '13px'
+  }
+}
+```
+
+之前的用法`styleData: 'background:#AB92EB;font-size:22px`
+
+---
+
+# slot插槽
+
+father.vue
+```
+<child>
+  <div slot='up'>start</div>
+  <div> content </div>
+  <div slot='down'> end </div>
+</child>
+```
+
+child.vue
+```
+<div>
+  <slot name='up' />
+  ...
+  <slot name='down' />
+</div>
+```
+
+效果：
+
+`start content end`
+
+---
+
+# mixin
+
+**如果要使用全局filter的话，原来的做法是：**
+
+main.js
+
+```
+Vue.filter('name',function(){
+  return 'test'
+})
+```
+
+**用mixin的做法是：**
+
+mixin.js
+
+```
+export default {
+    filters: {
+        name: function() {
+            return 'test'
+        }
+    }
+}
+```
+
+main.js
+
+```
+import mixin from './mixin'
+Vue.mixin(mixin)
+```
+
+**created和methods也是同样的效果**
+
+```
+export default {
+    created(){
+        console.log('created')
+    }
+}
+```
+
+这时所有的vue文件的created都会调用这里的方法。
+
+---
+
 # 公共组件
 
 ```

@@ -1329,3 +1329,50 @@ img{
 
 比如`float`，`position`、`absolute`
 
+---
+
+# 图片与文字顶部对齐
+
+虽然`flex`可以实现，但有时候如果不想用到`flex`，可以尝试`img`自带的`vertical-align`属性。
+
+```
+img{
+  vertical-align:text-top; // 图片与文字顶部对齐
+}
+```
+
+---
+
+# gsap数字动画
+
+```
+npm install gsap@2.0.2
+
+最新版本我尝试的时候不行，也许不同环境下可以
+```
+
+```
+<input v-model="number" type="text" step="20">
+<p>{{ animatedNumber }}</p>
+...
+import { TweenLite } from 'gsap/TweenMax'
+export default {
+  data() {
+    return {
+      number: 0,
+      tweenedNumber: 0
+    }
+  },
+
+  computed: {
+    animatedNumber: function() {
+      return this.tweenedNumber.toFixed(0);
+    }
+  },
+  watch: {
+    number: function(newValue) {
+      TweenLite.to(this.$data, 2, { tweenedNumber: newValue })
+    }
+  },
+}
+```
