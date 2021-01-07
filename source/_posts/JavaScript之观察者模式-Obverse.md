@@ -175,3 +175,23 @@ boundingClientRect：目标元素的矩形区域的信息
 intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
 intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
 ```
+
+## 懒加载图片实例
+
+```
+const io = new IntersectionObserver(callback);
+let imgs = document.querySelectorAll('[data-src]');
+function callback(entries){
+  entries.forEach((item) => {
+    if(item.isIntersecting){
+      item.target.src = item.target.dataset.src
+      io.unobserve(item.target)
+    }
+
+  })
+}
+
+imgs.forEach((item)=>{
+  io.observe(item)
+})
+```

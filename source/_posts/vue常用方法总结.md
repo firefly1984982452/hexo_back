@@ -6,7 +6,7 @@ categories:
 ---
 
 
-## vue绑定内联样式
+# vue绑定内联样式
 
 ```
 <div :style="styleData">
@@ -100,6 +100,9 @@ export default {
 
 # 公共组件
 
+## 【1】全局使用
+
+main.js
 ```
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -109,6 +112,28 @@ import SixiButton from 'components/common/SixiButton'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.component('six-button', SixiButton)
+```
+
+## 【2】局部使用
+
+test.vue
+```
+<template>
+  <div>
+    <child />
+  </div>
+</template>
+
+...
+
+import child from 'child.vue';
+
+...
+
+components:{
+  child
+}
+
 ```
 
 ---
@@ -719,7 +744,7 @@ this.$message.success('info');
 
 ---
 
-# vue2简单的双向绑定原理
+# vue2的双向绑定原理【`Object.defineProperty`】
 
 ```
 <div id="div"></div>
@@ -740,7 +765,7 @@ this.$message.success('info');
 ```
 
 ---
-# v-if与v-show
+# v-if与v-show的区别
 
 `v-if`：整个元素删除；适用于条件少变动时。
 `v-show`：用`display:none`；适用于频繁切换。
