@@ -307,3 +307,45 @@ structuralClone(obj).then(res=>{
 
 ```
 
+---
+
+# window.postMessage
+
+知识点：
+
+- `addEventListener`监听的必须是`'message'`
+- `window.postMessage`发送的必须是自己的`域名`
+
+[学习链接](https://blog.csdn.net/weixin_40650646/article/details/81777398)
+
+
+需求：在页面a,里打开新窗口b，在b窗口里点击postMessage按钮，能够在a页面收到发来的消息
+
+页面A：
+
+```
+<button onClick="test()">open</button>
+
+...
+
+<script>
+    function test() {
+    
+        let op = window.open('b.html', '_blank'); //打开新窗口，并建立窗口的引用变量op
+    
+        function receiveMessage(event) {
+            console.log('event', event);
+        }
+    
+        op.addEventListener("message", receiveMessage, false); //监听新开窗口发来的消息
+    }
+</script>
+```
+
+页面B：
+
+```
+window.postMessage("hi there!", location.origin);
+```
+
+此时点击页面B的发送消息按钮就能在页面A接收消息了。

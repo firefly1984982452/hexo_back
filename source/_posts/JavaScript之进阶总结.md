@@ -239,6 +239,13 @@ handleClick(e){
 
 ---
 
+---
+
+# 冒泡事件和阻止默认事件
+
+- `event.stopProgation`能阻止冒泡事件
+- `event.preventDefault`能阻止如`<a>`的默认`href`事件
+
 # let和闭包
 
 ## let劫持作用域
@@ -516,49 +523,6 @@ console.log(String(obj)); /// str
 
 ---
 
-# window.postMessage
-
-知识点：
-
-- `addEventListener`监听的必须是`'message'`
-- `window.postMessage`发送的必须是自己的`域名`
-
-[学习链接](https://blog.csdn.net/weixin_40650646/article/details/81777398)
-
-
-需求：在页面a,里打开新窗口b，在b窗口里点击postMessage按钮，能够在a页面收到发来的消息
-
-页面A：
-
-```
-<button onClick="test()">open</button>
-
-...
-
-<script>
-    function test() {
-    
-        let op = window.open('b.html', '_blank'); //打开新窗口，并建立窗口的引用变量op
-    
-        function receiveMessage(event) {
-            console.log('event', event);
-        }
-    
-        op.addEventListener("message", receiveMessage, false); //监听新开窗口发来的消息
-    }
-</script>
-```
-
-页面B：
-
-```
-window.postMessage("hi there!", location.origin);
-```
-
-此时点击页面B的发送消息按钮就能在页面A接收消息了。
-
----
-
 # JSON的更多参数用法
 
 ## JSON.stringify
@@ -650,6 +614,10 @@ ViewModel层：视图模型，连接Model和View的桥梁。将Model转为View�
 
 js里面的类和其它OOP里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
 
+
+---
+
+# hybird
 ## jsBridge
 
 js与android的通信
@@ -669,9 +637,7 @@ js发消息给java
 js收java的消息
 `document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
 
----
-
-# hybird
+### 示例
 
 ```
 $(".company_color").click(function(){
@@ -689,175 +655,6 @@ $(".company_color").click(function(){
 ```
 
 ---
-
-# HTTP
-
-## 协议
-
-客户端和服务器之间传输数据的规范，全称是“超文本传输协议”。
-
-## 协议请求
-
-GET、POST和OPTION
-
-## GET和POST的区别
-
-|区别|get|post|
-|:--:|:--:|:--:|
-|传参|`URL`、`cookie`|请求体`body`|
-|参数长度|不同浏览器不同限制（限制`URL`而非参数）|无限制|
-|安全性|参数保留在浏览记录中 <br> 通过地址栏收藏 <br> 直接在地址栏显示<br>主动缓存|-|
-|TCP数据包|1个|2个|
-|幂等性|✓|×|
-|用法|获取数据(`list`接口)|将数据发给服务器(`delete`接口)|
-
-
-- **TCP数据包：** `GET`请求会把`header`和`data`一并发出去，`POST`会先发`header`，服务器响应`100 continue`，浏览器再发送`data`，服务器响应`200 ok`。
-- **幂等性：** 指对某一资源进行一次或多次请求都具有相同的副作用。例如搜索接口都是幂相等的操作，而增、删、改都不是幂等操作。
-
-## HTTP和HTTPS的区别
-
-- `HTTPS` = `HTTP` + `SSL`证书
-
-- `HTTP`是超文本传输协议，信息是明文传输；`HTTPS`则是具有安全性的`SSL`加密协议传输
-
-- `HTTPS`比`HTTP`慢，因为`HTTPS`除了`TCP`握手的3个包，还要加上`SSL`握手的9个包。
-
-## 跨域
-
-[更全跨域方法链接](https://segmentfault.com/a/1190000011145364)
-
-- jsonp跨域
-- 跨域资源共享（CORS）
-- nodejs中间件代理跨域
-- iframe
-- document.domain
-- postMessage
-
-## jsonp
-
-把JS、CSS、IMG等静态资源分离到独立域名的服务器上。
-**缺点：只能实现GET请求**。
-
-### 原生实现
-
-```
-<script>
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-
-  // 传参一个回调函数名给后端，方便后端返回时执行这个在前端定义的回调函数
-  script.src = 'http://www.domain2.com:8080/login?user=admin&callback=handleCallback';
-  document.head.appendChild(script);
-
-  // 回调执行函数
-  function handleCallback(res) {
-      alert(JSON.stringify(res));
-  }
-</script>
-```
-
- ### jquery ajax
-
-```
-$.ajax({
-    url: 'http://www.domain2.com:8080/login',
-    type: 'get',
-    dataType: 'jsonp',  // 请求方式为jsonp
-    jsonpCallback: "handleCallback",    // 自定义回调函数名
-    data: {}
-});
-```
-
-### vue.js：
-
-```
-this.$http.jsonp('http://www.domain2.com:8080/login', {
-    params: {},
-    jsonp: 'handleCallback'
-}).then((res) => {
-    console.log(res); 
-})
-```
-## CORS
-
-普通跨域请求，只需要服务端设置`Access-Control-Allow-Origin`即可；若要携带`cookie`请求，前后端都要设置。
-
-### 原生ajax
-
-```
-// 前端设置是否带cookie
-xhr.withCredentials = true;
-```
-
-### jQuery ajax
-
-```
-$.ajax({
-    ...
-   xhrFields: {
-       withCredentials: true    // 前端设置是否带cookie
-   },
-   crossDomain: true,   // 会让请求头中包含跨域的额外信息，但不会含cookie
-    ...
-});
-```
-
-### vue框架 axios设置
-
-```
-axios.defaults.withCredentials = true
-```
-## Nodejs中间件代理跨域
-
-如`proxy`中间件
-
-## document.domain
-该方式只能用于二级域名相同的情况下，比如 `a.test.com` 和 `b.test.com` 适用于该方式。
-
-只需要给页面添加 `document.domain = 'test.com'` 表示二级域名都相同就可以实现跨域
-
-## postMessage
-
-这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息。
-
-```
-// 发送消息端
-window.parent.postMessage('message', 'http://test.com')
-// 接收消息端
-var mc = new MessageChannel()
-mc.addEventListener('message', event => {
-  var origin = event.origin || event.originalEvent.origin
-  if (origin === 'http://test.com') {
-    console.log('验证通过')
-  }
-})
-```
-
-## 缓存
-
-一般是在`html`中的`meta`标签上定义属性
-
-方法一：
-
-```
-<meta http-equiv="Pragma" content="no-cache">
-```
-
-方法二：
-
-```
-<meta http-equiv="expires" content="mon, 18 apr 2016 14:30:00 GMT">
-```
-
-请求--判断max-age是否过期（没过期就直接在缓存数据库中得到数据）--过期后判断属性是否字段一致，再使用缓存。
-
----
-
-# session和cookie
-
-cookie是在客户端，session是在服务端。
-一般如果想跳过cookie的限制，就用session。
 
 ---
 
@@ -928,18 +725,6 @@ fetch(url).then(res => res.blob()).then((blob) => {
   document.body.removeChild(a);
 })
 ```
-
----
-
-# 冒泡事件
-
-`event.stopProgation`能阻止冒泡事件
-
----
-
-# 默认事件
-
-`event.preventDefault`能阻止如`<a>`的默认`href`事件
 
 ---
 
