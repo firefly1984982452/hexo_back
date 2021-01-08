@@ -5,13 +5,14 @@ categories:
 - program
 ---
 
-# `<noscript>`
+# `<script>`标签
+
+## `<noscript>`
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
 
----
 
-# `<script>`中的`async`和`defer`
+## `<script>`中的`async`和`defer`
 
 ```
 1.`<script src="script.js"></script>`
@@ -26,15 +27,6 @@ categories:
 
 和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
 ```
-
----
-
-
-# `typeof null`为什么返回`object`
-
-`null`是空对象指针，所以`typeof null`返回的是`object`，
-
-`'null'`变为`null`：`JSON.parse('null')`
 
 ---
 
@@ -77,55 +69,6 @@ test(3)
 
 ---
 
-# return和闭包
-
-## 直接return
-
-```
-var a = 0;
-function fn(){
-    var a = 12;
-    return a;
-}
-console.log(fn()); // 12
-console.log(a); // 0
-```
-
-## return function
-
-```
-var a = 0;
-function fn() {
-    var a = 12;
-    return function(){
-        return a
-    };
-}
-console.log(fn()()); // 12
-console.log(a); // 0
-```
-
-## return 闭包
-
-```
-var a = 0;
-function fn() {
-    var a = 12;
-    return (function(){
-        return a
-    })();
-}
-console.log(fn()); // 12
-console.log(a); // 0
-```
-## 区别
-
-- 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用2次）。
-- 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
-- 3.`return`出来的是一个值（`12`），不是变量本身（`a`），此处的`return`是取得私有变量值的一种方法，跟闭包没有严格关系。
-
----
-
 # 防抖和节流
 
 [可视化在线demo](http://demo.nimius.net/debounce_throttle/)
@@ -134,12 +77,12 @@ console.log(a); // 0
 [学习链接1](https://www.jianshu.com/p/f9f6b637fd6c)
 [学习链接2](https://www.jianshu.com/p/b73c2acad696)
 
-### 概念
+## 【1】概念
 
 - 防抖：（停止后才1次）触发事件后n秒内只执行1次，如果n秒内又触发了事件，则会重新计算时间。
 - 节流：（几秒1次）一定时间内只能执行1次。
 
-### 应用场景
+## 【2】应用场景
 
 防抖：
 
@@ -153,7 +96,7 @@ console.log(a); // 0
 - 滚动加载；
 - 浏览器搜索框联想功能。
 
-### 实现原理
+## 【3】实现原理
 
 1、防抖
 
@@ -322,136 +265,52 @@ for (let i = 1; i < 6; i++) {
 
 ---
 
+# return和闭包
 
-# JavaScript相等操作符（==）
-
-参考：
-[链接1](https://www.cnblogs.com/wisewrong/p/10396002.html)
-[链接2](https://blog.csdn.net/magic_xiang/article/details/83686224)
-[链接3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
-
-## 两组操作符
-
-相等：`==`（先转换再比较）
-全等：`===`（仅比较不转换）
-
-## 相等（`==`）规则
-
-**Boolean规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
-**String&Number规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
-**Object规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
-
-![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
-
-## 问题探讨
+## 直接return
 
 ```
-[] == []; // false
-{} == {}; // false
-[] == ![]; // true
-{} == !{}; // false
-```
-
-`[] == []`和`{} == {}`是因为引用的对象指向不同的指针，所以不会相等。
-
-**一、`[] == ![]`**
-
-- 1：逻辑非（`!`）的优先级高于相等操作符（`==`），所以先计算`![]`的`boolean`值`false`，此时比较的是：`[] == false`；
-- 2：根据上面提到的**boolean规则**，则需要把 `false` 转成 `0`，此时比较的是：`[] == 0`；
-- 3：根据上面提到的**Object规则**，调用空数组的toString方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
-- 4：根据上面提到的**String规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
-
-简化：
-`[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
-
-**二、`{} == !{}`**
-
-- 1：先计算`!{}`得到`false`，此时比较的是：`{} == false`；
-- 2：调用**Booean规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
-
-简化：
-`{} == !{}` 转化：`{} == false` 转化：`true == false`。
-
----
-
-# Blob实现下载文件
-
-[参考链接](https://zhuanlan.zhihu.com/p/97768916)
-
-DOM:
-
-```
-<a id="download" @click="download">下载</a>
-```
-
-JS:
-
-```
-download(){
-    var blob = new Blob(['hello world']);
-    var url = window.URL.createObjectURL(blob);
-    var a = document.getElementById('download');
-    a.download = 'helloworld.txt';
-    a.href = url;
-},
-```
-
----
-
-# `try...catch`无法用于异步代码
-
-## 同步代码
-
-```
-try {
-    foo();
-} catch (error) {
-    console.log('异常是：'+error)
+var a = 0;
+function fn(){
+    var a = 12;
+    return a;
 }
+console.log(fn()); // 12
+console.log(a); // 0
 ```
 
-此时会由catch捕捉到异常：
+## return function
 
 ```
-异常是：ReferenceError: foo is not defined
-```
-
-## 异步代码
-
-```
-function foo(){
-    setTimeout(()=>{
-        bar.arr();
-    },100);
-};
-try {
-    foo();
-} catch (error) {
-    console.log(error)
+var a = 0;
+function fn() {
+    var a = 12;
+    return function(){
+        return a
+    };
 }
+console.log(fn()()); // 12
+console.log(a); // 0
 ```
 
-此时无法捕捉，而是浏览器控制台报出未捕捉异常。
+## return 闭包
 
 ```
-Uncaught ReferenceError: bar is not defined
+var a = 0;
+function fn() {
+    var a = 12;
+    return (function(){
+        return a
+    })();
+}
+console.log(fn()); // 12
+console.log(a); // 0
 ```
+## 区别
 
-## 对比图
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
-
----
-
-# lighthouse前端性能优化工具
-
-```
-npm install -g lighthouse
-
-lighthouse https://www.cnblogs.com/
-```
-
-生成html页面
+- 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用2次）。
+- 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
+- 3.`return`出来的是一个值（`12`），不是变量本身（`a`），此处的`return`是取得私有变量值的一种方法，跟闭包没有严格关系。
 
 ---
 
@@ -571,7 +430,7 @@ var data = JSON.stringify(settings, undefined, 2);
 ## 参数1：普通用法
 
 ```
-SON.parse('{"p": 5}'); // {p: 5}
+JSON.parse('{"p": 5}'); // {p: 5}
 ```
 
 ## 参数2：过滤函数
@@ -592,71 +451,104 @@ p 5
 
 ---
 
-# 与JAVA相通的概念
 
-## MVC、MVVM
+# JavaScript相等操作符（==）
 
-### MVC
+参考：
+[链接1](https://www.cnblogs.com/wisewrong/p/10396002.html)
+[链接2](https://blog.csdn.net/magic_xiang/article/details/83686224)
+[链接3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
 
-Model层:模型层，比如图片放一个类，标题放一个类
-View层：显示页面，如xml
-Controller层：控制Model的读取、存储。如MainActivity
+## 两组操作符
 
-## MVVM
+相等：`==`（先转换再比较）
+全等：`===`（仅比较不转换）
 
-MVVM实现了View和Model的自动同步，当Model的属性改变时，我们不再手动操作DOM，也就是双向绑定。
+## 相等（`==`）规则
 
-Model层：后端传递的数据
-View层：页面
-ViewModel层：视图模型，连接Model和View的桥梁。将Model转为View（将后端数据显示给前端）用的是数据绑定，将View转为Model（将前端数据转给后端）用的DOM监听，这种实现方法称为为**数据的双向绑定**。
+**Boolean规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
+**String&Number规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
+**Object规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
 
-## 类
+![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
 
-js里面的类和其它OOP里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
-
-
----
-
-# hybird
-## jsBridge
-
-js与android的通信
-
-### android代码：
-
-java发消息给js：
-`webview.send()`
-java收js的消息
-`webview.registerHander('name',new Bridge(){})`
-
-
-### javaScript代码：
-
-js发消息给java
-`window.WebViewJavaScriptBridge.send()`
-js收java的消息
-`document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
-
-### 示例
+## 问题探讨
 
 ```
-$(".company_color").click(function(){
-  var u = navigator.userAgent;
-  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
-  var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  var company_name = $(this).text();
-  if(isAndroid) {
-    var msg = window.mrlou.androidIs("2",company_name);
-  } else if(isIos) {
-    //iosPhone()这个方法，ios会自动监听，并接收我传过来的值，用msg接收它传给我的值
-    broker("2",company_name);
-  }
-})
+[] == []; // false
+{} == {}; // false
+[] == ![]; // true
+{} == !{}; // false
 ```
 
----
+`[] == []`和`{} == {}`是因为引用的对象指向不同的指针，所以不会相等。
+
+**一、`[] == ![]`**
+
+- 1：逻辑非（`!`）的优先级高于相等操作符（`==`），所以先计算`![]`的`boolean`值`false`，此时比较的是：`[] == false`；
+- 2：根据上面提到的**boolean规则**，则需要把 `false` 转成 `0`，此时比较的是：`[] == 0`；
+- 3：根据上面提到的**Object规则**，调用空数组的toString方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
+- 4：根据上面提到的**String规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
+
+简化：
+`[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
+
+**二、`{} == !{}`**
+
+- 1：先计算`!{}`得到`false`，此时比较的是：`{} == false`；
+- 2：调用**Booean规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
+
+简化：
+`{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
 ---
+
+
+# `try...catch`无法用于异步代码
+
+## 同步代码
+
+```
+try {
+    foo();
+} catch (error) {
+    console.log('异常是：'+error)
+}
+```
+
+此时会由catch捕捉到异常：
+
+```
+异常是：ReferenceError: foo is not defined
+```
+
+## 异步代码
+
+```
+function foo(){
+    setTimeout(()=>{
+        bar.arr();
+    },100);
+};
+try {
+    foo();
+} catch (error) {
+    console.log(error)
+}
+```
+
+此时无法捕捉，而是浏览器控制台报出未捕捉异常。
+
+```
+Uncaught ReferenceError: bar is not defined
+```
+
+## 对比图
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
+
+---
+
 
 # HTML渲染过程
 
@@ -691,38 +583,6 @@ page2
 ```
 window.addEventListener('storage', (e) => {
     console.log(e)
-})
-```
-
----
-
-# 打开下载后立马关闭
-
-- 1.excel
-
-```
-var adom = document.createElement("a");
-adom.setAttribute("href",url);
-adom.width = "0px";
-adom.height = "0px";
-adom.setAttribute("target","_blank")
-document.body.appendChild(adom)
-adom.click();
-adom.remove();
-```
-- 2.image
-
-```
-fetch(url).then(res => res.blob()).then((blob) => {
-  // 创建隐藏的可下载链接
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = URL.createObjectURL(blob);
-  a.download = this.peopleList[i].peopleName;
-  document.body.appendChild(a);
-  a.click();
-  // 移除元素
-  document.body.removeChild(a);
 })
 ```
 
@@ -932,3 +792,147 @@ if (val != 0) {
 ```
 return val ? foo() : bar();
 ```
+
+---
+
+
+# 与JAVA相通的概念
+
+## 【1】MVC、MVVM
+
+### 【1.1】MVC
+
+Model层:模型层，比如图片放一个类，标题放一个类
+View层：显示页面，如xml
+Controller层：控制Model的读取、存储。如MainActivity
+
+### 【1.2】MVVM
+
+MVVM实现了View和Model的自动同步，当Model的属性改变时，我们不再手动操作DOM，也就是双向绑定。
+
+Model层：后端传递的数据
+View层：页面
+ViewModel层：视图模型，连接Model和View的桥梁。将Model转为View（将后端数据显示给前端）用的是数据绑定，将View转为Model（将前端数据转给后端）用的DOM监听，这种实现方法称为为**数据的双向绑定**。
+
+## 【2】类
+
+js里面的类和其它OOP里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
+
+
+---
+
+# hybird混合式开发
+## jsBridge
+
+js与android的通信
+
+### android代码：
+
+java发消息给js：
+`webview.send()`
+java收js的消息
+`webview.registerHander('name',new Bridge(){})`
+
+
+### javaScript代码：
+
+js发消息给java
+`window.WebViewJavaScriptBridge.send()`
+js收java的消息
+`document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
+
+### 示例
+
+```
+$(".company_color").click(function(){
+  var u = navigator.userAgent;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+  var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  var company_name = $(this).text();
+  if(isAndroid) {
+    var msg = window.mrlou.androidIs("2",company_name);
+  } else if(isIos) {
+    //iosPhone()这个方法，ios会自动监听，并接收我传过来的值，用msg接收它传给我的值
+    broker("2",company_name);
+  }
+})
+```
+---
+
+# Blob实现下载文件
+
+[参考链接](https://zhuanlan.zhihu.com/p/97768916)
+
+DOM:
+
+```
+<a id="download" @click="download">下载</a>
+```
+
+JS:
+
+```
+download(){
+    var blob = new Blob(['hello world']);
+    var url = window.URL.createObjectURL(blob);
+    var a = document.getElementById('download');
+    a.download = 'helloworld.txt';
+    a.href = url;
+},
+```
+
+---
+
+# 打开下载后立马关闭
+
+- 1.excel
+
+```
+var adom = document.createElement("a");
+adom.setAttribute("href",url);
+adom.width = "0px";
+adom.height = "0px";
+adom.setAttribute("target","_blank")
+document.body.appendChild(adom)
+adom.click();
+adom.remove();
+```
+- 2.image
+
+```
+fetch(url).then(res => res.blob()).then((blob) => {
+  // 创建隐藏的可下载链接
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = URL.createObjectURL(blob);
+  a.download = this.peopleList[i].peopleName;
+  document.body.appendChild(a);
+  a.click();
+  // 移除元素
+  document.body.removeChild(a);
+})
+```
+
+---
+
+
+# `typeof null`为什么返回`object`
+
+`null`是空对象指针，所以`typeof null`返回的是`object`，
+
+`'null'`变为`null`：`JSON.parse('null')`
+
+---
+
+
+# lighthouse前端性能优化工具
+
+```
+npm install -g lighthouse
+
+lighthouse https://www.cnblogs.com/
+```
+
+生成html页面
+
+---
