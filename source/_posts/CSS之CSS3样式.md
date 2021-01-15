@@ -5,8 +5,7 @@ categories:
   - program
 ---
 
-
-# CSS3-边框
+# 边框
 
 - `border-radius`
 - `box-shadow`
@@ -90,103 +89,50 @@ outline-offset: 10px;
 
 ---
 
-# CSS3-background
+# 背景：background
 
-## 【1】background-origin
+## 【1】区域起源：background-origin
 
 背景区域的位置，有如下属性：
 
 - `content-box`：`padding`值会起效，以`padding`开始的单位开始显示背景；
 
-- `padding-box`：`padding`不会影响背影，直接从`border`里面开如显示背影；
+- `padding-box`：`padding`不会影响背影，直接从`border`里面开始显示背影；
 
 - `border-box`：`border`不会影响背景，直接把`border`的内容也算在背影里面，背景会减去`border`的长度。
 
-## 【2】background-image
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gmojvywhjdj30nj09q0vi.jpg)
+
+## 【2】区域剪辑：background-clip
+
+背景区域的位置，有如下属性：
+
+- `content-box`：`padding`值会起效，以`padding`开始的单位开始显示背景，**`padding`的部分会被剪掉**；
+
+- `padding-box`：`padding`不会影响背影，直接从`border`里面开始显示背影；
+
+- `border-box`：`border`**会**影响背景，和`padding-box`的效果一样。
+
+![image](https://wx4.sinaimg.cn/large/0069qZtTgy1gmojw61vn4j30nr0arq4z.jpg)
+
+**对比：**
+
+![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gmojwa6l61j30re0iv79f.jpg)
+
+## 【3】图片：background-image
 
 背景图，有如下属性：
 
 - `url()`：图片地址
+- `linear-gradient()`渐变背景
 
-- `line-gradient`：创建线性渐变的图片
-
-- `redial-gradient`：创建径向渐变的图片
-
-- `repeating-line-gradient`：创建重复线性渐变的图片
-
-- `repeating-redial-gradient`：创建重复径向渐变的图片
-
-与`background-size`组合的话，可以生成条纹背景。
-
-### 【2.1】linear-gradient
-
-背景 2 色平铺
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
-
-```
-background: linear-gradient(#ff0 50%, #f00 50%);
-background-size: 100% 50%;
-```
-
-#### 【2.1.1】linear-gradient：条纹背景
-
-##### 背景为上下 2 色分割
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0f2emiabj308x05lq2r.jpg)
-
-`backgorund-image: linear-gradient(#ff0 50%, #f00 50%)`
-
-##### 背景 2 色平铺
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
-
-```
-background: linear-gradient(#ff0 50%, #f00 50%);
-background-size: 100% 50%;
-```
-
-##### 背景 2 色任意角度平铺
-
-![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
-
-```
-background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%);
-```
-
-#### 【2.1.2】linear-gradient：切角效果
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
-
-```
-width: 200px;
-height: 200px;
-background:#ffb;
-background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
-      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
-      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
-      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
-background-size:50% 50%;
-background-repeat:no-repeat;
-```
-
-### 【2.2】repeating-linear-gradient
-
-背景 2 色任意角度平铺
-
-![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
-
-```
-background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%);
-```
-
-## 【3】background-position 位置
+## 【4】位置：background-position
 
 让背景图在距离右边和底部都是 20px，如图：
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gizlk17h0ej303b03i74d.jpg)
 
-### 【3.1】background-position
+### 【4.1】background-position
 
 方法一：
 
@@ -206,14 +152,14 @@ background-origin: content-box;
 
 `background-origin:content-box;`和`padding:20px`结合起来的效果和方法一一样。
 
-### 【3.2】calc
+### 【4.2】calc
 
 ```
 background: url(img_url) no-repeat;
 background-position: calc(100% - 20px, 100% - 20px);
 ```
 
-## 【4】background-attachment
+## 【5】背景依附：background-attachment
 
 背景依附，默认为`scroll`，随背景滚动
 
@@ -234,7 +180,7 @@ background-attachment: local, scroll;
 
 ---
 
-# CSS3-transform
+# 转换：transform
 
 [所有旋转效果](https://c.runoob.com/codedemo/3391)
 
@@ -348,7 +294,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 ---
 
-# CSS3-各种阴影
+# 各种阴影
 
 ## 【1】边框阴影：box-shadow
 
@@ -359,6 +305,10 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 box-shadow: 15px 0 5px -10px #000;
 ```
+
+| `h-shadow` | `v-shadow` | `blur` | `spread` | `color` |     `insect`     |
+| :--------: | :--------: | :----: | :------: | :-----: | :--------------: |
+|  水平阴影  |  垂直阴影  |  模糊  | 阴影尺寸 |  颜色   | 外阴影转到内阴影 |
 
 ### 【1.2】多侧阴影
 
@@ -434,8 +384,178 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 
 ---
 
+# 渐变：gradient
 
-# 用`keyframes`模拟打字动画
+- `line-gradient`：创建线性渐变的图片
+
+- `redial-gradient`：创建径向渐变的图片
+
+- `repeating-line-gradient`：创建重复线性渐变的图片
+
+- `repeating-redial-gradient`：创建重复径向渐变的图片
+
+与`background-size`组合的话，可以生成条纹背景。
+
+## 【1】linear-gradient
+
+背景 2 色平铺
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
+
+```
+background: linear-gradient(#ff0 50%, #f00 50%);
+background-size: 100% 50%;
+```
+
+### 【1.1】linear-gradient：条纹背景
+
+#### 背景为上下 2 色分割
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0f2emiabj308x05lq2r.jpg)
+
+`backgorund-image: linear-gradient(#ff0 50%, #f00 50%)`
+
+#### 背景 2 色平铺
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
+
+```
+background: linear-gradient(#ff0 50%, #f00 50%);
+background-size: 100% 50%;
+```
+
+#### 背景 2 色任意角度平铺
+
+![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
+
+```
+background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%);
+```
+
+### 【1.2】linear-gradient：切角效果
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0m36t5cij306q068web.jpg)
+
+```
+width: 200px;
+height: 200px;
+background:#ffb;
+background: linear-gradient(135deg, transparent 15px,#fbb 0) top left,
+      linear-gradient(-135deg, transparent 15px,#fbb 0) top right,
+      linear-gradient(-45deg, transparent 15px, #fbb 0) bottom right,
+      linear-gradient(45deg, transparent 15px, #fbb 0) bottom left;
+background-size:50% 50%;
+background-repeat:no-repeat;
+```
+
+## 【2】repeating-linear-gradient
+
+背景 2 色任意角度平铺
+
+![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gj0f30zb6bj308t05nn04.jpg)
+
+```
+background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%);
+```
+
+---
+
+# 文本效果
+
+## 文字超出：text-overflow
+
+- ellipsis：显示`...`。
+- clip：截断。
+- 'string'：【仅 firefox】自定义字符串。
+
+## 文字换行：word-wrap
+
+- break-word：如果单词太长会自动换行。
+
+## 文字截断：word-break
+
+- keep-all：【默认】单词放不下会自动换行。
+- break-all：单词放不下会折断换行，铺满元素。
+
+---
+
+# 动画：animation
+
+## 【1】写法
+
+```
+<style>
+  div {
+    width: 0px;
+    height: 100px;
+    background: red;
+    position: relative;
+    /* 全称名字 */
+    /* animation: name duration timing-function delay iteration-count direction fill-mode;  */
+
+    /* 全称简写 */
+    /* animation: mymove 5s linear 1s 1 alternate backwards;  */
+
+    /* 名称 */
+    animation-name: mymove;
+    /* 速度 */
+    animation-duration: 5s;
+    /* 曲线 */
+    animation-timing-function: linear;
+    /* 延迟 */
+    animation-delay: 1s;
+    /* 次数 */
+    animation-iteration-count: 1;
+    /* 反向播放 */
+    animation-direction: normal;
+    /* 填充模式 */
+    animation-fill-mode: both;
+  }
+
+  @keyframes mymove {
+    from {
+      background-color: #fbb;
+      width: 10px;
+    }
+
+    to {
+      width: 300px;
+    }
+  }
+</style>
+
+...
+
+<div> content </div>
+```
+
+## 【2】属性解析
+
+### 【2.1】曲线：animation-timing-function
+
+- `linear`：速度从头至尾相同。
+- `ease`：【默认】低速开始和结束，中间速度快。
+- `ease-in`：低速开始。
+- `ease-out`：低速结束。
+- `ease-in-out`：低速开始和结束
+
+### 【2.2】反向播放：animation-direction
+
+- `normal`：【默认】只正常播放
+- `alternate`：轮流反向播放
+
+### 【2.3】填充模式
+
+[学习链接](https://www.w3cplus.com/css3/understanding-css-animation-fill-mode-property.html)
+
+- `none`：【默认】无改变。
+- `forwards`：保留最后一帧，不回到初始状态。
+- `backwards`：延迟的等待时间内，元素的样式变为第一帧的样式。
+- `both`：同时应用`forwards`和`backwards`的效果。
+
+## 【3】更多用法
+
+### 【3.1】模拟打字动画
 
 用`width:0`到`width:100%`模拟出打字效果。
 
@@ -450,6 +570,164 @@ p{
   overflow: hidden;
   white-space: nowrap;
   animation: typing 18s;
+}
+```
+
+## 【4】其它组合
+
+### 【4.1】backface-visibility：背面向屏幕时是否可见
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    div
+    {
+      width:100px;
+      height:100px;
+      background: url('https://image.youbankeji.com/test/12/2021/01/05/6970b7294f674d6eb6a32425fdaca066.jpeg!avatar');
+      background-size:100% 100%;
+      animation:myfirst 15s;
+      backface-visibility: hidden;
+    }
+
+    @keyframes myfirst
+    {
+      from {transform:rotateY(0deg);}
+      to {transform:rotateY(360deg);}
+    }
+
+    </style>
+  </head>
+  <body>
+  	<div>文字</div>
+  </body>
+</html>
+```
+
+---
+
+# 过渡：transition
+
+```
+<style>
+  div {
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+    /* 简写 */
+    /* transition: width 2s linear 1s; */
+
+    /* 属性名称 */
+    transition-property: width;
+    /* 持续时间 */
+    transition-duration: 2s;
+    /* 曲线 */
+    transition-timing-function: linear;
+    /* 延迟时间 */
+    transition-delay: 1s;
+  }
+
+  div:hover {
+    width: 300px;
+  }
+</style>
+
+...
+
+<div></div>
+```
+
+**曲线：animation-timing-function**
+
+- `linear`：速度从头至尾相同。
+- `ease`：【默认】低速开始和结束，中间速度快。
+- `ease-in`：低速开始。
+- `ease-out`：低速结束。
+- `ease-in-out`：低速开始和结束
+
+---
+
+# 滤镜：filter
+
+[filter 所有效果](https://www.runoob.com/try/try.php?filename=trycss_ex_images_filters)
+
+常用：
+
+- blur：高斯模糊
+- drop-shadow：阴影
+
+---
+
+# flex 相关
+
+## 规范
+
+```
+<div class="box">
+  <div class="item"></div>
+</div>
+```
+
+## 示例
+
+```
+.box{
+  width: 400px;
+  height: 400px;
+  border: 1px solid #f7b2bb;
+  display: flex;
+  /*flex-direction: row;//方向
+  flex-wrap: wrap; //换行 */
+  flex-flow: row wrap;
+  justify-content: space-between;//内容
+  align-content: space-between;//
+}
+.item{
+  width: 100px;
+  height: 100px;
+  background: #f7b2bb;
+  color: #fff;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /*flex-grow: 3;*/
+}
+```
+
+---
+
+## flex 中的 `justify-content: space-evenly`
+
+**均匀分布**
+
+```
+justify-content: space-between; // 两端
+justify-content: space-around; // 两端间隙相等，项目中间的间隙比较大
+justify-content: space-evenly; // 两端与项目中间的间隙一样大
+```
+
+区别：
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gidesq1po8j30970c4mxc.jpg)
+
+**IOS 之类的兼容性用 before 和 after**
+
+```
+container{
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+       //justify-content: space-evenly;
+      &:before,
+      &:after {
+          content: '';
+          display: block;
+    }
 }
 ```
 
