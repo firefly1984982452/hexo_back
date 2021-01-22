@@ -1,26 +1,26 @@
 ---
 title: ES6总结
 date: 2020-08-17 18:50:17
-categories: 
-- program
+categories:
+  - program
 ---
 
-[链接](https://es6.ruanyifeng.com/)
+[阮一峰学习链接](https://es6.ruanyifeng.com/)
 
 ---
 
-# let、const和globalThis
+# let、const 和 globalThis
 
 ## 【1】对比表
 
-|区别项|let|var|const|
-|:--:|:--:|:--:|:--:|
-|挂载window|×|全局作用域时，是|×|
-|是否有变量提升|×|✓|×|
-|作用域|块级作用域|全局作用域或函数作用域|块级作用域|
-|是否可重复声明|×|✓|×|
-|暂时性死区|✓|×|✓|
-|值不变|v|×|常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据|
+|     区别项     |    let     |          var           |                            const                             |
+| :------------: | :--------: | :--------------------: | :----------------------------------------------------------: |
+|  挂载 window   |     ×      |    全局作用域时，是    |                              ×                               |
+| 是否有变量提升 |     ×      |           ✓            |                              ×                               |
+|     作用域     | 块级作用域 | 全局作用域或函数作用域 |                          块级作用域                          |
+| 是否可重复声明 |     ×      |           ✓            |                              ×                               |
+|   暂时性死区   |     ✓      |           ×            |                              ✓                               |
+|     值不变     |     v      |           ×            | 常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据 |
 
 ## 【2】let
 
@@ -28,7 +28,7 @@ categories:
 - 不存在变量提升
 - 暂时性死区
 - 不允许重复声明
-- 块级作用域替代IIFE立即执行函数
+- 块级作用域替代 IIFE 立即执行函数
 
 ### 【2.1】不存在变量提升
 
@@ -69,7 +69,7 @@ function func() {
 }
 ```
 
-### 【2.4】块级作用域替代IIFE立即执行函数
+### 【2.4】块级作用域替代 IIFE 立即执行函数
 
 ```
 // IIFE 写法
@@ -85,7 +85,7 @@ function func() {
 }
 ```
 
-### 【2.5】ES5手动实现let
+### 【2.5】ES5 手动实现 let
 
 如上，变成`IIFE`写法
 
@@ -118,9 +118,9 @@ arr.length = 0; // []
 arr = ['world']; // 报错
 ```
 
-### ES5手动实现const
+### ES5 手动实现 const
 
-**方法1：`Object.defineProperty`**
+**方法 1：`Object.defineProperty`**
 
 ```
 function _const (key,value) {
@@ -142,7 +142,7 @@ delete cc; //false
 Object.keys(window).indexOf('cc'); // -1
 ```
 
-**方法2：`Object.freeze`**
+**方法 2：`Object.freeze`**
 
 ```
 var f = Object.freeze({'name':'admin'});
@@ -152,12 +152,12 @@ f.name; // 打印出admin ,值没有被改变
 
 ## 【4】globalThis
 
-|顶层对象|浏览器|Node|Web Worker|
-|:--:|:--:|:--:|:--:|
-|window|✓|×|×|
-|self|✓|×|✓|
-|global|×|×|✓|
-|globalThis(ES2020)|✓|✓|✓|
+|      顶层对象      | 浏览器 | Node | Web Worker |
+| :----------------: | :----: | :--: | :--------: |
+|       window       |   ✓    |  ×   |     ×      |
+|        self        |   ✓    |  ×   |     ✓      |
+|       global       |   ×    |  ×   |     ✓      |
+| globalThis(ES2020) |   ✓    |  ✓   |     ✓      |
 
 ---
 
@@ -165,14 +165,13 @@ f.name; // 打印出admin ,值没有被改变
 
 ## 【1】对比表
 
-|值|用法|括号|默认值|默认值生效条件|
-|:--:|:--:|:--:|:--:|:--:|
-|数组|`let [a, b] = [1, 2];`|数组`[]`|`let [foo = true] = [];`|值为`undefined`|
-|对象|`let { foo } = { foo: 'aaa'};`|对象`{}`|`let {foo} = {bar: 'baz'};`|值为`undefined`|
-|字符串|`const [a, b, c] = 'hello';`|数组`[]`|`const [a,b = 5] = 'e'`|值为`undefined`|
-|数值（转对象、无意义）|`let {toString: s} = 123;`|对象`{}`|-|-|
-|布尔（转对象、无意义）|`let {toString: s} = true;`|对象`{}`|-|-|
-
+|           值           |              用法              |   括号   |           默认值            | 默认值生效条件  |
+| :--------------------: | :----------------------------: | :------: | :-------------------------: | :-------------: |
+|          数组          |     `let [a, b] = [1, 2];`     | 数组`[]` |  `let [foo = true] = [];`   | 值为`undefined` |
+|          对象          | `let { foo } = { foo: 'aaa'};` | 对象`{}` | `let {foo} = {bar: 'baz'};` | 值为`undefined` |
+|         字符串         |  `const [a, b, c] = 'hello';`  | 数组`[]` |   `const [a,b = 5] = 'e'`   | 值为`undefined` |
+| 数值（转对象、无意义） |   `let {toString: s} = 123;`   | 对象`{}` |              -              |        -        |
+| 布尔（转对象、无意义） |  `let {toString: s} = true;`   | 对象`{}` |              -              |        -        |
 
 ## 【2】数组
 
@@ -229,13 +228,13 @@ baz // undefined
 所以如果变量名与属性名不一致，必须写成全称：
 
 （字义`name`变量接收对象里的`title`字段）
+
 ```
 let {title:name} = {title:'小明',sex:'男'};
 title // 小明
 ```
 
 在解构中，**左边是模式，右边是赋值**。
-
 
 ### 【3.2】默认值
 
@@ -271,7 +270,7 @@ foo(); // 30
 foo(0,1); // 11
 ```
 
-第一个参数0被解析成了`false`，而不是数字0进行计算。
+第一个参数 0 被解析成了`false`，而不是数字 0 进行计算。
 
 用`默认参数值`
 
@@ -348,6 +347,7 @@ let x = 1;
 let y = 2;
 [x,y] = [y,x];
 ```
+
 （2）提取对象的属性
 
 （3）遍历`Map`
@@ -380,7 +380,7 @@ improt {list1} from 'list'
 
 我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
 
-### 【1.1】代替apply
+### 【1.1】代替 apply
 
 ```
 var test = function(a,b,c){
@@ -390,13 +390,13 @@ var arr = [1,2,3];
 test(...arr); // 1 2 3
 ```
 
-用apply的写法：
+用 apply 的写法：
 
 ```
 test.apply(null,arr);
 ```
 
-### 【1.2】代替concat
+### 【1.2】代替 concat
 
 ```
 var arr1 = [1,2,3,4];
@@ -404,13 +404,13 @@ var arr2 = [0,...arr1,5,6];
 console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
 ```
 
-用concat的写法：
+用 concat 的写法：
 
 ```
 [0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
 ```
 
-### 【1.3】代替split
+### 【1.3】代替 split
 
 ```
 var str = 'hello';
@@ -418,7 +418,7 @@ var arr3 = [...str];
 console.log(arr3); // ["h", "e", "l", "l", "o"]
 ```
 
-用split的写法：
+用 split 的写法：
 
 ```
 'hello'.split(''); // ["h", "e", "l", "l", "o"]
@@ -473,6 +473,7 @@ log('Hello') // Hello World
 log('Hello', 'China') // Hello China
 log('Hello', '') // Hello
 ```
+
 ### 【1.1】与解构赋值默认值结合使用
 
 **当不使用默认值时**：
@@ -488,7 +489,7 @@ foo({x: 1, y: 2}) // 1 2
 foo() // TypeError: Cannot read property 'x' of undefined
 ```
 
-此时的x和y没有函数参数默认值，所以会报错。
+此时的 x 和 y 没有函数参数默认值，所以会报错。
 
 **使用默认值时**：
 
@@ -504,7 +505,6 @@ foo() // undefined 5
 
 必须是尾参数，不然除非调用时显示写上`undefined`，如：`foo(undefined,1)`。
 
-
 ### 【1.3】作用域
 
 只在`function`内部有效
@@ -513,7 +513,7 @@ foo() // undefined 5
 
 - 如果省略某参数，函数仍然进行
 
-## 【2】reset参数
+## 【2】reset 参数
 
 ### 【2.1】使用
 
@@ -571,6 +571,7 @@ var f2 = (...values) => values;
 f1(1,2,3,4); // [1, 2, 3, 4]
 f2(1,2,3,4); // [1, 2, 3, 4]
 ```
+
 ## 【4】尾调用优化
 
 ### 【4.1】尾调用是什么
@@ -597,9 +598,9 @@ function f(x){
 }
 ```
 
-- 情况一：调用函数g之后，还有赋值操作；
-- 情况二：调用函数g之后，还有`+1`的操作；
-- 情况三：调用函数g之后，还隐式的调用了`return undefined`。
+- 情况一：调用函数 g 之后，还有赋值操作；
+- 情况二：调用函数 g 之后，还有`+1`的操作；
+- 情况三：调用函数 g 之后，还隐式的调用了`return undefined`。
 
 ### 【4.2】尾调用优化
 
@@ -678,6 +679,10 @@ factorial(5) // 120
 
 ---
 
+# 正则 RegExp
+
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/12/23/JavaScript%E4%B9%8BRegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></iframe>
+
 # Symbol
 
 ```
@@ -695,7 +700,7 @@ c === d // true
 
 ---
 
-# Map和weakMap
+# Map 和 weakMap
 
 为什么要用`Map`？因为普通数据结构无法以非字符串为键。
 
@@ -711,7 +716,7 @@ console.log(m,m[x],m[y]); // {[object Object]: "bar"} "bar" "bar"
 
 对象`m`中只有一个`[object Object]`，值都是`'bar'`，它无法解析两个对象为键。
 
-## 【1】使用Map以非字符串为键
+## 【1】使用 Map 以非字符串为键
 
 ```
 var m = new Map();
@@ -728,20 +733,20 @@ console.log(m.get({id:1}));
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghel895idrj309k05i3yo.jpg)
 
-## 【2】delete删除
+## 【2】delete 删除
 
 ```
 m.delete(y);
 ```
 
-## 【3】clean清除所有
+## 【3】clean 清除所有
 
 ```
 m.clear();
 m.size; // 0
 ```
 
-## 【4】size大小
+## 【4】size 大小
 
 ```
 m.size;
@@ -768,15 +773,14 @@ console.log(mm2,mm);
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1ghelkmlwaxj30a80340st.jpg)
 
-两个value值都是对象，互不影响。
+两个 value 值都是对象，互不影响。
 
-## 【6】Map所有的值
+## 【6】Map 所有的值
 
-**方法1：`m.values()`**
-**方法2：`m.entries()`**
+**方法 1：`m.values()`**
+**方法 2：`m.entries()`**
 
-
-### 【6.1】方法1：`m.values()`
+### 【6.1】方法 1：`m.values()`
 
 返回一个迭代器，可以用`spread`扩展运算符（`...`）或`Array.from()`转换成数组。
 
@@ -790,7 +794,7 @@ console.log([...m.values()]); // ["foo", "bar"]
 console.log(Array.from(m.values())); // ["foo", "bar"]
 ```
 
-### 【6.2】方法2：`m.entries()`
+### 【6.2】方法 2：`m.entries()`
 
 ```
 var m = new Map();
@@ -803,7 +807,7 @@ console.log([...m.entries()][0][1]); // "foo"
 console.log([...m.entries()][1][1]); // "bar"
 ```
 
-## 【7】Map所有的键
+## 【7】Map 所有的键
 
 ### 【7.1】keys
 
@@ -815,7 +819,7 @@ m.set(y , 'bar');
 console.log([...m.keys()]); // [{id:1},{id:2}]
 ```
 
-### 【7.2】has判断是否有该键
+### 【7.2】has 判断是否有该键
 
 ```
 var m = new Map();
@@ -844,7 +848,7 @@ console.log(m.has(x)); // false
 
 ---
 
-# Set和weakSet
+# Set 和 weakSet
 
 `Set`是一个值的集合，其中的值是唯一的。
 
@@ -854,7 +858,6 @@ API:
 - **增：add()**
 - **删：delete()**
 - **查:has**
-
 
 ## 【1】新建
 
@@ -872,7 +875,7 @@ s.add(7);
 console.log(s); // Set(6) {0, 1, 2, NaN, 3, 7}
 ```
 
-## 【3】删除（delete和clear）
+## 【3】删除（delete 和 clear）
 
 ```
 s.delete(2);
@@ -937,7 +940,7 @@ ws.has(obj1); // false
 
 虽然`obj1`的值看上去还在，但已经取不到了。
 
-### 【6.2】delete删除
+### 【6.2】delete 删除
 
 ```
 ws.delete(obj2);
@@ -946,28 +949,28 @@ console.log(ws); // [{id:1}]
 
 ---
 
-# Array、Map、WeakMap、Set、WeakSet的对比
+# Array、Map、WeakMap、Set、WeakSet 的对比
 
 ## 【1】对比表
 
-|功能属性|Array|Map|WeakMap|Set|WeakSet|
-|:--:|:--:|:--:|:--:|:--:|:--:|
-|新建|`[]`|`new Map()`|`new WeakMap()`|`new Set()`|`new WeakSet()`|
-|增|`push`|`m.set(obj,'value')`|`wm.set(obj1,'value')`|`s.add(value)`|`ws.add(obj)`|
-|新建并增加|`[1,2]`|-|-|`new Set([4, 0, 0, 4, 1])`|-|
-|键|对象或其它|对象或其它|只接受对象|对象或其它|只接受对象|
-|删|`slice`或`splice`|`delete`|`delete`|`delete`|`delete`|
-|清除|`arr = []`|`clear`|`clear`|`clear`|`clear`|
-|改|`splice`|-|-|-|-|
-|查|`includes`、`indexOf`等|`get`或`has`|`get`或`has`|`has`|`has`|
-|键|`m.keys()`下标|`m.keys()`|-|`m.keys()`|-|
-|值|`m.values()`值|`m.values()`|-|`m.values()`|-|
-|迭代|`entries`|`entries`|-|`entries`|-|
-|长度|`length`|`size`|-|`size`|-|
+|  功能属性  |          Array          |         Map          |        WeakMap         |            Set             |     WeakSet     |
+| :--------: | :---------------------: | :------------------: | :--------------------: | :------------------------: | :-------------: |
+|    新建    |          `[]`           |     `new Map()`      |    `new WeakMap()`     |        `new Set()`         | `new WeakSet()` |
+|     增     |         `push`          | `m.set(obj,'value')` | `wm.set(obj1,'value')` |       `s.add(value)`       |  `ws.add(obj)`  |
+| 新建并增加 |         `[1,2]`         |          -           |           -            | `new Set([4, 0, 0, 4, 1])` |        -        |
+|     键     |       对象或其它        |      对象或其它      |       只接受对象       |         对象或其它         |   只接受对象    |
+|     删     |    `slice`或`splice`    |       `delete`       |        `delete`        |          `delete`          |    `delete`     |
+|    清除    |       `arr = []`        |       `clear`        |        `clear`         |          `clear`           |     `clear`     |
+|     改     |        `splice`         |          -           |           -            |             -              |        -        |
+|     查     | `includes`、`indexOf`等 |     `get`或`has`     |      `get`或`has`      |           `has`            |      `has`      |
+|     键     |     `m.keys()`下标      |      `m.keys()`      |           -            |         `m.keys()`         |        -        |
+|     值     |     `m.values()`值      |     `m.values()`     |           -            |        `m.values()`        |        -        |
+|    迭代    |        `entries`        |      `entries`       |           -            |         `entries`          |        -        |
+|    长度    |        `length`         |        `size`        |           -            |           `size`           |        -        |
 
 ## 【2】Map API:
 
-- size数量
+- size 数量
 - set()设置
 - clear()清除
 - delete()删除
@@ -983,11 +986,11 @@ console.log(ws); // [{id:1}]
 - delete()删除
 - has()存在
 - get()获取
-- clear()清除（已弃用，但可通过new WeakMap()空对象来置空）
+- clear()清除（已弃用，但可通过 new WeakMap()空对象来置空）
 
 ## 【4】Set API:
 
-- size数量
+- size 数量
 - add()添加
 - clear()清除
 - delete()删除
@@ -1040,7 +1043,7 @@ objTest.flag.book.page = 33
 
 # Reflect
 
-## 修改Object的返回结果
+## 修改 Object 的返回结果
 
 `Object.defineProperty(obj, name, desc)`在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
 
@@ -1075,7 +1078,7 @@ if (Reflect.defineProperty(target, property, attributes)) {
 Reflect.has(obj, 'name');
 ```
 
-## 与Proxy语法一一对应
+## 与 Proxy 语法一一对应
 
 ---
 
@@ -1087,7 +1090,7 @@ Reflect.has(obj, 'name');
 
 **只能同时调用不受关联的`prmise`，如果`promise2`的值受`promise1`影响，不能用`promise.all`，可以用`async/await`**
 
-首先假设要依次调用3个`promise`的代码：
+首先假设要依次调用 3 个`promise`的代码：
 
 ```
 var pro1 = new Promise((resolve,reject) => {
@@ -1151,11 +1154,11 @@ Promise.race([pro2,pro3]).then(val=>{
 })
 ```
 
-此时，pro2要花费1秒，pro3要花费2秒，谁先`resolve`，`.then`获取的`val`就是谁的。
+此时，pro2 要花费 1 秒，pro3 要花费 2 秒，谁先`resolve`，`.then`获取的`val`就是谁的。
 
 ---
 
-# Iterater和for...of循环
+# Iterater 和 for...of 循环
 
 ## Iterator
 
@@ -1202,7 +1205,7 @@ for (let s of str) {
 }
 ```
 
-#### DOM NodeList对象
+#### DOM NodeList 对象
 
 ```
 let paras = document.querySelectorAll("p");
@@ -1213,7 +1216,7 @@ for (let p of paras) {
 
 ```
 
-#### arguments对象
+#### arguments 对象
 
 ```
 function printArgs() {
@@ -1278,11 +1281,11 @@ myArray.forEach(function (value) {
 
 ### 对比表
 
-|功能|`for`|`forEach`|`for...in`|`for...of`|
-|:--:|:--:|:--:|:--:|:--:|
-|跳出循环|×|`try...catch`和`throw`|`return` 或 `break`|`return` 或 `break`|
-|遍历数组时的`value`|下标|下标|下标|值|
-|遍历对象时的`value`|`TypeError`|`TypeError`|key|`TypeError`|
+|        功能         |    `for`    |       `forEach`        |     `for...in`      |     `for...of`      |
+| :-----------------: | :---------: | :--------------------: | :-----------------: | :-----------------: |
+|      跳出循环       |      ×      | `try...catch`和`throw` | `return` 或 `break` | `return` 或 `break` |
+| 遍历数组时的`value` |    下标     |          下标          |        下标         |         值          |
+| 遍历对象时的`value` | `TypeError` |      `TypeError`       |         key         |     `TypeError`     |
 
 总结：
 
@@ -1299,7 +1302,7 @@ myArray.forEach(function (value) {
 
 [学习链接](https://segmentfault.com/a/1190000007535316)
 
-## 普通函数和async的区别
+## 普通函数和 async 的区别
 
 普通函数：
 
@@ -1336,7 +1339,7 @@ testAsync().then(v=>{
 })
 ```
 
-1秒后：get long_time_value
+1 秒后：get long_time_value
 
 如果用的话：
 
@@ -1354,9 +1357,9 @@ async function test(){
 test();
 ```
 
-1秒后：get long_time_value
+1 秒后：get long_time_value
 
-### 优势：处理then链
+### 优势：处理 then 链
 
 ```
 function takeLongTime(n){
@@ -1434,6 +1437,7 @@ doIt();
 ## 【1】普通使用
 
 constant.js
+
 ```
 var constant = {
     edit:"编辑",
@@ -1449,6 +1453,7 @@ export {
 ```
 
 test.vue
+
 ```
 import {constant,b} from '@/utils/test';
 console.log(constant,b)
@@ -1457,6 +1462,7 @@ console.log(constant,b)
 ## 【2】全局使用
 
 constant.js
+
 ```
 export default {
     list1:[],
@@ -1466,12 +1472,14 @@ export default {
 ```
 
 main.js
+
 ```
 improt constant from './utils/test';
 Vue.prototype.$constant = constant;
 ```
 
 test.vue
+
 ```
 this.list = this.$constant.list1;
 ```

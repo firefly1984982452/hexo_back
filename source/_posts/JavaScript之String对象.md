@@ -1,8 +1,8 @@
 ---
 title: JavaScript之String对象
 date: 2020-06-05 13:40:32
-categories: 
-- program
+categories:
+  - program
 ---
 
 # 查询过滤
@@ -29,7 +29,7 @@ categories:
 
 ## 【2】charCodeAt()
 
-返回uniccode/accsic编码
+返回 uniccode/accsic 编码
 
 ```
 'a'.charCodeAt(0); // 97
@@ -98,7 +98,7 @@ String.fromCharCode(65); // A
 
 `'abcdefg'.substring(2,3)` // "c"
 `'abcdefg'.substring(2)` // "cdefg"
-`'abcdefg'.substring(2,-9)` // "ab" **与slice的区别**
+`'abcdefg'.substring(2,-9)` // "ab" **与 slice 的区别**
 
 ## 【4】slice()
 
@@ -106,7 +106,7 @@ String.fromCharCode(65); // A
 
 `'abcdefg'.slice(2,3)` // "c"
 `'abcdefg'.slice(2)` // "cdefg"
-`'abcdefg'.slice(2,-9)` // "" **与substring的区别**
+`'abcdefg'.slice(2,-9)` // "" **与 substring 的区别**
 
 ---
 
@@ -134,6 +134,12 @@ String.fromCharCode(65); // A
 
 ---
 
+# matchAll
+
+效果上同，返回所有符合条件的值的 Iterator 遍历器。
+
+---
+
 # raw：模板字符串
 
 ```
@@ -151,7 +157,7 @@ s === "hello\\n"; // true
 
 `'e'.repeat(30)` // "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
-## replace和replaceAll：替换
+## replace 和 replaceAll：替换
 
 ```
 '12333345'.replace('3','0'); // "12033345"
@@ -193,7 +199,7 @@ JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
 
 # 其它技巧
 
-## 金钱格式化toLocalString
+## 金钱格式化 toLocalString
 
 ```
 var num = 1234567890;
@@ -203,4 +209,4 @@ num.toLocaleString('en-US'); // 效果相同
 
 ## 单行写一个评级组件
 
-`"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate)`;定义一个变量rate是1到5的值
+`"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate)`;定义一个变量 rate 是 1 到 5 的值
