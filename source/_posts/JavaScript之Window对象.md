@@ -1,13 +1,13 @@
 ---
 title: JavaScript之Window对象
 date: 2020-12-09 15:44:34
-categories: 
-- program
+categories:
+  - program
 ---
 
 # 属性篇
 
-# performance性能
+# performance 性能
 
 - 计算页面加载完成所需要的总时间
 
@@ -32,14 +32,15 @@ categories:
 加载历史中某个具体的页面
 
 # 数据存储：cookie，localStorage，sessionStorage，indexDB
-|特性|cookie|localStorage|sessionStorage|indexDB|
-|:--:|:--:|:--:|:--:|:--:|
-|数据生命周期|一般由服务器生成，可以设置过期时间|除非被清理，否则一直存在|页面关闭就清理|除非被清理，否则一直存在|
-|数据存储大小|4K|5M|5M|无限|
-|与服务端通信|每次都会携带在 header 中，对于请求性能影响|不参与|不参与|不参与|
-|调用|`document.cookie`|`window.localStorage`|`window.sessionStorage`|`window.indexDB`|
 
-# location：当前URL
+|     特性     |                   cookie                   |       localStorage       |     sessionStorage      |         indexDB          |
+| :----------: | :----------------------------------------: | :----------------------: | :---------------------: | :----------------------: |
+| 数据生命周期 |     一般由服务器生成，可以设置过期时间     | 除非被清理，否则一直存在 |     页面关闭就清理      | 除非被清理，否则一直存在 |
+| 数据存储大小 |                     4K                     |            5M            |           5M            |           无限           |
+| 与服务端通信 | 每次都会携带在 header 中，对于请求性能影响 |          不参与          |         不参与          |          不参与          |
+|     调用     |             `document.cookie`              |  `window.localStorage`   | `window.sessionStorage` |     `window.indexDB`     |
+
+# location：当前 URL
 
 ## 属性
 
@@ -62,11 +63,11 @@ categories:
 - reload 刷新
 - replace 替换
 
-## 扩展：搜索参加用fromEntries和URLSearchParams可变为普通对象
+## 扩展：搜索参加用 fromEntries 和 URLSearchParams 可变为普通对象
 
 # navigator：浏览器对象
 
-- userAgent当前浏览器
+- userAgent 当前浏览器
 
 ```
 export function detectiveBrowse() {
@@ -89,8 +90,8 @@ export function detectiveBrowse() {
 - 窗口总区域宽（控制台算）：outerWidth
 - 窗口总区域高（控制台算）：outerHeight
 - 浏览器：screen
-- 浏览器距离Left：screenLeft / screenX
-- 浏览器距离Top：screenTop / screenY
+- 浏览器距离 Left：screenLeft / screenX
+- 浏览器距离 Top：screenTop / screenY
 
 ```
 let clientScreenMsg =
@@ -119,49 +120,23 @@ console.log(clientScreenMsg);
 
 - devicePixelRatio: 设备像素比
 
-一般的电脑显示器都是1倍，但有部分笔记本电脑的分辨率是2倍。
+一般的电脑显示器都是 1 倍，但有部分笔记本电脑的分辨率是 2 倍。
 
-# Number相关
+# Number 相关
 
 - isFinite 是否为数字型
 - isInteger 是否为整数
-- isNaN 是否为NaN
+- isNaN 是否为 NaN
 
 这些属性既可以通过`window`调用，也可以通过`Number`调用。
 
-- Infinity无穷大
+- Infinity 无穷大
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 方法篇
 
-# 英文base64转码：btoa和atob实现
+# 英文 base64 转码：btoa 和 atob 实现
 
 ```
 var string = 'Hello World!';
@@ -169,7 +144,7 @@ btoa(string) // "SGVsbG8gV29ybGQh"
 atob('SGVsbG8gV29ybGQh') // "Hello World!"
 ```
 
-# 中文base64转码：escape、encodeURI和encodeURIComponent实现
+# 中文 base64 转码：escape、encodeURI 和 encodeURIComponent 实现
 
 ```
 function b64Encode(str) {
@@ -189,20 +164,20 @@ b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
 
 区别：
 
-1. `escape`适合不含URI的纯`string`；
+1. `escape`适合不含 URI 的纯`string`；
 2. `encodeURIComponent`会把 `http://`编码成`http%3A%2F%2F`而`encodeURI`却不会。
 
 # 计时器
 
 - setInterval()
 - setTimeout()
-- setImmediate()（IE用）
+- setImmediate()（IE 用）
 
 # 取消计时器
 
 - clearInterval()
 - clearTimeout()
-- clearImmediate()（IE用）
+- clearImmediate()（IE 用）
 
 # 重绘更新动画
 
@@ -211,10 +186,11 @@ b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
 
 # 打印：print
 
+`window.print();`
 
 # MessageChannel：管道通信
 
-## MessageChannel的基本使用
+## MessageChannel 的基本使用
 
 ```
 const {port1, port2} = new MessageChannel();
@@ -228,11 +204,11 @@ port1.postMessage('port1发送的消息');
 port2.postMessage('port2发送的消息');
 ```
 
-port1发送的由port2接收，port2发送的由port1接收。
+port1 发送的由 port2 接收，port2 发送的由 port1 接收。
 
-也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再return出来，就是一个新的对象，所以肯定能实现深拷贝。
+也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再 return 出来，就是一个新的对象，所以肯定能实现深拷贝。
 
-## 使用MessageChannel实现深拷贝
+## 使用 MessageChannel 实现深拷贝
 
 ```
 var obj = {id:1,name:{a:'xx'}};
@@ -254,7 +230,7 @@ structuralClone(obj).then(res=>{
 <!-- 用promise是为了好传数据 -->
 ```
 
-## MessageChannel实现vue.$nexttick
+## MessageChannel 实现 vue.$nexttick
 
 ```
 <!DOCTYPE html>
@@ -318,10 +294,9 @@ structuralClone(obj).then(res=>{
 
 [学习链接](https://blog.csdn.net/weixin_40650646/article/details/81777398)
 
+需求：在页面 a,里打开新窗口 b，在 b 窗口里点击 postMessage 按钮，能够在 a 页面收到发来的消息
 
-需求：在页面a,里打开新窗口b，在b窗口里点击postMessage按钮，能够在a页面收到发来的消息
-
-页面A：
+页面 A：
 
 ```
 <button onClick="test()">open</button>
@@ -330,22 +305,22 @@ structuralClone(obj).then(res=>{
 
 <script>
     function test() {
-    
+
         let op = window.open('b.html', '_blank'); //打开新窗口，并建立窗口的引用变量op
-    
+
         function receiveMessage(event) {
             console.log('event', event);
         }
-    
+
         op.addEventListener("message", receiveMessage, false); //监听新开窗口发来的消息
     }
 </script>
 ```
 
-页面B：
+页面 B：
 
 ```
 window.postMessage("hi there!", location.origin);
 ```
 
-此时点击页面B的发送消息按钮就能在页面A接收消息了。
+此时点击页面 B 的发送消息按钮就能在页面 A 接收消息了。

@@ -1,8 +1,8 @@
 ---
 title: git进阶
 date: 2018-10-24 14:35:18
-categories: 
-- program
+categories:
+  - program
 ---
 
 # 普通发布代码
@@ -33,40 +33,60 @@ git checkout .
 
 # 两个版本之前的补丁包
 
-比如我要10月3日 至 10月5日 的补丁包
+比如我要 10 月 3 日 至 10 月 5 日 的补丁包
 
 `$ git diff 10月5日的7位数版本号 10月3日的7位数版本号 --name-only | xargs zip update.zip`
 
 # 不同分支开发
 
+**新建分支**
+
+```
+git checkout -b name
+```
+
+**发布新的分支**
+
+```
+<!-- 提交发布代码后： -->
+git push origin name
+```
+
 **查看所有分支**
+
 ```
 git branch
 ```
 
 **切换分支**
+
 ```
 git checkout name
 ```
 
-**将master分支上的代码pull下来**
+**将 master 分支上的代码 pull 下来**
+
 ```
 git pull origin master
 ```
 
-**在自己分支上修改代码并push到自己分支**
+**在自己分支上修改代码并 push 到自己分支**
 
-**切换到master分支**
+**切换到 master 分支**
+
 ```
 git checkout master
 ```
 
-**同步并push代码**
+**同步并 push 代码**
+
 ```
 git merge name
 git push
 ```
+
 或
+
 ```
 git pull origin name
 git push

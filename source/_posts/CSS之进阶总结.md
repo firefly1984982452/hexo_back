@@ -525,6 +525,29 @@ p{
 }
 ```
 
+## 【4】打印方向
+
+```
+<style type="text/css" media="print">
+@page {
+  size: landscape !important;
+}
+</style>
+```
+
+横向打印：`size: landscape`
+竖向打印：`size: portrait`
+
+## 【5】打印换行
+
+比如 `table` 表格中下一个 `tr` 直接换行到下一页显示：
+
+```
+tr {
+  page-break-inside: avoid;
+}
+```
+
 ---
 
 # 简写属性
