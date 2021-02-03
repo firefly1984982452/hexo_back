@@ -1,16 +1,18 @@
 ---
 title: JavaScript之Document对象
 date: 2020-12-10 16:17:34
-categories: 
-- program
+categories:
+  - program
 ---
 
-# Dcoument对象集合
+# Dcoument 对象集合
 
 - all
 - forms
 - images
 - links
+
+---
 
 # 域名、地址
 
@@ -19,25 +21,39 @@ categories:
 - baseURI
 - URL
 
+---
+
 # cookie
+
+---
 
 # title：名称
 
-# visibilityState：页面隐藏状态
+---
+
+# visibilityState 和 hidden：页面隐藏状态
 
 ```
 document.addEventListener('visibilitychange', function () {
+  console.log(document.hidden,document.visibilityState)
   // 用户离开了当前页面
-  if (document.visibilityState === 'hidden') {
+  if (document.visibilityState === 'hidden' || document.hidden === true) {
     document.title = '页面不可见';
   }
 
   // 用户打开或回到页面
-  if (document.visibilityState === 'visible') {
+  if (document.visibilityState === 'visible' || document.hidden === false) {
     document.title = '页面可见';
   }
 });
 ```
+
+区别
+
+- `document.hidden`返回是否隐藏，只返回`true`和`false`；
+- `document.visibilityState`返回具体状态，有`hidden`、`visible`、`prerender`（正在渲染中）。
+
+---
 
 # referrer：上一页地址
 
@@ -53,6 +69,8 @@ if(document.referrer === '') {
 }
 ```
 
+---
+
 # 获取对象
 
 - getElementById()
@@ -62,17 +80,25 @@ if(document.referrer === '') {
 - querySelector()
 - querySelectorAll()
 
+---
+
 # 写入
 
 - write()
 - writeln()
+
+---
 
 # 状态监听
 
 - addEventListener()
 - removeEventListener()
 
+---
+
 # 创建元素、节点
 
 - createElement()
 - createTextNode()
+
+---

@@ -1,8 +1,8 @@
 ---
 title: JavaScript之Object对象
 date: 2020-08-05 15:44:34
-categories: 
-- program
+categories:
+  - program
 ---
 
 # 增
@@ -22,7 +22,7 @@ delete obj.id;
 
 ---
 
-# assign合并两个对象
+# assign 合并两个对象
 
 ```
 Object.assign(obj1,obj2);
@@ -34,11 +34,11 @@ Object.assign(obj1,obj2);
 
 [链接](https://firefly1984982452.github.io/2020/07/31/JavaScript%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%85%A8%E6%9E%90/)
 
-方法1：`JSON.parse(JSON.stringify())`
+方法 1：`JSON.parse(JSON.stringify())`
 
-方法2：`MessageChannel`
+方法 2：`MessageChannel`
 
-方法3：`lodash.cloneDeep`
+方法 3：`lodash.cloneDeep`
 
 ---
 
@@ -106,7 +106,6 @@ obj.arr.slice(1); // 修改数组监听失败
 
 ---
 
-
 # 判断对象`{}`是否为空
 
 ```
@@ -115,7 +114,7 @@ if(Object.keys(obj).length === 0){...}
 
 ---
 
-# 对象key值构建
+# 对象 key 值构建
 
 ```
 var a = 'name'
@@ -151,11 +150,11 @@ var param = Object.fromEntries(p);
 `seal`：不能增删，能改
 `freeze`:不能增删改
 
-|对象属性|增|删|改|
-|:--:|:--:|:--:|:--:|
-|preventExtensions|×|✓|✓|
-|seal|×|×|✓|
-|freeze|×|×|×|
+|     对象属性      | 增  | 删  | 改  |
+| :---------------: | :-: | :-: | :-: |
+| preventExtensions |  ×  |  ✓  |  ✓  |
+|       seal        |  ×  |  ×  |  ✓  |
+|      freeze       |  ×  |  ×  |  ×  |
 
 ## 不可扩展对象`preventExtensions`
 
@@ -233,4 +232,35 @@ Object.isFrozen(obj);// true
 ```
 const obj = { foo: 'bar', baz: 42 };
 console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+```
+
+---
+
+# 可选链操作符`?.`
+
+```
+let obj =  {
+  attr: {
+      name: 'kingsaj'
+  }
+}
+```
+
+获取 name 的值
+
+```
+let n_val = obj.attr.name
+```
+
+如果这样直接获取可能会报错，导致程序异常，所以我们需要对 obj 、attr 此次验证
+即：
+
+```
+let n_val = obj && obj.attr && obj.attr.name
+```
+
+**用可选链操作符`?.`**
+
+```
+let n_val = obj?.attr?.name
 ```

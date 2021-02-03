@@ -489,14 +489,17 @@ p{
 ### 【2.1】media 属性
 
 ```
-<style type="text/css" media=print>
-	.noprint {
-		display: none
-	}
-</style>
-```
+@media screen {
+  /* 只对屏幕浏览有效 */
+}
 
-- 在正常的 html 文件中有效，但我试了在 vue 中无效
+@media print {
+  /* 只对打印有效 */
+  	.noprint {
+      display: none
+    }
+}
+```
 
 ### 【2.2】媒体查询
 
@@ -537,15 +540,53 @@ p{
 
 横向打印：`size: landscape`
 竖向打印：`size: portrait`
+自动【默认】：`size: auto`
 
-## 【5】打印换行
+## 【5】分页
 
-比如 `table` 表格中下一个 `tr` 直接换行到下一页显示：
+分页符属性用来设置页面的分页（即另起一页），共有三个相关属性。
+
+`page-break-before`：元素之前分页
+`page-break-after`：元素之后分页
+`page-break-inside`：元素内部分页
+这三个属性的值都是两个：`always`（生效）和`avoid`（避免）。
 
 ```
-tr {
+h1 {
+  /* 总是在 h1 元素之前分页 */
+  page-break-before: always;
+}
+
+section.city-map {
+  /* 在元素之前和之后分页，即该元素单独占据一页 */
+  page-break-before: always;
+  page-break-after: always;
+}
+
+table {
+  /* 表格尽可能不要分页 */
   page-break-inside: avoid;
 }
+```
+
+## 【6】重复表格的表头
+
+用`<thead>`元素定义表头，`<tbody>`元素定义表的数据
+
+```
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>Population</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sydney</td>
+      <td>4.627 million (2018)</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ---
