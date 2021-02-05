@@ -842,6 +842,46 @@ p{
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbgsxvddej31hb0ng1b9.jpg)
 
+## 【2】image-set
+
+```
+background-image: -webkit-image-set(url('./cute.png') 2x, url('./yellow.jpeg') 3x);
+```
+
+选取移动端符合响应式条件的图片。
+
+## 【3】background-blend-mode
+
+背景的颜色混合模式，有 16 个值可取：【normal（默认值，即不混合）, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color and luminosity（显示单色效果）】。
+
+可以显示多张背景图片的混合，或者背景图片和颜色的混合。
+
+```
+background-image: url(...g);
+background-color: #51B7D3;
+background-blend-mode: luminosity;
+```
+
+或
+
+```
+background: url(img/pattern.png), url(img/jellyfish.jpg), #f07e32;
+background-blend-mode: screen;
+```
+
+## 【4】object-position
+
+与 `background-position`写法一样，区别是`object-position`用于对象，一般用图片，而`background-position`只能用在背景里面。
+
+```
+img {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  object-position: top 70px;
+}
+```
+
 ---
 
 # flex 相关
