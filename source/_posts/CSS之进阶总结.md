@@ -188,6 +188,59 @@ vmin：1/100的视口中较小的一方的长度；
 
 ---
 
+# 屏幕尺寸，分辨率，像素，PPI
+
+[学习链接](https://zhuanlan.zhihu.com/p/26232703?utm_source=com.tencent.mtt)
+
+## 【1】名词解释
+
+- ppi【屏幕像素密度】：（pixels per inch）指每英雨所拥有的像素尺寸。
+- inch【英寸】：屏幕尺寸。指屏幕对角线的长度，可由勾股定理求出宽和高的长度【**1 英寸=2.54 厘米**】。
+- px【像素】：分辨率。由手机宽和高组成。
+
+## 【2】公式
+
+![image](https://pic4.zhimg.com/80/v2-7b4513532884954ac0eb9aa9823f59f7_720w.jpg)
+
+## 【3】实例
+
+以 iphoneXR 为例：
+
+| 属性 |   参数    |
+| :--: | :-------: |
+| 像素 | 1792\*828 |
+| 尺寸 | 6.1 英寸  |
+| ppi  |    326    |
+
+由公式得出：`Math.sqrt(Math.pow(1792,2)+Math.pow(828,2))/6.1 = 323ppi`，`323`和`326`值很相近。
+
+还能算出以下属性：
+
+| 属性 |       算法       |      计算       |    结果    |
+| :--: | :--------------: | :-------------: | :--------: |
+|  宽  | (像素/ppi)\*2.54 | (828/326)\*2.54 | 6.45 厘米  |
+|  长  |    1792\*828     |    1792\*828    | 13.96 厘米 |
+
+**更多：求 kindle 像素**
+
+已知：
+
+|   属性   |        参数         |
+| :------: | :-----------------: |
+|   尺寸   |       6 英寸        |
+|   ppi    |         167         |
+| 屏幕长度 |  123 毫米\*92 毫米  |
+| 屏幕长度 | 12.3 厘米\*9.2 厘米 |
+
+计算出宽和高的英寸对应的像素
+
+```
+高：(12.3/2.54)*167 = 808像素
+宽：(9.2/2.54)*167 = 605像素
+```
+
+---
+
 # CSS 自定义属性（CSS 变量）
 
 要点：
@@ -373,6 +426,19 @@ word-wrap:break-word;
 
 ```
 text-indent: 2em;
+```
+
+## 【10】自定义字体：font-face
+
+```
+@font-face {
+    font-family: DIGITAL-Dream;
+    src: url("../assets/font/DIGITAL-Dream.ttf");
+}
+
+a{
+  font-family: 'DIGITAL-Dream';
+}
 ```
 
 ---
@@ -587,6 +653,45 @@ table {
     </tr>
   </tbody>
 </table>
+```
+
+---
+
+# supports 支持
+
+`supports`命令用来判断浏览器是否支持某项 CSS 功能。
+
+例：
+
+当浏览器支持`text-overflow: '***';`时末尾便显示`'***'`，不支持时显示`'...'`。
+
+（仅火狐支持`text-overflow: '***';`，其它浏览均会显示`'...'`）
+
+```
+.info {
+  width: 300px;
+  height: 50px;
+  border: solid 1px #222;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: '***';
+}
+
+@supports (text-overflow: '***') {
+  .info {
+    text-overflow: '***';
+  }
+}
+
+@supports not (text-overflow: '***') {
+  .info {
+    text-overflow: ellipsis;
+  }
+}
+
+...
+
+<div class="info">"these vulnerabilities occur when untrusted data is sent"</div>
 ```
 
 ---

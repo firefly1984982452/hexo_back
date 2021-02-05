@@ -87,6 +87,21 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
+## border-style 属性
+
+[效果](https://www.w3school.com.cn/tiy/t.asp?f=csse_border-style)
+
+- `none`：无；
+- `hidden`：同“`none`”，在 `table` 中能解决边框冲突；
+- `dotted`：点；
+- `dashed`：虚线；
+- `solid`：实线；
+- `double`：双实线；
+- `inset`：3D 内边框;
+- `outset`：3D 外边框;
+- `groove`：凹槽边框；
+- `ridge`：垄状边框；
+
 ---
 
 # 背景：background
@@ -177,6 +192,23 @@ background-repeat: no-repeat;
 background-size: 100% 15px;
 background-attachment: local, scroll;
 ```
+
+## 【6】背景重复：background-repeat
+
+**属性**
+
+- `repeat`【默认】：平铺满整个容器，可能会造成背景图片显示不全。
+- `repeat-x`： 背景图片沿容器的 X 轴平铺。
+- `repeat-y`：背景图片沿容器的 Y 轴平铺。
+- `no-repeat`：背景图片不做任何平铺。
+- `round`：升缩背景图片适应容器大小。
+- `space`：平均分配相邻图片之间的空间。
+
+**示例**
+
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbbuxfn3aj31hb0sk154.jpg)
+
+[源码](https://firefly1984982452.github.io/my-web-page/background-repeat.html)
 
 ---
 
@@ -291,6 +323,98 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
   transform: perspective(30px)rotateX(5deg);
 }
 ```
+
+---
+
+# 多边形裁剪路径：clip-path
+
+[源码](https://firefly1984982452.github.io/my-web-page/clip-path.html)
+
+## 【1】矩形：inset
+
+语法：
+
+```
+clip-path:inset(上 右 下 左); // 4个值
+clip-path:inset(上右下左); // 1个值
+clip-path:inset(上 左右 下); // 3个值
+clip-path:inset(下 左右); // 2个值
+clip-path:inset(上右下左 round 圆角); // 值+圆角【border-radius】
+```
+
+示例：
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gnbaa0b9f5j30ok09oaa8.jpg)
+
+```
+clip-path: inset(10px 20px 0px 5px); // 矩形
+clip-path: inset(25% 5px round 5px 25%);// 其它
+```
+
+## 【2】圆形：circle
+
+语法：
+
+```
+clip-path:circle(半径 at x y);
+```
+
+示例：
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gnaii751tlj30kk08l0st.jpg)
+
+```
+clip-path: circle(50% at 50% 50%); // 正圆
+clip-path: circle(); // 正圆-简写
+clip-path: circle(50% at 0 100%); // 其它形状圆
+```
+
+## 【3】椭圆：ellipse
+
+语法：
+
+```
+clip-path:ellipse(x y at 圆心x 圆心y);
+```
+
+示例：
+
+![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gnairkejmxj30k508hjrf.jpg)
+
+```
+clip-path: clip-path: ellipse(30% 20% at 50% 50%);; // 正圆
+clip-path: ellipse(40% 20% at 20% 70%); // 其它形状
+```
+
+## 【4】多边形：polygon
+
+语法：
+
+```
+clip-path:polygon(x1 y1, x2 y2, x3 y3,...);
+```
+
+示例：
+
+- 1. 多边形
+
+![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gnai8f18pkj309605nt8m.jpg)
+
+```
+clip-path: polygon(0 0, 90% 0, 100% 25%, 100% 100%, 10% 100%, 0 85%);
+```
+
+- 2. 三角形
+
+![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gnai8jg39zj308e05nwed.jpg)
+
+```
+clip-path: (0 100%, 50% 0, 100% 100%);
+```
+
+三角形原理：
+
+![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gnai89f7bqj30hk0dxt94.jpg)
 
 ---
 
@@ -479,6 +603,45 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 
 ---
 
+# 文字环绕：shape
+
+`shape-outside`属性使得行内（`inline`）的内容，围绕`outside`指定的曲线排列，可以用多边形``里面的属性。
+
+`shape-margin`属性指定`shape-outside`与内容之间的`margin`。
+
+【1】圆形文字环绕
+
+![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gnadz5a2rlj30ih06kt9g.jpg)
+
+```
+.circle {
+  width: 250px;
+  height: 250px;
+  background-color: #fbb;
+  border-radius: 50%;
+  float: left;
+  shape-outside: circle();
+}
+```
+
+【2】三角形文字环绕
+
+![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gnadzmmpw3j30j406oaas.jpg)
+
+```
+.circle {
+  width: 250px;
+  height: 250px;
+  background-color: #fbb;
+  border-radius: 50%;
+  float: left;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  shape-outside: polygon(0 100%, 50% 0, 100% 100%);
+}
+```
+
+---
+
 # 动画：animation
 
 ## 【1】写法
@@ -658,6 +821,26 @@ p{
 
 - blur：高斯模糊
 - drop-shadow：阴影
+
+---
+
+# 图片相关
+
+## 【1】object-fit
+
+[源码](https://firefly1984982452.github.io/my-web-page/object-fit.html)
+
+**语法**
+
+- `fill`【默认】：不按比例拉伸至填满容器；
+- `contain`：保持比例缩放；
+- `cover`：保持比例剪切；
+- `none`：保持原有长和宽；
+- `scale-down`：保持比例，取`contain`和`cover`谁的尺寸更小。
+
+**示例**
+
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbgsxvddej31hb0ng1b9.jpg)
 
 ---
 
