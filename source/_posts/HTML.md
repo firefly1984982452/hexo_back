@@ -13,9 +13,9 @@ categories:
 
 # URL 部分
 
-## <base>标签
+## <base>元素
 
-作用：全局配置`href`和`target`属性。
+作用：设置相对 URL 的基础，有`href`和`target`属性。
 
 用法：
 
@@ -136,3 +136,7 @@ macbook：使用<kbd>control</kbd> + <kbd>option</kbd> + `accessKey`。
 
 <h1 data-yeah='显示信息：'>data-yeah</h1>
 ```
+
+---
+
+# 网页的语义结构
