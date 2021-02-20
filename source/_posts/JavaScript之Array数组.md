@@ -272,7 +272,9 @@ arr.sort((a,b) =>  a - b); //[1, 23, 53, 122, 231]
 
 ```
 
-**其它**
+**高级**
+
+- 1. 原理
 
 [Array.sort 原理](https://blog.csdn.net/coder_chenz/article/details/77156047)
 
@@ -280,6 +282,12 @@ v8 引擎的 sort 函数给出的排序方式：
 
 Chrome 浏览器（`Webkit`）：`插入排序`和`快速排序`（如果数组长度小于 10 就用`插入排序`，大于 10 就用`快速排序`）。
 火狐浏览器（`Mozilla/Firefox`）：`归并排序`。
+
+- 2. 返回值
+
+`[23,122,1,53,231].sort((a,b) => a - b); //[1, 23, 53, 122, 231]`里面`return`的值是`a-b`，也就是**正数**和**负数**，不是`true/false`与`1/0`这样的`boolean`值。
+
+![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnu39jl3cnj30fn0lf3zz.jpg)
 
 ## reverse
 
