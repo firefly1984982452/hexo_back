@@ -107,8 +107,8 @@ let clientScreenMsg =
 `窗口总区域宽（控制台算）：window.outerWidth：${window.outerWidth}\n` +
 `窗口总区域高（控制台算）：window.outerHeight：${window.outerHeight}\n\n\n` +
 
-`网页被卷去的Top(滚动条)：document.body.scrollTop：${document.body.scrollTop}\n` +
-`网页被卷去的Left(滚动条)：document.body.scrollLeft：${document.body.scrollLeft}\n` +
+`网页被卷去的Top(滚动条)：document.documentElement.scrollTop：${document.documentElement.scrollTop}\n` +
+`网页被卷去的Left(滚动条)：document.documentElement.scrollLeft：${document.documentElement.scrollLeft}\n` +
 `浏览器距离Left：window.screenLeft / screenX：${window.screenLeft}、${window.screenX}\n` +
 `浏览器距离Top：window.screenTop / screenY：${window.screenTop}、${window.screenY}\n` +
 `屏幕分辨率的宽：window.screen.width：${window.screen.width}\n` +
