@@ -360,6 +360,18 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 ---
 
+# 宽高比：`aspect-ratio`
+
+设置元素的宽高比为 `10:1`：
+
+```
+.box{
+  aspect-ratio: 10 / 1;
+}
+```
+
+---
+
 # 文字相关
 
 ## 【1】文字渐变
@@ -439,6 +451,28 @@ text-indent: 2em;
 a{
   font-family: 'DIGITAL-Dream';
 }
+```
+
+## 【11】垂直排版
+
+```
+p{
+  text-orientation: upright; // 数字横向显示
+  writing-mode: vertical-lr; // 竖向排版
+}
+p span{
+  text-combine-upright: all; // 数字联排
+}
+```
+
+## 【12】断行规则
+
+```
+line-break: auto; // 默认
+line-break: loose; // 限制最小
+line-break: normal; // 常规
+line-break: strict; // 限制最大
+line-break: anywhere; // 任意位置标点都可以换行
 ```
 
 ---
