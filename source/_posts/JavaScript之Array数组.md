@@ -590,7 +590,7 @@ console.log(arr) // ['tom','65','男',['jane','john','Mary']]
 
 其它情况则不会改变，会变成`[ undefined, undefined, undefined, undefined ]`。
 
-## Set 变为数组
+## Set 变为数组 
 
 ```
 Array.from(new Set([1,3,3,4])) //[1, 3, 4]
