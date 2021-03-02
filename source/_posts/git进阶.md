@@ -91,3 +91,40 @@ git push
 git pull origin name
 git push
 ```
+
+---
+
+# 新电脑开发新项目
+
+1. 查看自己电脑的邮箱和用户名
+
+```
+git config --global user.email
+```
+
+2. 设置邮箱和用户名
+
+```
+git config --global user.email 'xx'
+git config --global user.name 'xx'
+```
+
+3. 生成 SSH
+
+```
+ssh-keygen -t rsa -C “邮箱名称"
+```
+
+4. MAC 电脑打开 SSH 文件
+
+```
+open ~/.ssh
+```
+
+5. 将`id_rsa.pub`文件中的内容复制到代码仓库里面生成新的 SSH
+
+6. 下载
+
+```
+git clone 'xx'
+```
