@@ -1,22 +1,23 @@
 ---
 title: echarts超全超详情配置项
 date: 2020-09-08 14:35:18
-categories: 
-- program
+categories:
+  - program
 ---
 
-原date: 2018-11-20 14:35:18
+原 date: 2018-11-20 14:35:18
 
 # 链接
 
-[官方API链接](https://echarts.apache.org/zh/option.html)
-[官方实例链接](https://echarts.apache.org/examples/zh/index.html)
-[官方Gallery更多实例链接](https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all)
+- [官方 API 链接](https://echarts.apache.org/zh/option.html)
+
+- [官方实例链接](https://echarts.apache.org/examples/zh/index.html)
+
+- [官方 Gallery 更多实例链接](https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all)
 
 ---
 
-# 在vue中如何使用
-
+# 在 vue 中如何使用
 
 ## 【1】下载
 
@@ -24,7 +25,7 @@ categories:
 npm install echarts --save
 ```
 
-## 【2】写echarts组件
+## 【2】写 echarts 组件
 
 ```
 <template>
@@ -216,17 +217,17 @@ export default {
 
 ```
 
-## 【3】main.js里面定义
+## 【3】main.js 里面定义
 
 和常规的注册全局组件一样的写法
 
 ```
 // 引入echarts公用组件
-import Ehcart from '@/components/echarts'; 
+import Ehcart from '@/components/echarts';
 Vue.component('ehcart', Ehcart);
 ```
 
-## 【4】在vue里面使用
+## 【4】在 vue 里面使用
 
 ```
 <ehcart
@@ -243,7 +244,7 @@ echart.resizeB(); // 如果要后期改变大小
 echart.refresh();
 ```
 
-## 【5】配置echarts具体内容
+## 【5】配置 echarts 具体内容
 
 ```
 import {getAdapterFont} from '../../assets/js/common'
@@ -290,7 +291,7 @@ export const option = {
 }
 ```
 
-## 【6】echarts其它公用方法common.js
+## 【6】echarts 其它公用方法 common.js
 
 common.js
 
@@ -318,7 +319,6 @@ export const getAdapterFont = (e = 7) => {
     }
 }
 ```
-
 
 ---
 
@@ -407,7 +407,7 @@ option = {
             {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
         ]
     },
-    
+
     // 系列列表。每个系列通过 type 决定自己的图表类型
     series: [
         {
@@ -472,7 +472,7 @@ type: 'pie',
 minAngle: 15,
 ```
 
-## 【3】y轴文字过长显示省略号
+## 【3】y 轴文字过长显示省略号
 
 ```
 axisLabel: {
@@ -493,16 +493,17 @@ axisLabel: {
 
 ---
 
-# js控制echarts
+# js 控制 echarts
 
-## 【1】`window.eventBus`实现vue页面与普通js数据通信
+## 【1】`window.eventBus`实现 vue 页面与普通 js 数据通信
 
-重点：用`window.eventBus`而不是`this.eventBus`，因为普通js里面的`this`是代表`vue`，而普通js获取不到`vue`的值。
+重点：用`window.eventBus`而不是`this.eventBus`，因为普通 js 里面的`this`是代表`vue`，而普通 js 获取不到`vue`的值。
 
 main.js
+
 ```
 // 引入eventBus
-import EventBus from './bus/eventBus'; 
+import EventBus from './bus/eventBus';
 Vue.prototype.$eventBus = EventBus;
 
 if (window) {
@@ -511,11 +512,13 @@ if (window) {
 ```
 
 page.vue
+
 ```
 window.$eventBus.$emit('residenceData', resData.map(v => v.lx));
 ```
 
 index.js
+
 ```
 var attackSourcesName = [];
 window.$eventBus.$on('residenceData',v=>{
@@ -525,11 +528,11 @@ window.$eventBus.$on('residenceData',v=>{
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gij1jm6zqjj30zw0han25.jpg)
 
-## 【2】echarts与elementUI中的carousel走马灯结合的轮播
+## 【2】echarts 与 elementUI 中的 carousel 走马灯结合的轮播
 
 ```
 <el-carousel :interval="3000" arrow="always" class="img-box">
-    <el-carousel-item 
+    <el-carousel-item
         v-for="(item,index) in 2"
         :key="index" >
         <div v-if="0 === index">
@@ -600,6 +603,7 @@ option = {
 ### 【2.1】柱状图横/竖向显示
 
 竖向
+
 ```
 xAxis: {
     type: 'category'
@@ -611,6 +615,7 @@ yAxis: {
 ```
 
 横向
+
 ```
 xAxis: {
     type: 'value'
@@ -694,7 +699,7 @@ series: [
 
 ---
 
-# 其它不常用echarts图
+# 其它不常用 echarts 图
 
 ## 【1】仪表盘
 
@@ -1072,7 +1077,7 @@ option = {
                 }else{
                   newParamsName = newParams.substring(0,4)  + "...";
                 }
-                
+
                 index = contains(attackSourcesName, params) + 1;
                 params = newParamsName;
                 if (index - 1 < 3) {
