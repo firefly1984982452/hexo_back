@@ -699,6 +699,14 @@ series: [
 
 ---
 
+### 【3.3】饼图其它设置
+
+- 鼠标悬浮时去掉动画
+
+```
+hoverAnimation:false,
+```
+
 # 其它不常用 echarts 图
 
 ## 【1】仪表盘
@@ -930,6 +938,8 @@ export const option = {
 }
 ```
 
+---
+
 ## 【2】滚动柱状图排行榜
 
 ![image](https://wx2.sinaimg.cn/large/0069qZtTgy1gijgurb2syj30cw07eq4h.jpg)
@@ -1117,3 +1127,343 @@ option = {
     ]
 };
 ```
+
+---
+
+## 【3】转动圆环水波球
+
+![image](https://wx4.sinaimg.cn/large/0069qZtTgy1go7x8rqs9zj30l00j8jwe.jpg)
+
+
+```
+<div>
+    <div class="line-chart-iot" ref="echarts_iot_bear"></div>
+    <div class="line-chart-liquidfill" ref="echarts_iot_liquidfill"></div>
+</div>
+
+...
+
+<script>
+let angle = 0
+import { getAdapterFont } from '../../Utils/Com.js'
+import 'echarts-liquidfill'
+import * as echarts from 'echarts/lib/echarts'
+export default {
+  name: 'uinverseIoTLeft',
+  data() {
+    return {
+      timerId: null,
+      EchartsIOTBearOptions: {}
+    }
+  },
+  mounted() {
+    // 有动画加载交互，最好把echarts写在页面里，不要单独封装
+    this.setOptionFn()
+    setInterval(() => {
+      this.draw()
+    }, 100)
+  },
+  beforeDestroy() {
+    clearInterval(this.timerId)
+  },
+  methods: {
+    draw() {
+      angle += 3
+      this.echartsIoTBear.clear()
+      this.echartsIoTBear.setOption(this.EchartsIOTBearOptions, true)
+    },
+    setOptionFn() {
+      function getCirlPoint(x0, y0, r, angle) {
+        let x1 = x0 + r * Math.cos((angle * Math.PI) / 180)
+        let y1 = y0 + r * Math.sin((angle * Math.PI) / 180)
+        return {
+          x: x1,
+          y: y1
+        }
+      }
+      // 初始化
+      this.echartsIoTBear = echarts.init(this.$refs.echarts_iot_bear)
+      this.echartsIoTLiquidfill = echarts.init(
+        this.$refs.echarts_iot_liquidfill
+      )
+
+      // 绘制外环
+      this.EchartsIOTBearOptions = {
+        series: [
+          // 内环线
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              return {
+                type: 'arc',
+                shape: {
+                  cx: api.getWidth() / 2,
+                  cy: api.getHeight() / 2,
+                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.75,
+                  startAngle: ((0 + angle) * Math.PI) / 180,
+                  endAngle: ((90 + angle) * Math.PI) / 180
+                },
+                style: {
+                  stroke: '#00F9FC',
+                  fill: 'transparent',
+                  lineWidth: 1.5
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+          //内环点
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              let x0 = api.getWidth() / 2
+              let y0 = api.getHeight() / 2
+              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.75
+              let point = getCirlPoint(x0, y0, r, 90 + angle)
+              return {
+                type: 'circle',
+                shape: {
+                  cx: point.x,
+                  cy: point.y,
+                  r: getAdapterFont(1)
+                },
+                style: {
+                  stroke: 'transparent',
+                  fill: '#00F9FC'
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+
+          // 内环线
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              return {
+                type: 'arc',
+                shape: {
+                  cx: api.getWidth() / 2,
+                  cy: api.getHeight() / 2,
+                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.75,
+                  startAngle: ((180 + angle) * Math.PI) / 180,
+                  endAngle: ((270 + angle) * Math.PI) / 180
+                },
+                style: {
+                  stroke: '#00F9FC',
+                  fill: 'transparent',
+                  lineWidth: 1.5
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+          //内环点
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              let x0 = api.getWidth() / 2
+              let y0 = api.getHeight() / 2
+              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.75
+              let point = getCirlPoint(x0, y0, r, 180 + angle)
+              return {
+                type: 'circle',
+                shape: {
+                  cx: point.x,
+                  cy: point.y,
+                  r: getAdapterFont(1)
+                },
+                style: {
+                  stroke: 'transparent',
+                  fill: '#00F9FC'
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+
+          // 外环线
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              return {
+                type: 'arc',
+                shape: {
+                  cx: api.getWidth() / 2,
+                  cy: api.getHeight() / 2,
+                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.9,
+                  startAngle: ((270 + -angle) * Math.PI) / 180,
+                  endAngle: ((40 + -angle) * Math.PI) / 180
+                },
+                style: {
+                  stroke: '#00F9FC',
+                  fill: 'transparent',
+                  lineWidth: 1
+                },
+                silent: true
+              }
+            },
+            data: [1]
+          },
+          // 外环线
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              return {
+                type: 'arc',
+                shape: {
+                  cx: api.getWidth() / 2,
+                  cy: api.getHeight() / 2,
+                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.9,
+                  startAngle: ((90 + -angle) * Math.PI) / 180,
+                  endAngle: ((220 + -angle) * Math.PI) / 180
+                },
+                style: {
+                  stroke: '#00F9FC',
+                  fill: 'transparent',
+                  lineWidth: 1.5
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+          // 外环点
+          {
+            name: 'ring5',
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              let x0 = api.getWidth() / 2
+              let y0 = api.getHeight() / 2
+              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.9
+              let point = getCirlPoint(x0, y0, r, 90 + -angle)
+              return {
+                type: 'circle',
+                shape: {
+                  cx: point.x,
+                  cy: point.y,
+                  r: getAdapterFont(1)
+                },
+                style: {
+                  stroke: 'transparent', //粉
+                  fill: '#00F9FC'
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          },
+          // 外环点
+          {
+            name: 'ring5', //绿点
+            type: 'custom',
+            coordinateSystem: 'none',
+            renderItem: function(params, api) {
+              let x0 = api.getWidth() / 2
+              let y0 = api.getHeight() / 2
+              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.9
+              let point = getCirlPoint(x0, y0, r, 270 + -angle)
+              return {
+                type: 'circle',
+                shape: {
+                  cx: point.x,
+                  cy: point.y,
+                  r: getAdapterFont(1)
+                },
+                style: {
+                  stroke: 'transparent', //绿
+                  fill: '#00F9FC'
+                },
+                silent: true
+              }
+            },
+            data: [0]
+          }
+        ]
+      }
+
+      // 绘制水波球
+      var echartsIoTLiquidfillOption = {
+        series: [
+          {
+            type: 'liquidFill',
+            radius: '60%',
+            center: ['50%', '50%'],
+            data: [0.5, 0.5, 0.5], // data个数代表波浪数
+
+            backgroundStyle: {
+              borderWidth: 1,
+              color: 'transparent'
+            },
+            label: {
+              normal: {
+                formatter: 0.5 * 100 + '%',
+                color: '#00F9FC',
+                textStyle: {
+                  fontSize: getAdapterFont(5)
+                }
+              }
+            },
+            outline: {
+              show: true,
+              borderDistance: 1,
+              itemStyle: {
+                borderColor: '#00F9FC',
+                borderWidth: 1
+              }
+            }
+          }
+        ]
+      }
+
+      this.echartsIoTBear.clear()
+      this.EchartsIOTBearOptions &&
+        this.echartsIoTBear.setOption(this.EchartsIOTBearOptions)
+
+      this.echartsIoTLiquidfill.clear()
+      echartsIoTLiquidfillOption &&
+        this.echartsIoTLiquidfill.setOption(echartsIoTLiquidfillOption)
+    }
+  }
+}
+</script>
+
+<style>
+div{
+    position: relative;
+    .line-chart-iot {
+      position: absolute;
+      top: 0.7rem;
+      left: 0;
+      width: 100%;
+      height: 2.93rem;
+    }
+    .line-chart-liquidfill {
+      position: absolute;
+      top: 0.7rem;
+      left: 0;
+      width: 100%;
+      height: 2.93rem;
+    }
+}
+</style>
+```
+
+---
