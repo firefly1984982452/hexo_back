@@ -1,11 +1,11 @@
 ---
 title: JavaScript之Date时间对象
 date: 2020-06-05 10:19:32
-categories: 
-- program
+categories:
+  - program
 ---
 
-# date所有方法
+# date 所有方法
 
 ```
 var date = new Date();
@@ -45,7 +45,6 @@ console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
 ```
 
 ---
-
 
 # 当时时间时分秒（非时间戳）
 
@@ -93,7 +92,6 @@ Math.round(Date.valueOf()/1000)
 
 ---
 
-
 # 两个时间戳相减所距时间
 
 ```
@@ -110,7 +108,6 @@ getDate(){
 ```
 
 ---
-
 
 # 计算今天是今年的进度的多少
 
@@ -150,4 +147,22 @@ getAge24Time() {
   let minute = agePlan%60;
   console.log('你目前的年龄相当于时钟上的'+hour+'点'+minute+'分')
 }
+```
+
+---
+
+# 国际化相对时间格式化：Intl.RelativeTimeFormat
+
+```
+const rtf = new Intl.RelativeTimeFormat("zh", { numeric: "auto" });
+console.log(rtf.format(-3.14, "second"));
+console.log(rtf.format(3, "day"));
+console.log(rtf.format(-1, "day"));
+console.log(rtf.format(-1, "quarter"));
+console.log(rtf.format(-1, "month"));
+console.log(rtf.format(-1, "week"));
+console.log(rtf.format(-1, "day"));
+console.log(rtf.format(-1, "hour"));
+console.log(rtf.format(-1, "minute"));
+console.log(rtf.formatToParts(3, "week"));
 ```
