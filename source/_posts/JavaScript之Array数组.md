@@ -211,7 +211,9 @@ arr.splice(1,3);     //(3) ["B", "C", "D"]
 
 ## 【1】push 和 pop
 
-`push()`向`Array`的末尾添加若干元素，`pop()`则把`Array`的最后一个元素删除掉.
+- `push()`向`Array`的末尾添加若干元素;
+
+- `pop()`则把`Array`的最后一个元素删除掉.
 
 ```
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -221,8 +223,9 @@ arr.pop();           //['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 ## 【2】shift 和 unshift
 
-`shift()`删除数组第一个数据；
-`unshift()`删除数姐最后一个数据。
+- `shift()`删除数组第一个数据；
+
+- `unshift()`添加数姐第一个数据。
 
 ## 【3】concat
 
@@ -280,8 +283,7 @@ arr.sort((a,b) =>  a - b); //[1, 23, 53, 122, 231]
 
 v8 引擎的 sort 函数给出的排序方式：
 
-Chrome 浏览器（`Webkit`）：`插入排序`和`快速排序`（如果数组长度小于 10 就用`插入排序`，大于 10 就用`快速排序`）。
-火狐浏览器（`Mozilla/Firefox`）：`归并排序`。
+Chrome 浏览器（`Webkit`）：`插入排序`和`快速排序`（如果数组长度小于 10 就用`插入排序`，大于 10 就用`快速排序`）。火狐浏览器（`Mozilla/Firefox`）：`归并排序`。
 
 - 2. 返回值
 
@@ -418,8 +420,7 @@ Object.fromEntries(map)
 
 ## 【3】values
 
-和 entries 异曲同工
-返回迭代器，一般和`next`一起使用
+和 entries 异曲同工返回迭代器，一般和`next`一起使用
 
 `['a', 'b', 'c'].values().next().value`
 
@@ -590,7 +591,7 @@ console.log(arr) // ['tom','65','男',['jane','john','Mary']]
 
 其它情况则不会改变，会变成`[ undefined, undefined, undefined, undefined ]`。
 
-## Set 变为数组 
+## Set 变为数组
 
 ```
 Array.from(new Set([1,3,3,4])) //[1, 3, 4]
@@ -707,9 +708,7 @@ var strArr = arr.toString().split(',');
 
 # `arguments`参数的 3 种转数组方法
 
-**方法 1：Array.prototype.slice.apply**
-**方法 2：Array.from**
-**方法 3：[...arguments]**
+**方法 1：Array.prototype.slice.apply** **方法 2：Array.from** **方法 3：[...arguments]**
 
 ```
 var test3 = function(){

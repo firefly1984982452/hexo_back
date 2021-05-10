@@ -1,8 +1,8 @@
 ---
 title: JavaScript之进阶总结
 date: 2020-12-07 14:19:32
-categories: 
-- program
+categories:
+  - program
 ---
 
 # `<script>`标签
@@ -10,7 +10,6 @@ categories:
 ## `<noscript>`
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
-
 
 ## `<script>`中的`async`和`defer`
 
@@ -52,7 +51,7 @@ test(3)
 
 但是`arguments.callee`已经被弃用了，所以可以尝试其它方法。
 
-## 命名一个function
+## 命名一个 function
 
 ```
 function test(num) {
@@ -71,16 +70,16 @@ test(3)
 
 # 防抖和节流
 
-[可视化在线demo](http://demo.nimius.net/debounce_throttle/)
-[滚动栏在线demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
+[可视化在线 demo](http://demo.nimius.net/debounce_throttle/)
+[滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
 
-[学习链接1](https://www.jianshu.com/p/f9f6b637fd6c)
-[学习链接2](https://www.jianshu.com/p/b73c2acad696)
+[学习链接 1](https://www.jianshu.com/p/f9f6b637fd6c)
+[学习链接 2](https://www.jianshu.com/p/b73c2acad696)
 
 ## 【1】概念
 
-- 防抖：（停止后才1次）触发事件后n秒内只执行1次，如果n秒内又触发了事件，则会重新计算时间。
-- 节流：（几秒1次）一定时间内只能执行1次。
+- 防抖：（停止后才 1 次）触发事件后 n 秒内只执行 1 次，如果 n 秒内又触发了事件，则会重新计算时间。
+- 节流：（几秒 1 次）一定时间内只能执行 1 次。
 
 ## 【2】应用场景
 
@@ -88,7 +87,7 @@ test(3)
 
 - 搜索框搜索输入，只有用户停止输入时，才发送请求；
 - 手机号、邮箱号验证输入检测；
-- 窗口resize，只需等窗口调整完成后计算大小，防止重复渲染。
+- 窗口 resize，只需等窗口调整完成后计算大小，防止重复渲染。
 
 节流：
 
@@ -100,7 +99,7 @@ test(3)
 
 1、防抖
 
-正常情况下，我希望它多久执行，假设邮箱验证正常情况是每隔1秒向后台发送请求，然后用户一直不停的在输入框输入，此时会不断的清除Timeout，直到停止调用方法1秒后才正常去向后台发送请求。
+正常情况下，我希望它多久执行，假设邮箱验证正常情况是每隔 1 秒向后台发送请求，然后用户一直不停的在输入框输入，此时会不断的清除 Timeout，直到停止调用方法 1 秒后才正常去向后台发送请求。
 
 ```
 // 防抖【防止多次触发滚动事件】
@@ -108,13 +107,14 @@ var time = '';
 handleDebounce () {
     console.log('调用')
     // 清除未执行的代码，重置回初始化状态
-    if(timer){clearTimeout(timer);} 
+    if(timer){clearTimeout(timer);}
     //开始一个新的任务
     timer = setTimeout(()=>{
         console.log('函数防抖');
     }, 1000);
 },
 ```
+
 ![image.png](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho47acnm9j303q03ndfo.jpg)
 
 2、节流
@@ -133,6 +133,7 @@ handleThrottle () {
   },1000)
 }
 ```
+
 ![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
 
 ---
@@ -157,12 +158,12 @@ handleThrottle () {
 </script>
 ```
 
-vue中使用
+vue 中使用
 
 ```
 <div  @click="handleClick">
-    <span 
-        v-for="(item,index) of 10000"  
+    <span
+        v-for="(item,index) of 10000"
         :key="index">
         {{item}}
     </span>
@@ -189,11 +190,11 @@ handleClick(e){
 - `event.stopProgation`能阻止冒泡事件
 - `event.preventDefault`能阻止如`<a>`的默认`href`事件
 
-# let和闭包
+# let 和闭包
 
-## let劫持作用域
+## let 劫持作用域
 
-**用var时**
+**用 var 时**
 
 ```
 console.log(str);
@@ -210,9 +211,9 @@ console.log(str);
 str = 'hello';
 ```
 
-用var 的话，变量名会提升，但并不会赋值。
+用 var 的话，变量名会提升，但并不会赋值。
 
-**用let时**
+**用 let 时**
 
 ```
 console.log(str);
@@ -221,11 +222,11 @@ let str = 'hello';
 
 报错`VM67161:1 Uncaught ReferenceError: str is not defined`
 
-这里相当于直接`console.log('未定义变量名')`，此时的let已经劫持了var的作用域。
+这里相当于直接`console.log('未定义变量名')`，此时的 let 已经劫持了 var 的作用域。
 
-## 用闭包作用域解释为什么用let的for循环可以劫持数据。
+## 用闭包作用域解释为什么用 let 的 for 循环可以劫持数据。
 
-假设我们想每隔1秒分别打印1、2、3、4、5。
+假设我们想每隔 1 秒分别打印 1、2、3、4、5。
 
 ```
 for (var i = 1; i < 6; i++) {
@@ -236,11 +237,11 @@ for (var i = 1; i < 6; i++) {
 }
 ```
 
-会打印1、2、3、4、5，然后每隔1秒打印一次`'print6'`.
+会打印 1、2、3、4、5，然后每隔 1 秒打印一次`'print6'`.
 
-因为`任务流`的关系，console.log(i)会先于setTimeout执行，等for循环的6次console执行完之后，队列里的setTimeout才会依次执行，而这个时候的i已经是6了。
+因为`任务流`的关系，console.log(i)会先于 setTimeout 执行，等 for 循环的 6 次 console 执行完之后，队列里的 setTimeout 才会依次执行，而这个时候的 i 已经是 6 了。
 
-用let可以劫持i的作用域。
+用 let 可以劫持 i 的作用域。
 
 ```
 for (var i = 1; i < 6; i++) {
@@ -252,7 +253,7 @@ for (var i = 1; i < 6; i++) {
 }
 ```
 
-此时就是先打印1、2、3、4、5，然后每隔1秒打印'print1'、'print2'...'print5'。但是，每次都会有新的j替代原来的j，所以可以直接在for循环里面定义let i = 1;
+此时就是先打印 1、2、3、4、5，然后每隔 1 秒打印'print1'、'print2'...'print5'。但是，每次都会有新的 j 替代原来的 j，所以可以直接在 for 循环里面定义 let i = 1;
 
 ```
 for (let i = 1; i < 6; i++) {
@@ -265,9 +266,9 @@ for (let i = 1; i < 6; i++) {
 
 ---
 
-# return和闭包
+# return 和闭包
 
-## 直接return
+## 直接 return
 
 ```
 var a = 0;
@@ -306,21 +307,22 @@ function fn() {
 console.log(fn()); // 12
 console.log(a); // 0
 ```
+
 ## 区别
 
-- 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用2次）。
+- 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用 2 次）。
 - 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
 - 3.`return`出来的是一个值（`12`），不是变量本身（`a`），此处的`return`是取得私有变量值的一种方法，跟闭包没有严格关系。
 
 ---
 
-# valueOf、toString和Symbol.toPrimitive
+# valueOf、toString 和 Symbol.toPrimitive
 
 对象转基本类型时，先调用`valueOf`,再调用`toString`，如果有`Symbol.toPrimitive`的话优先级是最高的。
 
 ## valueOf
 
-如果有valueOf和toString时，valueOf的优先级高：
+如果有 valueOf 和 toString 时，valueOf 的优先级高：
 
 ```
 let a = {
@@ -336,7 +338,7 @@ console.log( a + '10'); // 110
 
 ## toString
 
-当只有toString时，才会调用它：
+当只有 toString 时，才会调用它：
 
 ```
 let a = {
@@ -349,7 +351,7 @@ console.log(a+203); // 2203
 
 ## Symbol.toPrimitive
 
-优先级最高，还可根据不同的类型转换成Number类型和String类型：
+优先级最高，还可根据不同的类型转换成 Number 类型和 String 类型：
 
 ```
 
@@ -359,16 +361,16 @@ let obj = {
         case 'number':
             return 1234;
             break;
-            
+
         case 'string':
             return 'str';
             break;
-            
+
         case 'default':
             return 'default';
             break;
-            
-        
+
+
         default:
             break;
         }
@@ -382,7 +384,7 @@ console.log(String(obj)); /// str
 
 ---
 
-# JSON的更多参数用法
+# JSON 的更多参数用法
 
 ## JSON.stringify
 
@@ -402,18 +404,19 @@ var settings = {
 var data = JSON.stringify(settings); // "{"username":"lydiahallie","level":19,"health":90}"
 ```
 
-### 参数2：参数过滤
+### 参数 2：参数过滤
 
 ```
 var data = JSON.stringify(settings, ['level', 'health']); // "{"level":19,"health":90}"
 ```
 
-### 参数3：参数排版
+### 参数 3：参数排版
 
 ```
 var data = JSON.stringify(settings, undefined, 2);
 
 ```
+
 打印出来：
 
 ```
@@ -423,17 +426,18 @@ var data = JSON.stringify(settings, undefined, 2);
   "health": 90
 }"
 ```
+
 不再是一行，而是有了排版的字符串。
 
 ## JSON.parse
 
-## 参数1：普通用法
+## 参数 1：普通用法
 
 ```
 JSON.parse('{"p": 5}'); // {p: 5}
 ```
 
-## 参数2：过滤函数
+## 参数 2：过滤函数
 
 ```
 JSON.parse('{"p": 5}',((key,value)=>{
@@ -451,13 +455,12 @@ p 5
 
 ---
 
-
-# JavaScript相等操作符（==）
+# JavaScript 相等操作符（==）
 
 参考：
-[链接1](https://www.cnblogs.com/wisewrong/p/10396002.html)
-[链接2](https://blog.csdn.net/magic_xiang/article/details/83686224)
-[链接3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
+[链接 1](https://www.cnblogs.com/wisewrong/p/10396002.html)
+[链接 2](https://blog.csdn.net/magic_xiang/article/details/83686224)
+[链接 3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
 
 ## 两组操作符
 
@@ -466,9 +469,9 @@ p 5
 
 ## 相等（`==`）规则
 
-**Boolean规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
-**String&Number规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
-**Object规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
+**Boolean 规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
+**String&Number 规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
+**Object 规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
 
 ![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
 
@@ -486,9 +489,9 @@ p 5
 **一、`[] == ![]`**
 
 - 1：逻辑非（`!`）的优先级高于相等操作符（`==`），所以先计算`![]`的`boolean`值`false`，此时比较的是：`[] == false`；
-- 2：根据上面提到的**boolean规则**，则需要把 `false` 转成 `0`，此时比较的是：`[] == 0`；
-- 3：根据上面提到的**Object规则**，调用空数组的toString方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
-- 4：根据上面提到的**String规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
+- 2：根据上面提到的**boolean 规则**，则需要把 `false` 转成 `0`，此时比较的是：`[] == 0`；
+- 3：根据上面提到的**Object 规则**，调用空数组的 toString 方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
+- 4：根据上面提到的**String 规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
 
 简化：
 `[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
@@ -496,13 +499,12 @@ p 5
 **二、`{} == !{}`**
 
 - 1：先计算`!{}`得到`false`，此时比较的是：`{} == false`；
-- 2：调用**Booean规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
+- 2：调用**Booean 规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
 
 简化：
 `{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
 ---
-
 
 # `try...catch`无法用于异步代码
 
@@ -516,7 +518,7 @@ try {
 }
 ```
 
-此时会由catch捕捉到异常：
+此时会由 catch 捕捉到异常：
 
 ```
 异常是：ReferenceError: foo is not defined
@@ -549,28 +551,26 @@ Uncaught ReferenceError: bar is not defined
 
 ---
 
+# HTML 渲染过程
 
-# HTML渲染过程
-
-- 1、解析HTML，构成DOM
-- 2、解析CSS，形成CSS对象模型
-- 3、将CSS和DOM合并，构成渲染模型
+- 1、解析 HTML，构成 DOM
+- 2、解析 CSS，形成 CSS 对象模型
+- 3、将 CSS 和 DOM 合并，构成渲染模型
 - 4、绘制
 
-
 - 重绘：corlor、borde、visibility，只会小变动；
-- 重排（回流）：DOM操作、CSS属性改变、伪类操作，会大变动。
+- 重排（回流）：DOM 操作、CSS 属性改变、伪类操作，会大变动。
 
 ---
 
 # 前端路由和后端路由
 
-- 前端路由（#）：hash值或pushStatu
-- 后端路由（/）：通过URL跳转到具体的html页面，每次跳转都重新访问服务端，服务端返回页面。
+- 前端路由（#）：hash 值或 pushStatu
+- 后端路由（/）：通过 URL 跳转到具体的 html 页面，每次跳转都重新访问服务端，服务端返回页面。
 
 ---
 
-# localStorage标签页通信
+# localStorage 标签页通信
 
 page1
 
@@ -588,12 +588,11 @@ window.addEventListener('storage', (e) => {
 
 ---
 
-# webSocekt多人通信
+# webSocekt 多人通信
 
 [学习链接-基础通信](http://www.imooc.com/article/286001)
 [学习链接-多人通信(ws)](https://www.cnblogs.com/lihaohua/p/12410511.html)
 [学习链接-多人通信(nodejs-websocket)](https://zhuanlan.zhihu.com/p/64906193)
-
 
 ![效果](https://wx2.sinaimg.cn/large/0069qZtTgy1gls4a0l7fej30ge0agtap.jpg)
 
@@ -634,7 +633,7 @@ console.log('webSocket建立完毕！');
 
 ## 客户端
 
-**客户端1：**
+**客户端 1：**
 
 ```
 <!DOCTYPE html>
@@ -687,7 +686,7 @@ console.log('webSocket建立完毕！');
 </html>
 ```
 
-**客户端2（将用户1改为用户2）：**
+**客户端 2（将用户 1 改为用户 2）：**
 
 ```
 ...
@@ -710,12 +709,11 @@ ws.send(
 
 `node server.js`
 
-此时，一个运行在chrome，一个运行在firefox，就已经能实现通信。
+此时，一个运行在 chrome，一个运行在 firefox，就已经能实现通信。
 
 ---
 
-# JavaScript编码规范
-
+# JavaScript 编码规范
 
 ## 不要在块内函数声明
 
@@ -744,9 +742,9 @@ var x = new Boolean(false);
 false === false; // false
 ```
 
-## for-in循环
+## for-in 循环
 
-### 只用于object/map/hast的遍历
+### 只用于 object/map/hast 的遍历
 
 ```
 var obj = {
@@ -757,7 +755,7 @@ for(var i in obj) {
 }
 ```
 
-### 遍历对象时用hasOwnPropery
+### 遍历对象时用 hasOwnPropery
 
 ```
 for(var i in obj) {
@@ -765,7 +763,7 @@ for(var i in obj) {
 }
 ```
 
-## 检查null和0
+## 检查 null 和 0
 
 如果你想检查字符串是否为 null 或空:
 
@@ -795,50 +793,48 @@ return val ? foo() : bar();
 
 ---
 
-
-# 与JAVA相通的概念
+# 与 JAVA 相通的概念
 
 ## 【1】MVC、MVVM
 
 ### 【1.1】MVC
 
-Model层:模型层，比如图片放一个类，标题放一个类
-View层：显示页面，如xml
-Controller层：控制Model的读取、存储。如MainActivity
+Model 层:模型层，比如图片放一个类，标题放一个类
+View 层：显示页面，如 xml
+Controller 层：控制 Model 的读取、存储。如 MainActivity
 
 ### 【1.2】MVVM
 
-MVVM实现了View和Model的自动同步，当Model的属性改变时，我们不再手动操作DOM，也就是双向绑定。
+MVVM 实现了 View 和 Model 的自动同步，当 Model 的属性改变时，我们不再手动操作 DOM，也就是双向绑定。
 
-Model层：后端传递的数据
-View层：页面
-ViewModel层：视图模型，连接Model和View的桥梁。将Model转为View（将后端数据显示给前端）用的是数据绑定，将View转为Model（将前端数据转给后端）用的DOM监听，这种实现方法称为为**数据的双向绑定**。
+Model 层：后端传递的数据
+View 层：页面
+ViewModel 层：视图模型，连接 Model 和 View 的桥梁。将 Model 转为 View（将后端数据显示给前端）用的是数据绑定，将 View 转为 Model（将前端数据转给后端）用的 DOM 监听，这种实现方法称为为**数据的双向绑定**。
 
 ## 【2】类
 
-js里面的类和其它OOP里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
-
+js 里面的类和其它 OOP 里面的类概念是一样的。（比如，所有的车是一个类，房子是一个类）
 
 ---
 
-# hybird混合式开发
+# hybird 混合式开发
+
 ## jsBridge
 
-js与android的通信
+js 与 android 的通信
 
-### android代码：
+### android 代码：
 
-java发消息给js：
+java 发消息给 js：
 `webview.send()`
-java收js的消息
+java 收 js 的消息
 `webview.registerHander('name',new Bridge(){})`
 
+### javaScript 代码：
 
-### javaScript代码：
-
-js发消息给java
+js 发消息给 java
 `window.WebViewJavaScriptBridge.send()`
-js收java的消息
+js 收 java 的消息
 `document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
 
 ### 示例
@@ -857,9 +853,10 @@ $(".company_color").click(function(){
   }
 })
 ```
+
 ---
 
-# Blob实现下载文件
+# Blob 实现下载文件
 
 [参考链接](https://zhuanlan.zhihu.com/p/97768916)
 
@@ -897,6 +894,7 @@ document.body.appendChild(adom)
 adom.click();
 adom.remove();
 ```
+
 - 2.image
 
 ```
@@ -915,7 +913,6 @@ fetch(url).then(res => res.blob()).then((blob) => {
 
 ---
 
-
 # `typeof null`为什么返回`object`
 
 `null`是空对象指针，所以`typeof null`返回的是`object`，
@@ -924,8 +921,7 @@ fetch(url).then(res => res.blob()).then((blob) => {
 
 ---
 
-
-# lighthouse前端性能优化工具
+# lighthouse 前端性能优化工具
 
 ```
 npm install -g lighthouse
@@ -933,11 +929,11 @@ npm install -g lighthouse
 lighthouse https://www.cnblogs.com/
 ```
 
-生成html页面
+生成 html 页面
 
 ---
 
-# 用iframe实现HTML在线编辑
+# 用 iframe 实现 HTML 在线编辑
 
 ```
 <!DOCTYPE html>
@@ -974,4 +970,122 @@ lighthouse https://www.cnblogs.com/
 
   </body>
 </html>
+```
+
+---
+
+# 实现数字递增动画
+
+## `html`版
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>数字自动增加</title>
+  </head>
+
+  <body>
+    <h1 id="time">0</h1>
+
+    <script>
+      function NumAutoPlusAnimation(targetEle, options) {
+        var $this = document.getElementById(targetEle),
+          finalNum = options.num, //要显示的真实数值
+          step = finalNum / (options.time / 30) /*每30ms增加的数值--*/,
+          count = 0;
+        var timer = setInterval(function () {
+          count += step;
+          if (count >= finalNum) {
+            clearInterval(timer);
+            count = finalNum;
+          }
+          $this.innerHTML = Math.floor(count).toLocaleString();
+        }, 30);
+      }
+
+      NumAutoPlusAnimation("time", {
+        time: 1500,
+        num: 100,
+      });
+    </script>
+  </body>
+</html>
+```
+
+## `vue`组件版
+
+numberAnimation.vue
+
+```
+<template>
+  <div>
+    <p class="EX-Medium">{{ number }}</p>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      number: 0
+    }
+  },
+  props: {
+    valueNumber: {
+      default: 0,
+      type: Number
+    },
+    timeTotal: {
+      default: 1500,
+      type: Number
+    }
+  },
+  mounted() {
+    this.NumAutoPlusAnimation({
+      time: this.timeTotal,
+      num: this.valueNumber
+    })
+  },
+  methods: {
+    NumAutoPlusAnimation(options) {
+      var finalNum = options.num, //要显示的真实数值
+        step = finalNum / (options.time / 30) /*每30ms增加的数值--*/,
+        count = 0
+
+      var timer = setInterval(() => {
+        count += step
+        if (count >= finalNum) {
+          clearInterval(timer)
+          count = finalNum
+        }
+        this.number = Math.floor(count).toLocaleString()
+      }, 30)
+    }
+  }
+}
+</script>
+
+```
+
+main.js
+
+```
+import numberAnimation from './components/public/numberAnimation.vue'
+Vue.component('numberAnimation', numberAnimation)
+```
+
+test.vue
+
+```
+<numberAnimation :valueNumber="53667.4" />
+```
+
+---
+
+# 全屏
+
+```
+document.querySelector('body').requestFullscreen(); // 全屏
+document.exitFullscreen(); // 退出全屏
 ```

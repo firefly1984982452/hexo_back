@@ -103,7 +103,7 @@ getDate(){
   let day = Math.floor(reduceTimeStamp / 60 /60 / 24);
   let hour = Math.floor((reduceTimeStamp / 60 /60) % 24);
   let minute = Math.floor((reduceTimeStamp /60) % 60);
-  console.log('两个时间段相距：' + day + '天 ' + hour + '小时 ' + minute + '秒');
+  console.log('两个时间段相距：' + day + '天 ' + hour + '小时 ' + minute + '分'+ seconds + '秒');
 },
 ```
 

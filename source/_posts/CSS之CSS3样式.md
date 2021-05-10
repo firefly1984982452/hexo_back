@@ -10,6 +10,7 @@ categories:
 - `border-radius`
 - `box-shadow`
 - `border-image`
+- `border-style`
 
 ## 【1】box-shadow
 
@@ -68,16 +69,17 @@ outline: 5px solid #ff0;
 border: 5px solid #f00;
 ```
 
-**outline 和 border 的区别**：
+◆ **outline 和 border 的区别**：
 
 - `outline`不占空间，`border`占空间
 - 设置圆角（`border-radius`）之后，`border`边框会贴紧，`outline`不会
 - `outline-set`可以设置边距
 
-**区别的图片**
+◆ **区别的图片**
+
 ![image](https://wx1.sinaimg.cn/mw1024/0069qZtTgy1gizkad0s9lj304k04aweg.jpg)
 
-**区别的代码**:
+◆ **区别的代码**:
 
 ```
 background: #fbfb;
@@ -87,7 +89,7 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
-## border-style 属性
+## 【5】border-style 属性
 
 [效果](https://www.w3school.com.cn/tiy/t.asp?f=csse_border-style)
 
@@ -101,6 +103,91 @@ outline-offset: 10px;
 - `outset`：3D 外边框;
 - `groove`：凹槽边框；
 - `ridge`：垄状边框；
+
+## 【6】信封边框
+
+<div
+  style="
+    width: 200px;
+    height: 100px;
+    padding: 1em;
+    border: 10px solid transparent;
+    background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, black 0, black 25%, white 0, white 50%);
+    background-size: 0.6em 0.6em;
+  "
+></div>
+
+```
+.box {
+  width: 200px;
+  height: 100px;
+  padding: 1em;
+  border: 10px solid transparent;
+  background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, black 0, black 25%, white 0, white 50%);
+  background-size: 0.6em 0.6em;
+}
+```
+
+## 【7】重复边框背景图片
+
+[链接](https://dabblet.com/gist/c73fd4ea4b592a05c004)
+
+```
+border: 10px solid;
+border-image: 33.3% url("./test.jpg") round;
+```
+
+## 【8】border-radius 中斜杠`/`的用法
+
+◆ 自适应椭圆
+
+<div class="box" style="width: 300px; height: 100px; background-color: #fbb; border-radius: 20% / 50%"></div>
+
+```
+width: 300px;
+height: 100px;
+background-color: #fbb;
+border-radius: 20% / 50%;
+```
+
+◆ 半圆
+
+<div class="box" style="width: 50px; height: 100px; background-color: #fbb; border-radius: 0 100% 100% 0 / 50%"></div>
+
+```
+width: 50px;
+height: 100px;
+background-color: #fbb;
+border-radius: 0 100% 100% 0 / 50%
+```
+
+◆ 其它形状
+
+<div class="box" style="width: 300px; height: 100px; background-color: #fbb; border-radius: 10% 50% / 50% 10%"></div>
+
+```
+width: 300px;
+height: 100px;
+background-color: #fbb;
+border-radius: 10% 50% / 50% 10%;
+```
+
+◆ 斜杠`/`的用法
+
+[链接](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-radius)
+
+```
+border-radius: 1em/5em;
+
+/* 等价于： */
+
+border-top-left-radius:     1em 5em;
+border-top-right-radius:    1em 5em;
+border-bottom-right-radius: 1em 5em;
+border-bottom-left-radius:  1em 5em;
+```
+
+`border-top-left-radius: 1em 5em;`意思是：`top`为`1em`，`left`为`5em`。
 
 ---
 
@@ -140,6 +227,20 @@ outline-offset: 10px;
 
 - `url()`：图片地址
 - `linear-gradient()`渐变背景
+
+背景图片可以有多个，可以摆放在任意位置
+
+```
+background: url('1.png'),
+            url('2.png'),
+            url('3.png'),
+            url('4.png');
+background-repeat: no-repeat;
+background-size: 0.2rem 0.2rem;
+background-position: 0 0, 100% 0, 0 100%, 100% 100%;
+<!-- 或写成下面这样 -->
+background-position: top left, top right, bottom left, bottom right;
+```
 
 ## 【4】位置：background-position
 
@@ -195,7 +296,7 @@ background-attachment: local, scroll;
 
 ## 【6】背景重复：background-repeat
 
-**属性**
+◆ **属性**
 
 - `repeat`【默认】：平铺满整个容器，可能会造成背景图片显示不全。
 - `repeat-x`： 背景图片沿容器的 X 轴平铺。
@@ -204,7 +305,7 @@ background-attachment: local, scroll;
 - `round`：升缩背景图片适应容器大小。
 - `space`：平均分配相邻图片之间的空间。
 
-**示例**
+◆ **示例**
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbbuxfn3aj31hb0sk154.jpg)
 
@@ -240,7 +341,13 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 ## 【1】rotate：旋转
 
-### 【1.1】正方形
+**rotate(10turn)代表转 10 圈**
+
+<div class="box" style="margin: 60px 0 0 60px; width: 300px; border: 1px solid #bbf; transform: rotate(45deg); overflow: hidden">
+  <img src="https://wx1.sinaimg.cn/mw690/0069qZtTgy1go96k54t3lj30ru0rqx6p.jpg" style="width: 100%; transform: rotate(-45deg) scale(1.5)" />
+</div>
+
+### 【1.1】菱形
 
 ```
 .lin{
@@ -272,7 +379,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 ## 【2】skewX：倾斜
 
-`transform: skewX(-45deg);`
+`transform: skewX(-45deg);` // 平形四边形
 
 **skewX 默认会把字体内容也旋转，解决方式是加伪元素**
 
@@ -328,11 +435,13 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 # 多边形裁剪路径：clip-path
 
+可以裁剪图片
+
 [源码](https://firefly1984982452.github.io/my-web-page/clip-path.html)
 
 ## 【1】矩形：inset
 
-语法：
+◆ 语法：
 
 ```
 clip-path:inset(上 右 下 左); // 4个值
@@ -342,7 +451,7 @@ clip-path:inset(下 左右); // 2个值
 clip-path:inset(上右下左 round 圆角); // 值+圆角【border-radius】
 ```
 
-示例：
+◆ 示例：
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gnbaa0b9f5j30ok09oaa8.jpg)
 
@@ -353,13 +462,13 @@ clip-path: inset(25% 5px round 5px 25%);// 其它
 
 ## 【2】圆形：circle
 
-语法：
+◆ 语法：
 
 ```
 clip-path:circle(半径 at x y);
 ```
 
-示例：
+◆ 示例：
 
 ![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gnaii751tlj30kk08l0st.jpg)
 
@@ -371,13 +480,13 @@ clip-path: circle(50% at 0 100%); // 其它形状圆
 
 ## 【3】椭圆：ellipse
 
-语法：
+◆ 语法：
 
 ```
 clip-path:ellipse(x y at 圆心x 圆心y);
 ```
 
-示例：
+◆ 示例：
 
 ![image](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gnairkejmxj30k508hjrf.jpg)
 
@@ -388,13 +497,13 @@ clip-path: ellipse(40% 20% at 20% 70%); // 其它形状
 
 ## 【4】多边形：polygon
 
-语法：
+◆ 语法：
 
 ```
 clip-path:polygon(x1 y1, x2 y2, x3 y3,...);
 ```
 
-示例：
+◆ 示例：
 
 - 1. 多边形
 
@@ -454,7 +563,7 @@ text-shadow: 5px 5px 5px #f00;
 
 ## 【3】多边形阴影：drop-shadow
 
-**文字也会有阴影**
+◆ 文字也会有阴影
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gj0ol4gog9j305l03amx2.jpg)
 
@@ -467,6 +576,12 @@ filter: drop-shadow(5px 5px 5px #000);
 ```
 
 参数：x 轴、y 轴、阴影、颜色。
+
+◆ 图标换色
+
+```
+filter: drop-shadow(#f00 20px 0)
+```
 
 ## 【4】通过阴影弱化背景
 
@@ -510,26 +625,19 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 
 # 渐变：gradient
 
-- `line-gradient`：创建线性渐变的图片
+- `line-gradient`：线性渐变
 
-- `redial-gradient`：创建径向渐变的图片
+- `radial-gradient`：径向渐变
 
-- `repeating-line-gradient`：创建重复线性渐变的图片
+- `conic-gradient`：圆锥形渐变
 
-- `repeating-redial-gradient`：创建重复径向渐变的图片
+- `repeating-line-gradient`：重复线性渐变
+
+- `repeating-radial-gradient`：重复径向渐变
 
 与`background-size`组合的话，可以生成条纹背景。
 
 ## 【1】linear-gradient
-
-背景 2 色平铺
-
-![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0f2jukxkj308v05pt8r.jpg)
-
-```
-background: linear-gradient(#ff0 50%, #f00 50%);
-background-size: 100% 50%;
-```
 
 ### 【1.1】linear-gradient：条纹背景
 
@@ -537,7 +645,7 @@ background-size: 100% 50%;
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0f2emiabj308x05lq2r.jpg)
 
-`backgorund-image: linear-gradient(#ff0 50%, #f00 50%)`
+`background-image: linear-gradient(#ff0 50%, #f00 50%)`
 
 #### 背景 2 色平铺
 
@@ -582,24 +690,165 @@ background-repeat:no-repeat;
 background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,green 10%);
 ```
 
+## 【3】radial-gradient 与 linear-gradient 类似
+
+## 【4】conic-gradient
+
+### 【4.1】饼图
+
+<div
+  style="
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
+  "
+></div>
+
+```
+background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
+```
+
+### 【4.2】伪圆环效果
+
+<div
+  style="
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <div
+    style="
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #fff;
+    "
+  >
+  </div>
+</div>
+
 ---
 
 # 文本效果
 
-## 文字超出：text-overflow
+## 【1】文字及段落
 
-- ellipsis：显示`...`。
-- clip：截断。
-- 'string'：【仅 firefox】自定义字符串。
+- text-align: center | left | right | justify; // 文本对齐方式
 
-## 文字换行：word-wrap
+- text-align-last: center | left | right; // 段落最后一行对齐方式
 
-- break-word：如果单词太长会自动换行。
+- text-decoration: overline | underline | line-through; // 文本线条的简写
 
-## 文字截断：word-break
+- text-decoration-color: #fff; // 线条颜色
 
-- keep-all：【默认】单词放不下会自动换行。
-- break-all：单词放不下会折断换行，铺满元素。
+- text-decoration-line: overline | underline | line-through; // 线条位置
+
+- text-decoration-style: solid | double | dotted | dashed | wavy ; 线条样式
+
+- text-indent: 2em; // 段落第 1 行缩进
+
+- text-overflow: ellipsis | clip | 'string'【仅 firefox】; // 文字超出
+
+- text-shadow: 2px 2px #ff0; // 文字阴影
+
+- text-transform: uppercase | lowercase | capitaliza; // 文字转换大小写
+
+## 【2】行内元素文字间距自动调整
+
+◆ 效果：
+
+<div style="width: 100px; text-align: justify; text-align-last: justify"
+  >姓名</div
+>
+<div style="width: 100px; text-align: justify; text-align-last: justify">
+  家庭住址
+</div>
+<br />
+
+◆ 代码：
+
+```
+<style>
+  div {
+    width: 100px;
+    text-align:justify;
+    text-align-last:justify;
+  }
+</style>
+<body>
+  <divs>姓名</divs>
+  <div>家庭住址</div>
+</body>
+```
+
+## 【2】文字从右到左效果
+
+◆ 区别：
+
+- text-align: right
+- direction: rtl
+- unicode-bidi: bidi-override【依赖于 direction】
+
+◆ 效果：
+
+<div style="background:#fbb;">
+  <p style="text-align: right">
+    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+  </p>
+  <div style="direction: rtl">
+    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+  </div>
+  <section style="direction: rtl; unicode-bidi: bidi-override">
+    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+  </section>
+</div>
+
+◆ 代码：
+
+```
+<p style="text-align: right">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</p>
+<div style="direction: rtl">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</div>
+<section style="direction: rtl; unicode-bidi: bidi-override">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</section>
+```
+
+## 【3】文字换行与截断
+
+- word-wrap: break-word; // 如果单词太长会自动换行。
+- white-space: nowrap; // 段落中的文本不换行（会截断）。
+
+- word-break: keep-all; //【默认】单词放不下会自动换行【文字截断】。
+- word-break: break-all; // 单词放不下会折断换行，铺满元素【文字截断】。
+
+## 【4】文字间距
+
+- word-spacing:30px; // 单词与单词之间的距离。
+- letter-spacing:-3px; // 字母与字母之间的距离。
+
+## 【5】文字连字符换行：`hyphens`
+
+◆ 功能：连字符换行
+
+◆ 与`text-align: justify`的区别
+
+<p style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
+<p style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
+
+```
+<p style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
+<p style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
+```
 
 ---
 
@@ -668,11 +917,18 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
     /* 延迟 */
     animation-delay: 1s;
     /* 次数 */
-    animation-iteration-count: 1;
+    animation-iteration-count: 1 | infinite;
     /* 反向播放 */
     animation-direction: normal;
     /* 填充模式 */
     animation-fill-mode: both;
+    /* 运行状态 */
+    animation-play-state: running ;
+  }
+
+  /* 鼠标悬浮在动画上时暂停 */
+  div:hover{
+    animation-play-state: paused ;
   }
 
   @keyframes mymove {
@@ -701,6 +957,8 @@ background-image: repeating-linear-gradient(60deg,yellow 0%,yellow 5%,green 0%,g
 - `ease-in`：低速开始。
 - `ease-out`：低速结束。
 - `ease-in-out`：低速开始和结束
+
+**该属性还有个不常用的值：steps(10)代表次数，可以做逐帧动画。**
 
 ### 【2.2】反向播放：animation-direction
 
@@ -773,6 +1031,8 @@ p{
 
 # 过渡：transition
 
+可以直接写`transition:all 2s;`来过渡所有样式。
+
 ```
 <style>
   div {
@@ -817,10 +1077,74 @@ p{
 
 [filter 所有效果](https://www.runoob.com/try/try.php?filename=trycss_ex_images_filters)
 
-常用：
+◆ 常用：
 
 - blur：高斯模糊
+
 - drop-shadow：阴影
+
+多个`filter`滤镜一起使用：**加空格**
+
+```
+filter: blur(4px) brightness(0.3);
+```
+
+## 进阶 - 毛玻璃效果
+
+◆ 方法一：`backdrop-filter`
+
+```
+backdrop-filter: blur(10px);
+```
+
+◆ 方法二：在`::before`里面加传统`filter`
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      main::before {
+        background: url("./test.jpg") no-repeat;
+        background-size: 500px 500px;
+      }
+
+      main {
+        position: relative;
+        background: rgba(0, 0, 0, 0.2);
+        width: 300px;
+        height: 300px;
+      }
+
+      main::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        filter: blur(20px);
+      }
+    </style>
+  </head>
+  <body>
+    <main>hello world</main>
+  </body>
+</html>
+
+```
+
+---
+
+# 混合模式：mix-blend-mode
+
+[mix-blend-moe 所有效果](https://www.runoob.com/try/try.php?filename=trycss_mix-blend-mode-all)
 
 ---
 
@@ -830,7 +1154,7 @@ p{
 
 [源码](https://firefly1984982452.github.io/my-web-page/object-fit.html)
 
-**语法**
+◆ **语法**
 
 - `fill`【默认】：不按比例拉伸至填满容器；
 - `contain`：保持比例缩放；
@@ -838,7 +1162,7 @@ p{
 - `none`：保持原有长和宽；
 - `scale-down`：保持比例，取`contain`和`cover`谁的尺寸更小。
 
-**示例**
+◆ **示例**
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbgsxvddej31hb0ng1b9.jpg)
 
@@ -882,76 +1206,48 @@ img {
 }
 ```
 
----
+## 【5】vertical-align
 
-# flex 相关
-
-## 规范
+文字对齐图片方式
 
 ```
-<div class="box">
-  <div class="item"></div>
-</div>
-```
-
-## 示例
-
-```
-.box{
-  width: 400px;
-  height: 400px;
-  border: 1px solid #f7b2bb;
-  display: flex;
-  /*flex-direction: row;//方向
-  flex-wrap: wrap; //换行 */
-  flex-flow: row wrap;
-  justify-content: space-between;//内容
-  align-content: space-between;//
-}
-.item{
-  width: 100px;
-  height: 100px;
-  background: #f7b2bb;
-  color: #fff;
-  border: 1px solid #eee;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /*flex-grow: 3;*/
-}
+vertical-align: text-top; // 默认文字对齐图片顶部
+vertical-align: text-bottom; // 文字对齐图片底部
 ```
 
 ---
 
-## flex 中的 `justify-content: space-evenly`
+# 其它
 
-**均匀分布**
-
-```
-justify-content: space-between; // 两端
-justify-content: space-around; // 两端间隙相等，项目中间的间隙比较大
-justify-content: space-evenly; // 两端与项目中间的间隙一样大
-```
-
-区别：
-
-![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gidesq1po8j30970c4mxc.jpg)
-
-**IOS 之类的兼容性用 before 和 after**
+## 【1】reiseze 属性
 
 ```
-container{
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-between;
-       //justify-content: space-evenly;
-      &:before,
-      &:after {
-          content: '';
-          display: block;
-    }
+width: 200px;
+height: 200px;
+overflow: hidden;
+border: 1px solid #ebb;
+resize: auto;
+```
+
+条件：
+
+- 子元素要比父元素大；
+
+- `overflow: hidden;`
+
+## 【2】z-index 属性
+
+如果父元素的 z-index 很低，并且被其它元素遮住，那子元素的 z-index 再大也不会显示在最上面。
+
+```
+
+.A{
+  z-index:1;
+  .a{
+    z-index:99;
+  }
+}
+.B{
+  z-index:2;
 }
 ```
-
----

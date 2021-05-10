@@ -5,7 +5,6 @@ categories:
   - program
 ---
 
-
 # 【1】改变控制台面样式
 
 ```
@@ -202,37 +201,21 @@ body{
 
 ---
 
-# 【12】清除浮动
-
-- 1、使用空元素`clear:both`
-- 2、`overflow:hidden`
-- 3、使用邻近元素`clear:both`
-- 4、使用伪类`:before`元素`clear:both`
-
-父元素：
+# 【12】`background-clip: padding-box;`实现半透明边框
 
 ```
-.content-box::after{
-  clear: both;
-  content: '';
-  display: block;
-}
+border: 10px solid rgba(255, 255, 255, 0.5);
+background: #fbb;
+background-clip: padding-box;
 ```
 
----
-
-# 【13】BFC
-
-`BFC`是特性（功能），不是定义。
-
-比如`float`，`position`、`absolute`
+实现： `background-clip: padding-box;`或`background-clip: content-box;`，因为默认是：`background-clip: border-box;`，边框的颜色与背景重合，所以无效。
 
 ---
 
 # 【14】reset.css
 
-作者推荐了`normalize.css`替代传统的`reset.css`。
-[链接](https://github.com/chokcoco/iCSS/issues/5)
+作者推荐了`normalize.css`替代传统的`reset.css`。 [链接](https://github.com/chokcoco/iCSS/issues/5)
 
 ---
 
@@ -240,8 +223,7 @@ body{
 
 ## 【1】预览
 
-[案例预览](https://firefly1984982452.github.io/css-center/)
-[案例下载地址](https://github.com/firefly1984982452/css-center)
+[案例预览](https://firefly1984982452.github.io/css-center/) [案例下载地址](https://github.com/firefly1984982452/css-center)
 
 ## 【2】布局
 
@@ -391,7 +373,6 @@ li:not(:last-child)...
 
 ---
 
-
 # 【16】更改自带的 scorll 滚动条样式
 
 ```
@@ -412,3 +393,295 @@ li:not(:last-child)...
 ```
 
 ---
+
+# 【17】CSS 水波特效动画
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes wave {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      body {
+        position: relative;
+      }
+      .water-waves {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        border: 1px solid #38abe9;
+        overflow: hidden;
+      }
+      .water-wave {
+        position: absolute;
+        top: 40%;
+        left: 0;
+        width: 205px;
+        height: 250px;
+        border-radius: 33%;
+        position: absolute;
+        left: -50px;
+        opacity: 0.3;
+      }
+
+      .water-wave1 {
+        top: 35%;
+        background-color: rgba(0, 161, 246, 0.8);
+        animation: wave 10s linear infinite;
+      }
+      .water-wave2 {
+        top: 38%;
+        background-color: rgba(3, 110, 172, 0.6);
+        animation: wave 9s linear infinite;
+      }
+      .water-wave3 {
+        top: 40%;
+        background-color: rgba(4, 78, 127, 0.8);
+        animation: wave 7s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="water-waves">
+      <div class="water-wave water-wave1"></div>
+      <div class="water-wave water-wave2"></div>
+      <div class="water-wave water-wave3"></div>
+    </div>
+  </body>
+</html>
+
+```
+
+---
+
+# 【18】用 radial-gradient 和 linear-gradient 实现单个 div 下渐变进度条
+
+```
+.rate {
+  width: 500px;
+  --c: #3200ff;
+  --p: 60%;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 30px;
+  background-image: radial-gradient(
+      closest-side circle at var(--p),
+      var(--c),
+      var(--c) 100%,
+      transparent
+    ),
+    linear-gradient(to right,#fbb,var(--c));
+  background-size: 100%,var(--p);
+  background-repeat: no-repeat;
+}
+```
+
+---
+
+# 【19】用 flex 和 after 中的 padding 实现定宽高比例
+
+```
+.box{
+  background-color: #fbf;
+  width: 100px;
+  display: flex;
+}
+.box::after{
+  content: '';
+  padding-bottom: 150%;
+}
+
+...
+
+<div class="box">这是定宽比例</div>
+```
+
+---
+
+# 【20】outline 属性实现悬浮时高亮
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+    }
+    ul{
+      width: 300px;
+    margin: auto;
+    }
+    li{
+      border: 10px solid #bff;
+      height: 50px;
+    }
+    li+li{
+      margin-top: -10px;
+    }
+    li:hover{
+      outline: 1000px solid #00000099;
+      outline-offset: -10px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>01</li>
+    <li>02</li>
+    <li>03</li>
+    <li>04</li>
+    <li>05</li>
+    <li>06</li>
+    <li>07</li>
+    <li>08</li>
+  </ul>
+</body>
+</html>
+```
+
+---
+
+# 【21】border 边框动效
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .content {
+        width: 200px;
+        height: 200px;
+        background-color: #fbb;
+        position: relative;
+      }
+      .content::before {
+        position: absolute;
+        content: "";
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 5px solid #bbf;
+      }
+      .content::before {
+        animation: move 5s infinite linear;
+      }
+      @keyframes move {
+        0%,
+        100% {
+          clip-path: inset(0 5px 200px 5px);
+        }
+        25% {
+          clip-path: inset(5px 0 5px 200px);
+        }
+        50% {
+          clip-path: inset(200px 5px 0 5px);
+        }
+        75% {
+          clip-path: inset(5px 200px 5px 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content"></div>
+  </body>
+</html>
+```
+
+---
+
+# 【22】整块文本溢出省略
+
+◆ 效果：
+
+<section style="width: 300px; height: 80px; border: 1px solid #bbf">
+  <p
+    style="
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    "
+  >
+    <span
+      style="background-color: #bfb; display: inline-block; padding: 10px"
+      >CSS3</span
+    >
+    <span
+      style="background-color: #bfb; display: inline-block; padding: 10px"
+      >JavaScript</span
+    >
+    <span
+      style="background-color: #bfb; display: inline-block; padding: 10px"
+      >HTML5</span
+    >
+    <span
+      style="background-color: #bfb; display: inline-block; padding: 10px"
+      >前端工程师</span
+    >
+  </p>
+</section>
+
+◆ 代码：
+
+```
+<style>
+  section {
+    width: 300px;
+    height: 80px;
+    border: 1px solid #bbf;
+  }
+  .person-card__desc {
+    width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  span {
+    background-color: #bfb;
+    display: inline-block;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+<section>
+  <p class="person-card__desc">
+    <span>CSS3</span>
+    <span>JavaScript</span>
+    <span>HTML5</span>
+    <span>前端工程师</span>
+  </p>
+</section>
+</body>
+```
+
+◆ 核心：
+
+`span`标签变成`display: inline-block;`，父标签正常的用溢出换行的代码，为了兼容`iOS/Safari`，加上`display: -webkit-box;`下面的代码实现兼容。

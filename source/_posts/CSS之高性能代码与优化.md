@@ -117,7 +117,7 @@ import './assets/css/public.css';
 ::-webkit-scrollbar{}
 ```
 
-中间最后留 5 行以后，好在全览时看起来像个段落。
+中间最好留 5 行以上，好在全览时看起来像个段落。
 
 ---
 
@@ -177,3 +177,11 @@ Class
 - 表格相关：`border-spacing`。
 
 **比如`border`不能继承是因为不通用，有的得加上，有的加上得删掉。**
+
+---
+
+# SEO 优化和增加可读性
+
+- 鼠标样式随功能变化；
+
+如不可点击时可改为`cursor: not-allowed;`

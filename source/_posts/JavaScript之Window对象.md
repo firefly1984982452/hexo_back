@@ -5,7 +5,7 @@ categories:
   - program
 ---
 
-# 属性篇
+# ◆ 属性篇
 
 # performance 性能
 
@@ -134,7 +134,7 @@ console.log(clientScreenMsg);
 
 ---
 
-# 方法篇
+# ◆ 方法篇
 
 # 英文 base64 转码：btoa 和 atob 实现
 
@@ -324,3 +324,15 @@ window.postMessage("hi there!", location.origin);
 ```
 
 此时点击页面 B 的发送消息按钮就能在页面 A 接收消息了。
+
+---
+
+# HTML 事件属性
+
+[HTML 事件属性列表](https://www.w3school.com.cn/tags/html_ref_eventattributes.asp)
+
+所有的事件都可以由 window 监听：
+
+```
+window.addEventListener('storage', (e) => {})
+```

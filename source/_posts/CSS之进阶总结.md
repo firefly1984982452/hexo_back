@@ -116,10 +116,10 @@ $(document).ready(function(){
 		top: 0;
 		bottom: 0;
 		left: 0;
-        pointer-events: none;
-        .left,.right{
-            pointer-events:all
-        }
+    pointer-events: none;
+    .left,.right{
+        pointer-events:all
+    }
 	}
 }
 </style>
@@ -419,28 +419,7 @@ a{
 
 字体如果需求是小于`12px`的话，可以先设置字体为`20px`，再使用`transfrom:scale(0.5)`进行缩放。（也可以使用图片，但不推荐）
 
-## 【7】文字效果
-
-```
-text-decoration:none 无装饰，通常对html下划线标签去掉下划线样式
-text-decoration:underline 下划线样式
-text-decoration:line-through 删除线样式-贯穿线样式
-text-decoration:overline 上划线样式
-```
-
-## 【8】文字换行
-
-```
-word-wrap:break-word;
-```
-
-## 【9】段落开头空 2 格
-
-```
-text-indent: 2em;
-```
-
-## 【10】自定义字体：font-face
+## 【7】自定义字体：font-face
 
 ```
 @font-face {
@@ -453,7 +432,7 @@ a{
 }
 ```
 
-## 【11】垂直排版
+## 【8】垂直排版
 
 ```
 p{
@@ -465,7 +444,7 @@ p span{
 }
 ```
 
-## 【12】断行规则
+## 【9】断行规则
 
 ```
 line-break: auto; // 默认
@@ -477,32 +456,18 @@ line-break: anywhere; // 任意位置标点都可以换行
 
 ---
 
-# position 定位
-
-- `relative`：略
-- `absolute`：略
-- `fixed`：略
-- `sticky`
-
-## sticky：粘性布局
-
-重点：
-
-```
-position: sticky;
-top: 0;
-```
-
-`sticky`必须指定 `top`, `right`, `bottom` 或 `left` 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。
-
----
-
 # display 显示
+
+[链接](https://blog.csdn.net/qq_42161935/article/details/99844944)
 
 - `inline`
 - `block`
 - `inline-table`
 - `table-cell`
+- `flow-root`
+- `flex`
+- `grid`
+- `content`
 
 ## 【1】inline
 
@@ -523,6 +488,14 @@ top: 0;
 ## 【4】table-cell
 
 所有内容在一行
+
+## 【5】flow-root
+
+撑开浮动的元素高度
+
+## 【6】content
+
+不产生边框、背景、颜色，只显示内容。
 
 ---
 
@@ -638,18 +611,13 @@ p{
 </style>
 ```
 
-横向打印：`size: landscape`
-竖向打印：`size: portrait`
-自动【默认】：`size: auto`
+横向打印：`size: landscape` 竖向打印：`size: portrait` 自动【默认】：`size: auto`
 
 ## 【5】分页
 
 分页符属性用来设置页面的分页（即另起一页），共有三个相关属性。
 
-`page-break-before`：元素之前分页
-`page-break-after`：元素之后分页
-`page-break-inside`：元素内部分页
-这三个属性的值都是两个：`always`（生效）和`avoid`（避免）。
+`page-break-before`：元素之前分页 `page-break-after`：元素之后分页 `page-break-inside`：元素内部分页这三个属性的值都是两个：`always`（生效）和`avoid`（避免）。
 
 ```
 h1 {
@@ -817,9 +785,7 @@ font-size: 14px;
 
 # counter 计数器
 
-[MDN-counter](<https://developer.mozilla.org/zh-CN/docs/Web/CSS/counter()>)
-[MDN-counters](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters)
-[其它博客](https://blog.csdn.net/lhjuejiang/article/details/79823803)
+[MDN-counter](<https://developer.mozilla.org/zh-CN/docs/Web/CSS/counter()>) [MDN-counters](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters) [其它博客](https://blog.csdn.net/lhjuejiang/article/details/79823803)
 
 ## 【1】属性
 
