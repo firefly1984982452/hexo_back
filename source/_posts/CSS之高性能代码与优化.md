@@ -135,8 +135,7 @@ import './assets/css/public.css';
 
 ## 命名规范
 
-下划线（ `__` ）代表子元素；
-连字符（ `-` ）代表不同状态；
+下划线（ `__` ）代表子元素；连字符（ `-` ）代表不同状态；
 
 ```
 .ul{}
@@ -146,8 +145,7 @@ import './assets/css/public.css';
 
 ## BEM 命名法
 
-块（Block）、元素（Element）、修饰符（Modifier）
-例：`class="button button--state-danger"`
+块（Block）、元素（Element）、修饰符（Modifier）例：`class="button button--state-danger"`
 
 ---
 
@@ -185,3 +183,5 @@ Class
 - 鼠标样式随功能变化；
 
 如不可点击时可改为`cursor: not-allowed;`
+
+[所有的鼠标样式](https://www.w3school.com.cn/tiy/t.asp?f=eg_csse_cursor)

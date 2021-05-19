@@ -70,11 +70,9 @@ test(3)
 
 # 防抖和节流
 
-[可视化在线 demo](http://demo.nimius.net/debounce_throttle/)
-[滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
+[可视化在线 demo](http://demo.nimius.net/debounce_throttle/) [滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
 
-[学习链接 1](https://www.jianshu.com/p/f9f6b637fd6c)
-[学习链接 2](https://www.jianshu.com/p/b73c2acad696)
+[学习链接 1](https://www.jianshu.com/p/f9f6b637fd6c) [学习链接 2](https://www.jianshu.com/p/b73c2acad696)
 
 ## 【1】概念
 
@@ -457,21 +455,15 @@ p 5
 
 # JavaScript 相等操作符（==）
 
-参考：
-[链接 1](https://www.cnblogs.com/wisewrong/p/10396002.html)
-[链接 2](https://blog.csdn.net/magic_xiang/article/details/83686224)
-[链接 3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
+参考： [链接 1](https://www.cnblogs.com/wisewrong/p/10396002.html) [链接 2](https://blog.csdn.net/magic_xiang/article/details/83686224) [链接 3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
 
 ## 两组操作符
 
-相等：`==`（先转换再比较）
-全等：`===`（仅比较不转换）
+相等：`==`（先转换再比较）全等：`===`（仅比较不转换）
 
 ## 相等（`==`）规则
 
-**Boolean 规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。
-**String&Number 规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。
-**Object 规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
+**Boolean 规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。 **String&Number 规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。 **Object 规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
 
 ![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
 
@@ -493,16 +485,14 @@ p 5
 - 3：根据上面提到的**Object 规则**，调用空数组的 toString 方法，即`[].toString()`的值为`''`，此时比较的是：`'' == 0`；
 - 4：根据上面提到的**String 规则**，将字符串转为数字，即`Number('')`的值为`0`，此时比较的是：`0 == 0`。
 
-简化：
-`[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
+简化： `[] == ![]` 转化：`[] == false` 转化： `[] == 0` 转化`'' == 0` 转化： `0 == 0`。
 
 **二、`{} == !{}`**
 
 - 1：先计算`!{}`得到`false`，此时比较的是：`{} == false`；
 - 2：调用**Booean 规则**，计算`Boolean({})`得到`true`，此时比较的是`true == false`。
 
-简化：
-`{} == !{}` 转化：`{} == false` 转化：`true == false`。
+简化： `{} == !{}` 转化：`{} == false` 转化：`true == false`。
 
 ---
 
@@ -590,9 +580,7 @@ window.addEventListener('storage', (e) => {
 
 # webSocekt 多人通信
 
-[学习链接-基础通信](http://www.imooc.com/article/286001)
-[学习链接-多人通信(ws)](https://www.cnblogs.com/lihaohua/p/12410511.html)
-[学习链接-多人通信(nodejs-websocket)](https://zhuanlan.zhihu.com/p/64906193)
+[学习链接-基础通信](http://www.imooc.com/article/286001) [学习链接-多人通信(ws)](https://www.cnblogs.com/lihaohua/p/12410511.html) [学习链接-多人通信(nodejs-websocket)](https://zhuanlan.zhihu.com/p/64906193)
 
 ![效果](https://wx2.sinaimg.cn/large/0069qZtTgy1gls4a0l7fej30ge0agtap.jpg)
 
@@ -713,6 +701,24 @@ ws.send(
 
 ---
 
+# MQTT 通信
+
+```
+client = mqttConnect.connect(MQTT_SERVICE, options)
+client.on('connect', () => {
+  client.publish('/inner/web/dialog/close', JSON.stringify(this.options.obj))
+})
+```
+
+```
+
+client.on('connect', () => {
+  client.subscribe('/inner/web/dialog/close')
+  client.on('message', (topic, message) => {})
+```
+
+---
+
 # JavaScript 编码规范
 
 ## 不要在块内函数声明
@@ -799,17 +805,13 @@ return val ? foo() : bar();
 
 ### 【1.1】MVC
 
-Model 层:模型层，比如图片放一个类，标题放一个类
-View 层：显示页面，如 xml
-Controller 层：控制 Model 的读取、存储。如 MainActivity
+Model 层:模型层，比如图片放一个类，标题放一个类 View 层：显示页面，如 xml Controller 层：控制 Model 的读取、存储。如 MainActivity
 
 ### 【1.2】MVVM
 
 MVVM 实现了 View 和 Model 的自动同步，当 Model 的属性改变时，我们不再手动操作 DOM，也就是双向绑定。
 
-Model 层：后端传递的数据
-View 层：页面
-ViewModel 层：视图模型，连接 Model 和 View 的桥梁。将 Model 转为 View（将后端数据显示给前端）用的是数据绑定，将 View 转为 Model（将前端数据转给后端）用的 DOM 监听，这种实现方法称为为**数据的双向绑定**。
+Model 层：后端传递的数据 View 层：页面 ViewModel 层：视图模型，连接 Model 和 View 的桥梁。将 Model 转为 View（将后端数据显示给前端）用的是数据绑定，将 View 转为 Model（将前端数据转给后端）用的 DOM 监听，这种实现方法称为为**数据的双向绑定**。
 
 ## 【2】类
 
@@ -825,17 +827,11 @@ js 与 android 的通信
 
 ### android 代码：
 
-java 发消息给 js：
-`webview.send()`
-java 收 js 的消息
-`webview.registerHander('name',new Bridge(){})`
+java 发消息给 js： `webview.send()` java 收 js 的消息 `webview.registerHander('name',new Bridge(){})`
 
 ### javaScript 代码：
 
-js 发消息给 java
-`window.WebViewJavaScriptBridge.send()`
-js 收 java 的消息
-`document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
+js 发消息给 java `window.WebViewJavaScriptBridge.send()` js 收 java 的消息 `document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
 
 ### 示例
 

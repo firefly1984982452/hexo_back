@@ -152,6 +152,10 @@ top: 0;
 [MDN-学习链接](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Multiple-column_Layout)
 
 ```
+columns: 3;
+```
+
+```
 .main {
   color: #f00;
   /* 设置列数 */

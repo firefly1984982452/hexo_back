@@ -5,14 +5,11 @@ categories:
   - program
 ---
 
-学习链接：
-[阮一峰](https://wangdoc.com/html/)
+学习链接： [阮一峰](https://wangdoc.com/html/)
 
-参考书籍：
-[《HTML5 权威指南》](https://book.douban.com/subject/25786074/)
+参考书籍： [《HTML5 权威指南》](https://book.douban.com/subject/25786074/)
 
-其它：
-我只记录了冷门的不常用的信息，其它基础的没有记录。
+其它：我只记录了冷门的不常用的信息，其它基础的没有记录。
 
 # URL 部分
 
@@ -81,8 +78,7 @@ categories:
 
 使用：
 
-window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt</kbd> + `accessKey`)
-macbook：使用<kbd>control</kbd> + <kbd>option</kbd> + `accessKey`。
+window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt</kbd> + `accessKey`) macbook：使用<kbd>control</kbd> + <kbd>option</kbd> + `accessKey`。
 
 ## 【6】hidden
 
@@ -396,6 +392,81 @@ han zi
 
 多个术语（`<dt>`）对应一个解释（`<dd>`），或者多个解释（`<dd>`）对应一个术语（`<dt>`），都是合法的。
 
+### 【2.1】更多应用
+
+**`<dl>`、`<dt>`和`<dd>`应用于属性列表并换行**
+
+**示例：** ![image](https://wx4.sinaimg.cn/large/0069qZtTly1gqgsd0k45sj31g207g0tu.jpg)
+
+**方法：**
+
+1. 用`<div>`隔断换行，适用于 for 循环；
+2. 用伪元素的`content: "\A";white-space: pre-wrap;`换行，适用于已知的属性列表。
+
+**代码：**
+
+```
+<style>
+  dl {
+    columns: 3;
+  }
+  dd {
+    margin: 0;
+    font-weight: bold;
+  }
+  dt,
+  dd {
+    display: inline;
+  }
+  dd + dt::before {
+    content: "\A";
+    white-space: pre-wrap;
+  }
+  dd + dd::before {
+    content: ",";
+  }
+</style>
+
+...
+
+<dl>
+  <div>
+    <dt>姓名1</dt>
+    <dd>张三</dd>
+  </div>
+  <div>
+    <dt>性别2</dt>
+    <dd>男</dd>
+  </div>
+  <div>
+    <dt>人员类型3</dt>
+    <dd>普通人员</dd>
+    <dd>健康人员</dd>
+    <dd>病患人员</dd>
+  </div>
+  <div>
+    <dt>联系方式4</dt>
+    <dd>151****1111</dd>
+  </div>
+  <div>
+    <dt>国家5</dt>
+    <dd>中国</dd>
+  </div>
+  <div>
+    <dt>民族6</dt>
+    <dd>汉</dd>
+  </div>
+  <div>
+    <dt>来访时间7</dt>
+    <dd>昨天</dd>
+  </div>
+  <div>
+    <dt>证件类型8</dt>
+    <dd>身份证</dd>
+  </div>
+</dl>
+```
+
 ---
 
 # 图像标签
@@ -599,8 +670,7 @@ han zi
 
 # 表格标签
 
-**`<thead>`、`<tbody>`、`<tfoot>`**
-`<thead>`、`<tbody>`、`<tfoot>`都是块级容器元素，且都是`<table>`的一级子元素，分别表示表头、表体和表尾。
+**`<thead>`、`<tbody>`、`<tfoot>`** `<thead>`、`<tbody>`、`<tfoot>`都是块级容器元素，且都是`<table>`的一级子元素，分别表示表头、表体和表尾。
 
 ```
 <table>
@@ -694,6 +764,8 @@ modal.showModal();
 modal.close();
 ```
 
+如果直接写了`<dialog open>`而不是用`modal.showModal()`显示 dialog 的话是无法使用`dialog::backdrop`伪无素的。
+
 ## 【2】`<details>`和`<summary>`
 
 - `<details>`：折叠内容
@@ -724,3 +796,16 @@ summary::-webkit-details-marker {
   color: transparent;
 }
 ```
+
+---
+
+# 特殊字符
+
+|   字符   |  含义  |
+| :------: | :----: |
+| `&nbsp;` | `空格` |
+| `&amp;`  |  `&`   |
+|  `&lt;`  |  `<`   |
+|  `&gt;`  |  `>`   |
+| `&quot;` |  `"`   |
+| `&qpos;` |  `'`   |

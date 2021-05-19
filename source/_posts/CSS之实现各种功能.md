@@ -685,3 +685,234 @@ li:not(:last-child)...
 ◆ 核心：
 
 `span`标签变成`display: inline-block;`，父标签正常的用溢出换行的代码，为了兼容`iOS/Safari`，加上`display: -webkit-box;`下面的代码实现兼容。
+
+---
+
+# 【23】上下左右箭头
+
+```
+width: 20px;
+height: 20px;
+border-top: 1px solid #c3c8d6;
+border-right: 1px solid #c3c8d6;
+// 上
+transform: rotate(-45deg);
+// 下
+transform: rotate(135deg);
+// 左
+transform: rotate(-135deg);
+// 右
+transform: rotate(45deg);
+```
+
+---
+
+# 【24】自定义下划线
+
+## 【24.1】text-decoration
+
+```
+text-decoration: underline;
+```
+
+## 【24.2】border
+
+```
+border-bottom: 1px solid #f00;
+```
+
+## 【24.3】background
+
+```
+background: linear-gradient(gray, gray) no-repeat;
+background-size: 100% 1px;
+background-position: 0 1.1em;
+```
+
+---
+
+# 【25】自定义复选框
+
+[效果预览地址](https://firefly1984982452.github.io/my-web-page/image-contrast.html)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <style>
+      input[type="checkbox"] {
+        /* display: none; */
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+      }
+      label {
+        font-size: 40px;
+      }
+      input[type="checkbox"] + label::before {
+        content: "\a0";
+        display: inline-block;
+        vertical-align: 0.2em;
+        width: 0.8em;
+        height: 0.8em;
+        margin-right: 0.2em;
+        border-radius: 0.2em;
+        background: silver;
+        text-indent: 0.15em;
+        line-height: 0.65em;
+      }
+      input[type="checkbox"]:checked + label::before {
+        content: "\2713";
+        background: yellowgreen;
+      }
+      input[type="checkbox"]:focus + label::before {
+        box-shadow: 0 0 0.1em 0.1em #fbb;
+      }
+      input[type="checkbox"]:disabled + label::before {
+        background: #f00;
+        box-shadow: none;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="checkbox" id="awesome" />
+    <label for="awesome">Awesome</label>
+  </body>
+</html>
+```
+
+---
+
+# 自定义图片对比控件
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义图片对比控件</title>
+    <style>
+      .box {
+        width: 500px;
+        height: 500px;
+        border: 1px solid;
+        display: flex;
+      }
+      .img-box {
+        margin: auto;
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+      }
+      img {
+        display: block;
+        width: 400px;
+        height: 400px;
+      }
+      .bg-box {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+        overflow: hidden;
+      }
+      input {
+        position: absolute;
+        bottom: 5px;
+        width: 95%;
+        left: 2.5%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="img-box">
+        <div class="bg-box" id="show">
+          <img class="bottom" src="./test.png" alt="" srcset="" />
+        </div>
+        <img class="top" src="./test3.png" alt="" srcset="" />
+        <input id="slider" type="range" onmousemove="changeSlider()" />
+      </div>
+    </div>
+    <script>
+      let slider = document.getElementById("slider");
+      function changeSlider() {
+        console.log(slider.value);
+        let show = document.getElementById("show");
+        show.style.width = slider.value + "%";
+      }
+    </script>
+  </body>
+</html>
+```
+
+---
+
+# 【26】沿环形路径平移的动画
+
+[效果预览地址](https://firefly1984982452.github.io/my-web-page/circle-animation.html)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>沿环形路径平移的动画</title>
+    <style>
+      main {
+        width: 500px;
+        height: 500px;
+        border: 1px solid;
+        display: flex;
+      }
+      .box {
+        height: 400px;
+        width: 400px;
+        background-color: #fbb;
+        margin: auto;
+        border-radius: 50%;
+      }
+      .box1 {
+        background-color: #fbf;
+        text-align: center;
+        line-height: 50px;
+        margin-left: 44%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        animation: spin 5s infinite linear;
+        transform-origin: 50% 200px;
+      }
+      .img {
+        width: 50px;
+        height: 50px;
+        animation: spin1 5s infinite linear;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      @keyframes spin1 {
+        from {
+          transform: rotate(1turn);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="box">
+        <div class="box1">
+          <div class="img">hello</div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+```

@@ -561,6 +561,17 @@ text-shadow: 5px 5px 5px #f00;
 
 参数：x 轴、y 轴、阴影、颜色。
 
+**文字效果**
+
+```
+/* 凸起印刷效果 */
+text-shadow: 0 1px 1px rgba(0, 0, 100, 0.8);
+/* 文字外发光效果 */
+text-shadow: 0 0 0.1rem, 0 0 0.3rem;
+/* 文字凸起效果 */
+text-shadow: 0 1px hsl(0, 0%, 85%), 0 2px hsl(0, 0%, 80%), 0 3px hsl(0, 0%, 75%), 0 4px hsl(0, 0%, 70%);
+```
+
 ## 【3】多边形阴影：drop-shadow
 
 ◆ 文字也会有阴影
@@ -739,6 +750,8 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 ## 【1】文字及段落
 
+### 【1.1】text
+
 - text-align: center | left | right | justify; // 文本对齐方式
 
 - text-align-last: center | left | right; // 段落最后一行对齐方式
@@ -758,6 +771,11 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 - text-shadow: 2px 2px #ff0; // 文字阴影
 
 - text-transform: uppercase | lowercase | capitaliza; // 文字转换大小写
+
+### 【1.2】font
+
+- font-variant: small-caps(小型大写字母字体); // 字体变体
+- font-variant-ligatures: no-common-ligatures; // 连字形式【英文的 fi 会分开】
 
 ## 【2】行内元素文字间距自动调整
 
@@ -1249,5 +1267,27 @@ resize: auto;
 }
 .B{
   z-index:2;
+}
+```
+
+---
+
+# 选择器
+
+## 【1】`::backdrop`：全屏样式
+
+1.用于 `dialog` 弹框
+
+```
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+```
+
+2.用于 `video` 全屏
+
+```
+video::backdrop {
+  background-color: #f00;
 }
 ```
