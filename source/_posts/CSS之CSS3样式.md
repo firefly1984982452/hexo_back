@@ -772,6 +772,8 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 - text-transform: uppercase | lowercase | capitaliza; // 文字转换大小写
 
+- text-rendering: optimizeSpeed; // 连字形式【英文的 fi 会分开】
+
 ### 【1.2】font
 
 - font-variant: small-caps(小型大写字母字体); // 字体变体
@@ -1162,7 +1164,17 @@ backdrop-filter: blur(10px);
 
 # 混合模式：mix-blend-mode
 
+## 所有效果
+
 [mix-blend-moe 所有效果](https://www.runoob.com/try/try.php?filename=trycss_mix-blend-mode-all)
+
+## isolation：隔离
+
+[示例](https://www.zhangxinxu.com/study/201601/css3-isolation-isolate.html)
+
+```
+isolation: isolate;
+```
 
 ---
 

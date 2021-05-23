@@ -657,6 +657,21 @@ table {
 </table>
 ```
 
+## 【7】只设置打印文档时第一页的样式
+
+```
+@page :first {
+  margin-left: 50%;
+  margin-top: 50%;
+}
+```
+
+注意：你不能用所有的 CSS 属性`:first`。您只能更改文档的边距，`orphans`, `widows` 和分页符。所有其他的 CSS 属性将被忽略。
+
+## 【8】`:left`和`:right`
+
+页面左右是由文档的主要书写方向决定的。例如，如果第一页的主要书写方向是从左到右，那么它将是一个`:right`页面，如果它具有从右到左的主要书写方向，那么它将是一个`:left`页面。
+
 ---
 
 # supports 支持
@@ -1004,3 +1019,37 @@ export default {
 # content 中的特殊字符及图标
 
 [网址](https://blog.csdn.net/qq_41995919/article/details/112377349)
+
+---
+
+# scroll 滚动优化
+
+## scroll-behavior
+
+[学习链接](https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-behavior)
+
+当用户手动导航时设置更平滑的滚动。
+
+```
+scroll-behavior: smooth;
+```
+
+## scroll-snap-type
+
+[学习链接](https://www.cnblogs.com/coco1s/p/11993942.html)
+
+值：
+
+- mandatory【默认】：滚动结束后强制停在指定的地方。
+
+- proximity【接近】：滚动结束后可能停在结束的地方，也可以会偏移一些（配合`scroll-snap-align`一起使用）。
+
+一般用在父元素上。
+
+## scroll-snap-align
+
+方向：start/center/end。
+
+一般用在子元素上。
+
+## scroll-margin/scroll-padding
