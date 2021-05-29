@@ -5,6 +5,86 @@ categories:
   - program
 ---
 
+# 选择器
+
+## 【1】伪元素、伪类选择器
+
+[链接](https://firefly1984982452.github.io/my-web-page/select-page.html)
+
+## 【2】`:focus`与`:focus-within`
+
+如果只使用`:focus`，它不能包含子元素的聚焦事件（比如输入框、按钮聚焦）。
+
+以下内容无效：
+
+```
+.container:focus input {
+  width: 230px;
+}
+```
+
+用:focus-within 解决：
+
+```
+.container:focus-within input {
+  width: 230px;
+}
+```
+
+当父元素聚焦时，`input`内容也会随之改变。
+
+**例子：不同的登录状态**
+
+![image](https://user-images.githubusercontent.com/8554143/43560900-2ef72358-9647-11e8-8123-ecfc45828c3d.gif)
+
+```
+img{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.g-container{
+  margin: 200px 0 0 0;
+}
+.g-username:focus-within img{
+  display: block;
+}
+.g-password:focus-within img{
+  display: block;
+}
+
+...
+
+<div class="g-container">
+    <h2>登录</h2>
+    <div class="g-username">
+        <input name="loginPhoneOrEmail" maxlength="64" placeholder="请输入手机号或邮箱" class="input">
+        <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="g-username">
+    </div>
+
+    <div class="g-password">
+        <input name="loginPassword" type="password" maxlength="64" placeholder="请输入密码" class="input">
+        <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="g-password">
+    </div>
+</div>
+```
+
+## 【3】`:root`选择器
+
+```
+:root{
+  color: red;
+}
+html{
+  color: green;
+}
+```
+
+最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
+
+---
+
 # 边框
 
 - `border-radius`
@@ -846,6 +926,7 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 ## 【3】文字换行与截断
 
 - word-wrap: break-word; // 如果单词太长会自动换行。
+- overflow-wrap: break-word; // 功能上同，W3C 新写法。
 - white-space: nowrap; // 段落中的文本不换行（会截断）。
 
 - word-break: keep-all; //【默认】单词放不下会自动换行【文字截断】。
@@ -877,6 +958,8 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 `shape-outside`属性使得行内（`inline`）的内容，围绕`outside`指定的曲线排列，可以用多边形``里面的属性。
 
 `shape-margin`属性指定`shape-outside`与内容之间的`margin`。
+
+`shape-image-threshold`属性指定[透明度值](https://developer.mozilla.org/zh-CN/docs/Web/CSS/shape-image-threshold)。
 
 【1】圆形文字环绕
 

@@ -261,21 +261,6 @@ p{
 
 ---
 
-# `:root`选择器
-
-```
-:root{
-  color: red;
-}
-html{
-  color: green;
-}
-```
-
-最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
-
----
-
 # width 和 height 相关知识点
 
 ## 【1】table
@@ -374,6 +359,16 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 # 文字相关
 
+- 1. 文字渐变
+- 2. 抗锯齿渲染：-webkit-font-smoothing
+- 3. 文字描边：-webkit-text-stroke
+- 4. 文字阴影：text-shadow
+- 5. 文字颜色：-webkit-text-fill-color
+- 6. font-size:10px
+- 7. 自定义字体：font-face
+- 8. 垂直排版
+- 9. 断行规则：line-break
+
 ## 【1】文字渐变
 
 ```
@@ -382,7 +377,7 @@ background: linear-gradient(to bottom, #8AF0FF,#3780E6);;
 color: transparent;
 ```
 
-## 【2】抗锯齿渲染`-webkit-font-smoothing`
+## 【2】抗锯齿渲染：-webkit-font-smoothing
 
 `-webkit-font-smoothing`有 3 个属性值：
 
@@ -444,7 +439,7 @@ p span{
 }
 ```
 
-## 【9】断行规则
+## 【9】断行规则：line-break
 
 ```
 line-break: auto; // 默认
@@ -726,67 +721,6 @@ table {
 ## 2 个值
 
 如：`text-shodow`、`background-position`.
-
----
-
-# `:focus`与`:focus-within`
-
-如果只使用`:focus`，它不能包含子元素的聚焦事件（比如输入框、按钮聚焦）。
-
-以下内容无效：
-
-```
-.container:focus input {
-  width: 230px;
-}
-```
-
-用:focus-within 解决：
-
-```
-.container:focus-within input {
-  width: 230px;
-}
-```
-
-当父元素聚焦时，`input`内容也会随之改变。
-
-## 例子：不同的登录状态
-
-![image](https://user-images.githubusercontent.com/8554143/43560900-2ef72358-9647-11e8-8123-ecfc45828c3d.gif)
-
-```
-img{
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.g-container{
-  margin: 200px 0 0 0;
-}
-.g-username:focus-within img{
-  display: block;
-}
-.g-password:focus-within img{
-  display: block;
-}
-
-...
-
-<div class="g-container">
-    <h2>登录</h2>
-    <div class="g-username">
-        <input name="loginPhoneOrEmail" maxlength="64" placeholder="请输入手机号或邮箱" class="input">
-        <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="g-username">
-    </div>
-
-    <div class="g-password">
-        <input name="loginPassword" type="password" maxlength="64" placeholder="请输入密码" class="input">
-        <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="g-password">
-    </div>
-</div>
-```
 
 ---
 
