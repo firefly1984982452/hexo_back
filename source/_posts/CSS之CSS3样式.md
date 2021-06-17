@@ -11,6 +11,58 @@ categories:
 
 [链接](https://firefly1984982452.github.io/my-web-page/select-page.html)
 
+### 【1.1】伪元素
+
+- ::after【后文内容】
+- ::before【前文内容】
+- ::first-letter【首字母】
+- ::first-line【首行】
+- ::selection【选中文字】
+- ::default【默认】
+- ::marker【标记】
+
+### 【1.2】伪类
+
+- :hover【悬浮】
+- :root【根元素】
+- :target【目标】
+
+### 【1.3】伪类【form 验证】
+
+- :checked【选中某项】
+- :disabled【不能用】
+- :enabled【能用】
+- :empty【空内容】
+- :focus【聚焦】
+- :focus-within【聚焦内容】
+- :in-range【在范围内】
+- :out-of-range【超出范围】
+- :invalid/valid/required【验证】
+- :placeholder-shown【提示内容】
+- :read-only【只读】
+- :read-write【只写】
+
+### 【1.4】伪类【link 链接】
+
+- :active【点击时】
+- :link【链接】
+- :visited【访问过】
+- :any-link【任意链接】
+
+### 【1.5】伪类【父子兄弟元素】
+
+- :first-child【首个子元素】
+- :last-child【末个子元素】
+- :nth-child【第 n 个子元素】
+- :nth-last-child【倒数第 n 个子元素】
+- :only-child【仅有 1 个子元素】
+- :first-of-type【首个类型元素】
+- :last-of-type【末个同类型元素】
+- :nth-of-type【第 n 个同类型元素】
+- :nth-last-of-type【倒数第 n 个同类型元素】
+- :only-of-type【仅有 1 个同类型元素】
+- :not【不包含】
+
 ## 【2】`:focus`与`:focus-within`
 
 如果只使用`:focus`，它不能包含子元素的聚焦事件（比如输入框、按钮聚焦）。
@@ -82,6 +134,32 @@ html{
 ```
 
 最后出来的颜色是`red`，`:root`选择器代表是根元素，代表`html`，但优先级比`html`高。
+
+## 【4】`::backdrop`：全屏下的对象样式
+
+1.用于 `dialog` 弹框
+
+```
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+```
+
+2.用于 `video` 全屏
+
+```
+video::backdrop {
+  background-color: #f00;
+}
+```
+
+## 【5】`:fullscreen`：全屏样式
+
+```
+div:fullscreen{
+  color: #ff0;
+}
+```
 
 ---
 
@@ -932,6 +1010,50 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 - word-break: keep-all; //【默认】单词放不下会自动换行【文字截断】。
 - word-break: break-all; // 单词放不下会折断换行，铺满元素【文字截断】。
 
+- box-decoration-break: clone; // 盒装饰器中断【复制】
+- box-decoration-break: slice; // 盒装饰器中断【默认】
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      main {
+        width: 200px;
+        color: #999;
+      }
+      .text {
+        border-radius: 30px;
+        background-color: #cd0000;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+      }
+      section {
+        width: 300px;
+        column-count: 2;
+      }
+      .text1 {
+        border: 1px solid #f00;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>chrome不行的话，试试firefox</h3>
+    <main>
+      <span class="text">测试demo，测试demo，测试demo。</span>
+    </main>
+    <section>
+      <p class="text1">
+        测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。
+      </p>
+    </section>
+  </body>
+</html>
+
+```
+
 ## 【4】文字间距
 
 - word-spacing:30px; // 单词与单词之间的距离。
@@ -1200,6 +1322,20 @@ filter: blur(4px) brightness(0.3);
 backdrop-filter: blur(10px);
 ```
 
+注：`backdrop-filter`中其它属性大多只是[颜色变化](https://cloud.tencent.com/developer/section/1072021)。
+
+```
+backdrop-filter: contrast(40%);
+backdrop-filter: drop-shadow(4px 4px 10px blue);
+backdrop-filter: grayscale(30%);
+backdrop-filter: hue-rotate(120deg);
+backdrop-filter: invert(70%);
+backdrop-filter: opacity(20%);
+backdrop-filter: sepia(90%);
+backdrop-filter: brightness(60%);
+backdrop-filter: saturate(80%);
+```
+
 ◆ 方法二：在`::before`里面加传统`filter`
 
 ```
@@ -1367,22 +1503,201 @@ resize: auto;
 
 ---
 
-# 选择器
+# mask：面具
 
-## 【1】`::backdrop`：全屏样式
+[学习链接](https://www.zhangxinxu.com/wordpress/2017/11/css-css3-mask-masks/)
 
-1.用于 `dialog` 弹框
+- mask-image：面具图像
+- mask-mode：面具模型
+- mask-repeat：面具重复
+- mask-position：面具位置
+- mask-clip：面具裁剪
+- mask-size：面具大小
+- mask-composite：面具复合
 
 ```
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      img {
+        width: 100%;
+        height: 100%;
+
+        border: 20px solid #f00;
+
+        -webkit-mask-image: url("https://firefly1984982452.github.io/my-web-page/animation.png");
+        mask-image: url("https://firefly1984982452.github.io/my-web-page/animation.png");
+
+        /* firefox 可用 */
+        mask-mode: luminance;
+
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+
+        -webkit-mask-position: right top;
+        mask-position: right top;
+
+        -webkit-mask-clip: border-box;
+        mask-clip: border-box;
+
+        -webkit-mask-size: 40% 50%;
+        mask-size: 40% 50%;
+
+        /* firefox 可用 */
+        mask-composite: exclude;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="https://wx1.sinaimg.cn/mw690/0069qZtTgy1go96k54t3lj30ru0rqx6p.jpg" alt="" srcset="" />
+  </body>
+</html>
+```
+
+---
+
+# @media：媒体查询
+
+## 【1】any-hover
+
+[学习链接](https://www.zhangxinxu.com/wordpress/2020/01/css-any-hover-media/)
+
+在 PC 端 hover 时背景会变色，在不具备 hover 的设备上（如移动端）下划线会消失。
+
+css
+
+```
+@media (any-hover: hover) {
+  a:hover{
+    background: yellow;
+  }
+}
+@media (any-hover: none) {
+  a {
+    text-decoration: none;
+  }
 }
 ```
 
-2.用于 `video` 全屏
+html
 
 ```
-video::backdrop {
-  background-color: #f00;
+<a href="#">在PC端hover时背景会变色，在不具备hover的设备上（如移动端）下划线会消失。</a>
+```
+
+## 【2】any-pointer
+
+在 PC 端 点击 input 时与在不具备 hover 的设备上（如移动端）点击时不同的效果。
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      input[type="checkbox"]:checked {
+        background: gray;
+      }
+
+      @media (any-pointer: fine) {
+        input[type="checkbox"] {
+          -moz-appearance: none;
+          -webkit-appearance: none;
+          appearance: none;
+          width: 15px;
+          height: 15px;
+          border: 1px solid blue;
+        }
+      }
+
+      @media (any-pointer: coarse) {
+        input[type="checkbox"] {
+          -moz-appearance: none;
+          -webkit-appearance: none;
+          appearance: none;
+          width: 30px;
+          height: 30px;
+          border: 2px solid red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <input id="test" type="checkbox" />
+    <label for="test">Look at me!</label>
+  </body>
+</html>
+```
+
+## 【3】aspect-ratio：纵横比
+
+```
+@media (aspect-ratio: 1/1) {
+  div {
+    color: red;
+  }
 }
+@media (min-aspect-ratio: 8/5) {
+  div {
+    background: yellow;
+  }
+}
+@media (max-aspect-ratio: 2/1) {
+  div {
+    border: 2px solid blue;
+  }
+}
+```
+
+## 【4】display-mode：全屏样式
+
+```
+
+@media all and (display-mode: fullscreen) {
+  body {
+    color: #fff;
+    background-color: #f00;
+    margin: 0;
+    border: 5px solid #f0f;
+  }
+}
+```
+
+---
+
+# appearance：修改默认样式
+
+[链接](https://blog.csdn.net/webofrxy/article/details/79853710)
+
+更改`<button />`的默认样式为无
+
+```
+{
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance:none;
+}
+
+...
+
+<button>一些文本。</button>
+```
+
+更改`<input />`默认的大小和边框样式
+
+```
+
+input[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid red;
+}
+
+...
+
+<input id="test" type="checkbox" />
 ```

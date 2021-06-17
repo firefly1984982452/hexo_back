@@ -54,11 +54,11 @@ console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
 
 # 获取指定时间的时间戳
 
-`Math.floor(new Date(Date.UTC(2020, 0, 1, 0, 0, 0)).getTime() / 1000)` // 1577836800 --> 2020/1/1 8:0:0
+`Math.floor(new Date(Date.UTC(2020, 0, 1, 0, 0, 0)).getTime() / 1000)` // 2020/1/1 0:0:0 --> 1577808000
 
-`Math.floor(new Date('2020-01-01 00:00:00').getTime()/1000)` // 1577808000 --> 2020/1/1 0:0:0
+`Math.floor(new Date('2020-01-01 00:00:00').getTime()/1000)` // 2020/1/1 0:0:0 --> 1577808000
 
-`Date.parse('2020-01-01 00:00:00')/1000` // 1577808000 --> 2020/1/1 0:0:0
+`Date.parse('2020-01-01 00:00:00')/1000` // 2020/1/1 0:0:0 --> 1577808000
 
 ---
 
@@ -95,15 +95,19 @@ Math.round(Date.valueOf()/1000)
 # 两个时间戳相减所距时间
 
 ```
-getDate(){
-  let startTimeStamp = Date.parse('2020-01-01 00:00:00')/1000;
-  let nowTimeStamp = Math.floor(+new Date()/1000);
-  let reduceTimeStamp = nowTimeStamp - startTimeStamp;
+getTime(value = Math.round(Date.now() / 1000)) {
+  let nowTimeStamp = Math.round(Date.now() / 1000);
+  let reduceTimeStamp = nowTimeStamp - value;
+  let day = Math.floor(reduceTimeStamp / 60 / 60 / 24);
+  let hour = Math.floor((reduceTimeStamp / 60 / 60) % 24);
+  let minute = Math.floor((reduceTimeStamp / 60) % 60);
   let seconds = reduceTimeStamp % 60;
-  let day = Math.floor(reduceTimeStamp / 60 /60 / 24);
-  let hour = Math.floor((reduceTimeStamp / 60 /60) % 24);
-  let minute = Math.floor((reduceTimeStamp /60) % 60);
-  console.log('两个时间段相距：' + day + '天 ' + hour + '小时 ' + minute + '分'+ seconds + '秒');
+  hour = hour > 9 ? hour : "0" + hour;
+  minute = minute > 9 ? minute : "0" + minute;
+  seconds = seconds > 9 ? seconds : "0" + seconds;
+  let result = hour + ":" + minute + ":" + seconds;
+  console.log("两个时间段相距：" + day + "天 " + result);
+  return result;
 },
 ```
 

@@ -72,7 +72,7 @@ test(3)
 
 [可视化在线 demo](http://demo.nimius.net/debounce_throttle/) [滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
 
-[学习链接 1](https://www.jianshu.com/p/f9f6b637fd6c) [学习链接 2](https://www.jianshu.com/p/b73c2acad696)
+[学习链接 ](https://www.jianshu.com/p/f9f6b637fd6c)
 
 ## 【1】概念
 
@@ -133,6 +133,56 @@ handleThrottle () {
 ```
 
 ![image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho487f7lnj305904omx1.jpg)
+
+高阶节流：`闭包` + `return数据` + `传参`
+
+```
+<script>
+  var resultValue = "1";
+  /**
+    * 节流函数
+    *
+    * @param
+    * arguments[0]:绑定的function，即fn
+    * arguments[1]:时间，即time
+    * arguments[2]:是否需要回调，即isNeedResult
+    * arguments[最后一个]:要赋值给谁
+    *
+    * 赋值：普通页面下用window，vue项目下用this
+    */
+  function throttle(fn, time = 1000, isNeedResult = false) {
+    let params = Array.from(arguments)
+    params.splice(0,3)
+    let res = ''
+    if (isNeedResult) {
+      res = arguments[arguments.length - 1]
+      params.pop()
+    }
+    let canRun = true
+    return () => {
+      if (!canRun) return
+      canRun = false
+      setTimeout(() => {
+        canRun = true
+        if (isNeedResult) {
+          this[res] = fn.apply(this, params)
+        } else {
+          fn.apply(this, params)
+        }
+      }, time)
+    }
+  }
+  function sayHi(value1, value2) {
+    console.log(value1, value2);
+    return "result=======";
+  }
+
+  var x = throttle(sayHi,1000,true, 1, 2, "resultValue");
+  setInterval(() => {
+    x();
+  }, 500);
+</script>
+```
 
 ---
 

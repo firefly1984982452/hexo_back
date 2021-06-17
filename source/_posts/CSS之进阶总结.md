@@ -669,7 +669,7 @@ table {
 
 ---
 
-# supports 支持
+# @supports 支持
 
 `supports`命令用来判断浏览器是否支持某项 CSS 功能。
 
@@ -987,3 +987,51 @@ scroll-behavior: smooth;
 一般用在子元素上。
 
 ## scroll-margin/scroll-padding
+
+---
+
+# caret-color：插入光杆颜色
+
+```
+input.custom {
+  caret-color: #0f0;
+}
+```
+
+---
+
+# user-select：用户选择
+
+```
+user-select: auto | text | none | contain | all;
+```
+
+有时候用<p>标签默认鼠标能选中文字，这时可以使用`user-select: none`来禁止点击文字之后处于选中状态，也能避免复制能操作。
+
+---
+
+# all：级联和继承
+
+```
+<style>
+  section {
+    color: blue;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  .widget {
+    all: initial;
+  }
+</style>
+
+...
+
+<section>
+  <p>This is a section!</p>
+
+  <aside class="widget">
+    <p>This is a little widget.</p>
+  </aside>
+<section>
+```
