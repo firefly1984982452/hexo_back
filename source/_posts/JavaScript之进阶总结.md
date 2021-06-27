@@ -159,15 +159,15 @@ handleThrottle () {
       params.pop()
     }
     let canRun = true
-    return () => {
+    return (...body) => {
       if (!canRun) return
       canRun = false
       setTimeout(() => {
         canRun = true
         if (isNeedResult) {
-          this[res] = fn.apply(this, params)
+          this[res] = fn.apply(this, body)
         } else {
-          fn.apply(this, params)
+          fn.apply(this, body)
         }
       }, time)
     }
@@ -177,9 +177,10 @@ handleThrottle () {
     return "result=======";
   }
 
-  var x = throttle(sayHi,1000,true, 1, 2, "resultValue");
+  var throttleFn = throttle(sayHi, 1000,true,'resultValue')
   setInterval(() => {
-    x();
+    console.log('????');
+    throttleFn(1,2);
   }, 500);
 </script>
 ```
@@ -1134,4 +1135,40 @@ test.vue
 ```
 document.querySelector('body').requestFullscreen(); // 全屏
 document.exitFullscreen(); // 退出全屏
+```
+
+---
+
+# `{变量}`方法可以快速使变量变成对象
+
+```
+const num = 123;
+var a = {num};
+console.log(a); // {num:123}
+```
+
+---
+
+# `event.getModifierState('CapsLock')`检测到当前开启了大写键盘，而不是用`shift`生成的大写字母
+
+```
+const passwordInput = document.getElementById('password');
+passwordInput.addEventListener('keyup', function (event) {
+  if (event.getModifierState('CapsLock')) {
+    console.log('检测到当前开启了大写键盘，而不是用shift生成的大写字母');
+  }
+});
+```
+
+---
+
+# 可终止条件`true && doSomething();`
+
+```
+// 原来的：
+if (true) {
+    doSomething();
+}
+// 优化成：
+true && doSomething();
 ```

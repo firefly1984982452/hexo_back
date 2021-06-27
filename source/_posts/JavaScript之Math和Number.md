@@ -132,6 +132,7 @@ console.log(Number.isNaN(NaN));       //true
 ## 数值转换
 
 ```
++'404'
 Number();
 parseInt();
 parseFloat();
@@ -161,4 +162,14 @@ parseFloat((a).toFixed(2));//toFixed只能针对数字类型才能使用
 ```
 var b = parseFloat(price).toFixed(3);
 this.all_price = b.substring(0,b.toString().length - 1);
+```
+
+---
+
+# Number分隔符`_`
+
+```
+const largeNumber = 1_000_000_000;
+
+console.log(largeNumber); // 1000000000"
 ```

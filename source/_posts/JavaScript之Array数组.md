@@ -338,6 +338,13 @@ arr.reverse();       //(5) [53, 231, 23, 122, 1]
 (3) [12, 130, 44]
 ```
 
+例：过滤所有为false的值
+
+```
+const myArray = [1, undefined, NaN, 2, null, '@denicmarko', true, 3, false];
+console.log(myArray.filter(Boolean)); // [1, 2, "@denicmarko", true, 3]    
+```
+
 ## 【4】indexOf 和 lastIndexOf
 
 与`String`类似，`Array`也可以通过`indexOf()`来搜索一个指定的元素的位置：

@@ -67,7 +67,7 @@ categories:
 
 # navigator：浏览器对象
 
-- userAgent 当前浏览器
+## userAgent：当前浏览器
 
 ```
 export function detectiveBrowse() {
@@ -80,6 +80,9 @@ export function detectiveBrowse() {
     (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
 }
 ```
+
+
+---
 
 # 窗口
 
@@ -326,6 +329,7 @@ window.postMessage("hi there!", location.origin);
 此时点击页面 B 的发送消息按钮就能在页面 A 接收消息了。
 
 ---
+
 
 # HTML 事件属性
 

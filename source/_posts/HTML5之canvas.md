@@ -170,3 +170,128 @@ function rectFn() {
   };
 }
 ```
+
+---
+
+# 【4】实例：canvas数据流动效
+
+[效果预览](https://firefly1984982452.github.io/my-web-page/canvas-dataflow.html)
+
+源码：
+
+```
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="line">
+        <canvas class="box" id="rect"> </canvas>
+    </div>
+    <script>
+		var texts = '01'.split('');
+		const FONTSIZE = 30
+		const WIDTH = 500
+		const HEIGHT = 300
+		var arrs = new Array(parseInt(WIDTH/FONTSIZE)).fill(1)
+	
+		let c = document.querySelector("#rect");
+		let ctx = c.getContext("2d");
+		
+		setInterval(()=>{
+			basicFn()
+			animationFn();
+		},100)
+		function basicFn(){
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+			
+            ctx.fillStyle = "rgba(255,255,255,1)";
+			ctx.font = FONTSIZE + "px Arial";
+		}
+        function animationFn() {
+			arrs.forEach((v,index)=>{
+				var text = texts[Math.floor(Math.random()*texts.length)]
+				ctx.fillText(text, index*FONTSIZE, arrs[index]*FONTSIZE);
+				
+				if (arrs[index]*FONTSIZE > HEIGHT || Math.random() > 0.95) {
+				  arrs[index] = 0
+				}
+				arrs[index]++
+			})
+        }
+
+    </script>
+</body>
+
+</html>
+```
+
+vue组件版源码：
+
+```
+<template>
+  <div class="box" ref="container">
+    <canvas ref="canvas"></canvas>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      drops: [],
+      fontSize: 40,
+      texts: '0123456789'.split('')
+    }
+  },
+  mounted() {
+    this.$eventBus.$on('ref_matrix', (width, height) => {
+      var canvas = this.$refs.canvas
+      canvas.height = width
+      canvas.width = height
+      this.drops = new Array(parseInt(canvas.width / this.fontSize)).fill(1)
+      setInterval(this.draw, 99)
+    })
+  },
+  methods: {
+    draw() {
+      var ctx = this.$refs.canvas.getContext('2d')
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+      ctx.fillRect(0, 0, this.$refs.canvas.width, this.$refs.canvas.height)
+      ctx.fillStyle = 'rgba(255,255,255,1)'
+      ctx.font = this.fontSize + 'px arial'
+      for (var i = 0; i < this.drops.length; i++) {
+        var text = this.texts[Math.floor(Math.random() * this.texts.length)]
+        ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize)
+
+        if (this.drops[i] * this.fontSize > this.$refs.canvas.height || Math.random() > 0.95) {
+          this.drops[i] = 0
+        }
+        this.drops[i]++
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+.box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.2;
+  border-radius: 50%;
+}
+</style>
+```

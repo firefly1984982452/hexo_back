@@ -5,14 +5,7 @@ categories:
   - program
 ---
 
-# 【1】改变控制台面样式
-
-```
-console.log("%c来自:console","color:red;font-size:50px");
-```
-
-![Image.png](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gho4c77d8dj30bj02odfq.jpg)
-
+# 【1】
 ---
 
 # 【2】限定 N 行
@@ -915,4 +908,130 @@ background-position: 0 1.1em;
   </body>
 </html>
 
+```
+
+---
+
+# 【27】椭圆环绕动效
+
+## 链接
+
+[学习链接](https://www.cnblogs.com/lin494910940/p/14051631.html)
+
+[效果链接](https://firefly1984982452.github.io/my-web-page/oval-around.html)
+
+## 思路
+
+单个球的环绕运动
+
+```
+.area>.ball1{
+    animation: anmiteX 12s linear 0s infinite alternate,
+    anmiteY 12s linear 0s infinite alternate;
+}
+/* 动画 */
+/* 在X轴上的移动 */
+@keyframes  anmiteX{
+    from{
+        left: 100px;
+    }
+    to{
+        left: 1000px;
+    }
+}
+/* 在轴上Y的移动 */
+@keyframes  anmiteY{
+    from{
+        top: 100px;
+    }
+    to{
+        top: 600px;
+    }
+}
+```
+
+此时只是叠加动画，加上6秒的时间差之后才有上右下左的环绕效果：
+
+```
+animation: anmiteX 12s linear -6s infinite alternate,/* 叠加上6秒时间差 */
+          anmiteY 12s linear 0s infinite alternate;
+```
+
+再加上贝塞尔曲线。
+## 源码
+
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <style>
+        .area {
+            width: 1000px;
+            height: 400px;
+            border: 1px solid #f00;
+        }
+
+        .area>.ball {
+            width: 100px;
+            height: 60px;
+            position: absolute;
+            border-radius: 60px;
+            background-image: linear-gradient(to top, blue, lightblue);
+            box-shadow: 0px 0px 20px #0000ff5c;
+        }
+
+        /* 在X轴上的移动 */
+        @keyframes anmiteX {
+            from {
+                left: 100px;
+            }
+
+            to {
+                left: 800px;
+            }
+        }
+
+        /* 在轴上Y的移动 */
+        @keyframes anmiteY {
+            from {
+                top: 100px;
+            }
+
+            to {
+                top: 300px;
+            }
+        }
+    </style>
+
+    <div class="area">
+    </div>
+    <script type="text/javascript">
+        // nameArr 球的名称，runtime 运行一圈的时间.warmballArr 爆满的球素组
+        function addBall(num, runtime) {
+            let _parentbox = document.getElementsByClassName('area')[0];
+            let _innerHtml = "";
+            for (let i = 0; i < num; i++) {
+                let _xtime = parseFloat(runtime / 4);
+                let _ytime = parseFloat(runtime / num);
+                let _style = `
+             animation: anmiteX `+ (runtime / 2) + `s cubic-bezier(0.36, 0, 0.64, 1) -` + (_xtime + (i * _ytime)) + `s infinite alternate,
+             anmiteY `+ (runtime / 2) + `s cubic-bezier(0.36, 0, 0.64, 1) -` + (i * _ytime) + `s infinite alternate;
+             `;
+                _innerHtml += `
+                <div class=" ball`+ (i + 1) + ` ball " Style="` + _style + `">
+                </div>`
+            }
+            _parentbox.innerHTML = _innerHtml;
+        }
+        addBall(10, 24);
+    </script>
+</body>
+
+</html>
 ```

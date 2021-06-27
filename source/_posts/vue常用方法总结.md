@@ -1047,3 +1047,16 @@ data: () => ({
 ```
 
 ---
+
+# watch
+
+## 【1】箭头函数不指向this
+
+```
+watch:{
+  // 普通函数可以获取this
+  deviceCode: function() {}
+  // 箭头函数无法获取this
+  deviceCode: ()=>{}
+}
+```

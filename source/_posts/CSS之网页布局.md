@@ -57,6 +57,34 @@ categories:
 }
 ```
 
+## flex中最后一个元素右对齐
+
+```
+.father{
+  justify-content:space-between;
+}
+.child{
+  margin-left: auto;
+}
+```
+
+## gap
+
+```
+ul {
+  display: flex;
+  border: 1px solid #f00;
+  flex-wrap: wrap;
+  gap: 20px 50px;
+}
+
+li {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #f00;
+}
+```
+
 ---
 
 ## flex 中的 `justify-content: space-evenly`
@@ -260,3 +288,37 @@ GridLayout 会有更加丰富的属性来控制行列
 Flexbox 定义了伸缩容器内伸缩项目该如何布局
 
 ---
+
+# content-visibility：内容可见性
+
+和`visibility: hidden;`有类似效果，能够占位。其它用处没有测出来。
+
+css
+
+```
+<style>
+  .hidden {
+    content-visibility: hidden;
+    contain-intrinsic-size: 0 500px;
+  }
+  .visible {
+    content-visibility: visible;
+  }
+  p {
+    display: none;
+  }
+  div {
+    visibility: hidden;
+  }
+</style>
+```
+
+html
+```
+<main>
+  <p>3223</p>
+  <div>test</div>
+  <section class="hidden">555</section>
+  <section class="visible">666</section>
+</main>
+```

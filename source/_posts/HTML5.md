@@ -564,11 +564,27 @@ han zi
 
 ---
 
+# 视频标签
+
+## poster：视频预览图
+
+```
+<video controls poster="/images/w3school.gif">
+   <source src="movie.mp4" type="video/mp4">
+   <source src="movie.ogg" type="video/ogg">
+   Your browser does not support the video tag.
+</video> 
+```
+
+---
+
 # 链接标签
 
 ## 【1】`<a>`
 
+```
 超级链接
+```
 
 ## 【1.1】href
 
@@ -617,6 +633,28 @@ han zi
 ```
 <a href="data:,hello,world" download="hello.txt">下载hello.txt</a>
 ```
+## 【1.3】rel属性
+
+- noopener
+
+[noopener](https://www.xinshouzhanzhang.com/rel-noopener.html):
+
+当你使用`target="_blank"`打开一个新的标签页时，新页面的window对象上有一个属性`opener`，它指向的是前一个页面的 `window`对象，这样，后一个页面就获得了前一个页面的控制权，可以使用`window.opener.location.replace`更改前一个页面的`url`。简单来说就是，用户点击了一个超链接，该链接在新窗口打开的同时，竟然更改了前一个页面的链接。
+
+这时候`rel="noopener"`闪亮登场，打开链接后你会发现`window.opener`已经被置为了`null`。
+
+```
+<a href="https://baidu.com/" target="_blank" rel="noopener">
+	baidu.com
+</a>
+```
+
+- nofollow
+
+[nofollow](https://blog.csdn.net/qq_33981438/article/details/80909881)
+
+不跟踪链接，利于SEO优化。
+
 
 ## 【2】`<link>`
 
@@ -732,6 +770,8 @@ han zi
 <input type="number" name="b" value="10"> =
 <output name="result">20</output>
 ```
+
+自带清除按钮的输入框：`<input type="search" />`
 
 ## 【5】`<progress>`和`<meter>`
 

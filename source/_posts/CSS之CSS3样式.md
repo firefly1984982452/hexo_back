@@ -9,7 +9,9 @@ categories:
 
 ## 【1】伪元素、伪类选择器
 
-[链接](https://firefly1984982452.github.io/my-web-page/select-page.html)
+[预览效果](https://firefly1984982452.github.io/my-web-page/select-page.html)
+
+[源码](https://github.com/firefly1984982452/my-web-page/blob/master/select-page.html)
 
 ### 【1.1】伪元素
 
@@ -467,7 +469,7 @@ background-attachment: local, scroll;
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbbuxfn3aj31hb0sk154.jpg)
 
-[源码](https://firefly1984982452.github.io/my-web-page/background-repeat.html)
+[效果预览](https://firefly1984982452.github.io/my-web-page/background-repeat.html)
 
 ---
 
@@ -488,6 +490,8 @@ transform: perspective(45deg);
 transform: translate(20px, 10px);
 /* 缩放 */
 transform: scale(.5);
+/* 椭圆 */
+transform: rotate3d(1, 0, 0, 83deg);
 
 ```
 
@@ -595,7 +599,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 可以裁剪图片
 
-[源码](https://firefly1984982452.github.io/my-web-page/clip-path.html)
+[效果预览](https://firefly1984982452.github.io/my-web-page/clip-path.html)
 
 ## 【1】矩形：inset
 
@@ -936,6 +940,9 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 - font-variant: small-caps(小型大写字母字体); // 字体变体
 - font-variant-ligatures: no-common-ligatures; // 连字形式【英文的 fi 会分开】
+- font-variant-numeric: slashed-zero; // 数字0显示为中间有斜杠，好和o区分
+
+https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
 ## 【2】行内元素文字间距自动调整
 
@@ -1071,6 +1078,14 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 ```
 <p style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
 <p style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
+```
+
+## 【6】line-clamp：限制文本行数
+
+必须加上-webkit-
+
+```
+-webkit-line-clamp: 3;
 ```
 
 ---
@@ -1252,6 +1267,17 @@ p{
 </html>
 ```
 
+## 【5】使用requestAnimationFrame手动反复调用动画
+
+```
+this.$refs.ref_trademark.className = 'trademark'
+window.requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
+    this.$refs.ref_trademark.className = 'trademark animation'
+  })
+})
+```
+
 ---
 
 # 过渡：transition
@@ -1401,7 +1427,7 @@ isolation: isolate;
 
 ## 【1】object-fit
 
-[源码](https://firefly1984982452.github.io/my-web-page/object-fit.html)
+[效果预览](https://firefly1984982452.github.io/my-web-page/object-fit.html)
 
 ◆ **语法**
 
@@ -1506,6 +1532,8 @@ resize: auto;
 # mask：面具
 
 [学习链接](https://www.zhangxinxu.com/wordpress/2017/11/css-css3-mask-masks/)
+
+**目前一定要用-webkit-来兼容**
 
 - mask-image：面具图像
 - mask-mode：面具模型
@@ -1664,6 +1692,15 @@ html
 }
 ```
 
+## 【5】prefers-color-scheme：适配主题
+
+[链接1](https://zhuanlan.zhihu.com/p/374506516)
+[链接2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+
+目前我测试chrome、firefox、safari浏览器兼容性均不能实现这个功能。
+
+## 【6】prefers-reduced-motion
+
 ---
 
 # appearance：修改默认样式
@@ -1700,4 +1737,125 @@ input[type="checkbox"] {
 ...
 
 <input id="test" type="checkbox" />
+```
+
+---
+
+# css比较函数：min()、max()、clamp()
+
+可以择优选择一个最合适的尺寸，不仅用于width，还可以用于font-size等值。
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body>* {
+			color: #fff;
+			height: 100px;
+			background-color: #f00;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		header {
+			width: min(50%, 500px);
+		}
+
+		main {
+			width: max(50%, 500px);
+		}
+
+		footer {
+			width: clamp(100px, 50%, 500px);
+		}
+	</style>
+</head>
+
+<body>
+	<header>min(50%, 500px)</header>
+	<main>mxn(50%, 500px)</main>
+	<footer>clamp(100px,50%, 500px)</footer>
+</body>
+
+</html>
+```
+
+---
+
+# will-change：性能优化
+
+[will-change链接](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)
+[animation事件监听](https://www.runoob.com/try/try.php?filename=tryjsref_animationstart)
+
+两者结合的实例：
+
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>test</title>
+	<style>
+		#myDIV {
+			margin: 25px;
+			width: 550px;
+			height: 100px;
+			background: orange;
+			position: relative;
+			font-size: 20px;
+			will-change: transform, opacity;
+		}
+
+		@keyframes mymove {
+			from {
+				top: 0px;
+				transform: scale(1);
+				opacity: 1;
+			}
+
+			to {
+				top: 200px;
+				transform: scale(.7);
+				opacity: .7;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<p>该实例使用了addEventListener() 方法为 DIV 元素添加"animationstart", "animationiteration" 和 "animationend" 事件。</p>
+	<p>该实例使用了will-change优化性能。</p>
+	<div id="myDIV" onclick="myFunction()">点我开始动画</div>
+	<script>
+		var x = document.getElementById("myDIV")
+		function myFunction() {
+			x.style.animation = "mymove 4s 2";
+		}
+		x.addEventListener("animationstart", myStartFunction);
+		x.addEventListener("animationiteration", myIterationFunction);
+		x.addEventListener("animationend", myEndFunction);
+		function myStartFunction() {
+			this.innerHTML = "animationstart 事件触发 - 动画已经开始";
+			this.style.backgroundColor = "pink";
+		}
+		function myIterationFunction() {
+			this.innerHTML = "animationiteration 事件触发 - 动画重新播放";
+			this.style.backgroundColor = "lightblue";
+		}
+		function myEndFunction() {
+			this.innerHTML = "animationend 事件触发 - 动画已经完成";
+			this.style.willChange = 'auto'
+			this.style.backgroundColor = "lightgray";
+		}
+	</script>
+</body>
+
+</html>
 ```
