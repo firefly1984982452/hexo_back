@@ -1,8 +1,8 @@
 ---
 title: JavaScript之Math和Number
 date: 2020-06-05 11:19:32
-categories: 
-- program
+categories:
+  - program
 ---
 
 # Math
@@ -10,13 +10,6 @@ categories:
 ## 取整相关
 
 ```
-// sign 返回正数或是负数
-Math.sign(9); // 1
-Math.sign(-8); // -1
-Math.sign(0); //0
-Math.sign(-0); //-0
-Math('ee'); //NaN
-
 // trunc 取整，只取小数点前的数字不管正负，不管四舍五入
 Math.trunc(9.9); // 9
 Math.trunc(-8.7); // -8
@@ -30,6 +23,25 @@ Math.floor(-4.1); // -5 按最小的取
 12.899.toFixed(2); // 12.9 四舍五入（有小数）
 ```
 
+对比表：
+
+| 示例值 | Math.floor<br>向下取整 | Math.ceil<br>向上取整 | Math.round<br>四舍五入 | Math.trunc<br>只取整数 |
+| :----: | :--------------------: | :-------------------: | :--------------------: | :--------------------: |
+|  3.1   |           3            |           4           |           3            |           3            |
+|  3.6   |           3            |           4           |           4            |           3            |
+|  -1.1  |           -2           |          -1           |           -1           |           -1           |
+|  -1.6  |           -2           |          -1           |           -2           |           -1           |
+
+## sign：返回正数或是负数
+
+```
+Math.sign(9); // 1
+Math.sign(-8); // -1
+Math.sign(0); //0
+Math.sign(-0); //-0
+Math.sign('ee'); //NaN
+```
+
 ## 返回数组中最大值
 
 `Math.max(...[1,2,3])` // 3
@@ -40,9 +52,9 @@ Math.floor(-4.1); // -5 按最小的取
 
 ## 随机数
 
-默认返回0~1
+默认返回 0~1
 
-`Math.random()` 
+`Math.random()`
 
 返回指定范围（5~24）：
 
@@ -56,16 +68,23 @@ Math.floor(Math.random() * number)
 
 ## 最大最小数
 
-`Math.max`
-`Math.min`
+`Math.max` `Math.min`
 
-## 次方
+## 次方求幂
 
-`Math.pow(2, 3)`代表 2的3 次方
+`Math.pow(2, 3)`代表 2 的 3 次方
+
+同等于`2 ** 3`
+
+## 取余
+
+```
+5 % 2 ; // 1 余1
+```
 
 ## 取随机字符串
 
-先转为16进制，再去掉前两位小数点
+先转为 16 进制，再去掉前两位小数点
 
 `Math.random().toString(16).subString(2)`
 
@@ -88,7 +107,7 @@ Number.isFinite(1.2) ; // true
 
 `Number.isInteger(13)`
 
-## isNaN 是否为NaN
+## isNaN 是否为 NaN
 
 `window.isNaN`和`Number.isNaN`的区别
 
@@ -119,7 +138,7 @@ console.log(Number.isNaN(NaN));       //true
 
 ## 安全范围
 
-整数的操作有一个安全范围，即2的53次方。
+整数的操作有一个安全范围，即 2 的 53 次方。
 
 `Math.pow(2, 53) - 1 = 9007199254740991`
 
@@ -147,6 +166,27 @@ parseInt('3e'); // 3
 parseInt('0x10'); // 16
 ```
 
+## toString
+
+基本用法：
+
+1. 转为字符串
+
+2. 转换进制
+
+`..`的用法：**转换 Number 类型**：
+
+```
+123..toString(2); // "1111011"
+```
+
+相当于：
+
+```
+(123).toString(2)
+Number(123).toString(2)
+```
+
 ---
 
 # 保留小数点后两位
@@ -166,7 +206,7 @@ this.all_price = b.substring(0,b.toString().length - 1);
 
 ---
 
-# Number分隔符`_`
+# 数字分隔符`_`
 
 ```
 const largeNumber = 1_000_000_000;

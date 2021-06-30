@@ -5,6 +5,8 @@ categories:
   - program
 ---
 
+**可能不只 ES6，ES7 和 ES8 都会加上**
+
 [阮一峰学习链接](https://es6.ruanyifeng.com/)
 
 ---
@@ -777,8 +779,7 @@ console.log(mm2,mm);
 
 ## 【6】Map 所有的值
 
-**方法 1：`m.values()`**
-**方法 2：`m.entries()`**
+**方法 1：`m.values()`** **方法 2：`m.entries()`**
 
 ### 【6.1】方法 1：`m.values()`
 
@@ -1156,6 +1157,71 @@ Promise.race([pro2,pro3]).then(val=>{
 
 此时，pro2 要花费 1 秒，pro3 要花费 2 秒，谁先`resolve`，`.then`获取的`val`就是谁的。
 
+## promise.allSellted
+
+不管什么状态，都会收集起来。
+
+```
+const p1 = new Promise((resolve, reject) => {
+    reject("第一个错");
+});
+const p2 = new Promise((resolve, reject) => {
+    resolve('第二个对----');
+});
+Promise.allSettled([p1, p2]).then(results => {
+    console.log(results);
+});
+```
+
+## `promise.all`、`promise.race`、`promise.allSellted`的区别
+
+- promise.all 是所有的保证每一步都对，如果其中有一个 reject，都会报错。
+- promise.race 是谁第一个 resolve，都获取谁的值。
+- promise.allSellted 是执行完所有的 promise，不管是 reject 还是 resolve，都会返回回来一个结果。
+
+```
+const p1 = new Promise((resolve, reject) => {
+  console.log(1);
+  setTimeout(() => {
+    resolve('任务成功1')
+  }, 1000);
+})
+const p2 = new Promise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    reject('任务失败2')
+  }, 1200);
+})
+
+const p3 = new Promise((resolve, reject) => {
+  console.log(3);
+  setTimeout(() => {
+    resolve('任务成功3')
+  }, 1500);
+})
+
+Promise.allSettled([p1, p2, p3]).then(result => {
+  console.log(result);
+})
+Promise.all([p1, p2, p3]).then(result => {
+  console.log(result)
+})
+Promise.race([p1, p2, p3]).then(result => {
+  console.log(result)
+})
+```
+
+结果：
+
+```
+1
+2
+3
+任务成功1
+Uncaught (in promise) 任务失败2
+[{…}, {…}, {…}]
+```
+
 ---
 
 # Iterater 和 for...of 循环
@@ -1289,8 +1355,7 @@ myArray.forEach(function (value) {
 
 总结：
 
-`for...of`可以`bread`，遍历时是值；
-`for...in`遍历对象更优，可简写`Objec.keys()`;
+`for...of`可以`bread`，遍历时是值； `for...in`遍历对象更优，可简写`Objec.keys()`;
 
 ---
 

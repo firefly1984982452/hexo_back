@@ -163,6 +163,26 @@ div:fullscreen{
 }
 ```
 
+## 【6】`:is`:是否选择器
+
+原来的写法：
+
+```
+section h1,
+section h2,
+article h1 {
+  color: #f00;
+}
+```
+
+使用`:is`优化后的写法：
+
+```
+:is(section,article) :is(h1,h2){
+  color: #f00;
+}
+```
+
 ---
 
 # 边框
@@ -940,7 +960,7 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 - font-variant: small-caps(小型大写字母字体); // 字体变体
 - font-variant-ligatures: no-common-ligatures; // 连字形式【英文的 fi 会分开】
-- font-variant-numeric: slashed-zero; // 数字0显示为中间有斜杠，好和o区分
+- font-variant-numeric: slashed-zero; // 数字 0 显示为中间有斜杠，好和 o 区分
 
 https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
@@ -1267,7 +1287,7 @@ p{
 </html>
 ```
 
-## 【5】使用requestAnimationFrame手动反复调用动画
+## 【5】使用 requestAnimationFrame 手动反复调用动画
 
 ```
 this.$refs.ref_trademark.className = 'trademark'
@@ -1694,12 +1714,11 @@ html
 
 ## 【5】prefers-color-scheme：适配主题
 
-[链接1](https://zhuanlan.zhihu.com/p/374506516)
-[链接2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+[链接 1](https://zhuanlan.zhihu.com/p/374506516) [链接 2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 
-目前我测试chrome、firefox、safari浏览器兼容性均不能实现这个功能。
+目前我测试 chrome、firefox、safari 浏览器兼容性均不能实现这个功能。
 
-## 【6】prefers-reduced-motion
+## 【6】prefers-reduced-motion：减少动画
 
 ---
 
@@ -1741,9 +1760,9 @@ input[type="checkbox"] {
 
 ---
 
-# css比较函数：min()、max()、clamp()
+# css 比较函数：min()、max()、clamp()
 
-可以择优选择一个最合适的尺寸，不仅用于width，还可以用于font-size等值。
+可以择优选择一个最合适的尺寸，不仅用于 width，还可以用于 font-size 等值。
 
 ```
 <!DOCTYPE html>
@@ -1790,8 +1809,7 @@ input[type="checkbox"] {
 
 # will-change：性能优化
 
-[will-change链接](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)
-[animation事件监听](https://www.runoob.com/try/try.php?filename=tryjsref_animationstart)
+[will-change 链接](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change) [animation 事件监听](https://www.runoob.com/try/try.php?filename=tryjsref_animationstart)
 
 两者结合的实例：
 

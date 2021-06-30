@@ -368,6 +368,7 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 - 7. 自定义字体：font-face
 - 8. 垂直排版
 - 9. 断行规则：line-break
+- 10. 优化字体性能：font-display
 
 ## 【1】文字渐变
 
@@ -448,6 +449,10 @@ line-break: normal; // 常规
 line-break: strict; // 限制最大
 line-break: anywhere; // 任意位置标点都可以换行
 ```
+
+## 【10】优化字体性能：font-display
+
+[链接](https://zhuanlan.zhihu.com/p/28369304)
 
 ---
 
@@ -999,9 +1004,9 @@ overflow-anchor: none; // 禁止滚动锚点
 
 ## 【6】touch-action：触摸操作
 
+- `touch-action: none;` 禁止有任何操作，此时的 scroll 无效
+- `touch-action: pan-x;` 此时只有 x 轴能滑动，y 粙是滑动不了的。
 
-- `touch-action: none;` 禁止有任何操作，此时的scroll无效
-- `touch-action: pan-x;` 此时只有x轴能滑动，y粙是滑动不了的。
 ```
 
 [其它](https://developer.mozilla.org/zh-CN/docs/Web/CSS/touch-action)
@@ -1011,9 +1016,9 @@ overflow-anchor: none; // 禁止滚动锚点
 # caret-color：插入光杆颜色
 
 ```
-input.custom {
-  caret-color: #0f0;
-}
+
+input.custom { caret-color: #0f0; }
+
 ```
 
 ---
@@ -1021,7 +1026,9 @@ input.custom {
 # user-select：用户选择
 
 ```
+
 user-select: auto | text | none | contain | all;
+
 ```
 
 有时候用<p>标签默认鼠标能选中文字，这时可以使用`user-select: none`来禁止点击文字之后处于选中状态，也能避免复制能操作。
@@ -1031,6 +1038,7 @@ user-select: auto | text | none | contain | all;
 # all：级联和继承
 
 ```
+
 <style>
   section {
     color: blue;
