@@ -1,12 +1,11 @@
 ---
 title: JavaScript之面向对象
 date: 2020-12-07 15:44:34
-categories: 
-- program
+categories:
+  - program
 ---
 
-# java对象
-
+# java 对象
 
 ```
 // 创建类——“人”
@@ -15,7 +14,7 @@ public class People{
 }
 // 创建类——“男人”
 public class MenPeople extends People {
-    
+
 }
 // 创建对象
 MenPeople xm = new MenPeople();
@@ -24,18 +23,17 @@ xm.age = 15;
 
 ---
 
-# js对象
+# js 对象
 
 `var xm = {age:15}`
 
+[JS 中的类](https://www.jianshu.com/p/edf4d665d0df)
 
-[JS中的类](https://www.jianshu.com/p/edf4d665d0df)
-
-[JS对象与JAVA对象的区别](https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html)
+[JS 对象与 JAVA 对象的区别](https://www.cnblogs.com/yanyunpiaomaio/p/11025444.html)
 
 ---
 
-# JavaScript面向对象
+# JavaScript 面向对象
 
 [参考](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
 
@@ -75,9 +73,9 @@ function Cat(name,color){
 }
 ```
 
-这段代码里面的`this.name = name`就是构造函数，可以直接用es6语法糖的形式写：
+这段代码里面的`this.name = name`就是构造函数，可以直接用 es6 语法糖的形式写：
 
-### 【2.1】es6语法糖class
+### 【2.1】es6 语法糖 class
 
 ```
 class Cat{
@@ -148,13 +146,13 @@ cat1.eat == cat2.eat; // false
 
 ```
 
-此时eat方法占用了太多内存，并且它们没有指向同一个引用地址，永远不会相等。参考数组的其实是相等的。
+此时 eat 方法占用了太多内存，并且它们没有指向同一个引用地址，永远不会相等。参考数组的其实是相等的。
 
 ```
 [1].push == [2].push; // true
 ```
 
-### 【3.2】用prototype添加方法
+### 【3.2】用 prototype 添加方法
 
 ```
 function Cat(name,color){
@@ -171,9 +169,9 @@ var cat2 = new Cat('小猫','黑色');
 cat1.eat == cat2.eat; // true，它们是指向同一个内存地址下的方法
 ```
 
-(就算不定义Cat的prototype，Cat也自带有prototype属性)
+(就算不定义 Cat 的 prototype，Cat 也自带有 prototype 属性)
 
-## 【4】prototype模式的验证方法
+## 【4】prototype 模式的验证方法
 
 ### 【4.1】判断对象和实例的关系`isPrototypeOf`
 
@@ -187,7 +185,7 @@ Cat.prototype.isPrototypeOf(cat1); // true
 Array.prototype.isPrototypeOf([]); // true
 ```
 
-### 【4.2】判断是本地属性还是prototype属性
+### 【4.2】判断是本地属性还是 prototype 属性
 
 ```
 cat1.hasOwnProperty('name'); // true
@@ -206,13 +204,9 @@ cat1.hasOwnProperty('type'); // false
 'push' in []; // true
 ```
 
-### 【4.4】__proto__
+### 【4.4】**proto**
 
-一般情况下，实例对象的`__proto__`指向原型对象的`prototype`。
-`prototype`被实例的`__proto__`指向
-`__proto__`指向构造函数的`prototype`
-`__proto__`存在于实例和构造函数的原型对象，而不是实例与构造函数。
-如：
+一般情况下，实例对象的`__proto__`指向原型对象的`prototype`。 `prototype`被实例的`__proto__`指向 `__proto__`指向构造函数的`prototype` `__proto__`存在于实例和构造函数的原型对象，而不是实例与构造函数。如：
 
 ```
 cat1.__proto__ === Cat.prototype; // true
@@ -251,7 +245,7 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 
 ---
 
-# DOM也有原型链
+# DOM 也有原型链
 
 ```
 <html>
@@ -273,11 +267,11 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 
 ---
 
-# Object.create实现类继承和克隆对象
+# Object.create 实现类继承和克隆对象
 
-## Object.create实现类继承
+## Object.create 实现类继承
 
-### 先看不用Object.create来实现继承
+### 先看不用 Object.create 来实现继承
 
 ```
 function Pd(){
@@ -295,7 +289,7 @@ console.log(pdd); // Pd [3] __proto__:Array(0)直接就是真正的数组的__pr
 
 此时打印`Array.prototype.constructor`会发现变成了`undefined`，已经改动了原生的`Array`.
 
-### 用Object.create实现继承
+### 用 Object.create 实现继承
 
 ```
 function Pd(){
@@ -322,7 +316,7 @@ console.log(pdd); // Pd [3] __proto__:Array[__proto__:Array(0)]就是__proto__�
 - `Pd [3] __proto__:Array(0)`直接就是真正的数组的`__proto__`;
 - `Pd [3] __proto__:Array[__proto__:Array(0)]`就是`__proto__`里面包含真正的数组的`__proto__`。
 
-### 用Object.create实现继承自己的类并带参数
+### 用 Object.create 实现继承自己的类并带参数
 
 ```
 function Cat(name,color){
@@ -340,6 +334,7 @@ var pdd = new Pd('小猫','白色');
 
 console.log(cat1,pdd); // Cat {name: "大猫", color: "黄色"} Pd {name: "小猫", color: "白色"}
 ```
+
 ### 用原生写法实现继承自己的类并带参数
 
 ```
@@ -358,7 +353,7 @@ var pdd = new Pd('小猫','白色');
 console.log(cat1,pdd); // Cat {name: "大猫", color: "黄色"} Pd {name: "小猫", color: "白色"}
 ```
 
-## 用Object.create克隆对象
+## 用 Object.create 克隆对象
 
 ```
 var obj1 = {a:2,b:{name:'小明'}};
@@ -368,15 +363,16 @@ obj2.a = 3;
 obj2.b.name = '小红';
 console.log(obj1); // {a:2,b:{name:'小红'}};
 ```
-结论：obj1对象中的一级对象a:2并没有受影响，但二级对象b已经受影响。所以**Object.create克隆的对象也只能实现一级对象的深拷贝**。
 
-obj2的具体值：
+结论：obj1 对象中的一级对象 a:2 并没有受影响，但二级对象 b 已经受影响。所以**Object.create 克隆的对象也只能实现一级对象的深拷贝**。
+
+obj2 的具体值：
 
 ![image.png](https://wx1.sinaimg.cn/mw690/0069qZtTgy1gho49w7kobj306102wjra.jpg)
 
 ---
 
-# extends继承
+# extends 继承
 
 ```
 class Cat{
@@ -431,6 +427,7 @@ class Child extends Cat{
 var cat = new Cat();
 var child = new Child();
 ```
+
 ---
 
 # new Array()和[]比较
@@ -468,8 +465,7 @@ new Array()输出耗时: 600
 
 ## 写法
 
-`[]`是字面量，JSON格式的语法是引擎直接解释的；
-`new Array()`需要调用`Array`的构造器。
+`[]`是字面量，JSON 格式的语法是引擎直接解释的； `new Array()`需要调用`Array`的构造器。
 
 ---
 
@@ -482,4 +478,32 @@ a.arr(); // 'print arr'
 Array.prototype.hasOwnProperty('arr'); // true
 a.hasOwnProperty('arr'); // false
 Array.hasOwnProperty('arr'); // false
+```
+
+# 获取对象所有属性
+
+- Object.keys
+
+- Reflect.ownKeys
+
+- Object.getOwnPropertyNames
+
+```
+var obj = {
+	a: 1,
+	b: 2
+}
+Object.defineProperty(obj, 'method', {
+	value: function () {
+	    alert("Non enumerable property")
+	},
+	enumerable: false
+})
+
+console.log(Object.keys(obj))
+// ["a", "b"]
+console.log(Reflect.ownKeys(obj))
+// ["a", "b", "method"]
+console.log(Object.getOwnPropertyNames(obj))
+// ["a", "b", "method"]
 ```

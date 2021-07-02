@@ -573,7 +573,7 @@ han zi
    <source src="movie.mp4" type="video/mp4">
    <source src="movie.ogg" type="video/ogg">
    Your browser does not support the video tag.
-</video> 
+</video>
 ```
 
 ---
@@ -633,13 +633,14 @@ han zi
 ```
 <a href="data:,hello,world" download="hello.txt">下载hello.txt</a>
 ```
-## 【1.3】rel属性
+
+## 【1.3】rel 属性
 
 - noopener
 
 [noopener](https://www.xinshouzhanzhang.com/rel-noopener.html):
 
-当你使用`target="_blank"`打开一个新的标签页时，新页面的window对象上有一个属性`opener`，它指向的是前一个页面的 `window`对象，这样，后一个页面就获得了前一个页面的控制权，可以使用`window.opener.location.replace`更改前一个页面的`url`。简单来说就是，用户点击了一个超链接，该链接在新窗口打开的同时，竟然更改了前一个页面的链接。
+当你使用`target="_blank"`打开一个新的标签页时，新页面的 window 对象上有一个属性`opener`，它指向的是前一个页面的 `window`对象，这样，后一个页面就获得了前一个页面的控制权，可以使用`window.opener.location.replace`更改前一个页面的`url`。简单来说就是，用户点击了一个超链接，该链接在新窗口打开的同时，竟然更改了前一个页面的链接。
 
 这时候`rel="noopener"`闪亮登场，打开链接后你会发现`window.opener`已经被置为了`null`。
 
@@ -653,8 +654,7 @@ han zi
 
 [nofollow](https://blog.csdn.net/qq_33981438/article/details/80909881)
 
-不跟踪链接，利于SEO优化。
-
+不跟踪链接，利于 SEO 优化。
 
 ## 【2】`<link>`
 
@@ -771,8 +771,6 @@ han zi
 <output name="result">20</output>
 ```
 
-自带清除按钮的输入框：`<input type="search" />`
-
 ## 【5】`<progress>`和`<meter>`
 
 - `<progress>`：进度；
@@ -783,6 +781,62 @@ han zi
 <progress id="file" max="100" value="70"> 70% </progress>
 <meter id="file" max="100" value="70"> 70% </meter>
 ```
+
+---
+
+# `<input />`标签
+
+## HTML5 input 标签所有 type
+
+[预览效果](https://firefly1984982452.github.io/my-web-page/input-type.html)
+
+[源码](https://github.com/firefly1984982452/my-web-page/blob/master/input-type.html)
+
+元素
+
+- button
+- checkbox
+- color
+- date
+- datetime
+- datetime-local
+- email
+- file
+- hidden
+- image
+- month
+- number
+- password
+- radio
+- range
+- reset
+- search
+- submit
+- tel
+- text
+- time
+- url
+- week
+
+## HTML5 input 标签所有属性
+
+[链接](https://www.runoob.com/tags/tag-input.html)
+
+- maxlength：最大输入长度
+- minlength：最小输入长度
+- autocomplete：自动补全
+- autofocus：自动聚焦
+- disabled： 禁用
+- name：名称
+- max：最大值
+- min：最小值
+- step：步数
+- size：字符长度
+- required：是否必填
+- readonly：是否只读
+- placeholder：提示信息
+- multiple：允许上传多个文件
+- pattern：用正则表达式验证值
 
 ---
 
@@ -844,6 +898,34 @@ summary::-webkit-details-marker {
 ```
 
 ---
+
+# `<map>`标签
+
+[链接](https://www.runoob.com/try/try.php?filename=tryhtml_areamap)
+
+---
+
+# `<figure>`、`<figcaption>`标签
+
+独立的主流代码（如图片、代码等）
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure)
+
+```
+<figure>
+		<figcaption>Get browser details using <code>navigator</code>.</figcaption>
+		<pre>
+	function NavigatorExample() {
+		var txt;
+		txt = "Browser CodeName: " + navigator.appCodeName;
+		txt+= "Browser Name: " + navigator.appName;
+		txt+= "Browser Version: " + navigator.appVersion ;
+		txt+= "Cookies Enabled: " + navigator.cookieEnabled;
+		txt+= "Platform: " + navigator.platform;
+		txt+= "User-agent header: " + navigator.userAgent;
+	}</pre>
+	</figure>
+```
 
 # 特殊字符
 
