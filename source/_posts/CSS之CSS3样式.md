@@ -183,6 +183,14 @@ article h1 {
 }
 ```
 
+## 【7】:nth-child 选择器
+
+- 偶数标签：`:nth-child(2n)`或`:nth-child(even)`
+- 奇数标签：`:nth-child(2n-1)`或`nth-child(odd)`
+- 从第 6 个 至最后一个：`:nth-child(n+6)`
+- 第 1 个到第 6 个：`:nth-child(-n+6)`
+- 第 6 个到第 9 个：`:nth-child(n+6):nth-child(-n+9)`
+
 ---
 
 # 边框

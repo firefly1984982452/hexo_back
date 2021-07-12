@@ -1089,7 +1089,7 @@ Reflect.has(obj, 'name');
 
 ## promise.all
 
-**只能同时调用不受关联的`prmise`，如果`promise2`的值受`promise1`影响，不能用`promise.all`，可以用`async/await`**
+**只能同时调用不受关联的`promise`，如果`promise2`的值受`promise1`影响，不能用`promise.all`，可以用`async/await`**
 
 首先假设要依次调用 3 个`promise`的代码：
 
@@ -1173,11 +1173,29 @@ Promise.allSettled([p1, p2]).then(results => {
 });
 ```
 
-## `promise.all`、`promise.race`、`promise.allSellted`的区别
+## promise.any
 
-- promise.all 是所有的保证每一步都对，如果其中有一个 reject，都会报错。
-- promise.race 是谁第一个 resolve，都获取谁的值。
-- promise.allSellted 是执行完所有的 promise，不管是 reject 还是 resolve，都会返回回来一个结果。
+有一个成功就算成功
+
+```
+const p1 = new Promise((resolve, reject) => {
+  reject("第一个错");
+});
+const p2 = new Promise((resolve, reject) => {
+  resolve('第二个对----');
+});
+Promise.any([p1, p2]).then(results => {
+  console.log(results);
+});
+
+```
+
+## `Promise.all`、`Promise.race`、`Promise.allSellted`、`Promise.any`的区别
+
+- Promise.all 是所有的保证每一步都对，如果其中有一个 reject，都会报错。
+- Promise.race 是第一个返回的是 resolve 或 reject，就获取谁的值。
+- Promise.allSellted 是执行完所有的 promise，不管是 reject 还是 resolve，都会返回回来一个总结果。
+- Promise.any 是有一个成功就算成功，所有都失败才会报错。
 
 ```
 const p1 = new Promise((resolve, reject) => {
@@ -1201,25 +1219,17 @@ const p3 = new Promise((resolve, reject) => {
 })
 
 Promise.allSettled([p1, p2, p3]).then(result => {
-  console.log(result);
+  console.log('所有结果：', result);
 })
 Promise.all([p1, p2, p3]).then(result => {
-  console.log(result)
+  console.log('只有所有都resolve才会返回成功，否则报错：', result)
 })
 Promise.race([p1, p2, p3]).then(result => {
-  console.log(result)
+  console.log('谁最快得到结果：', result)
 })
-```
-
-结果：
-
-```
-1
-2
-3
-任务成功1
-Uncaught (in promise) 任务失败2
-[{…}, {…}, {…}]
+Promise.any([p1, p2, p3]).then(result => {
+  console.log('谁最先resolve：', result);
+})
 ```
 
 ---

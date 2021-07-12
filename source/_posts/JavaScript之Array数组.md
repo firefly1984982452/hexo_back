@@ -183,6 +183,12 @@ var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 arr.splice(1,3);     //(3) ["B", "C", "D"]
 ```
 
+插入数据：
+
+```
+myArray.splice(2,0,'插入数据');
+```
+
 ## 【3】split：分隔
 
 ```
@@ -338,11 +344,11 @@ arr.reverse();       //(5) [53, 231, 23, 122, 1]
 (3) [12, 130, 44]
 ```
 
-例：过滤所有为false的值
+例：过滤所有为 false 的值
 
 ```
 const myArray = [1, undefined, NaN, 2, null, '@denicmarko', true, 3, false];
-console.log(myArray.filter(Boolean)); // [1, 2, "@denicmarko", true, 3]    
+console.log(myArray.filter(Boolean)); // [1, 2, "@denicmarko", true, 3]
 ```
 
 ## 【4】indexOf 和 lastIndexOf
