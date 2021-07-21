@@ -46,9 +46,15 @@ console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
 
 ---
 
-# 当时时间时分秒（非时间戳）
+# 时间 String 化
 
-`new Date().toLocaleString()`
+- toLocaleString
+- toLocaleDateString
+
+```
+new Date().toLocaleString(); // "2021/7/20下午2:57:36"
+new Date().toLocaleDateString(); // "2021/7/20"
+```
 
 ---
 

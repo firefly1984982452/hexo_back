@@ -57,7 +57,7 @@ categories:
 }
 ```
 
-## flex中最后一个元素右对齐
+## flex 中最后一个元素右对齐
 
 ```
 .father{
@@ -138,6 +138,17 @@ grid-row-gap: 0.3rem;
 
 - [阮一峰的学习链接-grid](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
 - [其它-grid](https://juejin.cn/post/6854573220306255880#heading-22)
+
+## place-content
+
+`place-content` 属性是`align-content` 和 `justify-content`的简写。
+
+`place-items`和`place-self`上同。
+
+```
+display: grid;
+place-content: center;
+```
 
 ---
 
@@ -314,6 +325,7 @@ css
 ```
 
 html
+
 ```
 <main>
   <p>3223</p>

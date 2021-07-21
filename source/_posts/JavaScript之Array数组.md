@@ -192,7 +192,8 @@ myArray.splice(2,0,'插入数据');
 ## 【3】split：分隔
 
 ```
-'a,b,c'.split(','); //
+'a,b,c'.split(','); // [ "a", "b", "c" ]
+'1234567890'.split(''); // [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" ]
 ```
 
 ## 【4】length
@@ -717,7 +718,11 @@ var strArr = arr.toString().split(',');
 
 # `arguments`参数的 3 种转数组方法
 
-**方法 1：Array.prototype.slice.apply** **方法 2：Array.from** **方法 3：[...arguments]**
+**方法 1：Array.prototype.slice.apply**
+
+**方法 2：Array.from**
+
+**方法 3：[...arguments]**
 
 ```
 var test3 = function(){
@@ -734,6 +739,10 @@ test3(1,2,3,4);
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
 
+<br />
+
 <img src="https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg"/>
+
+<br />
 
 <img src="https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg" referrerpolicy=”no-referrer”/>

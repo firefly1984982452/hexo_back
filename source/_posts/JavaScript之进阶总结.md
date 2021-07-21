@@ -1267,3 +1267,15 @@ rotateAni.finished.then(() => {
   console.log(rotateApi);
 })
 ```
+
+---
+
+# `undefined`和`void 0`
+
+`undefined`在闭包时可更改：
+
+```
+(() => { let undefined = 1; console.log(undefined) })()
+```
+
+`void 任何值`永远都是`undefined`

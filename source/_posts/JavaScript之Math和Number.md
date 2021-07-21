@@ -70,13 +70,13 @@ Math.floor(Math.random() * number)
 
 `Math.max` `Math.min`
 
-## 次方求幂
+## `Math.pow`：次方求幂
 
 `Math.pow(2, 3)`代表 2 的 3 次方
 
 同等于`2 ** 3`
 
-## 取余
+## `%`：取余
 
 ```
 5 % 2 ; // 1 余1
@@ -87,6 +87,12 @@ Math.floor(Math.random() * number)
 先转为 16 进制，再去掉前两位小数点
 
 `Math.random().toString(16).subString(2)`
+
+## `Math.abs`：绝对值
+
+```
+Math.abs(-2.5) ; // 2.5
+```
 
 ---
 
@@ -189,6 +195,22 @@ Number(123).toString(2)
 
 ---
 
+# 进制转换（toString 和 parseInt）
+
+十进制转二进制：
+
+```
+Number(99).toString(2); // "1100011"
+```
+
+二进制转十进制：
+
+```
+parseInt(101110,2); // 46
+```
+
+---
+
 # 保留小数点后两位
 
 ## 四舍五入
@@ -213,3 +235,19 @@ const largeNumber = 1_000_000_000;
 
 console.log(largeNumber); // 1000000000"
 ```
+
+---
+
+# BigInt
+
+大整数会自动转为科学计数法，这时使用`BigInt`可以避免这种情况。
+
+```
+(BigInt(9007199254740991)*BigInt(9007199254740991)).toString();
+
+// "81129638414606663681390495662081"
+```
+
+- 如果不使用 `toString()`，后面会自带 1 个 `n`，`10n==10`是`true`，`10n===10`是`false`；
+
+- 不能再用`Number`转义，`Number`转义会自动转为科学计数法。

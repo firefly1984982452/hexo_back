@@ -19,13 +19,11 @@ categories:
 
 返回指定位置的字符
 
-`'ewfwef'.charAt(5)` // f
-`'ewfwef'[5]` // f
+`'ewfwef'.charAt(5)` // f `'ewfwef'[5]` // f
 
 区别：
 
-`'ewfwef'.charAt(53)` // ""
-`'ewfwef'[59]` // undefined
+`'ewfwef'.charAt(53)` // "" `'ewfwef'[59]` // undefined
 
 ## 【2】charCodeAt()
 
@@ -96,17 +94,13 @@ String.fromCharCode(65); // A
 
 截取（开始位置，结束位置）
 
-`'abcdefg'.substring(2,3)` // "c"
-`'abcdefg'.substring(2)` // "cdefg"
-`'abcdefg'.substring(2,-9)` // "ab" **与 slice 的区别**
+`'abcdefg'.substring(2,3)` // "c" `'abcdefg'.substring(2)` // "cdefg" `'abcdefg'.substring(2,-9)` // "ab" **与 slice 的区别**
 
 ## 【4】slice()
 
 截取（开始位置，结束位置）
 
-`'abcdefg'.slice(2,3)` // "c"
-`'abcdefg'.slice(2)` // "cdefg"
-`'abcdefg'.slice(2,-9)` // "" **与 substring 的区别**
+`'abcdefg'.slice(2,3)` // "c" `'abcdefg'.slice(2)` // "cdefg" `'abcdefg'.slice(2,-9)` // "" **与 substring 的区别**
 
 ---
 
@@ -195,17 +189,204 @@ JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
 
 `' we '.trim()` // "we"
 
----
+# padStart() 和 padEnd() 进行补位
 
-# 其它技巧
+用法：
 
-## 金钱格式化 toLocalString
+```
+'x'.padStart(10,'ab'); // "ababababax"
+```
+
+示例：
+
+```
+'abc'.padStart(10, '0123456789'); // '0123456abc'
+'1'.padStart(10, '0') // "0000000001"
+'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+```
+
+# toLocaleString
+
+## 【1】用法
+
+```
+number.toLocaleString([locales [, options]])
+```
+
+## 【2】不同类型
+
+- string
+- array
+- date
+
+```
+number.toLocaleString([locales [, options]])
+array.toLocaleString([locales [, options]])
+date.toLocaleString([locales [, options]])
+```
+
+### 【2.1】array
+
+array 和 number 类同
+
+```
+Number(1).toLocaleString('zh',{style:'currency',currency:'cny'}); // "¥1.00"
+[1,2,3].toLocaleString('zh',{style:'currency',currency:'cny'}); // "¥1.00,¥2.00,¥3.00"
+```
+
+### 【2.2】date
+
+```
+new Date().toLocaleString(); // "2021/7/20下午2:39:35"
+```
+
+#### 【2.2.1】`locales`
+
+不同时区
+
+```
+new Date().toLocaleString(); // "2021/7/20下午2:44:40"
+new Date().toLocaleString('zh'); // "2021/7/20下午2:44:40"
+new Date().toLocaleString('en-US'); // "7/20/2021, 2:44:14 PM"
+new Date().toLocaleString('en-gb'); // "20/07/2021, 14:44:23"
+new Date().toLocaleString('ko-kr'); // "2021. 7. 20. 오후 2:44:33"
+```
+
+#### 【2.2.2】`options`
+
+- hour12 是否使用 12 小时的时间（而不是 24 小时的时间）。true\false; 默认值是语言环境相关的。
+- timeZone 要使用的时区
+- formatMatcher 要使用的格式匹配算法
+
+```
+var date = new Date()
+date.toLocaleString(); // "2021/7/20下午2:51:24"
+date.toLocaleString('zh',{ hour12: false }); // "2021/7/20 14:51:24"
+date.toLocaleString('zh',{ timeZone: 'GMT' }); // "2021/7/20上午6:51:24"（格林威治标准时间）
+date.toLocaleString('zh',{ timeZoneName: 'short' }); // "2021/7/20GMT+8 下午2:51:24"
+date.toLocaleString('zh',{ timeZoneName: 'long' }); // "2021/7/20中国标准时间 下午2:51:24"
+```
+
+## 【3】不同参数
+
+### 【3.1】`locales`
+
+- `zh-Hans-CN`：中国（简写`zh`）
+- `ja-Jp`：日本（简写`jp`）
+- `zh-u-nu-hanidec`：中文十进制数字
+
+国际简写
 
 ```
 var num = 1234567890;
-num.toLocalString();    //'1,234,567,890'
-num.toLocaleString('en-US'); // 效果相同
+num.toLocaleString(); // '1,234,567,890'
+num.toLocaleString('en-US'); // 效果相同 '1,234,567,890'
+num.toLocaleString('zh'); // 效果相同 '1,234,567,890'
+num.toLocaleString('jp'); // 效果相同 '1,234,567,890'
 ```
+
+`zh-u-nu-hanidec`：中文十进制数字
+
+```
+var num = 12345
+num.toLocaleString('zh-u-nu-hanidec'); // "一二,三四五"
+num.toLocaleString('zh-u-nu-hanidec',{useGrouping: false}); // "一二三四五"
+```
+
+### 【3.2】`options`
+
+1. style
+2. currency
+3. currencyDisplay
+4. useGrouping
+5. minimumIntegerDigits
+6. minimumFractionDigits
+7. maximumFractionDigits
+8. minimumSignificantDigits
+9. maximumSignificantDigits
+
+#### 【3.2.1】style 格式化时使用的样式
+
+- decimal 表示纯数字格式 为默认值
+- currency 表示货币格式
+- percent 表示百分比格式
+
+```
+Number(1345.2345).toLocaleString(); // "1,345.235"
+Number(1345.2345).toLocaleString('zh',{style:'percent'}); // "134,523%"
+Number(1345.2345).toLocaleString('zh',{style:'currency' , currency:'CNY' }) // "¥1,345.23"
+```
+
+#### 【3.2.2】currency 在货币格式化中使用的货币符号（如果 style 是“currency”,必须提供货币属性）
+
+- USD 美元
+- EUR 欧元
+- CNY 人民币
+
+```
+Number(12345678).toLocaleString('zh',{style:'currency' , currency:'CNY' }); // "¥12,345,678.00"
+Number(12345678).toLocaleString('zh',{style:'currency' , currency:'JPY' }); // "JP¥12,345,678"
+Number(12345678).toLocaleString('zh',{style:'currency' , currency:'USD' }); // "US$12,345,678.00"
+Number(12345678).toLocaleString('zh',{style:'currency' , currency:'EUR' }); // "€12,345,678.00"
+```
+
+#### 【3.2.3】currencyDisplay 货币格式化
+
+- symbol 使用本地化的货币符号例如 € （默认）
+- code 使用国际标准组织货币代码
+- name 使用本地化的货币名称
+
+```
+Number(1).toLocaleString('zh',{style:'currency' , currency:'USD' }); // "US$1.00
+Number(1).toLocaleString('zh',{style:'currency' , currency:'USD' ,currencyDisplay: 'code'}); // "USD 1.00"
+Number(1).toLocaleString('zh',{style:'currency' , currency:'USD' ,currencyDisplay: 'name'}); // "1.00美元"
+```
+
+#### 【3.2.4】useGrouping 是否使用分组分隔符，默认：`true`
+
+```
+Number(1234.56).toLocaleString('zh'); // "1,234.56"
+Number(1234.56).toLocaleString('zh', { useGrouping: false }); // "1234.56"
+```
+
+#### 【3.2.5】minimumIntegerDigits：指定整数最少位数
+
+```
+Number(123.456).toLocaleString('zh'); // "123.456"
+Number(123.456).toLocaleString('zh',{minimumIntegerDigits: 5}); // "00,123.456"
+```
+
+#### 【3.2.6】minimumFractionDigits：指定小数点后最少位数
+
+```
+Number(123.456).toLocaleString('zh'); // "123.456"
+Number(123.456).toLocaleString('zh',{minimumFractionDigits: 5}); // "123.45600"
+```
+
+#### 【3.2.7】maximumFractionDigits：小数位数的最大数目（四舍五入）
+
+```
+Number(123.456).toLocaleString('zh'); // "123.456"
+Number(123.456).toLocaleString('zh',{maximumFractionDigits: 2}); // "123.46"
+```
+
+#### 【3.2.8】minimumSignificantDigits：使用的有效数字的最小数目
+
+```
+Number(123.456).toLocaleString('zh'); // "123.456"
+Number(123.456).toLocaleString('zh',{minimumSignificantDigits: 10}); // "123.4560000"
+```
+
+#### 【3.2.9】maximumSignificantDigits：使用的有效数字的最大数量
+
+```
+Number(123.456).toLocaleString('zh'); // "123.456"
+Number(123.456).toLocaleString('zh',{maximumSignificantDigits: 2}); // "120"
+```
+
+---
+
+# 其它技巧
 
 ## 单行写一个评级组件
 
