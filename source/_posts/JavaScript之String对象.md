@@ -160,9 +160,52 @@ s === "hello\\n"; // true
 
 正则
 
+1. 多维数组扁平化为单维数组
+
 ```
 const arr = [1, [1,2], [1,2,3]];
 JSON.stringify(arr).replace(/(\[|\])/g,''); // "1,1,2,1,2,3"
+```
+
+2. 时间格式化
+
+```
+'yyyy-mm'.replace(/([a-z])/ig,($1)=>{return 0}); // "0000-00"
+```
+
+3. 字符串转换为驼峰格式
+
+```
+var sName = 'font-size'
+// 或
+var sName = '-webkit-background-composite'
+
+return sName.replace(/-[a-zA-Z]{1}/g, ($1, $2) => {
+  return $2 === 0 ? $1[1] : $1.toUpperCase()[1]
+})
+```
+
+4. 颜色字符串 rgb 转换为 hex 方法
+
+`rgb(255, 255, 255)` 转为 `#ffffff`
+
+```
+function rgb2hex(sRGB) {
+    var reg = /^(rgb|RGB)/
+    if (reg.test(sRGB)) {
+      let arr = sRGB.replace(/(\(|\)|rgb|RGB| )*/g, '').split(',')
+      let str = arr
+        .map(v => {
+          return ('0'+(Number(v).toString(16))).slice(-2)
+        })
+        .join('')
+      return '#'+str
+    } else {
+      return sRGB
+    }
+}
+
+rgb2hex('rgb(255, 255, 255)'); // '#ffffff'
 ```
 
 ---
@@ -391,3 +434,9 @@ Number(123.456).toLocaleString('zh',{maximumSignificantDigits: 2}); // "120"
 ## 单行写一个评级组件
 
 `"★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate)`;定义一个变量 rate 是 1 到 5 的值
+
+## 利用`slice`时间格式化补 0
+
+```
+("0" + t.getHours()).slice(-2); // '01'
+```

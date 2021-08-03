@@ -1007,8 +1007,6 @@ overflow-anchor: none; // 禁止滚动锚点
 - `touch-action: none;` 禁止有任何操作，此时的 scroll 无效
 - `touch-action: pan-x;` 此时只有 x 轴能滑动，y 粙是滑动不了的。
 
-```
-
 [其它](https://developer.mozilla.org/zh-CN/docs/Web/CSS/touch-action)
 
 ---

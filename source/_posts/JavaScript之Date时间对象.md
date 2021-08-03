@@ -46,6 +46,35 @@ console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
 
 ---
 
+# 时间自定义格式化(如 yyyy-MM-dd)
+
+```
+var formatDatePD = function(t,str) {
+  var obj = {
+    yyyy:t.getFullYear(),
+    yy:(""+ t.getFullYear()).slice(-2),
+    M:t.getMonth()+1,
+    MM:("0"+ (t.getMonth()+1)).slice(-2),
+    d:t.getDate(),
+    dd:("0" + t.getDate()).slice(-2),
+    H:t.getHours(),
+    HH:("0" + t.getHours()).slice(-2),
+    h:t.getHours() % 12,
+    hh:("0"+t.getHours() % 12).slice(-2),
+    m:t.getMinutes(),
+    mm:("0" + t.getMinutes()).slice(-2),
+    s:t.getSeconds(),
+    ss:("0" + t.getSeconds()).slice(-2),
+    w:['日', '一', '二', '三', '四', '五', '六'][t.getDay()]
+  };
+  return str.replace(/([a-z]+)/ig,($1)=>{return obj[$1]})
+}
+
+formatDate(new Date(1409894060000), 'yyyy-MM-dd HH:mm:ss 星期w')
+```
+
+---
+
 # 时间 String 化
 
 - toLocaleString
@@ -72,25 +101,25 @@ new Date().toLocaleDateString(); // "2021/7/20"
 
 以下为秒数，如果要毫秒数就不要`/1000`
 
-## 方法一
+- 方法一
 
 ```
 Math.round(new Date().getTime()/1000)
 ```
 
-## 方法二
+- 方法二
 
 ```
 Math.round((+ new Date())/1000)
 ```
 
-## 方法三
+- 方法三
 
 ```
 Math.round(Date.now()/1000)
 ```
 
-## 方法四
+- 方法四
 
 ```
 Math.round(Date.valueOf()/1000)

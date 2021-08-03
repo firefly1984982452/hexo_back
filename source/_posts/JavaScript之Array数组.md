@@ -738,3 +738,15 @@ test3(1,2,3,4);
 ```
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1ghdl1udru0j309o068dfy.jpg)
+
+---
+
+# 其它例子
+
+## 递增数组的值
+
+```
+var arr = [1,2,3,4,5]
+arr[arr.length] = arr.length+1
+arr ; // 6
+```
