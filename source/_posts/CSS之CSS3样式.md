@@ -954,7 +954,7 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 - text-decoration-style: solid | double | dotted | dashed | wavy ; 线条样式
 
-- text-indent: 2em; // 段落第 1 行缩进
+- text-indent: 2em; // 段落第 1 行缩进，开头空2格
 
 - text-overflow: ellipsis | clip | 'string'【仅 firefox】; // 文字超出
 
