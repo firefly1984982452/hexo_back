@@ -5,6 +5,26 @@ categories:
   - program
 ---
 
+# CSS 的进化历史
+
+- `Scss(Sass)`、`Less`、`stylus` 和 `PostCSS` 等 CSS 预处理器
+
+  提供了变量，函数，运算，继承等。扩展性，复用性都有了很大的提升，解决了一些样式重用冗余的问题，但是对于命名混乱和全局污染问题的效果不大。
+
+- `BEM` (`.block\_\_element–modifier`) 规范
+
+  比较流行的 `class` 命名规则，部分解决了命名混乱的问题，但 `className` 定义起来比较冗长，要想用的好，还是有一定难度的。
+
+- `CSS Modules`
+
+  模块化 `CSS`，将依赖的 `CSS` 文件以模块的形式注入到 `JavaScript` 里，基本上解决了全局污染、命名混乱、样式重用和冗余的问题，但是还是以文档方式组织，维护起来比较麻烦。
+
+- `CSS in JS`
+
+  组件化，方便开发维护和测试
+
+  JavaScript 和 CSS 可以方便的共享变量和方法
+
 # html `<head>`相关
 
 ## 【1】禁止缓存
@@ -1059,3 +1079,5 @@ user-select: auto | text | none | contain | all;
   </aside>
 <section>
 ```
+
+---
