@@ -1,13 +1,15 @@
 ---
-title: Emmet(Zencoding)语法
+title: HTML代码简写：Emmet(ZenCoding)和Pug语法
 date: 2018-05-02 10:51:17
-categories: 
-- program
+categories:
+  - program
 ---
+
+# 一、Emmet
 
 [参考原文](https://blog.csdn.net/seasunexpect/article/details/71124299)
 
-# DOM添加
+# DOM 添加
 
 ## 子节点 '>'
 
@@ -59,8 +61,7 @@ div>p>span^b
 </div>
 ```
 
-
-# 类和ID
+# 类和 ID
 
 ## ID '#'
 
@@ -117,7 +118,6 @@ div.class.class
 ```
 <div class="class class"></div>
 ```
-
 
 # 算法
 
@@ -181,8 +181,6 @@ ul>li.item$$$*3
 </ul>
 ```
 
-
-
 # 属性
 
 ## 自定义属性 '[attr]'
@@ -201,14 +199,13 @@ a[href='www.baidu.com' target='_blank']
 <a href="www.baidu.com" target="_blank"></a>
 ```
 
-	
 ## 改变编号基数和方向 '$@-'
 
 - 语法：
 
 ```
-ul>li.item$@-5*4
-ul>li.item$@3*4
+ul>li.item$@-5*3
+ul>li.item$@3*3
 ```
 
 - 结果：
@@ -218,17 +215,14 @@ ul>li.item$@3*4
 	<li class="item8"></li>
 	<li class="item7"></li>
 	<li class="item6"></li>
-	<li class="item5"></li>
 </ul>
 
 <ul>
 	<li class="item3"></li>
 	<li class="item4"></li>
 	<li class="item5"></li>
-	<li class="item6"></li>
 </ul>
 ```
-
 
 # 文本 '{}'
 
@@ -246,19 +240,18 @@ p>{click}+a{here}+{continue}
 <p>click<a href="">here</a>continue</p>
 ```
 
-# 隐式标签 
+# 隐式标签
 
 - 语法：
 
 ```
-ul>.test*3
+ul>.test*2
 ```
 
 - 结果：
 
 ```
 <ul>
-	<li class="test"></li>
 	<li class="test"></li>
 	<li class="test"></li>
 </ul>
@@ -274,53 +267,100 @@ ul>.test*3
 div#invest>head-custom+div.balance>div.center>div.assetle.l>ul.manner_left>li.row.rows>span.row_left.l+a.row_middle.l{商品管理}^^^div.l.wind>div.windright>div.topHead>p.l.text{结算管理-列表}^div.notice>p.eggs.l+p.l.writing^div.end>div.topend>div.topLeft.l>p.l.finish{起止时间}+p.l.totals{起止时间}^div.topmiddle.l>div>sivable>p.cashes{店铺应收金额}^div.nesting>p*4^^div.topright>p.l.period{本期应结}+p.l.state{结算状态}
 ```
 
+---
+
+# 二、Pug
+
+# 链接
+
+- [官方文档]https://www.pugjs.cn/api/getting-started.html)
+- [入门](https://www.cnblogs.com/xiaohuochai/p/7222227.html)
+
+# 下载
+
 ```
-<div id="invest">
-	<head-custom></head-custom>
-	<div class="balance">
-		<div class="center">
-			<div class="assetle l">
-				<ul class="manner_left">
-					<li class="row rows"><span class="row_left l"></span><a href="" class="row_middle l">商品管理</a></li>
-				</ul>
-			</div>
-			<div class="l wind">
-				<div class="windright">
-					<div class="topHead">
-						<p class="l text">结算管理-列表</p>
-					</div>
-					<div class="notice">
-						<p class="eggs l"></p>
-						<p class="l writing"></p>
-					</div>
-					<div class="end">
-						<div class="topend">
-							<div class="topLeft l">
-								<p class="l finish">起止时间</p>
-								<p class="l totals">起止时间</p>
-							</div>
-							<div class="topmiddle l">
-								<div>
-									<sivable>
-										<p class="cashes">店铺应收金额</p>
-									</sivable>
-									<div class="nesting">
-										<p></p>
-										<p></p>
-										<p></p>
-										<p></p>
-									</div>
-								</div>
-								<div class="topright">
-									<p class="l period">本期应结</p>
-									<p class="l state">结算状态</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+npm install pug-cli -g
+```
+
+# 编译
+
+- 1.基础编译
+
+```
+pug index.pug
+```
+
+- 2.自动编译（默认为压缩版 HTML）
+
+```
+pug index.pug -w
+```
+
+- 3.编译为标准版 HTML
+
+```
+pug index.pug -P
+```
+
+- 4.路径设置
+
+将 index.html 将输入到 a 目录下面
+
+```
+pug index.pug -o a
+```
+
+- 5.重命名
+
+**这里的路径必须提前建立好，否则不会成功**
+
+```
+pug <xx.pug> <xx/xx.html>
+```
+
+- 6.全部命令
+
+编译整个文件夹里面所有 pug 文件到 html 文件夹，并且所有文件是标准版 HTML
+
+```
+pug -w ./ -o ./html -P
+```
+
+# 结构语法
+
+```
+doctype html
+html
+  head
+  body
+    main
+    ul.content
+      -for(var i = 0;  i < 2; i ++)
+        li=i+'个'
+
+      - var list = ["Tres","Cuatro", "Cinco", "Seis"]
+        each item,index in list
+          li=`${index}：${item}`
+
+      - var values = []
+      each val in values
+        li = val
+      else
+        li 没有内容
+
+    .other
+      img/
+      a(href="baidu.com"): img
+    |很多很多文字
+    p 行内文字
+    p
+      |多个
+    p
+      |多
+      |多
+    input(
+      type='checkbox'
+      name='agreement'
+      checked
+    )
 ```

@@ -1,5 +1,5 @@
 ---
-title: ES6总结
+title: JavaScript之ES6总结
 date: 2020-08-17 18:50:17
 categories:
   - program
