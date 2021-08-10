@@ -68,6 +68,26 @@ categories:
 }
 ```
 
+## 语法
+
+### 【1】容器的属性
+
+- `flex-direction`：方向
+- `flex-wrap`：是否换行
+- `flex-flow`：`flex-direction`属性和`flex-wrap`属性的简写形式
+- `justify-content`：项目在主轴对齐方式
+- `align-items`：项目在交叉轴对齐方式
+- `align-content`：项目在多根轴线的对齐方式
+
+### 【2】项目的属性
+
+- `order`：排序
+- `flex-grow`：放大比例
+- `flex-shrink`：缩小比例
+- `flex-basis`：占用主轴空间
+- `flex`：合并上面所有
+- `align-self`：单个项目的不一样的方式
+
 ## gap
 
 ```
