@@ -2,7 +2,7 @@
 title: CSS之实现各种功能
 date: 2021-01-07 17:19:32
 categories:
-  - program
+- program
 ---
 
 # 【1】

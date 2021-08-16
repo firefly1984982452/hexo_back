@@ -2,7 +2,7 @@
 title: JavaScript之Document对象
 date: 2020-12-10 16:17:34
 categories:
-  - program
+- program
 ---
 
 # Dcoument 对象集合

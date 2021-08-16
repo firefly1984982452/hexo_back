@@ -2,7 +2,7 @@
 title: JavaScript之Math和Number
 date: 2020-06-05 11:19:32
 categories:
-  - program
+- program
 ---
 
 # Math

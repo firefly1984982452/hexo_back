@@ -2,7 +2,7 @@
 title: JavaScript之Array数组
 date: 2020-06-08 15:44:34
 categories:
-  - program
+- program
 ---
 
 # 扩展运算符（`...`）

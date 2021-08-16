@@ -2,7 +2,7 @@
 title: echarts超全超详情配置项
 date: 2020-09-08 14:35:18
 categories:
-  - program
+- program
 ---
 
 原 date: 2018-11-20 14:35:18

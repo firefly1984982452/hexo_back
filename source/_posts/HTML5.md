@@ -2,7 +2,7 @@
 title: HTML5
 date: 2021-02-18 14:19:32
 categories:
-  - program
+- program
 ---
 
 学习链接： [阮一峰](https://wangdoc.com/html/)

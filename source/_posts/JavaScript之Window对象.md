@@ -2,7 +2,7 @@
 title: JavaScript之Window对象
 date: 2020-12-09 15:44:34
 categories:
-  - program
+- program
 ---
 
 # ◆ 属性篇

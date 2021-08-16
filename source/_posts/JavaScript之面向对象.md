@@ -2,7 +2,7 @@
 title: JavaScript之面向对象
 date: 2020-12-07 15:44:34
 categories:
-  - program
+- program
 ---
 
 # java 对象

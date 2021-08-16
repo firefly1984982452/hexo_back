@@ -2,7 +2,7 @@
 title: CSS之CSS3样式
 date: 2021-01-07 14:19:32
 categories:
-  - program
+- program
 ---
 
 # 选择器

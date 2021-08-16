@@ -2,7 +2,7 @@
 title: node功能模块开发
 date: 2021-07-12 13:25:07
 categories:
-  - program
+- program
 ---
 
 # 读取某文件夹下面所有的文件名，并写到一个 json 配置

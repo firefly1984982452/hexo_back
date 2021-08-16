@@ -2,7 +2,7 @@
 title: NPM 命令
 date: 2021-08-04 18:35:14
 categories:
-  - program
+- program
 ---
 
 # 链接

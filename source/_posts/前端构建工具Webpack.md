@@ -2,7 +2,7 @@
 title: 前端构建工具Webpack
 date: 2021-08-11 15:19:56
 categories:
-  - program
+- program
 ---
 
 # 一、链接

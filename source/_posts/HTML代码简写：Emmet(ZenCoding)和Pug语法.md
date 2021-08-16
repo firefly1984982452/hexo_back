@@ -2,7 +2,7 @@
 title: HTML代码简写：Emmet(ZenCoding)和Pug语法
 date: 2018-05-02 10:51:17
 categories:
-  - program
+- program
 ---
 
 # 一、Emmet

@@ -2,7 +2,7 @@
 title: git进阶
 date: 2018-10-24 14:35:18
 categories:
-  - program
+- program
 ---
 
 # 普通发布代码
@@ -137,3 +137,7 @@ open ~/.ssh
 ```
 git clone 'xx'
 ```
+
+# git 设备多帐户
+
+[链接](https://www.jianshu.com/p/cacf91579268)

@@ -2,7 +2,7 @@
 title: JavaScript之进阶总结
 date: 2020-12-07 14:19:32
 categories:
-  - program
+- program
 ---
 
 # `<script>`标签

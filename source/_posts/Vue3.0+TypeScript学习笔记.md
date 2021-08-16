@@ -1,15 +1,15 @@
 ---
 title: Vue3.0+TypeScript学习笔记
 date: 2020-09-28 18:50:17
-categories: 
+categories:
 - program
 ---
 
 [链接](https://jspang.com/detailed?id=64)
 
-# 搭建vue3环境
+# 搭建 vue3 环境
 
-下载最新vue-cli
+下载最新 vue-cli
 
 ```
 npm install -g @vue/cli
@@ -19,25 +19,19 @@ yarn global add @vue/cli
 
 使用`vue --version`检查版本大于`@vue/cli 4.5.6`即可。
 
-## 【1】vue-cli命令行搭建
+## 【1】vue-cli 命令行搭建
 
-9步式对话。
+9 步式对话。
 
-1.使用`vue create vue3-1`创建
-2.选择自定义
-3.选择TypeScript
-4.创建完成后使用`yarn serve`运行项目
+1.使用`vue create vue3-1`创建 2.选择自定义 3.选择 TypeScript 4.创建完成后使用`yarn serve`运行项目
 
-## 【2】vue-cli图形界面搭建
+## 【2】vue-cli 图形界面搭建
 
-1.使用`vue ui`创建
-2.打开运行的`http://localhost:80`
-3.创建新项目
-4.创建完成后使用`yarn serve`运行项目
+1.使用`vue ui`创建 2.打开运行的`http://localhost:80` 3.创建新项目 4.创建完成后使用`yarn serve`运行项目
 
 ---
 
-# setup和ref
+# setup 和 ref
 
 做一个单行点击显示值事件
 
@@ -84,9 +78,9 @@ export default defineComponent({
 
 # 优化程序
 
-## 【1】reactive优化
+## 【1】reactive 优化
 
-为什么要用reactive，因为不用的话，在方法里面要用`selectGirl.value`才能获取到值。
+为什么要用 reactive，因为不用的话，在方法里面要用`selectGirl.value`才能获取到值。
 
 将所有对应的值封装为一个对象：
 
@@ -121,7 +115,7 @@ export default {
 </script>
 ```
 
-## 【2】给data增加类型注解优化
+## 【2】给 data 增加类型注解优化
 
 `data`变量没有作`类型注解`，而是采用了`TypeScript`的`类型推断`。
 
@@ -134,7 +128,7 @@ interface DataProps {
 const data: DataProps = ...
 ```
 
-## 【3】用toRefs优化DOM中的对象
+## 【3】用 toRefs 优化 DOM 中的对象
 
 引入：
 
@@ -233,7 +227,7 @@ setup() {
   },
 ```
 
-## 【3】和vue2的生命周期也能混合使用
+## 【3】和 vue2 的生命周期也能混合使用
 
 ```
 setup() {
@@ -258,9 +252,9 @@ updated() {
 
 ---
 
-# onRenderTracked()和onRenderTriggered()钩子函数
+# onRenderTracked()和 onRenderTriggered()钩子函数
 
-## 【1】onRenderTracked状态跟踪
+## 【1】onRenderTracked 状态跟踪
 
 只要页面中有`update`的情况，就会跟踪生成`event`。
 
@@ -275,7 +269,7 @@ onRenderTracked((event) => {
 });
 ```
 
-## 【2】onRenderTriggered状态触发
+## 【2】onRenderTriggered 状态触发
 
 只有发生变化的值才会触发
 
@@ -296,11 +290,13 @@ event:
 ```
 
 ---
+
 # watch
 
 例子上说`methods`无法改变`document.title`，要用`watch`监听后改，但我尝试后都是可以的。
 
-方法1：methods:
+方法 1：methods:
+
 ```
 chooseFn: (index: number) => {
     data.currentValue = data.deviceList[index];
@@ -309,7 +305,7 @@ chooseFn: (index: number) => {
 },
 ```
 
-方法2：watch:
+方法 2：watch:
 
 ```
 watch(refData.currentValue, (newValue, oldValue) => {
@@ -324,11 +320,12 @@ return {
 
 # 模块化
 
-## 【1】模块化JS功能
+## 【1】模块化 JS 功能
 
 假设有很多页面需要公用一个时间函数，这时先新建一个`ts`文件，实现这个功能。
 
 useNowTime.ts
+
 ```
 import {ref} from 'vue';
 
@@ -375,6 +372,7 @@ export default defineComponent({
 随机图片展示：
 
 useURLAxios.ts
+
 ```
 import {ref} from 'vue';
 import axios from 'axios';
@@ -459,7 +457,7 @@ export default {
 </style>
 ```
 
-app.vue使用
+app.vue 使用
 
 ```
 <modal />
@@ -475,9 +473,10 @@ const app = {
 //...
 ```
 
-## 【2】使用teleport
+## 【2】使用 teleport
 
-更改modal.vue
+更改 modal.vue
+
 ```
 <template>
     <teleport to="#modal">
@@ -486,7 +485,7 @@ const app = {
 </template>
 ```
 
-在html中使用
+在 html 中使用
 
 ```
 <body>
@@ -501,9 +500,9 @@ const app = {
 
 ---
 
-# Suspense异步请求组件
+# Suspense 异步请求组件
 
-## 【1】编写AsyncShow.vue异步返回数据的组件
+## 【1】编写 AsyncShow.vue 异步返回数据的组件
 
 ```
 <template>
@@ -557,5 +556,4 @@ const app = {
 </div>
 ```
 
-这里页面上会先显示loading，2秒钟后显示返回的数据。
-
+这里页面上会先显示 loading，2 秒钟后显示返回的数据。

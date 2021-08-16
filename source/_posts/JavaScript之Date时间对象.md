@@ -2,7 +2,7 @@
 title: JavaScript之Date时间对象
 date: 2020-06-05 10:19:32
 categories:
-  - program
+- program
 ---
 
 # date 所有方法
