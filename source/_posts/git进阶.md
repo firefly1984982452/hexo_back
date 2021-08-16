@@ -29,7 +29,9 @@ git checkout .
 
 # 导出干净代码
 
-`git archive --format zip --output "out.zip" master -0`
+```
+git archive --format zip --output "out.zip" master -0
+```
 
 # 两个版本之前的补丁包
 
@@ -95,6 +97,13 @@ git push
 ---
 
 # 新电脑开发新项目
+
+0. 使用 git 命令取消全局设置
+
+```
+git config --global --unset user.name
+git config --global --unset user.email
+```
 
 1. 查看自己电脑的邮箱和用户名
 

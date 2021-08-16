@@ -84,8 +84,8 @@ categories:
 - `order`：排序
 - `flex-grow`：放大比例
 - `flex-shrink`：缩小比例
-- `flex-basis`：占用主轴空间
-- `flex`：合并上面所有
+- `flex-basis`：占用主轴空间、初始空间
+- `flex`：是`flex-grow`、`flex-shrink`和`flex-basis`的缩写
 - `align-self`：单个项目的不一样的方式
 
 ## gap
@@ -353,4 +353,84 @@ html
   <section class="hidden">555</section>
   <section class="visible">666</section>
 </main>
+```
+
+# 五种 CSS 经典布局
+
+[阮一峰的博客链接](https://www.ruanyifeng.com/blog/2020/08/five-css-layouts-in-one-line.html)
+
+◆ 【1】空间居中布局
+
+[CodePen](https://codepen.io/una/pen/YzyYbBx) 示例
+
+```
+.container {
+    display: grid;
+    place-items: center;
+}
+```
+
+◆ 【2】并列式布局
+
+核心：`flex: 0 1 150px;`
+
+[CodePen](https://codepen.io/una/pen/WNQdBza) 示例
+
+```
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.item{
+   flex: 0 1 150px;
+   margin: 5px;
+}
+```
+
+◆ 【3】两栏式布局
+
+[CodePen](https://codepen.io/una/pen/gOaNeWL) 示例
+
+```
+.container {
+    display: grid;
+    grid-template-columns: minmax(150px, 25%) 1fr;
+}
+```
+
+◆ 三明治布局
+
+[CodePen](https://codepen.io/una/pen/bGVXPWB) 示例
+
+```
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+```
+
+◆ 圣杯布局
+
+[CodePen](https://codepen.io/una/pen/mdVbdBy) 示例
+
+HTML
+
+```
+<div class="container">
+    <header/>
+    <div/>
+    <main/>
+    <div/>
+    <footer/>
+</div>
+```
+
+CSS
+
+```
+.container {
+    display: grid;
+    grid-template: auto 1fr auto / auto 1fr auto;
+}
 ```

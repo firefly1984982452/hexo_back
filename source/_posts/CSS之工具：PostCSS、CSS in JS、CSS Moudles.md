@@ -9,7 +9,7 @@ categories:
 
 - [PostCSS 官网链接](https://www.postcss.com.cn/)
 
-我理解到的`PostCSS`就是个工具集，比如里面的`Autoprefixer`插件能自动补全前缀，`PostCSS Preset Env`能使用新特性
+我理解到的`PostCSS`就是个工具集，比如里面的`autoprefixer`插件能自动补全前缀，`PostCSS Preset Env`能使用新特性
 
 # 二、CSS in JS
 
