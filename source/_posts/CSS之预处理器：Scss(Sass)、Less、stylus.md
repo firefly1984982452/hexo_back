@@ -69,8 +69,8 @@ stylus test.scss
 | :---------------: | :--------------------------: | :------------------: | :----: | :--: |
 | 变量（Variables） |             `@`              |         `$`          | 直接写 |      |
 |  混合（Mixins）   |         `.class();`          | `@mixin`和`@include` | 直接写 |      |
-|  嵌套（Nesting）  |            `{{}}`            |        `{{}}`        |  缩进  |      |
-|  函数(Functions)  | .name {@functions ~\`IFFE\`} |   `@function name`   |  缩进  |      |
+|  嵌套（Nesting）  |            `{ { } }`            |        `{ { } }`        |  缩进  |      |
+|  函数(Functions)  | `.name {@functions ~IFFE}` |   `@function name`   |  缩进  |      |
 
 ## 【1】变量
 
@@ -152,7 +152,7 @@ p
 
 ## 【3】嵌套（Nesting）
 
-- Less 和 Scss：`{{}}`
+- Less 和 Scss：`{ { } }`
 
 ```
 header{
@@ -178,7 +178,7 @@ body{
 }
 ```
 
-- Less： .name {@functions ~\`IFFE\`}
+- Less： `.name {@functions ~IFFE}`
 
 ```
 .paletteMixin() {
