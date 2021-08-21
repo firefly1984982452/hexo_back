@@ -1,9 +1,104 @@
 ---
-title: JavaScript之Document对象
-date: 2020-12-10 16:17:34
+title: HTML之DOM对象
+date: 2021-07-12 17:44:34
 categories:
-- program
+  - program
 ---
+
+# 一、链接
+
+- [菜鸟教程](https://www.runoob.com/jsref/dom-obj-document.html)
+
+# 二、DOM 元素对象
+
+## scrollLeft
+
+向左滑动
+
+```
+this.$refs.scrollUl.scrollLeft = 100
+```
+
+# 三、DOM 事件对象
+
+## 【1】鼠标对象
+
+- `oncontextmenu`：右击
+- `ondblclick`：双击
+
+- `onclick`：单击（松开鼠标）
+- `onmousedown` 鼠标按钮被按下（并未松开鼠标时）
+- `onmouseup` 鼠标按键被松开（松开鼠标，优先于`onclick`事件）
+
+- `onmouseenter` 移入
+- `onmouseleave` 移出
+- `onmousemove` 鼠标被移动。
+- `onmouseover` 移入（支持冒泡）
+- `onmouseout` 移出（支持冒泡）
+
+◆ `onclick`、`onmousedown`、`onmouseup`鼠标点击的区别
+
+```
+<p onmousedown="console.log(1)" onmouseup="console.log(2)" onclick="console.log(3)">
+  点击后勿松开，然后松开后查看先后顺序
+</p>
+```
+
+◆ `onmouseenter`、`onmousemove`、`onmouseover`鼠标移入移出的区别
+
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+			margin: 10px;
+			float: left;
+			padding: 30px;
+			text-align: center;
+			background-color: lightgray;
+		}
+
+		p {
+			background-color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<h3>该实例演示了 onmousemove, onmouseenter 和 onmouseover 的不同。</h3>
+	<p> onmousemove 事件在鼠标移动到 div 元素上时触发。</p>
+	<p> mouseenter 事件中有在鼠标指针进入 div 元素时触发。 </p>
+	<p> onmouseover 事件在鼠标指针进入 div 元素时触发,在子元素上也会触发(p 和 span)。</p>
+	<div onmousemove="myMoveFunction()">
+		<p>onmousemove: <br> <span id="demo">鼠标移动到我这!</span></p>
+	</div>
+	<div onmouseenter="myEnterFunction()">
+		<p>onmouseenter: <br> <span id="demo2">标移动到我这!</span></p>
+	</div>
+	<div onmouseover="myOverFunction()">
+		<p>onmouseover: <br> <span id="demo3">标移动到我这!</span></p>
+	</div>
+	<script>
+		var x = y = z = 0;
+		function myMoveFunction() {
+			document.getElementById("demo").innerHTML = z += 1;
+		}
+		function myEnterFunction() {
+			document.getElementById("demo2").innerHTML = x += 1;
+		}
+		function myOverFunction() {
+			document.getElementById("demo3").innerHTML = y += 1;
+		}
+	</script>
+</body>
+
+</html>
+```
 
 # Dcoument 对象集合
 
@@ -96,7 +191,6 @@ if(document.referrer === '') {
 
 ## addEventListener
 
-
 - `addEventListener`监听中第三个参数配置`once`可以只监听一次
 
 ```
@@ -114,13 +208,12 @@ window.addEventListener('click', () => {
 
 ---
 
-
-# console对象
+# console 对象
 
 ## 链接
 
-- [学习链接1](https://markodenic.com/use-console-log-like-a-pro/)
-- [学习链接2](https://segmentfault.com/a/1190000004528137)
+- [学习链接 1](https://markodenic.com/use-console-log-like-a-pro/)
+- [学习链接 2](https://segmentfault.com/a/1190000004528137)
 - [效果预览](https://firefly1984982452.github.io/my-web-page/console.html)
 - [源码](https://github.com/firefly1984982452/my-web-page/blob/master/console.html)
 

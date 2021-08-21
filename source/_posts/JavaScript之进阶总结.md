@@ -234,11 +234,6 @@ handleClick(e){
 
 ---
 
-# 冒泡事件和阻止默认事件
-
-- `event.stopProgation`能阻止冒泡事件
-- `event.preventDefault`能阻止如`<a>`的默认`href`事件
-
 # let 和闭包
 
 ## let 劫持作用域

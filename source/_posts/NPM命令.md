@@ -13,6 +13,12 @@ categories:
 
 # NPM 常用命令
 
+## 【0】清理缓存后
+
+```
+npm cache clear --force
+```
+
 ## 【1】config：配置淘宝镜像源
 
 设置 npm 镜像源：

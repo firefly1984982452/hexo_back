@@ -2,7 +2,7 @@
 title: HTML5
 date: 2021-02-18 14:19:32
 categories:
-- program
+  - program
 ---
 
 学习链接： [阮一峰](https://wangdoc.com/html/)
@@ -575,6 +575,16 @@ han zi
    Your browser does not support the video tag.
 </video>
 ```
+
+- autoplay：如果出现该属性，则视频在就绪后马上播放。
+- controls：如果出现该属性，则向用户显示控件，比如播放按钮。
+- height：设置视频播放器的高度。
+- loop：如果出现该属性，则当媒介文件完成播放后再次开始播放。
+- muted：规定视频的音频输出应该被静音。
+- poster：规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。
+- preload：如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。
+- src：要播放的视频的 URL。
+- width：设置视频播放器的宽度。
 
 ---
 
