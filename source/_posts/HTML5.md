@@ -566,15 +566,7 @@ han zi
 
 # 视频标签
 
-## poster：视频预览图
-
-```
-<video controls poster="/images/w3school.gif">
-   <source src="movie.mp4" type="video/mp4">
-   <source src="movie.ogg" type="video/ogg">
-   Your browser does not support the video tag.
-</video>
-```
+## 属性
 
 - autoplay：如果出现该属性，则视频在就绪后马上播放。
 - controls：如果出现该属性，则向用户显示控件，比如播放按钮。
@@ -585,6 +577,49 @@ han zi
 - preload：如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。
 - src：要播放的视频的 URL。
 - width：设置视频播放器的宽度。
+
+◆ poster：视频预览图
+
+```
+<video controls poster="/images/w3school.gif">
+   <source src="movie.mp4" type="video/mp4">
+   <source src="movie.ogg" type="video/ogg">
+   Your browser does not support the video tag.
+</video>
+```
+
+## 用 canvas 实现 video 视频截图功能
+
+- [链接](https://blog.csdn.net/weixin_43392489/article/details/114642055)
+
+```
+<video controls src="./assets/demo.mp4" width="400" height="300" id="video">
+  Sorry, your browser doesn't support embedded videos.
+</video>
+<button onclick="screenShot()">Screenshot</button>
+<script>
+  function screenShot() {
+    const video = document.getElementById('video');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0);
+
+    // download picture
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = `${Date.now()}`;
+    a.click();
+  }
+</script>
+```
+
+◆ 注意事项：
+
+1. 浏览器需要一个服务器环境，否则 `canvas` 的 `toDataURL` 方法会报错。该方法是将其转换为 base64 格式的图片地址。
+
+2. 可使用本地视频和 flv 格式的监控视频。
 
 ---
 

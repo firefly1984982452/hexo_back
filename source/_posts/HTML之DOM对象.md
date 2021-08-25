@@ -5,154 +5,113 @@ categories:
   - program
 ---
 
-# 一、链接
+# 链接
 
 - [菜鸟教程](https://www.runoob.com/jsref/dom-obj-document.html)
 
-# 二、DOM 元素对象
+# 一、DOM Dcoument 对象集合
 
-## scrollLeft
+元素
 
-向左滑动
+- `all`：所有标签
+- `anchors`：[所有超链接（带 name 属性）](https://www.runoob.com/try/try.php?filename=tryjsref_doc_anchors)
+- `embeds`：[文档中所有嵌入的内容（embed）集合](https://www.runoob.com/try/try.php?filename=tryjsref_doc_embeds)
+- `forms`：[所有表单](https://www.runoob.com/try/try.php?filename=tryjsref_doc_forms)
+- `images`：[所有图片](https://www.runoob.com/try/try.php?filename=tryjsref_doc_images)
+- `links`：[所有链接](https://www.runoob.com/try/try.php?filename=tryjsref_doc_links)
+- `scripts`：[所有脚本](https://www.runoob.com/try/try.php?filename=tryjsref_doc_scripts)
 
-```
-this.$refs.scrollUl.scrollLeft = 100
-```
+域名、地址
 
-# 三、DOM 事件对象
+- `domain`：域名【`localhost`】
+- `documentURI`：文档的位置【`http://localhost:8080/#/`】
+- `baseURI`：基础 URI【`http://localhost:8080/#/`】
+- `URL`：完整的 URL【`http://localhost:8080/#/`】
 
-## 【1】鼠标对象
+状态及信息
 
-- `oncontextmenu`：右击
-- `ondblclick`：双击
+- `doctype`：文档类型声明
+- `readyState`：文档状态 (载入中……)
+- `cookie`：页面`cookie`
+- `title`：名称
+- `activeElement`：[当前获取焦点元素](https://www.runoob.com/try/try.php?filename=tryjsref_document_activeelement)
+- `adoptNode`：[从另外一个文档返回 adapded 节点到当前文档](https://www.runoob.com/try/try.php?filename=tryjsref_document_adoptnode)
+- `documentElement`：文档的根节点（如`HTML`）
+- `implementation`：检查是否有功能`HTML DOM`
+- `importNode()`：[把一个节点从另一个文档复制到该文档](https://www.runoob.com/try/try.php?filename=tryjsref_document_importnode)
+- `inputEncoding`：文档的编码方式（如`UTF-8`）
+- `lastModified`：最后修改的时间
+- `normalize()`：[删除空文本节点，并连接相邻节点](https://www.runoob.com/try/try.php?filename=tryjsref_document_normalize)
+- `visibilityState`：页面显示状态
+- `hidden`：隐藏页面
+- `referrer`：上一页地址
 
-- `onclick`：单击（松开鼠标）
-- `onmousedown` 鼠标按钮被按下（并未松开鼠标时）
-- `onmouseup` 鼠标按键被松开（松开鼠标，优先于`onclick`事件）
+获取对象
 
-- `onmouseenter` 移入
-- `onmouseleave` 移出
-- `onmousemove` 鼠标被移动。
-- `onmouseover` 移入（支持冒泡）
-- `onmouseout` 移出（支持冒泡）
+- `getElementById()`：指定 id 的第一个对象
+- `getElementsByClassName()`：所有指定类名的元素集合
+- `getElementsByName()`：指定名称的对象
+- `getElementsByTagName()`：指定标签名的对象
+- `querySelector()`：匹配指定的 CSS 选择器的第一元素
+- `querySelectorAll()`：匹配的 CSS 选择器的所有元素节点列表
 
-◆ `onclick`、`onmousedown`、`onmouseup`鼠标点击的区别
+写入
 
-```
-<p onmousedown="console.log(1)" onmouseup="console.log(2)" onclick="console.log(3)">
-  点击后勿松开，然后松开后查看先后顺序
-</p>
-```
+- `write()`：写入
+- `writeln()`：写入并换行
+- `open()`：[打开一个流](https://www.runoob.com/try/try.php?filename=tryjsref_doc_open)，以收集来自任何 `write()` 或 `writeln()` 方法的输出
+- `close()`：关闭用 `open()` 方法打开的输出流，并显示选定的数据
 
-◆ `onmouseenter`、`onmousemove`、`onmouseover`鼠标移入移出的区别
+状态监听
 
-```
-<!DOCTYPE html>
-<html>
+- `addEventListener()`：添加监听
+- `removeEventListener()`：移除监听
 
-<head>
-	<style>
-		div {
-			width: 100px;
-			height: 100px;
-			border: 1px solid black;
-			margin: 10px;
-			float: left;
-			padding: 30px;
-			text-align: center;
-			background-color: lightgray;
-		}
+创建元素、节点
 
-		p {
-			background-color: white;
-		}
-	</style>
-</head>
-
-<body>
-	<h3>该实例演示了 onmousemove, onmouseenter 和 onmouseover 的不同。</h3>
-	<p> onmousemove 事件在鼠标移动到 div 元素上时触发。</p>
-	<p> mouseenter 事件中有在鼠标指针进入 div 元素时触发。 </p>
-	<p> onmouseover 事件在鼠标指针进入 div 元素时触发,在子元素上也会触发(p 和 span)。</p>
-	<div onmousemove="myMoveFunction()">
-		<p>onmousemove: <br> <span id="demo">鼠标移动到我这!</span></p>
-	</div>
-	<div onmouseenter="myEnterFunction()">
-		<p>onmouseenter: <br> <span id="demo2">标移动到我这!</span></p>
-	</div>
-	<div onmouseover="myOverFunction()">
-		<p>onmouseover: <br> <span id="demo3">标移动到我这!</span></p>
-	</div>
-	<script>
-		var x = y = z = 0;
-		function myMoveFunction() {
-			document.getElementById("demo").innerHTML = z += 1;
-		}
-		function myEnterFunction() {
-			document.getElementById("demo2").innerHTML = x += 1;
-		}
-		function myOverFunction() {
-			document.getElementById("demo3").innerHTML = y += 1;
-		}
-	</script>
-</body>
-
-</html>
-```
-
-# Dcoument 对象集合
-
-- all
-- forms
-- images
-- links
+- `createElement()`：创建元素节点
+- `createTextNode()`：创建文本节点
+- `createAttribute()`：创建一个属性节点
+- `createComment()`：可创建注释节点
+- `createDocumentFragment()`：创建空的 `DocumentFragment` 对象，并返回此对象
 
 ---
 
-# 域名、地址
+## ◆ addEventListener
 
-- domain
-- documentURI
-- baseURI
-- URL
-
----
-
-# cookie
-
----
-
-# title：名称
-
----
-
-# visibilityState 和 hidden：页面隐藏状态
+`addEventListener`监听中第三个参数配置`once`可以设置只监听一次
 
 ```
-document.addEventListener('visibilitychange', function () {
-  console.log(document.hidden,document.visibilityState)
+window.addEventListener('click', () => {
+  console.log('click')
+}, { once: true })
+```
+
+## ◆ visibilityState 和 hidden：页面隐藏状态
+
+```
+addEventListener('visibilitychange', function () {
+  console.log(hidden,visibilityState)
   // 用户离开了当前页面
-  if (document.visibilityState === 'hidden' || document.hidden === true) {
-    document.title = '页面不可见';
+  if (visibilityState === 'hidden' || hidden === true) {
+    title = '页面不可见';
   }
 
   // 用户打开或回到页面
-  if (document.visibilityState === 'visible' || document.hidden === false) {
-    document.title = '页面可见';
+  if (visibilityState === 'visible' || hidden === false) {
+    title = '页面可见';
   }
 });
 ```
 
 区别
 
-- `document.hidden`返回是否隐藏，只返回`true`和`false`；
-- `document.visibilityState`返回具体状态，有`hidden`、`visible`、`prerender`（正在渲染中）。
+- `hidden`：是否隐藏，只返回`true`和`false`；
+- `visibilityState`：具体状态，有`hidden`、`visible`、`prerender`（正在渲染中）
 
----
+## ◆ referrer：上一页地址
 
-# referrer：上一页地址
-
-返回上一页的地址，可以处理如移动端直接进入到详情页时，用`history.go(-1)`和`history.back()`无效时可用`document.referrer`。
+返回上一页的地址，可以处理如移动端直接进入到详情页时，用`history.go(-1)`和`history.back()`无效时可用`referrer`
 
 [直接进入此详情页时点返回会返回到首页](https://m.qidian.com/author/402631776)
 
@@ -164,51 +123,106 @@ if(document.referrer === '') {
 }
 ```
 
----
+# 二、DOM Element 元素对象
 
-# 获取对象
+属性
 
-- getElementById()
-- getElementsByClassName()
-- getElementsByName()
-- getElementsByTagName()
-- querySelector()
-- querySelectorAll()
+- `style`：元素的样式属性
+- `tabIndex`：元素的标签顺序。
+- `tagName`：标记名（大写）
+- `textContent`：文本内容
+- `title`：元素的 title 属性
+- `id`：元素的 id。
+- `innerHTML`：元素的内容。
+- `lang`：元素的语言。
+- `namespaceURI`：命名空间的 URI
+- `attributes`：元素的属性数组
+- `classList`：[元素的所有类名](https://www.runoob.com/try/try.php?filename=tryjsref_element_classlist_add)
+- `className`：元素的 class 属性
+- `dir`：[一个元素中的文本方向](https://www.runoob.com/try/try.php?filename=try_dom_body_dir)
 
----
+其它操作
 
-# 写入
+- `accessKey`：[alt+快捷键设置](https://www.runoob.com/try/try.php?filename=tryjsref_anchor_accesskey)
+- `cloneNode()`：[克隆某个元素](https://www.runoob.com/try/try.php?filename=tryjsref_node_clonenode)
+- `focus()`：[获取元素焦点](https://www.runoob.com/try/try.php?filename=tryjsref_html_blur)
+- `blur()`：移除元素焦点
 
-- write()
-- writeln()
+判断
 
----
+- `contentEditable`：[元素的内容是否可编辑](https://www.runoob.com/try/try.php?filename=try_dom_body_contenteditable)
+- `hasChildNodes()`：是否有任何子元素
+- `hasFocus()`：是否获取焦点
+- `isEqualNode()`：检查两个元素是否相等
+- `isContentEditable`：元素内容是否可编辑
+- `isDefaultNamespace()`：是否为默认命名空间
+- `isSameNode()`：检查两个元素所有有相同节点
+- `isSupported()`：是否支持指定特征
 
-# 状态监听
+元素的增删改查操作
 
-- addEventListener()
-- removeEventListener()
+- `insertBefore()`：插入一个新的子元素在最前面
+- `appendChild()`：[添加一个新的子元素](https://www.runoob.com/try/try.php?filename=tryjsref_node_appendchild)
+- `firstChild`：[元素的第一个子节点](https://www.runoob.com/try/try.php?filename=tryjsref_node_firstchild)
+- `lastChild`：最后一个子节点
+- `nextSibling`：下一个节点（可为空）
+- `nextElementSibling`：下一个兄弟元素（必须是同元素）
+- `previousSibling`：上一个节点（可为空）
+- `previousElementSibling`：上一个兄弟元素（必须是同元素）
+- `nodeName`：元素的标记名（大写）
+- `nodeType`：[元素的节点类型](https://www.runoob.com/jsref/prop-node-nodetype.html)
+- `nodeValue`：元素的节点值
+- `ownerDocument`：元素的根元素（文档对象）
+- `parentNode`：元素的父节点
+- `removeChild()`：删除一个子元素
+- `replaceChild()`：替换一个子元素
+- `children`：[元素的所有子元素](https://www.runoob.com/try/try.php?filename=tryjsref_element_children)
+- `childNodes`：[元素的一个子节点的数组](https://www.runoob.com/try/try.php?filename=tryjsref_node_childnodes)
+- `item()`：[【childNodes】基于文档树的索引](https://www.runoob.com/try/try.php?filename=tryjsref_nodelist_item)
+- `length`：【childNodes】节点列表的节点数量
 
-## addEventListener
+宽高及上下左右边距
 
-- `addEventListener`监听中第三个参数配置`once`可以只监听一次
+- `clientHeight`：在页面上返回内容的可视高度（不包括边框，边距或滚动条）
+- `clientWidth`：在页面上返回内容的可视宽度（不包括边框，边距或滚动条）
+- `offsetHeight`：任何一个元素的高度包括边框和填充，但不是边距
+- `offsetWidth`：元素的宽度，包括边框和填充，但不是边距
+- `offsetLeft`：当前元素的相对水平偏移位置的偏移容器
+- `offsetParent`：元素的偏移容器
+- `offsetTop`：当前元素的相对垂直偏移位置的偏移容器
+- `scrollHeight`：整个元素的高度（包括带滚动条的隐蔽的地方）
+- `scrollLeft`：当前视图中的实际元素的左边缘和左边缘之间的距离
+- `scrollTop`：当前视图中的实际元素的顶部边缘和顶部边缘之间的距离
+- `scrollWidth`：元素的整个宽度（包括带滚动条的隐蔽的地方）
+
+设置属性
+
+- `getAttribute()`：[元素的属性](https://www.runoob.com/try/try.php?filename=tryjsref_element_getattribute)
+- `getAttributeNode()`：[指定属性节点](https://www.runoob.com/try/try.php?filename=tryjsref_element_getattributenode)
+- `hasAttribute()`：是否存在某属性
+- `hasAttributes()`：是否有任何属性
+- `removeAttribute()`：删除指定的属性
+- `removeAttributeNode()`：删除指定属性节点并返回移除后的节点。
+- `setAttribute()`：设置或者改变指定属性并指定值。
+- `setAttributeNode()`：设置或者改变指定属性节点。
+- `setIdAttribute()`：
+- `setIdAttributeNode()`：
+
+## ◆ scrollLeft
+
+js 设置向左滑动
 
 ```
-window.addEventListener('click', () => {
-  console.log('click')
-}, { once: true })
+this.$refs.ref.scrollLeft = 100
 ```
 
----
+# 三、DOM 属性对象
 
-# 创建元素、节点
+# 四、DOM 事件对象
 
-- createElement()
-- createTextNode()
+[链接](HTML之DOM事件对象)
 
----
-
-# console 对象
+# 五、DOM console 对象
 
 ## 链接
 
@@ -256,7 +270,7 @@ window.addEventListener('click', () => {
 		console.log('%c 【%c、%s、%i、%d、%o、%O】', 'font-size: 2em;color:#f00');
 		console.log('%d + %i = %s', '3', 2, 'hello');
 		console.log('%o和%O都是个对象', { a: 3 }, { a: 4 });
-		console.log('%c 自定义样式。如：ERROR', 'color:#0f0');
+		console.log('%c 自定义样式如：ERROR', 'color:#0f0');
 		console.log('\n');
 		console.log('\n');
 
@@ -277,9 +291,9 @@ window.addEventListener('click', () => {
 		console.log('%c 【dir、dirxml】', 'font-size: 2em;color:#f00');
 		console.log({ f1: 'foo', f2: 'bar' })
 		console.dir({ f1: 'foo', f2: 'bar' })
-		console.log(document.body)
-		console.dirxml(document.body)
-		console.dir(document.body)
+		console.log(body)
+		console.dirxml(body)
+		console.dir(body)
 		console.log('\n');
 		console.log('\n');
 

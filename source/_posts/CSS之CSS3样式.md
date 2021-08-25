@@ -580,6 +580,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
   height: 50px;
   text-align: center;
   line-height: 50px;
+  z-index: 0;
 }
 .box::before{
   content: '';

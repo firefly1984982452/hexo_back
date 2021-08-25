@@ -176,7 +176,6 @@ window.addEventListener("beforeunload", function (event) {
 
 ◆ 区别样式及代码
 
-
 <p style="font-size:20px;color:#f00;">
 在输入框中按下普通键盘，再按下<kbd>Delete</kbd><kbd>Ctrl</kbd><kbd>Shift</kbd>和<kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd><kbd>←</kbd>键查看变化，再查看输入中英文时的变化
 </p>
@@ -414,38 +413,34 @@ window.addEventListener("beforeunload", function (event) {
 	onsuspend="console.log('读取媒体数据终止')" 
 	ontimeupdate="console.log('播放位置发生改变')" 
 	onvolumechange="console.log('音量发生改变')" 
-	onwaiting="console.log('等待中，正在缓冲')">
-	<source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
-</video>
-<br />
-<br />
+	onwaiting="console.log('等待中，正在缓冲')"> <source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4"> </video> <br /> <br />
 
 ◆ 源码
 
 ```
-<video 
-	autoplay 
-	muted 
-	controls 
-	oncanplay="console.log('可以开始播放')" 
-	oncanplaythrough="console.log('可开始播放无需缓冲')" 
-	ondurationchange="console.log('时长已修改')" 
-	onended="console.log('播放结束')" 
-	onerror="console.log('发生错误')" 
-	onloadeddata="console.log('加载当前帧')" 
-	onloadedmetadata="console.log('元数据加载完')" 
+<video
+	autoplay
+	muted
+	controls
+	oncanplay="console.log('可以开始播放')"
+	oncanplaythrough="console.log('可开始播放无需缓冲')"
+	ondurationchange="console.log('时长已修改')"
+	onended="console.log('播放结束')"
+	onerror="console.log('发生错误')"
+	onloadeddata="console.log('加载当前帧')"
+	onloadedmetadata="console.log('元数据加载完')"
 	onloadstart="console.log('开始寻找指定视频')"
-	onpause="console.log('已暂停')" 
-	onplay="console.log('开始播放')" 
-	onplaying="console.log('暂停或缓冲后重新开始播放')" 
-	onprogress="console.log('下载指定视频时播放')" 
-	onratechange="console.log('播放速度改变')" 
-	onseeked="console.log('重新定位了播放位置')" 
+	onpause="console.log('已暂停')"
+	onplay="console.log('开始播放')"
+	onplaying="console.log('暂停或缓冲后重新开始播放')"
+	onprogress="console.log('下载指定视频时播放')"
+	onratechange="console.log('播放速度改变')"
+	onseeked="console.log('重新定位了播放位置')"
 	onseeking="console.log('重新定位视频')"
-	onstalled="console.log('媒体数据不可用')" 
-	onsuspend="console.log('读取媒体数据终止')" 
-	ontimeupdate="console.log('播放位置发生改变')" 
-	onvolumechange="console.log('音量发生改变')" 
+	onstalled="console.log('媒体数据不可用')"
+	onsuspend="console.log('读取媒体数据终止')"
+	ontimeupdate="console.log('播放位置发生改变')"
+	onvolumechange="console.log('音量发生改变')"
 	onwaiting="console.log('等待中，正在缓冲')">
 	<source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
 </video>
@@ -513,7 +508,6 @@ window.addEventListener("beforeunload", function (event) {
 - `preventDefault()`：阻止默认事件
 - `stopPropagation()`：阻止如`<a>`的默认`href`事件
 
-
 ◆ 事件对象的源码
 
 ```
@@ -579,8 +573,8 @@ window.addEventListener("beforeunload", function (event) {
 - `altKey`：<kbd>ALT</kbd> 键是否被按下
 - `shiftKey`：<kbd>SHIFT</kbd> 键是否被按下。
 - `ctrlKey`：<kbd>CTRL</kbd> 键是否被按下。
-- `metaKey`：<kbd>meta</kbd> 键是否被按下（Mac中的<kbd>command</kbd>键，Windows中的<kbd>Windows</kbd>键）
-- `button`：哪个鼠标按钮被点击（1、2、3分另代表左、中、右）。
+- `metaKey`：<kbd>meta</kbd> 键是否被按下（Mac 中的<kbd>command</kbd>键，Windows 中的<kbd>Windows</kbd>键）
+- `button`：哪个鼠标按钮被点击（1、2、3 分另代表左、中、右）。
 - `clientX`：元素的水平坐标。
 - `clientY`：元素的垂直坐标。
 - `screenX`：鼠标指针的水平坐标。
@@ -597,8 +591,8 @@ window.addEventListener("beforeunload", function (event) {
 
 ◆ `charCode`、`keyCode`、`which`的区别
 
-1. `keyCode`不支持Firefox
-2. `which`不支持IE9
+1. `keyCode`不支持 Firefox
+2. `which`不支持 IE9，且被大多数编译器弃用。
 
 ## 方法
 
