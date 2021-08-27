@@ -2,7 +2,7 @@
 title: JavaScript之Window对象
 date: 2020-12-09 15:44:34
 categories:
-- program
+  - program
 ---
 
 # ◆ 属性篇
@@ -33,12 +33,12 @@ categories:
 
 # 数据存储：cookie，localStorage，sessionStorage，indexDB
 
-|     特性     |                   cookie                   |       localStorage       |     sessionStorage      |         indexDB          |
-| :----------: | :----------------------------------------: | :----------------------: | :---------------------: | :----------------------: |
-| 数据生命周期 |     一般由服务器生成，可以设置过期时间     | 除非被清理，否则一直存在 |     页面关闭就清理      | 除非被清理，否则一直存在 |
-| 数据存储大小 |                     4K                     |            5M            |           5M            |           无限           |
-| 与服务端通信 | 每次都会携带在 header 中，对于请求性能影响 |          不参与          |         不参与          |          不参与          |
-|     调用     |             `document.cookie`              |  `window.localStorage`   | `window.sessionStorage` |     `window.indexDB`     |
+| 特性 | cookie | localStorage | sessionStorage | indexDB |
+| :-: | :-: | :-: | :-: | :-: |
+| 数据生命周期 | 一般由服务器生成，可以设置过期时间 | 除非被清理，否则一直存在 | 页面关闭就清理 | 除非被清理，否则一直存在 |
+| 数据存储大小 | 4K | 5M | 5M | 无限 |
+| 与服务端通信 | 每次都会携带在 header 中，对于请求性能影响 | 不参与 | 不参与 | 不参与 |
+| 调用 | `document.cookie` | `window.localStorage` | `window.sessionStorage` | `window.indexDB` |
 
 # location：当前 URL
 
@@ -80,7 +80,6 @@ export function detectiveBrowse() {
     (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
 }
 ```
-
 
 ---
 
@@ -330,6 +329,13 @@ window.postMessage("hi there!", location.origin);
 
 ---
 
+# window.showOpenFilePicker：显示打开文件的弹框
+
+上传文件，达到`<input type="file">`的功能
+
+[链接](https://www.zhangxinxu.com/study/202108/button-picker-file-upload.php)
+
+---
 
 # HTML 事件属性
 
