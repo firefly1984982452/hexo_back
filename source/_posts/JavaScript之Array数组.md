@@ -2,7 +2,7 @@
 title: JavaScript之Array数组
 date: 2020-06-08 15:44:34
 categories:
-- program
+  - program
 ---
 
 # 扩展运算符（`...`）
@@ -593,6 +593,8 @@ let arrayLike = {
 }
 let arr = Array.from(arrayLike)
 console.log(arr) // ['tom','65','男',['jane','john','Mary']]
+
+Array.from('1234567890'); // ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 ```
 
 同扩展运算符一样，只要是部署了 Iterator 接口的数据结构，Array.from 都能将其转为数组。区别在于`Array.from`还能转换类数组对象。

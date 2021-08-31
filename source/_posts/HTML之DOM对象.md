@@ -5,9 +5,18 @@ categories:
   - program
 ---
 
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="zshuai34" data-slug-hash="WNNzeZZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="WNNzeZZ">
+  <span>See the Pen <a href="https://codepen.io/zshuai34/pen/WNNzeZZ">
+  WNNzeZZ</a> by zshuai34 (<a href="https://codepen.io/zshuai34">@zshuai34</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
 # 链接
 
 - [菜鸟教程](https://www.runoob.com/jsref/dom-obj-document.html)
+- [w3cschool](https://www.w3school.com.cn/js/js_htmldom_document.asp)
 
 # 一、DOM Dcoument 对象集合
 
@@ -46,7 +55,8 @@ categories:
 - `hidden`：隐藏页面
 - `referrer`：上一页地址
 
-获取对象
+
+查找 HTML 元素
 
 - `getElementById()`：指定 id 的第一个对象
 - `getElementsByClassName()`：所有指定类名的元素集合
@@ -133,7 +143,6 @@ if(document.referrer === '') {
 - `textContent`：文本内容
 - `title`：元素的 title 属性
 - `id`：元素的 id。
-- `innerHTML`：元素的内容。
 - `lang`：元素的语言。
 - `namespaceURI`：命名空间的 URI
 - `attributes`：元素的属性数组
@@ -195,8 +204,9 @@ if(document.referrer === '') {
 - `scrollTop`：当前视图中的实际元素的顶部边缘和顶部边缘之间的距离
 - `scrollWidth`：元素的整个宽度（包括带滚动条的隐蔽的地方）
 
-设置属性
+改变 HTML 元素
 
+- `innerHTML`：元素的内容。
 - `getAttribute()`：[元素的属性](https://www.runoob.com/try/try.php?filename=tryjsref_element_getattribute)
 - `getAttributeNode()`：[指定属性节点](https://www.runoob.com/try/try.php?filename=tryjsref_element_getattributenode)
 - `hasAttribute()`：是否存在某属性

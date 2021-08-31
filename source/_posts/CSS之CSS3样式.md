@@ -2,7 +2,7 @@
 title: CSS之CSS3样式
 date: 2021-01-07 14:19:32
 categories:
-- program
+  - program
 ---
 
 # 选择器
@@ -955,7 +955,7 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 - text-decoration-style: solid | double | dotted | dashed | wavy ; 线条样式
 
-- text-indent: 2em; // 段落第 1 行缩进，开头空2格
+- text-indent: 2em; // 段落第 1 行缩进，开头空 2 格
 
 - text-overflow: ellipsis | clip | 'string'【仅 firefox】; // 文字超出
 
@@ -1885,4 +1885,19 @@ input[type="checkbox"] {
 </body>
 
 </html>
+```
+
+---
+
+# preserve
+
+[学习链接](https://www.cnblogs.com/coco1s/p/15178959.html)
+
+1. transform-style: preserve-3d; // 子元素将保留其 3D 位置。
+
+2. perspective-origin: x-axis y-axis; // 设置位置
+
+```
+// x-axis : 定义该视图在 x 轴上的位置。默认值：50%
+// y-axis : 定义该视图在 y 轴上的位置。默认值：50%
 ```
