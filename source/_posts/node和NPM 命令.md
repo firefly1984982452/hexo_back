@@ -1,11 +1,31 @@
 ---
-title: NPM 命令
+title: node和NPM 命令
 date: 2021-08-04 18:35:14
 categories:
 - program
 ---
 
-# 链接
+
+# mac下卸载node的命令
+
+依次在终端执行下面的脚本
+
+```
+sudo npm uninstall npm -g
+sudo rm -rf /usr/local/lib/node /usr/local/lib/node_modules /var/db/receipts/org.nodejs.*
+sudo rm -rf /usr/local/include/node /Users/$USER/.npm
+sudo rm /usr/local/bin/node
+sudo rm /usr/local/share/man/man1/node.1
+sudo rm /usr/local/lib/dtrace/node.d
+```
+
+# 安装node
+
+[官网](https://nodejs.org/en/download/)
+
+下载好之后自动有`node`和`npm`
+
+# npm链接
 
 - [官方文档](https://www.npmjs.com.cn/)
 - [中文文档](https://cloud.tencent.com/developer/doc/1282)

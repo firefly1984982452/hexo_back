@@ -5,6 +5,8 @@ categories:
   - program
 ---
 
+- [MDN 全元素](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
+
 # 选择器
 
 ## 【1】伪元素、伪类选择器
@@ -529,6 +531,10 @@ transform: rotate3d(1, 0, 0, 83deg);
 transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
+◆ 使用`transform: translateZ(0)` 用GPU硬件加速提升性能
+
+使用 `translatZ` 之后，变成了3D效果，走GPU渲染，开始硬件开速。
+
 ## 【1】rotate：旋转
 
 **rotate(10turn)代表转 10 圈**
@@ -943,6 +949,8 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 ### 【1.1】text
 
+- text-align: -webkit-match-parent; // 匹配父元素样式
+
 - text-align: center | left | right | justify; // 文本对齐方式
 
 - text-align-last: center | left | right; // 段落最后一行对齐方式
@@ -954,6 +962,12 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 - text-decoration-line: overline | underline | line-through; // 线条位置
 
 - text-decoration-style: solid | double | dotted | dashed | wavy ; 线条样式
+
+- text-decoration-skip: ink | spaces | edges; // 文字和线的覆盖关系
+
+- text-underline-position: under; // 下划线位置
+
+- text-underline-offset: 5px; // 下划线偏移值
 
 - text-indent: 2em; // 段落第 1 行缩进，开头空 2 格
 
@@ -1041,6 +1055,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
 - word-wrap: break-word; // 如果单词太长会自动换行。
 - overflow-wrap: break-word; // 功能上同，W3C 新写法。
+- overflow-wrap: anywhere; // 任何地方都可以换行[功能参考](https://www.zhangxinxu.com/wordpress/2020/03/css-overflow-wrap-anywhere/)
 - white-space: nowrap; // 段落中的文本不换行（会截断）。
 
 - word-break: keep-all; //【默认】单词放不下会自动换行【文字截断】。
@@ -1519,6 +1534,16 @@ vertical-align: text-top; // 默认文字对齐图片顶部
 vertical-align: text-bottom; // 文字对齐图片底部
 ```
 
+## 【6】image-orientation：纠正图片的方向
+
+## 【7】image-rendering：增强图像渲染
+
+```
+image-rendering: auto;
+image-rendering: crisp-edges;
+image-rendering: pixelated;
+```
+
 ---
 
 # 其它
@@ -1900,4 +1925,34 @@ input[type="checkbox"] {
 ```
 // x-axis : 定义该视图在 x 轴上的位置。默认值：50%
 // y-axis : 定义该视图在 y 轴上的位置。默认值：50%
+```
+
+3. perspective: number|none;
+
+# 移动端环境变量函数 `env()`和`constant()`
+
+`env()`和`constant()`，是`IOS11`新增特性，`Webkit`的`css`函数，用于设定安全区域与边界的距离，有4个预定义变量：
+
+- `safe-area-inset-left`：安全区域距离左边边界的距离
+- `safe-area-inset-right`：安全区域距离右边边界的距离
+- `safe-area-inset-top`：安全区域距离顶部边界的距离
+- `safe-area-inset-bottom` ：安全距离底部边界的距离
+
+
+H5网页设置`viewport-fit=cover`的时候才生效，小程序里的`viewport-fit`默认是`cover`
+
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+```
+
+```
+height: calc(96rpx+ constant(safe-area-inset-bottom));//兼容 IOS<11.2
+
+height: calc(96rpx + env(safe-area-inset-bottom));//兼容 IOS>11.2
+
+padding-bottom: constant(safe-area-inset-bottom);//兼容 IOS<11.2
+
+padding-bottom: env(safe-area-inset-bottom);//兼容 IOS>11.2
+
 ```

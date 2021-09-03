@@ -1,6 +1,6 @@
 ---
 title: CSS之进阶总结
-date: 2021-12-07 :19:32
+date: 2020-12-07 14:19:32
 categories:
 - program
 ---
@@ -24,10 +24,6 @@ categories:
   组件化，方便开发维护和测试
 
   JavaScript 和 CSS 可以方便的共享变量和方法
-
-# css插件
-
-- [css-doodle](https://codepen.io/yuanchuan/pen/ZqbVVL)
 
 # html `<head>`相关
 
@@ -85,13 +81,13 @@ $(document).ready(function(){
     <title></title>
     <style>
       .top {
-          width: px;
-          height: px;
+          width: 100px;
+          height: 90px;
           position: absolute;
-          top: ;
-          left: px;
+          top: 0;
+          left: 65px;
           background: yellow;
-          opacity: .5;
+          opacity: 0.5;
           pointer-events: none;
       }
     </style>
@@ -124,22 +120,22 @@ $(document).ready(function(){
 
 <style lang="less" scoped>
 .page {
-	width: %;
-	height: %;
+	width: 100%;
+	height: 100%;
 	position: relative;
 	.map{
 		width:100%;
 		height:100%;
 		position: absolute;
-		top: ;
-		bottom: ;
-		left: ;
+		top: 0;
+		bottom: 0;
+		left: 0;
 	}
 	.home-content{
 		position: absolute;
-		top: ;
-		bottom: ;
-		left: ;
+		top: 0;
+		bottom: 0;
+		left: 0;
     pointer-events: none;
     .left,.right{
         pointer-events:all
@@ -175,10 +171,10 @@ $(document).ready(function(){
 
 ```
 html,body{
-	font-size: px;
+	font-size: 20px;
 }
 p{
-	font-size: em;
+	font-size: 2em;
 }
 ```
 
@@ -192,8 +188,8 @@ p{
 (function() {
 	//首先取得当得屏幕宽度
 	var width = window.screen.width;
-	var scaleSize = ,
-		designSize = ;
+	var scaleSize = 100,
+		designSize = 375;
 		//用当得宽度除以（设计尺寸除以缩放尺寸）
 	var size = width / (designSize / scaleSize);
 	//设置font-size
@@ -217,7 +213,7 @@ html {
   font-size: calc(100vw/7.5)
 }
 p{
-  width: .5rem;
+  width: 7.5rem;
 }
 ```
 
@@ -243,18 +239,18 @@ p{
 
 | 属性 |   参数    |
 | :--: | :-------: |
-| 像素 | 2\*828 |
-| 尺寸 | .1 英寸  |
-| ppi  |        |
+| 像素 | 1792\*828 |
+| 尺寸 | 6.1 英寸  |
+| ppi  |    326    |
 
-由公式得出：`Math.sqrt(Math.pow(1792,2)+Math.pow(828,2))/6.1 = ppi`，`323`和`326`值很相近。
+由公式得出：`Math.sqrt(Math.pow(1792,2)+Math.pow(828,2))/6.1 = 323ppi`，`323`和`326`值很相近。
 
 还能算出以下属性：
 
 | 属性 |       算法       |      计算       |    结果    |
 | :--: | :--------------: | :-------------: | :--------: |
-|  宽  | (像素/ppi)\*2.54 | (828/326)\*2.54 | .45 厘米  |
-|  长  |    2\*828     |    2\*828    | .96 厘米 |
+|  宽  | (像素/ppi)\*2.54 | (828/326)\*2.54 | 6.45 厘米  |
+|  长  |    1792\*828     |    1792\*828    | 13.96 厘米 |
 
 **更多：求 kindle 像素**
 
@@ -262,16 +258,16 @@ p{
 
 |   属性   |        参数         |
 | :------: | :-----------------: |
-|   尺寸   |        英寸        |
-|   ppi    |                  |
-| 屏幕长度 |   毫米\*92 毫米  |
-| 屏幕长度 | .3 厘米\*9.2 厘米 |
+|   尺寸   |       6 英寸        |
+|   ppi    |         167         |
+| 屏幕长度 |  123 毫米\*92 毫米  |
+| 屏幕长度 | 12.3 厘米\*9.2 厘米 |
 
 计算出宽和高的英寸对应的像素
 
 ```
-高：(12.3/2.54)*167 = 像素
-宽：(9.2/2.54)*167 = 像素
+高：(12.3/2.54)*167 = 808像素
+宽：(9.2/2.54)*167 = 605像素
 ```
 
 ---
@@ -323,7 +319,7 @@ Table 表格中，定了 width，如果其它的内容很高，内容少的可�
 
 - 内联元素如果`display`改为了`block`，不用再设置`width:100%`。
 
-## 【6】让元素 heigth 支持 %的方法
+## 【6】让元素 heigth 支持 100%的方法
 
 方法一：
 
@@ -334,7 +330,7 @@ Table 表格中，定了 width，如果其它的内容很高，内容少的可�
 使用绝对定位
 
 ```
-height: %;
+height: 100%;
 position: absolute;
 ```
 
@@ -343,8 +339,8 @@ position: absolute;
 **超越!important**
 
 ```
-<img src="./floor.jpeg" style="width: px!important;" />
-img{min-width: px;}
+<img src="./floor.jpeg" style="width: 300px!important;" />
+img{min-width: 400px;}
 ```
 
 最终生效的是`400px`。
@@ -354,16 +350,16 @@ img{min-width: px;}
 如果`min-width`和`max-width`冲突时，取`min-width`的值。
 
 ```
-min-width: px;
-max-width: px;
+min-width: 400px;
+max-width: 350px;
 ```
 
 ## 【8】width 自适应关键字
 
 - `fill-available`：撑满空间，100%
 - `fit-content`：内容最大宽度。文字超过会换行。
-- `max-content`：内容最大宽度。如果文字超过显示区域了也不会换行，所以会有 %的可能。
-- `min-content`：内容最小宽度。比如图片是 px，文字是 px，就取 px。
+- `max-content`：内容最大宽度。如果文字超过显示区域了也不会换行，所以会有 200%的可能。
+- `min-content`：内容最小宽度。比如图片是 200px，文字是 300px，就取 200px。
 
 ## 【9】line-height 深入理解
 
@@ -372,10 +368,10 @@ max-width: px;
 默认：
 
 ```
-line-height: px;
+line-height: 20px;
 line-height: normal;
-line-height: %;
-line-height: .5; // 资料上都是1，但chrome和firfox上应该都是1.5
+line-height: 150%;
+line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 ```
 
 ---
@@ -386,7 +382,7 @@ line-height: .5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 ```
 .box{
-  aspect-ratio:  / ;
+  aspect-ratio: 10 / 1;
 }
 ```
 
@@ -394,16 +390,16 @@ line-height: .5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 # 文字相关
 
-- . 文字渐变
-- . 抗锯齿渲染：-webkit-font-smoothing
-- . 文字描边：-webkit-text-stroke
-- . 文字阴影：text-shadow
-- . 文字颜色：-webkit-text-fill-color
-- . font-size:10px
-- . 自定义字体：font-face
-- . 垂直排版
-- . 断行规则：line-break
-- . 优化字体性能：font-display
+- 1. 文字渐变
+- 2. 抗锯齿渲染：-webkit-font-smoothing
+- 3. 文字描边：-webkit-text-stroke
+- 4. 文字阴影：text-shadow
+- 5. 文字颜色：-webkit-text-fill-color
+- 6. font-size:10px
+- 7. 自定义字体：font-face
+- 8. 垂直排版
+- 9. 断行规则：line-break
+- 10. 优化字体性能：font-display
 
 ## 【1】文字渐变
 
@@ -415,7 +411,7 @@ color: transparent;
 
 ## 【2】抗锯齿渲染：-webkit-font-smoothing
 
-`-webkit-font-smoothing`有  个属性值：
+`-webkit-font-smoothing`有 3 个属性值：
 
 - `none`: 对像素低的文本好，会有严重的锯齿；
 - `subpixel-antialiased`: 默认值，有轻微锯齿；
@@ -430,7 +426,7 @@ color: transparent;
 ## 【3】文字描边：-webkit-text-stroke
 
 ```
--webkit-text-stroke: px #fff;
+-webkit-text-stroke: 1px #fff;
 ```
 
 ## 【4】文字阴影：text-shadow
@@ -534,7 +530,13 @@ line-break: anywhere; // 任意位置标点都可以换行
 
 ---
 
-# CSS 特殊值：initial、inherit、unset
+# CSS 关键字：initial、inherit、unset、revert 和 all
+
+- [区别预览](https://firefly1984982452.github.io/my-web-page/css-keyword.html)
+
+- [区别源码](https://github.com/firefly1984982452/my-web-page/blob/master/css-keyword.html)
+
+- [学习博客链接](https://www.cnblogs.com/xiaohuochai/p/5464456.html)
 
 ## 【1】初始值：initial
 
@@ -583,6 +585,44 @@ p{
 ```
 
 设置了`color:unset`值的`<p>`的颜色忽略了原来的`green`，读取了`html,body`的值`red`。
+
+## 【4】恢复：revert
+
+```
+.revert li {
+  list-style: none;
+}
+
+.revert ul li {
+  list-style: revert;
+}
+```
+
+此时的 `li` 恢复了默认有`list-style`的样子。
+
+## 【5】所有：all
+
+`all` 取值只能是 `initial`、`inherit`、`unset` 和 `revert`
+
+```
+<style>
+.test{
+    border: 1px solid black;
+    padding: 20px;
+    color: red;
+}
+.in{
+/*  all: initial;
+    all: inherit;
+    all: unset;
+    all: revert; */
+}
+</style>
+<div class="test">
+    <div class="in">测试文字</div>
+</div>
+```
+
 
 ---
 
@@ -696,8 +736,8 @@ table {
 
 ```
 @page :first {
-  margin-left: %;
-  margin-top: %;
+  margin-left: 50%;
+  margin-top: 50%;
 }
 ```
 
@@ -721,9 +761,9 @@ table {
 
 ```
 .info {
-  width: px;
-  height: px;
-  border: solid px #222;
+  width: 300px;
+  height: 50px;
+  border: solid 1px #222;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: '***';
@@ -752,25 +792,29 @@ table {
 
 **4 个值：上右下左(时钟)；2 个值：右/左和上下（x 轴和 y 轴）；**
 
-##  个值
+## 4 个值
 
 如：`margin`、`padding`、`border-width`。
 
 当`margin`和`padding`简写为`2`个值时，代表的是`上/下`和`左/右`。
 
-##  个值
+## 2 个值
 
 如：`text-shodow`、`background-position`.
 
 ---
 
-# HTML 默认字体大小 px
+# HTML 默认字体大小 14px
 
 ```
-font-size: px;
+font-size: 14px;
 ```
 
 ---
+
+# `content: ''` 的妙用
+
+[链接](https://echeverra.cn/2021/08/06/css-content/)
 
 # counter 计数器
 
@@ -787,13 +831,13 @@ font-size: px;
 参数：
 
 - `name`：名称（必填）。
-- `start`：从哪个数字开始计数（非必填），默认为 。
+- `start`：从哪个数字开始计数（非必填），默认为 0。
 
 例子：
 
 ```
 <style>
-    p{counter-reset:count ;}
+    p{counter-reset:count 4;}
     p:after{
         content:counter(count);
     }
@@ -815,13 +859,13 @@ font-size: px;
 参数：
 
 - `name`：名称（必填）。
-- `number`：递增数量（非必填），默认为 。
+- `number`：递增数量（非必填），默认为 1。
 
 例子：
 
 ```
 <style>
-    p{counter-reset:count ; counter-increment:count;}
+    p{counter-reset:count 3; counter-increment:count;}
     p:after{
         content:counter(count);
     }
@@ -854,7 +898,7 @@ font-size: px;
 
 ```
 <style>
-    p{counter-reset:count  count1 ; counter-increment:count  count1}
+    p{counter-reset:count 1 count1 3; counter-increment:count 2 count1}
     p:after{
         content:counter(count) counter(count1);
     }
@@ -902,7 +946,7 @@ counters(name, string, style) string
     }
 
     .father {
-      padding-left: px;
+      padding-left: 20px;
       counter-reset: countS;
     }
 
@@ -970,8 +1014,8 @@ import { TweenLite } from 'gsap/TweenMax'
 export default {
   data() {
     return {
-      number: ,
-      tweenedNumber: 
+      number: 0,
+      tweenedNumber: 0
     }
   },
 
@@ -982,7 +1026,7 @@ export default {
   },
   watch: {
     number: function(newValue) {
-      TweenLite.to(this.$data, , { tweenedNumber: newValue })
+      TweenLite.to(this.$data, 2, { tweenedNumber: newValue })
     }
   },
 }
