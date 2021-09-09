@@ -12,7 +12,6 @@ categories:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-
 # 链接
 
 - [菜鸟教程](https://www.runoob.com/jsref/dom-obj-document.html)
@@ -55,7 +54,6 @@ categories:
 - `hidden`：隐藏页面
 - `referrer`：上一页地址
 
-
 查找 HTML 元素
 
 - `getElementById()`：指定 id 的第一个对象
@@ -89,13 +87,48 @@ categories:
 
 ## ◆ addEventListener
 
-`addEventListener`监听中第三个参数配置`once`可以设置只监听一次
+**addEventListener 的第 3 个参数**
+
+[MDN 链接](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener)
+
+第 3 个参数可为`useCapture`（`Boolean`），也可为`options`（`Object`）：
+
+1. [useCapture](https://blog.csdn.net/u011456552/article/details/52610754)：为`true`时捕捉冒泡事件，`false` 就是从子元素到父元素，`true` 就是从父到子。
+
+2. options
+
+- 2.1 `capture`: 同 [useCapture]。
+- 2.2 `once`: 只监听一次
+- 2.3 `passive`: 设置为 `true` 时，表示 `listener` 永远不会调用 `preventDefault()`。如果 `listener` 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
+
+◆ `once`例子：
 
 ```
 window.addEventListener('click', () => {
   console.log('click')
 }, { once: true })
 ```
+
+◆ `passive`例子：
+
+```
+<script>
+document.getElementById("myAnchor").addEventListener("click", function (event) {
+	event.preventDefault()
+	console.log('禁止访问');
+}, {
+	passive: true
+});
+</script>
+
+
+<a id="myAnchor" href="https://w3school.com.cn/" target="blank">访问 W3School.com.cn</a>
+
+```
+
+◆ 使用 `passive` 改善的滚屏性能
+
+`passive` 的默认值为 `false` 时，性能会降低，所以某些浏览器（特别是 Chrome 和 Firefox）已经将 `passive` 的默认值改为了 `true`。这可以防止事件监听器，所以滚动页面时无法阻止页面呈现。
 
 ## ◆ visibilityState 和 hidden：页面隐藏状态
 

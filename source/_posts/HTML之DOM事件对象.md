@@ -8,6 +8,7 @@ categories:
 # 链接
 
 - [菜鸟教程](https://www.runoob.com/jsref/dom-obj-event.html)
+- [MDN-事件参考](https://developer.mozilla.org/zh-CN/docs/Web/Events)
 
 # 事件对象的使用
 

@@ -2,8 +2,10 @@
 title: git进阶
 date: 2018-10-24 14:35:18
 categories:
-- program
+  - program
 ---
+
+[链接](https://blog.csdn.net/shenlei19911210/article/details/78529939?spm=1001.2014.3001.5501)
 
 # 普通发布代码
 
@@ -12,6 +14,12 @@ git add .
 git commit -m '发布信息'
 git pull
 git push
+```
+
+# 绑定 git 仓库
+
+```
+git remote add origin 地址
 ```
 
 # 线上版本回退
