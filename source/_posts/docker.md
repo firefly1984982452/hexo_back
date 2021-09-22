@@ -37,8 +37,6 @@ docker 可以理解为**容器/虚拟机/服务器**。
 
 - `docker run --name test nginx`：运行指定名称的镜像
 
-- `docker image prune -a`：删除没有使用的所有镜像
-
 # 停止、删除、重启
 
 `xx` 为`<ID or Image Name >`
@@ -56,6 +54,8 @@ docker 可以理解为**容器/虚拟机/服务器**。
 - `docker rm -f $(docker ps -aq)`：强制删除所有镜像
 
 - `docker system prune -f`：删除所有不再使用的容器
+
+- `docker image prune -a`：删除没有使用的所有镜像
 
 # 端口映射的 2 种模式
 

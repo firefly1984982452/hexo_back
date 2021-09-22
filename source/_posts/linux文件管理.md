@@ -9,11 +9,19 @@ categories:
 
 [菜鸟教程](https://www.runoob.com/linux/linux-file-content-manage.html)
 
+# 快捷键
+
+<kbd>ctrl</kbd> + <kbd>l</kbd> 清屏
+
+一次 <kbd>tab</kbd> 补全
+
+两次 <kbd>tab</kbd> 提示
+
 # 其它
 
 - `clear`：清屏
 
-- `tar`：打包
+- `tar/zip`：打包
 
 将 index.js 文件[打包](https://www.cnblogs.com/lee0oo0/p/3251170.html)为 index.tar 文件：
 
@@ -21,9 +29,13 @@ categories:
 tar -cvf index.tar index.js
 ```
 
+- `history`：历史记录
+
 # 一、处理目录的常用命令
 
 - `ls`：列表目录及文件名
+
+- `cat test.txt`：显示文件内容
 
 - `cd`：切换目录
 

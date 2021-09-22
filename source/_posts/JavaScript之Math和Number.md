@@ -238,6 +238,14 @@ console.log(largeNumber); // 1000000000"
 
 ---
 
+# toLocaleString：金钱格式化
+
+```
+Number(123456789).toLocaleString(); // '123,456,789'
+```
+---
+
+
 # BigInt
 
 大整数会自动转为科学计数法，这时使用`BigInt`可以避免这种情况。

@@ -279,6 +279,13 @@ border-radius: 50%;
 outline-offset: 10px;
 ```
 
+◆ `outline-offset`：偏移
+
+```
+outline: 1px dashed #f00;
+outline-offset: -10px;
+```
+
 ## 【5】border-style 属性
 
 [效果](https://www.w3school.com.cn/tiy/t.asp?f=csse_border-style)
@@ -1578,6 +1585,18 @@ resize: auto;
 }
 .B{
   z-index:2;
+}
+```
+
+---
+
+# -webkit-box-reflect：倒影
+
+- [MDN](https://developer.mozilla.org/de/docs/Web/CSS/-webkit-box-reflect)
+
+```
+img{
+  -webkit-box-reflect: below;
 }
 ```
 
