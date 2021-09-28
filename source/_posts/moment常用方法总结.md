@@ -5,6 +5,12 @@ categories:
 - program
 ---
 
+# 完整日期
+
+```
+yyyy-MM-DD HH:mm:ss
+```
+
 # 当前周
 
 ```

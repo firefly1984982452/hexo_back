@@ -2,49 +2,55 @@
 title: JavaScript之ES6总结
 date: 2020-08-17 18:50:17
 categories:
-- program
+  - program
 ---
 
-**可能不只 ES6，ES7 和 ES8 都会加上**
+**可能不只 ES6，ES7 和 ES8 等 都会加上**
 
 [阮一峰学习链接](https://es6.ruanyifeng.com/)
 
 ---
 
-# let、const 和 globalThis
+# 一、let、const 和 globalThis
 
 ## 【1】对比表
 
-|     区别项     |    let     |          var           |                            const                             |
-| :------------: | :--------: | :--------------------: | :----------------------------------------------------------: |
-|  挂载 window   |     ×      |    全局作用域时，是    |                              ×                               |
-| 是否有变量提升 |     ×      |           ✓            |                              ×                               |
-|     作用域     | 块级作用域 | 全局作用域或函数作用域 |                          块级作用域                          |
-| 是否可重复声明 |     ×      |           ✓            |                              ×                               |
-|   暂时性死区   |     ✓      |           ×            |                              ✓                               |
-|     值不变     |     v      |           ×            | 常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据 |
+| 区别项 | let | var | const |
+| :-: | :-: | :-: | :-: |
+| 挂载 window | × | 全局作用域时，是 | × |
+| 是否有变量提升 | × | ✓ | × |
+| 作用域 | 块级作用域 | 全局作用域或函数作用域 | 块级作用域 |
+| 是否可重复声明 | × | ✓ | × |
+| 暂时性死区 | ✓ | × | ✓ |
+| 值不变 | v | × | 常量值不变是指指向的内存地址不变，复合数据类型可改变内部数据 |
 
 ## 【2】let
+
+◆ 【2.0】let 的特点
 
 - 只在块级作用域内起效
 - 不存在变量提升
 - 暂时性死区
 - 不允许重复声明
-- 块级作用域替代 IIFE 立即执行函数
+- 块级作用域替代 `IIFE 立即执行函数`
 
-### 【2.1】不存在变量提升
+◆ 【2.1】不存在变量提升
+
+- var 的情况
 
 ```
-// var 的情况
 console.log(foo); // 输出undefined
 var foo = 2;
+```
 
-// let 的情况
+- let 的情况
+
+```
 console.log(bar); // 报错ReferenceError
 let bar = 2;
 ```
 
-### 【2.2】暂时性死区
+◆ 【2.2】暂时性死区
 
 ```
 var tmp = 123;
@@ -55,7 +61,7 @@ if (true) {
 }
 ```
 
-### 【2.3】不允许重复声明
+◆ 【2.3】不允许重复声明
 
 ```
 // 报错
@@ -71,23 +77,27 @@ function func() {
 }
 ```
 
-### 【2.4】块级作用域替代 IIFE 立即执行函数
+◆ 【2.4】块级作用域替代 `IIFE 立即执行函数`
+
+- IIFE 写法
 
 ```
-// IIFE 写法
 (function () {
   var tmp = ...;
   ...
 }());
+```
 
-// 块级作用域写法
+- 块级作用域写法
+
+```
 {
   let tmp = ...;
   ...
 }
 ```
 
-### 【2.5】ES5 手动实现 let
+◆ 【2.5】ES5 手动实现 let
 
 如上，变成`IIFE`写法
 
@@ -103,6 +113,8 @@ console.log(a);
 
 ## 【3】const
 
+◆ 【2.0】const 的特点
+
 - 只在块级作用域内起效
 - 不存在变量提升
 - 暂时性死区
@@ -110,6 +122,8 @@ console.log(a);
 - 不允许更改
 - 不允许删除
 - 初始化必须赋值
+
+◆ 【2.1】const 可更改的情况
 
 `const`只能保证指向的指针是固定的。如果是数组，是可改的。
 
@@ -120,7 +134,7 @@ arr.length = 0; // []
 arr = ['world']; // 报错
 ```
 
-### ES5 手动实现 const
+◆ 【2.2】ES5 手动实现 const
 
 **方法 1：`Object.defineProperty`**
 
@@ -163,21 +177,21 @@ f.name; // 打印出admin ,值没有被改变
 
 ---
 
-# 变量的解构赋值
+# 二、变量的解构赋值
 
 ## 【1】对比表
 
-|           值           |              用法              |   括号   |           默认值            | 默认值生效条件  |
-| :--------------------: | :----------------------------: | :------: | :-------------------------: | :-------------: |
-|          数组          |     `let [a, b] = [1, 2];`     | 数组`[]` |  `let [foo = true] = [];`   | 值为`undefined` |
-|          对象          | `let { foo } = { foo: 'aaa'};` | 对象`{}` | `let {foo} = {bar: 'baz'};` | 值为`undefined` |
-|         字符串         |  `const [a, b, c] = 'hello';`  | 数组`[]` |   `const [a,b = 5] = 'e'`   | 值为`undefined` |
-| 数值（转对象、无意义） |   `let {toString: s} = 123;`   | 对象`{}` |              -              |        -        |
-| 布尔（转对象、无意义） |  `let {toString: s} = true;`   | 对象`{}` |              -              |        -        |
+| 值 | 用法 | 括号 | 默认值 | 默认值生效条件 |
+| :-: | :-: | :-: | :-: | :-: |
+| 数组 | `let [a, b] = [1, 2];` | 数组`[]` | `let [foo = true] = [];` | 值为`undefined` |
+| 对象 | `let { foo } = { foo: 'aaa'};` | 对象`{}` | `let {foo} = {bar: 'baz'};` | 值为`undefined` |
+| 字符串 | `const [a, b, c] = 'hello';` | 数组`[]` | `const [a,b = 5] = 'e'` | 值为`undefined` |
+| 数值（转对象、无意义） | `let {toString: s} = 123;` | 对象`{}` | - | - |
+| 布尔（转对象、无意义） | `let {toString: s} = true;` | 对象`{}` | - | - |
 
 ## 【2】数组
 
-### 【2.1】用法
+◆ 【2.1】用法
 
 **用法：只要等号两边的模式相同，左边的变量就会被赋予对应的值，解析失败返回`undefined`。（按次序）**
 
@@ -196,7 +210,7 @@ y // undefined
 z // []
 ```
 
-### 【2.2】默认值
+◆ 【2.2】默认值
 
 **默认值：数组成员严格等于`===`，默认值才生效**
 
@@ -212,7 +226,7 @@ x // null
 
 ## 【3】对象
 
-### 【3.1】使用
+◆ 【3.1】使用
 
 **使用：变量与属性同名即可取到值，解析失败返回`undefined`**
 
@@ -238,7 +252,7 @@ title // 小明
 
 在解构中，**左边是模式，右边是赋值**。
 
-### 【3.2】默认值
+◆ 【3.2】默认值
 
 **默认值：对象属性严格等于===，默认值才生效**
 
@@ -283,7 +297,7 @@ var foo = function(x=10, y=20){
 foo(0,1); // 1
 ```
 
-### 【3.3】注意点
+◆ 【3.3】注意点
 
 （1）将一个已声明的变量解构时注意不要将`{}`放于行首，`JavaScript`会解析为代码块
 
@@ -376,13 +390,13 @@ improt {list1} from 'list'
 
 ---
 
-# ES6`…`扩展（spread）/收集（rest）运算符详解
+# 三、ES6`…`扩展（spread）/收集（rest）运算符详解
 
 ## 【1】扩展运算符
 
 我理解的，用`()`包起来就是扩展成单个值，用`[]`包起来就是扩展成数组。
 
-### 【1.1】代替 apply
+◆ 【1.1】代替 apply
 
 ```
 var test = function(a,b,c){
@@ -398,7 +412,7 @@ test(...arr); // 1 2 3
 test.apply(null,arr);
 ```
 
-### 【1.2】代替 concat
+◆ 【1.2】代替 concat
 
 ```
 var arr1 = [1,2,3,4];
@@ -412,7 +426,7 @@ console.log(arr2); // [0, 1, 2, 3, 4, 5, 6]
 [0].concat(arr1,5,6); // [0, 1, 2, 3, 4, 5, 6]
 ```
 
-### 【1.3】代替 split
+◆ 【1.3】代替 split
 
 ```
 var str = 'hello';
@@ -428,7 +442,7 @@ console.log(arr3); // ["h", "e", "l", "l", "o"]
 
 ## 【2】收集运算符
 
-### 【2.1】接收不确定个数的形参
+◆ 【2.1】接收不确定个数的形参
 
 此功能和`JAVA`一样，当形参传入个数不确定时可用在形参上。
 
@@ -439,7 +453,7 @@ var rest2 = function(item, ...arr){
 rest2('hello',2,3,3,4); // hello [2, 3, 3, 4]
 ```
 
-### 【2.2】配合解构时使用
+◆ 【2.2】配合解构时使用
 
 ```
 var [a,...temp] = [1,2,3,4];
@@ -448,19 +462,19 @@ console.log(a,temp); // 1 [2, 3, 4]
 
 ---
 
-# 字符串的扩展
+# 四、字符串的扩展
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BString%E5%AF%B9%E8%B1%A1/"></iframe>
 
 ---
 
-# 数值的扩展
+# 五、数值的扩展
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BMath%E5%92%8CNumber/"></iframe>
 
 ---
 
-# 函数的扩展
+# 六、函数的扩展
 
 ## 【1】函数的默认参数
 
@@ -476,7 +490,7 @@ log('Hello', 'China') // Hello China
 log('Hello', '') // Hello
 ```
 
-### 【1.1】与解构赋值默认值结合使用
+◆ 【1.1】与解构赋值默认值结合使用
 
 **当不使用默认值时**：
 
@@ -503,21 +517,21 @@ function foo({x, y = 5} = {}) {
 foo() // undefined 5
 ```
 
-### 【1.2】位置
+◆ 【1.2】位置
 
 必须是尾参数，不然除非调用时显示写上`undefined`，如：`foo(undefined,1)`。
 
-### 【1.3】作用域
+◆ 【1.3】作用域
 
 只在`function`内部有效
 
-### 【1.4】应用
+◆ 【1.4】应用
 
 - 如果省略某参数，函数仍然进行
 
 ## 【2】reset 参数
 
-### 【2.1】使用
+◆ 【2.1】使用
 
 相当于将函数自带的`arguments`转换成了数组。
 
@@ -540,7 +554,7 @@ f2(3213,23,2,2332,32,)
 // (5) [3213, 23, 2, 2332, 32]
 ```
 
-### 【2.2】位置
+◆ 【2.2】位置
 
 必须是尾参数。
 
@@ -551,7 +565,7 @@ f2(3213,23,2,2332,32,)
 - 简化代码回调函数
 - 提升`this`
 
-### 【3.1】使用
+◆ 【3.1】使用
 
 ```
 // 简写：
@@ -562,7 +576,7 @@ data.map((val) => {
 })
 ```
 
-### 【3.2】与箭头函数结合
+◆ 【3.2】与箭头函数结合
 
 ```
 function f1(...values){
@@ -576,7 +590,7 @@ f2(1,2,3,4); // [1, 2, 3, 4]
 
 ## 【4】尾调用优化
 
-### 【4.1】尾调用是什么
+◆ 【4.1】尾调用是什么
 
 **某个函数的最后一步是调用另一个函数**
 
@@ -604,7 +618,7 @@ function f(x){
 - 情况二：调用函数 g 之后，还有`+1`的操作；
 - 情况三：调用函数 g 之后，还隐式的调用了`return undefined`。
 
-### 【4.2】尾调用优化
+◆ 【4.2】尾调用优化
 
 **只保留内层函数的调用帧**
 
@@ -626,7 +640,7 @@ f();
 g(3);
 ```
 
-### 【4.3】尾递归
+◆ 【4.3】尾递归
 
 **尾调用自身**
 
@@ -654,7 +668,7 @@ function factorial(n, total) {
 factorial(5, 1) // 120
 ```
 
-### 【4.4】递归函数的改写
+◆ 【4.4】递归函数的改写
 
 **柯里化**：将多参数的函数转换成单参数的形式。（默认值正好可以用上）
 
@@ -669,23 +683,25 @@ factorial(5) // 120
 
 ---
 
-# 数组的扩展
+# 七、数组的扩展
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/08/JavaScript%E4%B9%8BArray%E6%95%B0%E7%BB%84/"></iframe>
 
 ---
 
-# 对象
+# 八、对象
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/08/05/JavaScript%E4%B9%8BObject%E5%AF%B9%E8%B1%A1/"></iframe>
 
 ---
 
-# 正则 RegExp
+# 九、正则 RegExp
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/12/23/JavaScript%E4%B9%8BRegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></iframe>
 
-# Symbol
+# 十、Symbol
+
+## 【1】Symbol 与普通 String 的区别
 
 ```
 var a = Symbol('e')
@@ -700,9 +716,17 @@ c === d // true
 
 可以看出，正常情况下，只要值一样，不管是`==`还是`===`，都是相等的，但是`Symbol`就能保证值的唯一性。
 
+## 【2】Symbol.description
+
+```
+const s = Symbol('foo')
+console.log(s); // Symbol(foo)
+console.log(s.description); // 'foo'
+```
+
 ---
 
-# Map 和 weakMap
+# 十一、Map 和 weakMap
 
 为什么要用`Map`？因为普通数据结构无法以非字符串为键。
 
@@ -781,7 +805,7 @@ console.log(mm2,mm);
 
 **方法 1：`m.values()`** **方法 2：`m.entries()`**
 
-### 【6.1】方法 1：`m.values()`
+◆ 【6.1】方法 1：`m.values()`
 
 返回一个迭代器，可以用`spread`扩展运算符（`...`）或`Array.from()`转换成数组。
 
@@ -795,7 +819,7 @@ console.log([...m.values()]); // ["foo", "bar"]
 console.log(Array.from(m.values())); // ["foo", "bar"]
 ```
 
-### 【6.2】方法 2：`m.entries()`
+◆ 【6.2】方法 2：`m.entries()`
 
 ```
 var m = new Map();
@@ -810,7 +834,7 @@ console.log([...m.entries()][1][1]); // "bar"
 
 ## 【7】Map 所有的键
 
-### 【7.1】keys
+◆ 【7.1】keys
 
 ```
 var m = new Map();
@@ -820,7 +844,7 @@ m.set(y , 'bar');
 console.log([...m.keys()]); // [{id:1},{id:2}]
 ```
 
-### 【7.2】has 判断是否有该键
+◆ 【7.2】has 判断是否有该键
 
 ```
 var m = new Map();
@@ -849,7 +873,7 @@ console.log(m.has(x)); // false
 
 ---
 
-# Set 和 weakSet
+# 十二、Set 和 weakSet
 
 `Set`是一个值的集合，其中的值是唯一的。
 
@@ -931,7 +955,7 @@ console.log(ws); // [{id:1},{id:2}]
 
 添加了`obj1`两次，还是去重了。
 
-### 【6.1】GC
+◆ 【6.1】GC
 
 ```
 obj1 = null;
@@ -941,7 +965,7 @@ ws.has(obj1); // false
 
 虽然`obj1`的值看上去还在，但已经取不到了。
 
-### 【6.2】delete 删除
+◆ 【6.2】delete 删除
 
 ```
 ws.delete(obj2);
@@ -950,24 +974,24 @@ console.log(ws); // [{id:1}]
 
 ---
 
-# Array、Map、WeakMap、Set、WeakSet 的对比
+# 十三、Array、Map、WeakMap、Set、WeakSet 的对比
 
 ## 【1】对比表
 
-|  功能属性  |          Array          |         Map          |        WeakMap         |            Set             |     WeakSet     |
-| :--------: | :---------------------: | :------------------: | :--------------------: | :------------------------: | :-------------: |
-|    新建    |          `[]`           |     `new Map()`      |    `new WeakMap()`     |        `new Set()`         | `new WeakSet()` |
-|     增     |         `push`          | `m.set(obj,'value')` | `wm.set(obj1,'value')` |       `s.add(value)`       |  `ws.add(obj)`  |
-| 新建并增加 |         `[1,2]`         |          -           |           -            | `new Set([4, 0, 0, 4, 1])` |        -        |
-|     键     |       对象或其它        |      对象或其它      |       只接受对象       |         对象或其它         |   只接受对象    |
-|     删     |    `slice`或`splice`    |       `delete`       |        `delete`        |          `delete`          |    `delete`     |
-|    清除    |       `arr = []`        |       `clear`        |        `clear`         |          `clear`           |     `clear`     |
-|     改     |        `splice`         |          -           |           -            |             -              |        -        |
-|     查     | `includes`、`indexOf`等 |     `get`或`has`     |      `get`或`has`      |           `has`            |      `has`      |
-|     键     |     `m.keys()`下标      |      `m.keys()`      |           -            |         `m.keys()`         |        -        |
-|     值     |     `m.values()`值      |     `m.values()`     |           -            |        `m.values()`        |        -        |
-|    迭代    |        `entries`        |      `entries`       |           -            |         `entries`          |        -        |
-|    长度    |        `length`         |        `size`        |           -            |           `size`           |        -        |
+| 功能属性 | Array | Map | WeakMap | Set | WeakSet |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 新建 | `[]` | `new Map()` | `new WeakMap()` | `new Set()` | `new WeakSet()` |
+| 增 | `push` | `m.set(obj,'value')` | `wm.set(obj1,'value')` | `s.add(value)` | `ws.add(obj)` |
+| 新建并增加 | `[1,2]` | - | - | `new Set([4, 0, 0, 4, 1])` | - |
+| 键 | 对象或其它 | 对象或其它 | 只接受对象 | 对象或其它 | 只接受对象 |
+| 删 | `slice`或`splice` | `delete` | `delete` | `delete` | `delete` |
+| 清除 | `arr = []` | `clear` | `clear` | `clear` | `clear` |
+| 改 | `splice` | - | - | - | - |
+| 查 | `includes`、`indexOf`等 | `get`或`has` | `get`或`has` | `has` | `has` |
+| 键 | `m.keys()`下标 | `m.keys()` | - | `m.keys()` | - |
+| 值 | `m.values()`值 | `m.values()` | - | `m.values()` | - |
+| 迭代 | `entries` | `entries` | - | `entries` | - |
+| 长度 | `length` | `size` | - | `size` | - |
 
 ## 【2】Map API:
 
@@ -1008,11 +1032,13 @@ console.log(ws); // [{id:1}]
 
 ---
 
-# Proxy
+# 十四、Proxy
+
+◆ `Proxy` 替代 `Object.defineProperty`
 
 ```
 function observerProxy(obj){
-    let handler = {
+  let handler = {
 		get(target,key,receiver){
 			console.log('获取'+key);
 			if(typeof target[key] === 'object' && target[key] !== null) {
@@ -1020,21 +1046,21 @@ function observerProxy(obj){
 			}
 			return Reflect.get(target,key,receiver);
 		},
-        set(target,key,value,reciver){
+    set(target,key,value,reciver){
 			console.log(target,key,value,reciver)
 			return Reflect.set(target,key,value,reciver);
-        }
     }
-    return new Proxy(obj,handler)
+  }
+  return new Proxy(obj,handler)
 }
 var obj2 = {
-    name: '小明',
-    flag: {
-        book: {
-            name : 'js',
-            page: 325
-        },
-    }
+  name: '小明',
+  flag: {
+    book: {
+      name : 'js',
+      page: 325
+    },
+  }
 }
 var objTest = observerProxy(obj2)
 objTest.flag.book.page = 33
@@ -1042,22 +1068,26 @@ objTest.flag.book.page = 33
 
 ---
 
-# Reflect
+# 十五、Reflect
 
-## 修改 Object 的返回结果
+## 【1】修改 Object 的返回结果
 
 `Object.defineProperty(obj, name, desc)`在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
 
+- 老写法
+
 ```
-// 老写法
 try {
   Object.defineProperty(target, property, attributes);
   // success
 } catch (e) {
   // failure
 }
+```
 
-// 新写法
+- 新写法
+
+```
 if (Reflect.defineProperty(target, property, attributes)) {
   // success
 } else {
@@ -1065,29 +1095,29 @@ if (Reflect.defineProperty(target, property, attributes)) {
 }
 ```
 
-## 命令式编程变成函数式编程
+## 【2】命令式编程变成函数式编程
 
-原来的：
+- 原来的：
 
 ```
 'name' in obj;
 ```
 
-现在的：
+- 现在的：
 
 ```
 Reflect.has(obj, 'name');
 ```
 
-## 与 Proxy 语法一一对应
+## 【3】与 Proxy 语法一一对应
 
 ---
 
-# Promise
+# 十六、Promise
 
 `promise`代替`callback`回调。
 
-## promise.all
+## 【1】promise.all
 
 **只能同时调用不受关联的`promise`，如果`promise2`的值受`promise1`影响，不能用`promise.all`，可以用`async/await`**
 
@@ -1131,7 +1161,7 @@ Promise.all([pro1,pro2,pro3]).then(val=>{
 })
 ```
 
-## promise.race
+## 【2】promise.race
 
 第一个抛出`resolve`的`promise`就是`Promise.race`获取的值。
 
@@ -1157,7 +1187,7 @@ Promise.race([pro2,pro3]).then(val=>{
 
 此时，pro2 要花费 1 秒，pro3 要花费 2 秒，谁先`resolve`，`.then`获取的`val`就是谁的。
 
-## promise.allSellted
+## 【3】promise.allSellted
 
 不管什么状态，都会收集起来。
 
@@ -1173,7 +1203,7 @@ Promise.allSettled([p1, p2]).then(results => {
 });
 ```
 
-## promise.any
+## 【4】promise.any
 
 有一个成功就算成功
 
@@ -1190,7 +1220,7 @@ Promise.any([p1, p2]).then(results => {
 
 ```
 
-## `Promise.all`、`Promise.race`、`Promise.allSellted`、`Promise.any`的区别
+## 【5】`Promise.all`、`Promise.race`、`Promise.allSellted`、`Promise.any`的区别
 
 - Promise.all 是所有的保证每一步都对，如果其中有一个 reject，都会报错。
 - Promise.race 是第一个返回的是 resolve 或 reject，就获取谁的值。
@@ -1232,11 +1262,20 @@ Promise.any([p1, p2, p3]).then(result => {
 })
 ```
 
+## 【6】promise.finally
+
+```
+  promise
+  .then(function(json) { /* process your JSON further */ })
+  .catch(function(error) { console.log(error); })
+  .finally(function() { isLoading = false; });
+```
+
 ---
 
-# Iterater 和 for...of 循环
+# 十七、Iterater 和 for...of 、for...in 循环
 
-## Iterator
+## 【1】Iterator
 
 可遍历的类数组：
 
@@ -1246,16 +1285,13 @@ Promise.any([p1, p2, p3]).then(result => {
 
 都可以用`for...of`遍历值。
 
-## for...of
+## 【2】for...of
 
 `for...of`的使用范围是所有部署了`Iterator`的对象。
 
-### 使用
-
-#### 数组
+◆ 数组
 
 ```
-// 数组
 let arr = ['a', 'b', 'c'];
 for (let pair of arr) {
   console.log(pair);
@@ -1271,7 +1307,7 @@ for (let pair of arr.values()) {
 }
 ```
 
-#### 字符串
+◆ 字符串
 
 ```
 let str = "hello";
@@ -1281,7 +1317,7 @@ for (let s of str) {
 }
 ```
 
-#### DOM NodeList 对象
+◆ DOM NodeList 对象
 
 ```
 let paras = document.querySelectorAll("p");
@@ -1292,7 +1328,7 @@ for (let p of paras) {
 
 ```
 
-#### arguments 对象
+◆ arguments 对象
 
 ```
 function printArgs() {
@@ -1305,7 +1341,7 @@ printArgs('a', 'b');
 // 'b'
 ```
 
-### 对象
+## 【3】 for...in 遍历对象
 
 遍历对象可以减少使用`Object.keys()`这一步骤。
 
@@ -1324,11 +1360,11 @@ for (let e in es6) {
 // standard
 ```
 
-**用`for...in`遍历对象时会报错**
+**注：用`for...of`遍历对象时会报错**
 
-### 对比
+## 【4】 对比
 
-`for`的缺陷
+- `for`的缺陷
 
 ```
 // 取值比较麻烦
@@ -1337,7 +1373,7 @@ for (var index = 0; index < myArray.length; index++) {
 }
 ```
 
-为了解决`for`麻烦的问题，引入的`forEach`
+- 为了解决`for`麻烦的问题，引入的`forEach`
 
 ```
 // 问题：无法跳出循环
@@ -1347,7 +1383,7 @@ myArray.forEach(function (value) {
 });
 ```
 
-`for...in`的缺陷：
+- `for...in`的缺陷：
 
 ```
 1. 会遍历所有可枚举的属性，包括原型链（是否可遍历只和该对象上的属性enumerable有关，和在哪里无关）
@@ -1355,31 +1391,49 @@ myArray.forEach(function (value) {
 3. 专门为对象设计
 ```
 
-### 对比表
+◆ 对比表
 
-|        功能         |    `for`    |       `forEach`        |     `for...in`      |     `for...of`      |
-| :-----------------: | :---------: | :--------------------: | :-----------------: | :-----------------: |
-|      跳出循环       |      ×      | `try...catch`和`throw` | `return` 或 `break` | `return` 或 `break` |
-| 遍历数组时的`value` |    下标     |          下标          |        下标         |         值          |
-| 遍历对象时的`value` | `TypeError` |      `TypeError`       |         key         |     `TypeError`     |
+| 功能 | `for` | `forEach` | `for...in` | `for...of` |
+| :-: | :-: | :-: | :-: | :-: |
+| 跳出循环 | × | `try...catch`和`throw` | `return` 或 `break` | `return` 或 `break` |
+| 遍历数组时的`value` | 下标 | 下标 | 下标 | 值 |
+| 遍历对象时的`value` | `TypeError` | `TypeError` | key | `TypeError` |
 
 总结：
 
-`for...of`可以`bread`，遍历时是值； `for...in`遍历对象更优，可简写`Objec.keys()`;
+`for...of`可以`break`，遍历时是值； `for...in`遍历对象更优，可简写`Objec.keys()`;
 
 ---
 
-# Generator
+# 十八、Generator
+
+```
+let generator = function* () {
+  yield 1;
+  yield* [2,3,4]; //在数组前加* 遍历所有元素，不加* 直接遍历整体
+  yield 5;
+  yield {name:'123',num:123};
+};
+
+var iterator = generator();  //generator返回的是Iterator对象，所以调用时候要使用next()
+
+console.log(iterator.next().value); // 1
+console.log(iterator.next().value); // 2
+console.log(iterator.next().value); // 3
+console.log(iterator.next().value); // 4
+console.log(iterator.next().value); // 5
+console.log(iterator.next().value); // {name:'123',num:123}
+```
 
 ---
 
-# async/await
+# 十九、async/await
 
 [学习链接](https://segmentfault.com/a/1190000007535316)
 
-## 普通函数和 async 的区别
+## 【1】普通函数和 async 的区别
 
-普通函数：
+- 普通函数：
 
 ```
 function testAsync(){
@@ -1388,7 +1442,7 @@ function testAsync(){
 testAsync(); // 'hello world'
 ```
 
-`async`函数：
+- `async`函数：
 
 ```
 async function testAsync(){
@@ -1399,9 +1453,9 @@ testAsync(); // Promise {<fulfilled>: "hello world"}
 
 `async`返回的是一个`promise`对象
 
-## await
+## 【2】await
 
-如果不用`async/await`：
+- 如果不用`async/await`：
 
 ```
 async function testAsync(){
@@ -1414,9 +1468,9 @@ testAsync().then(v=>{
 })
 ```
 
-1 秒后：get long_time_value
+1 秒后：`get long_time_value`
 
-如果用的话：
+- 如果用的话：
 
 ```
 function testAsync(){
@@ -1432,9 +1486,11 @@ async function test(){
 test();
 ```
 
-1 秒后：get long_time_value
+1 秒后：`get long_time_value`
 
-### 优势：处理 then 链
+◆ 优势：处理 `then` 链
+
+- 如果不用`async/await`
 
 ```
 function takeLongTime(n){
@@ -1481,7 +1537,7 @@ VM5329:30 doIt: 9606.429931640625ms
 
 每一个`promise`都受上一个`promise`影响，所以必须一个调完之后再调另外一个。
 
-再看看用`async/await`更改`doIt`方法：
+- 再看看用`async/await`更改`doIt`方法：
 
 ```
 async function doIt(){
@@ -1501,13 +1557,13 @@ doIt();
 
 ---
 
-# Class
+# 二十、Class
 
 <iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/12/07/JavaScript%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"></iframe>
 
 ---
 
-# export 和 import 和 require
+# 二十一、export 和 import 和 require
 
 ## 【1】普通使用
 
