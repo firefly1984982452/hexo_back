@@ -14,7 +14,7 @@ categories:
 - `ReportingObserver`：汇报
 
 
-# ResizeObserver：resize监听
+# 一、ResizeObserver：resize监听
 
 `window.resize`下监听某`DOM`的改变：
 
@@ -30,9 +30,9 @@ var ro = new ResizeObserver( entries => {
 ro.observe(mainEl);
 ```
 
-# MutationObserver:监听DOM节点的变动
+# 二、MutationObserver:监听DOM节点的变动
 
-## 基本使用
+## 【1】基本使用
 
 ```
 <body>
@@ -59,7 +59,7 @@ ro.observe(mainEl);
 
 3秒钟之后，id为`content`的`DOM`变成了`'hello'`，此时的`MutationObserver`就已经监听到了改变，可以进行下一步的操作。
 
-## 实现vue.$nexttick
+## 【2】实现vue.$nexttick
 
 ```
 <!DOCTYPE html>
@@ -112,14 +112,15 @@ ro.observe(mainEl);
 </script>
 ```
 
-# InterSectionObserver：异步视口观察
+# 三、InterSectionObserver：异步视口观察
 
 学习链接：
 
-[链接1](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
-[链接2](https://www.jianshu.com/p/84a86e41eb2b)
+- [链接1](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
 
-## 使用API
+- [链接2](https://www.jianshu.com/p/84a86e41eb2b)
+
+## 【1】使用API
 
 ```
 /**
@@ -139,7 +140,7 @@ io.unobserve(element);
 io.disconnect();
 ```
 
-## 返回IntersectionObserverEntry对象
+## 【2】返回IntersectionObserverEntry对象
 
 `IntersectionObserverEntry`对象提供目标元素的信息，一共有六个属性。
 
@@ -176,7 +177,7 @@ intersectionRect：目标元素与视口（或根元素）的交叉区域的信�
 intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
 ```
 
-## 懒加载图片实例
+## 【3】懒加载图片实例
 
 ```
 const io = new IntersectionObserver(callback);

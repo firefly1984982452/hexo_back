@@ -7,31 +7,25 @@ categories:
 
 # ◆ 属性篇
 
-# performance 性能
+# 一、performance 性能
 
-- 计算页面加载完成所需要的总时间
+1. 计算页面加载完成所需要的总时间
 
-`performance.timing.loadEventEnd - performance.timing.navigationStart`
+```
+performance.timing.loadEventEnd - performance.timing.navigationStart
+```
 
-# history：历史记录
+# 二、history：历史记录
 
-## length
+1. `history.length`：历史列表中的网址数
 
-历史列表中的网址数
+2. `history.back`：上一下
 
-## back
+3. `history.forword`：下一个
 
-上一下
+4. `history.go`：加载历史中某个具体的页面
 
-## forword
-
-下一个
-
-## go
-
-加载历史中某个具体的页面
-
-# 数据存储：cookie，localStorage，sessionStorage，indexDB
+# 三、数据存储：`cookie`，`localStorage`，`sessionStorage`，`indexDB`
 
 | 特性 | cookie | localStorage | sessionStorage | indexDB |
 | :-: | :-: | :-: | :-: | :-: |
@@ -40,9 +34,9 @@ categories:
 | 与服务端通信 | 每次都会携带在 header 中，对于请求性能影响 | 不参与 | 不参与 | 不参与 |
 | 调用 | `document.cookie` | `window.localStorage` | `window.sessionStorage` | `window.indexDB` |
 
-# location：当前 URL
+# 四、location：当前 URL
 
-## 属性
+## 【1】属性
 
 ```
 {
@@ -58,16 +52,25 @@ categories:
 }
 ```
 
-## 方法
+## 【2】方法
 
-- reload 刷新
-- replace 替换
+- `location.reload()`：刷新
+- `location.replace`：替换
 
-## 扩展：搜索参加用 fromEntries 和 URLSearchParams 可变为普通对象
+## 【3】扩展：获取`location.search`的对象值
 
-# navigator：浏览器对象
+用 `Object.fromEntries` 和 `URLSearchParams` 可变为普通对象
 
-## userAgent：当前浏览器
+```
+window.location.search = '?roomId=9&status=1&taskId=7&serviceId=1109';
+var str = window.location.search.substr(1);
+var p = new URLSearchParams(str);
+var param = Object.fromEntries(p);
+```
+
+# 五、navigator：浏览器对象
+
+1. `navigator.userAgent`：当前浏览器
 
 ```
 export function detectiveBrowse() {
@@ -83,17 +86,17 @@ export function detectiveBrowse() {
 
 ---
 
-# 窗口
+# 六、窗口
 
 [链接](https://blog.51cto.com/dapengtalk/1883928)
 
-- 窗口可见区域宽（控制台不算）：innerWidth / document.body.clientWidth / document.body.offsetWidth / document.body.scrollWidth
-- 窗口可见区域高（控制台不算）：innerHeight / document.body.clientHeight / document.body.offsetHeight / document.body.scrollHeight
-- 窗口总区域宽（控制台算）：outerWidth
-- 窗口总区域高（控制台算）：outerHeight
-- 浏览器：screen
-- 浏览器距离 Left：screenLeft / screenX
-- 浏览器距离 Top：screenTop / screenY
+- 窗口可见区域宽（控制台不算）：`innerWidth` / `document.body.clientWidth` / `document.body.offsetWidth` / `document.body.scrollWidth`
+- 窗口可见区域高（控制台不算）：`innerHeight` / `document.body.clientHeight` / `document.body.offsetHeight` / `document.body.scrollHeight`
+- 窗口总区域宽（控制台算）：`outerWidth`
+- 窗口总区域高（控制台算）：`outerHeight`
+- 浏览器：`screen`
+- 浏览器距离 Left：`screenLeft` / `screenX`
+- 浏览器距离 Top：`screenTop` / `screenY`
 
 ```
 let clientScreenMsg =
@@ -124,21 +127,21 @@ console.log(clientScreenMsg);
 
 一般的电脑显示器都是 1 倍，但有部分笔记本电脑的分辨率是 2 倍。
 
-# Number 相关
+# 七、Number和window通用的属性
 
-- isFinite 是否为数字型
-- isInteger 是否为整数
-- isNaN 是否为 NaN
+1. `window.isFinite`：是否为数字型
+2. `window.isInteger`：是否为整数
+3. `window.isNaN`：是否为`NaN`
 
 这些属性既可以通过`window`调用，也可以通过`Number`调用。
 
-- Infinity 无穷大
+4. `window.Infinity` 无穷大
 
 ---
 
 # ◆ 方法篇
 
-# 英文 base64 转码：btoa 和 atob 实现
+# 八、英文 base64 转码：`btoa` 和 `atob` 实现
 
 ```
 var string = 'Hello World!';
@@ -146,7 +149,7 @@ btoa(string) // "SGVsbG8gV29ybGQh"
 atob('SGVsbG8gV29ybGQh') // "Hello World!"
 ```
 
-# 中文 base64 转码：escape、encodeURI 和 encodeURIComponent 实现
+# 九、中文 base64 转码：`escape`、`encodeURI` 和 `encodeURIComponent` 实现
 
 ```
 function b64Encode(str) {
@@ -169,30 +172,38 @@ b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
 1. `escape`适合不含 URI 的纯`string`；
 2. `encodeURIComponent`会把 `http://`编码成`http%3A%2F%2F`而`encodeURI`却不会。
 
-# 计时器
+# 十、计时器
 
-- setInterval()
-- setTimeout()
-- setImmediate()（IE 用）
+- `setInterval()`
+- `setTimeout()`
+- `setImmediate()`（IE 用）
 
-# 取消计时器
+# 十一、取消计时器
 
-- clearInterval()
-- clearTimeout()
-- clearImmediate()（IE 用）
+- `clearInterval()`
+- `clearTimeout()`
+- `clearImmediate()`（IE 用）
 
-# 重绘更新动画
+# 十二、重绘更新动画
 
-- requestAnimationFrame
-- cancelAnimationFrame
+- `window.requestAnimationFrame`
+- `window.cancelAnimationFrame`
 
-# 打印：print
+用法：
 
-`window.print();`
+1. 使用 `requestAnimationFrame` 手动反复调用动画
+2. 使用 `requestAnimationFrame` 染几万条数据并不卡住界面
+3. JS 使用 `requestAnimationFrame` 加载 `animation` 动画
 
-# MessageChannel：管道通信
+# 十三、打印：print
 
-## MessageChannel 的基本使用
+```
+window.print();
+```
+
+# 十四、MessageChannel：管道通信
+
+## 【1】MessageChannel 的基本使用
 
 ```
 const {port1, port2} = new MessageChannel();
@@ -210,7 +221,7 @@ port1 发送的由 port2 接收，port2 发送的由 port1 接收。
 
 也就是说，传过去的对象，接收到的时候已经不是原来的引用和指针了，这个时候再 return 出来，就是一个新的对象，所以肯定能实现深拷贝。
 
-## 使用 MessageChannel 实现深拷贝
+## 【2】使用 MessageChannel 实现深拷贝
 
 ```
 var obj = {id:1,name:{a:'xx'}};
@@ -232,7 +243,7 @@ structuralClone(obj).then(res=>{
 <!-- 用promise是为了好传数据 -->
 ```
 
-## MessageChannel 实现 vue.$nexttick
+## 【3】MessageChannel 实现 vue.$nexttick
 
 ```
 <!DOCTYPE html>
@@ -287,7 +298,7 @@ structuralClone(obj).then(res=>{
 
 ---
 
-# window.postMessage
+# 十五、window.postMessage
 
 知识点：
 
@@ -329,7 +340,7 @@ window.postMessage("hi there!", location.origin);
 
 ---
 
-# window.showOpenFilePicker：显示打开文件的弹框
+# 十六、window.showOpenFilePicker：显示打开文件的弹框
 
 上传文件，达到`<input type="file">`的功能
 
@@ -337,7 +348,7 @@ window.postMessage("hi there!", location.origin);
 
 ---
 
-# HTML 事件属性
+# 十七、HTML 事件属性
 
 [HTML 事件属性列表](https://www.w3school.com.cn/tags/html_ref_eventattributes.asp)
 

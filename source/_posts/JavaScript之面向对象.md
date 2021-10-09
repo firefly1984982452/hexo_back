@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-# java 对象
+# 一、java 对象
 
 ```
 // 创建类——“人”
@@ -23,7 +23,7 @@ xm.age = 15;
 
 ---
 
-# js 对象
+# 二、js 对象
 
 `var xm = {age:15}`
 
@@ -33,7 +33,7 @@ xm.age = 15;
 
 ---
 
-# JavaScript 面向对象
+# 三、JavaScript 面向对象
 
 [参考](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
 
@@ -245,7 +245,7 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 
 ---
 
-# DOM 也有原型链
+# 四、DOM 也有原型链
 
 ```
 <html>
@@ -267,7 +267,7 @@ Object.prototype.__proto__ === null ; // true 为了不指向自身的Object.pro
 
 ---
 
-# Object.create 实现类继承和克隆对象
+# 五、Object.create 实现类继承和克隆对象
 
 ## Object.create 实现类继承
 
@@ -372,7 +372,7 @@ obj2 的具体值：
 
 ---
 
-# extends 继承
+# 六、extends 继承
 
 ```
 class Cat{
@@ -406,7 +406,7 @@ console.log(cat,child); // Cat {name: "1"} Child {name: "2"}
 
 ---
 
-# `new.target`方法判断是否父类
+# 七、`new.target`方法判断是否父类
 
 ```
 class Cat{
@@ -430,7 +430,7 @@ var child = new Child();
 
 ---
 
-# new Array()和[]比较
+# 八、new Array()和[]比较
 
 ## 性能
 
@@ -469,7 +469,7 @@ new Array()输出耗时: 600
 
 ---
 
-# prototype 和 hasOwnProperty
+# 九、prototype 和 hasOwnProperty
 
 ```
 Array.prototype.arr = function(){console.log('print arr')};
@@ -480,7 +480,7 @@ a.hasOwnProperty('arr'); // false
 Array.hasOwnProperty('arr'); // false
 ```
 
-# 获取对象所有属性
+# 十获取对象所有属性
 
 - Object.keys
 

@@ -11,11 +11,11 @@ categories:
 
 其它：我只记录了冷门的不常用的信息，其它基础的没有记录。
 
-# URL 部分
+# 一、URL 部分
 
-## <base>元素
+## 【1】`<base>`：设置相对 URL 的基础
 
-作用：设置相对 URL 的基础，有`href`和`target`属性。
+作用：有`href`和`target`属性。
 
 用法：
 
@@ -36,23 +36,32 @@ categories:
 
 ---
 
-# 全局属性
+# 二、全局属性
+
+1. id 中的`#`锚点
+2. `title`：鼠标悬停时有提示文字
+3. `tabindex`：按<kbd>tab</kbd>键之后按顺序遍历
+4. `accessKey`：使用自定义键来聚焦
+5. `hidden`：不渲染这个 DOM 元素
+6. `dir`：文字的阅读方向
+7. `contenteditable`：允许修改内容
+8. `spellcheck`：打开拼写检查
+9. `data-`：放置自定义数据
 
 ## 【1】id 中的`#`锚点
 
 代码中有`<h1 id="test">测试</h1>`时，在浏览器直接后缀加上`#test`即可精准定位到指定 ID 地方。
 
-## 【2】title
+## 【2】`title`：鼠标悬停时有提示文字
 
-作用：鼠标悬停时有提示文字，相当于`tooltip`。
+相当于`tooltip`。
 
 ```
 <h1 title="版权说明">版权项：XXX</h1>
 ```
 
-## 【3】tabindex
+## 【3】`tabindex`：按<kbd>tab</kbd>键之后按顺序遍历
 
-作用：按<kbd>tab</kbd>键之后按顺序遍历。
 
 属性值：
 
@@ -68,9 +77,7 @@ categories:
 
 **`tabindex`为负数时不参与**
 
-## 【4】accessKey
-
-作用：使用自定义键来聚焦。
+## 【4】`accessKey`：使用自定义键来聚焦
 
 ```
 <button accesskey="s">提交</button>
@@ -78,9 +85,11 @@ categories:
 
 使用：
 
-window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt</kbd> + `accessKey`) macbook：使用<kbd>control</kbd> + <kbd>option</kbd> + `accessKey`。
+- window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt</kbd> + `accessKey`) 
 
-## 【6】hidden
+- macbook：使用<kbd>control</kbd> + <kbd>option</kbd> + `accessKey`。
+
+## 【5】`hidden`：不渲染这个 DOM 元素
 
 作用：不渲染这个 DOM 元素，相当于`display:none`。
 
@@ -88,9 +97,7 @@ window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt<
 <p hidden>本句不会显示在页面上。</p>
 ```
 
-## 【7】dir
-
-作用：`dir`属性表示文字的阅读方向。
+## 【6】`dir`：文字的阅读方向
 
 有三个可能的值。
 
@@ -100,17 +107,13 @@ window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt<
 
 `rtl`从右到左阅读时，效果相当于`text-align:right`，起作用的属性是：`direction:rtl`。
 
-## 【8】contenteditable
-
-作用：允许修改内容。
+## 【7】`contenteditable`：允许修改内容
 
 ```
 <p contenteditable="true">阅读时是正常模式，鼠标点击后，本句内容可修改。</p>
 ```
 
-## 【9】spellcheck
-
-作用：打开拼写检查。
+## 【8】`spellcheck`：打开拼写检查
 
 ```
 <p contenteditable="true" spellcheck="true">
@@ -120,9 +123,7 @@ window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt<
 
 （**我在 chrome 和 firefox 下都无效，没找到原因:(**）
 
-## 【10】`data-`属性
-
-作用：放置自定义数据。
+## 【9】`data-`：放置自定义数据
 
 ```
 <style>
@@ -138,7 +139,7 @@ window：使用<kbd>Alt</kbd> + `accessKey` (或者 <kbd>Shift</kbd> + <kbd>Alt<
 
 ---
 
-# 网页的语义结构
+# 三、网页的语义结构
 
 ```
 <body>
@@ -165,9 +166,26 @@ body>header{页眉}+(main>article>h1{文章标题}+section>h2{第一章}+p{文�
 
 ---
 
-# 文本标签
+# 四、文本标签
 
-## 【1】`<br>`和`<wbr>`
+1. `<br>`和`<wbr>`：自动断行
+2. `<pre>`：保留换行与空格
+3. `<strong>`和`<b>`：加粗
+4. `<em>`和`<i>`：斜线
+5. `<sub>`、`<sup>`和`<var>`：下标、上标、代码或数学公式的变量
+6. `<u>`和`<s>`：下划线和删除线
+7. `<ins>`和`<del>`：下划线和删除线
+8. `<code>`：代码块
+9. `<kbd>`和`<samp>`：键盘代码和示例
+10. `<mark>`：突出显示
+11. `<small>`：最小字号显示（12px）
+12. `<time>`和`<data>`：时间和数据
+13. `<address>`：联系方式
+14. `<abbr>`：缩写
+15. `<dfn>`：术语
+16. `<ruby>`：文字的语音注释
+
+## 【1】`<br>`和`<wbr>`：自动断行
 
 `<wbr>`标签可以自动断行。如果一行的宽度足够，则不断行；如果宽度不够，需要断行，就在`<wbr>`的位置的断行。
 
@@ -177,21 +195,17 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 </p>
 ```
 
-## 【2】`<pre>`
+## 【2】`<pre>`：保留换行与空格
 
-保留换行与空格。
+## 【3】`<strong>`和`<b>`：加粗
 
-## 【3】`<strong>`和`<b>`
+## 【4】`<em>`和`<i>`：斜线
 
-加粗。
+## 【5】`<sub>`、`<sup>`和`<var>`：下标、上标、代码或数学公式的变量
 
-## 【4】`<em>`和`<i>`
+- `<sub>`标签将内容变为下标。
 
-斜线。
-
-## 【5】`<sub>`、`<sup>`和`<var>`
-
-- `<sub>`标签将内容变为下标，`<sup>`标签将内容变为上标。
+- `<sup>`标签将内容变为上标。
 
 - `<var>`标签表示代码或数学公式的变量。
 
@@ -201,13 +215,13 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 。</p>
 ```
 
-## 【6】`<u>`和`<s>`
+## 【6】`<u>`和`<s>`：下划线和删除线
 
 - `<u>`：下划线；
 
 - `<s>`：删除线。
 
-## 【7】`<ins>`和`<del>`
+## 【7】`<ins>`和`<del>`：下划线和删除线
 
 - `<ins>`：下划线；
 
@@ -225,7 +239,7 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 </ins>
 ```
 
-## 【8】`<code>`
+## 【8】`<code>`：代码块
 
 `<code>`表示代码，如果需要显示多行代码，需要放在`<pre>`标签里面。
 
@@ -238,7 +252,7 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 </pre>
 ```
 
-## 【9】`<kbd>`和`<samp>`
+## 【9】`<kbd>`和`<samp>`：键盘代码和示例
 
 - `<kbd>`：键盘代码；
 
@@ -256,15 +270,11 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 </p>
 ```
 
-## 【10】`<mark>`
+## 【10】`<mark>`：突出显示
 
-突出显示。
+## 【11】`<small>`：最小字号显示（12px）
 
-## 【11】`<small>`
-
-最小字号显示（12px）。
-
-## 【12】`<time>`和`<data>`
+## 【12】`<time>`和`<data>`：时间和数据
 
 - `<time>`：时间；
 
@@ -278,21 +288,17 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 <p>本次马拉松比赛第一名是<data value="39">张三</data></p>。
 ```
 
-## 【13】`<address>`
+## 【13】`<address>`：联系方式
 
-联系方式。
+## 【14】`<abbr>`：缩写
 
-## 【14】`<abbr>`
-
-表示缩写，它的`title`属性可以把缩写展示全。
+它的`title`属性可以把缩写展示全。
 
 ```
 <abbr title="HyperText Markup Language">HTML</abbr>
 ```
 
-## 【15】`<dfn>`
-
-术语。
+## 【15】`<dfn>`：术语
 
 ```
 <p>
@@ -301,9 +307,7 @@ Fernstraßen<wbr>bau<wbr>privat<wbr>finanzierungs<wbr>gesetz
 </p>
 ```
 
-## 【16】`<ruby>`
-
-文字的语音注释。
+## 【16】`<ruby>`：文字的语音注释
 
 ```
 <ruby>
@@ -321,11 +325,9 @@ han zi
 
 ---
 
-# 列表标签
+# 五、列表标签
 
-## 【1】<ol>
-
-有序列表。
+## 【1】`<ol>`：有序列表
 
 ```
 1. 列表项 A
@@ -469,11 +471,19 @@ han zi
 
 ---
 
-# 图像标签
+# 六、图像标签
 
-## 【1】alt
+1. `alt`：图片的文字说明
+2. `width`，`height`：宽度和高度
+3. `referrerpolicy`：设置图片的`HTTP`请求时的`Referer`的头信息
+4. `crossorigin`：是否采用跨域的形式下载图片
+5. `loading`：懒加载
+6. 响应式-`srcset`：设置不同像素时的图片地址
+7. 响应式-`sizes`：适配不同屏幕时的图片
+8. 响应式-`<picture>`：指定不同情况加载的图片
+9. `<figure>`和`<figcapt>`：区块和说明
 
-图片的文字说明。
+## 【1】`alt`：图片的文字说明
 
 图片不显示时，图片的位置会显示该文本。
 
@@ -481,17 +491,13 @@ han zi
 <img src="foo.jpg" alt="示例图片">
 ```
 
-## 【2】width，height
+## 【2】`width`，`height`：宽度和高度
 
-宽度和高度，单位是像素或百分比。
+单位是像素或百分比。
 
-## 【3】referrerpolicy
+## 【3】`referrerpolicy`：设置图片的`HTTP`请求时的`Referer`的头信息
 
-设置图片的`HTTP`请求时的`Referer`的头信息。
-
-## 【4】crossorigin
-
-是否采用跨域的形式下载图片
+## 【4】`crossorigin`：是否采用跨域的形式下载图片
 
 有如下属性：
 
@@ -499,9 +505,7 @@ han zi
 
 - `use-credentials`：跨域请求带有用户凭证。
 
-## 【5】loading
-
-懒加载
+## 【5】`loading`：懒加载
 
 有如下属性：
 
@@ -511,9 +515,7 @@ han zi
 
 - `eager`：立即加载资源，无论它在页面的哪个位置。
 
-## 【6】响应式-srcset
-
-设置不同像素时的图片地址。
+## 【6】响应式-`srcset`：设置不同像素时的图片地址
 
 ```
 <img srcset="foo-320w.jpg,
@@ -522,9 +524,9 @@ han zi
      src="foo-640w.jpg">
 ```
 
-## 【7】响应式-sizes
+## 【7】响应式-`sizes`：适配不同屏幕时的图片
 
-适配不同屏幕时的图片，须与`srcset`属性一起使用。
+须与`srcset`属性一起使用。
 
 ```
 <img srcset="foo-160.jpg 160w,
@@ -537,9 +539,7 @@ han zi
      src="foo-1280.jpg">
 ```
 
-## 【8】响应式-`<picture>`
-
-指定不同情况加载的图片。
+## 【8】响应式-`<picture>`：指定不同情况加载的图片
 
 ```
 <picture>
@@ -549,7 +549,7 @@ han zi
 </picture>
 ```
 
-## 【9】`<figure>`和`<figcapt>`
+## 【9】`<figure>`和`<figcapt>`：区块和说明
 
 - `<figure>`：区块；
 
@@ -564,21 +564,21 @@ han zi
 
 ---
 
-# 视频标签
+# 七、视频标签
 
-## 属性
+## 【1】属性
 
-- autoplay：如果出现该属性，则视频在就绪后马上播放。
-- controls：如果出现该属性，则向用户显示控件，比如播放按钮。
-- height：设置视频播放器的高度。
-- loop：如果出现该属性，则当媒介文件完成播放后再次开始播放。
-- muted：规定视频的音频输出应该被静音。
-- poster：规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。
-- preload：如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。
-- src：要播放的视频的 URL。
-- width：设置视频播放器的宽度。
+- `autoplay`：如果出现该属性，则视频在就绪后马上播放。
+- `controls`：如果出现该属性，则向用户显示控件，比如播放按钮。
+- `height`：设置视频播放器的高度。
+- `loop`：如果出现该属性，则当媒介文件完成播放后再次开始播放。
+- `muted`：规定视频的音频输出应该被静音。
+- `poster`：规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。
+- `preload`：如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。
+- `src`：要播放的视频的 URL。
+- `width`：设置视频播放器的宽度。
 
-◆ poster：视频预览图
+◆ `poster`：视频预览图
 
 ```
 <video controls poster="/images/w3school.gif">
@@ -588,7 +588,7 @@ han zi
 </video>
 ```
 
-## 用 canvas 实现 video 视频截图功能
+## 【2】用 canvas 实现 video 视频截图功能
 
 - [链接](https://blog.csdn.net/weixin_43392489/article/details/114642055)
 
@@ -623,17 +623,12 @@ han zi
 
 ---
 
-# 链接标签
+# 八、链接标签
 
-## 【1】`<a>`
+## 【1】`<a>`：超级链接
 
-```
-超级链接
-```
 
-## 【1.1】href
-
-指向网址
+### 【1.1】`href`
 
 值：
 
@@ -671,15 +666,13 @@ han zi
 <a href="tel:13312345678">13312345678</a>
 ```
 
-## 【1.2】download
-
-下载
+## 【1.2】`download`：下载
 
 ```
 <a href="data:,hello,world" download="hello.txt">下载hello.txt</a>
 ```
 
-## 【1.3】rel 属性
+## 【1.3】`rel` 属性
 
 - noopener
 
@@ -757,7 +750,7 @@ han zi
 
 ---
 
-# 表格标签
+# 九、表格标签
 
 **`<thead>`、`<tbody>`、`<tfoot>`** `<thead>`、`<tbody>`、`<tfoot>`都是块级容器元素，且都是`<table>`的一级子元素，分别表示表头、表体和表尾。
 
@@ -771,9 +764,9 @@ han zi
 
 ---
 
-# 表单标签
+# 十、表单标签
 
-## 【1】`<fieldset>`和`<legend>`
+## 【1】`<fieldset>`和`<legend>`：控制标签
 
 - `<fieldset>`：控件组；
 
@@ -787,9 +780,7 @@ han zi
 </fieldset>
 ```
 
-## 【2】`<datalist>`
-
-容器标签
+## 【2】`<datalist>`：容器标签
 
 ```
 <label for="ice-cream-choice">冰淇淋：</label>
@@ -804,7 +795,7 @@ han zi
 </datalist>
 ```
 
-## 【4】`<input>`和`<output>`
+## 【3】`<input>`和`<output>`：输入输出标签
 
 - `<input>`：输入；
 
@@ -816,7 +807,7 @@ han zi
 <output name="result">20</output>
 ```
 
-## 【5】`<progress>`和`<meter>`
+## 【4】`<progress>`和`<meter>`：进度和指示器标签
 
 - `<progress>`：进度；
 
@@ -829,7 +820,7 @@ han zi
 
 ---
 
-# `<input />`标签
+# 十一、`<input />`标签
 
 ## HTML5 input 标签所有 type
 
@@ -885,11 +876,9 @@ han zi
 
 ---
 
-# 其它标签
+# 十二、其它标签
 
-## 【1】`<dialog>`
-
-对话框
+## 【1】`<dialog>`：对话框
 
 ```
 <dialog open>
@@ -911,7 +900,7 @@ modal.close();
 
 如果直接写了`<dialog open>`而不是用`modal.showModal()`显示 dialog 的话是无法使用`dialog::backdrop`伪无素的。
 
-## 【2】`<details>`和`<summary>`
+## 【2】`<details>`和`<summary>`：折叠内容与展开显示
 
 - `<details>`：折叠内容
 
@@ -944,15 +933,13 @@ summary::-webkit-details-marker {
 
 ---
 
-# `<map>`标签
+# 十三、`<map>`标签
 
 [链接](https://www.runoob.com/try/try.php?filename=tryhtml_areamap)
 
 ---
 
-# `<figure>`、`<figcaption>`标签
-
-独立的主流代码（如图片、代码等）
+# 十四、`<figure>`、`<figcaption>`标签：独立的主流代码（如图片、代码等）
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure)
 
@@ -972,7 +959,7 @@ summary::-webkit-details-marker {
 	</figure>
 ```
 
-# 实体
+# 十五、实体
 
 |   字符   |  含义   |
 | :------: | :-----: |

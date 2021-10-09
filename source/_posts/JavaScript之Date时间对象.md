@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-# date 所有方法
+# 一、date 获取日期时间的所有方法
 
 ```
 var date = new Date();
@@ -26,7 +26,7 @@ console.log(print);
 
 ---
 
-# 把时间戳转为时间（年月日时分秒）
+# 二、把时间戳转为时间（年月日时分秒）
 
 ```
 var time = new Date();
@@ -46,7 +46,7 @@ console.log(Y + "-" + m + "-" + d + " " + H + ":" + mi + ":" + s);
 
 ---
 
-# 时间自定义格式化(如 yyyy-MM-dd)
+# 三、时间自定义格式化(如 yyyy-MM-dd)
 
 ```
 var formatDatePD = function(t,str) {
@@ -75,10 +75,10 @@ formatDate(new Date(1409894060000), 'yyyy-MM-dd HH:mm:ss 星期w')
 
 ---
 
-# 时间 String 化
+# 四、时间 String 化
 
-- toLocaleString
-- toLocaleDateString
+- `toLocaleString`
+- `toLocaleDateString`
 
 ```
 new Date().toLocaleString(); // "2021/7/20下午2:57:36"
@@ -87,7 +87,7 @@ new Date().toLocaleDateString(); // "2021/7/20"
 
 ---
 
-# 获取指定时间的时间戳
+# 五、获取指定时间的时间戳
 
 `Math.floor(new Date(Date.UTC(2020, 0, 1, 0, 0, 0)).getTime() / 1000)` // 2020/1/1 0:0:0 --> 1577808000
 
@@ -97,37 +97,21 @@ new Date().toLocaleDateString(); // "2021/7/20"
 
 ---
 
-# 获取当前时间戳
+# 六、获取当前时间戳
 
 以下为秒数，如果要毫秒数就不要`/1000`
 
-- 方法一
+1. `Math.round(new Date().getTime()/1000)`
 
-```
-Math.round(new Date().getTime()/1000)
-```
+2. `Math.round((+ new Date())/1000)`
 
-- 方法二
+3. `Math.round(Date.now()/1000)`
 
-```
-Math.round((+ new Date())/1000)
-```
-
-- 方法三
-
-```
-Math.round(Date.now()/1000)
-```
-
-- 方法四
-
-```
-Math.round(Date.valueOf()/1000)
-```
+4. `Math.round(Date.valueOf()/1000)`
 
 ---
 
-# 两个时间戳相减所距时间
+# 七、两个时间戳相减所距时间
 
 ```
 getTime(value = Math.round(Date.now() / 1000)) {
@@ -148,7 +132,7 @@ getTime(value = Math.round(Date.now() / 1000)) {
 
 ---
 
-# 计算今天是今年的进度的多少
+# 八、计算今天是今年的进度的多少
 
 ```
 getPlan(){
@@ -190,7 +174,7 @@ getAge24Time() {
 
 ---
 
-# 国际化相对时间格式化：Intl.RelativeTimeFormat
+# 九、国际化相对时间格式化：Intl.RelativeTimeFormat
 
 ```
 const rtf = new Intl.RelativeTimeFormat("zh", { numeric: "auto" });

@@ -5,19 +5,19 @@ categories:
 - program
 ---
 
-# 协议
+# 一、协议
 
 客户端和服务器之间传输数据的规范，全称是“超文本传输协议”。
 
 ---
 
-# 协议请求
+# 二、协议请求
 
 `GET`、`POST`和`OPTION`
 
 ---
 
-# GET和POST的区别
+# 三、GET和POST的区别
 
 |区别|get|post|
 |:--:|:--:|:--:|
@@ -34,7 +34,7 @@ categories:
 
 ---
 
-# `HTTP`和`HTTPS`的区别
+# 四、`HTTP`和`HTTPS`的区别
 
 - `HTTPS` = `HTTP` + `SSL`证书
 
@@ -44,7 +44,7 @@ categories:
 
 ---
 
-# 跨域
+# 五、跨域
 
 [更全跨域方法链接](https://segmentfault.com/a/1190000011145364)
 
@@ -55,12 +55,12 @@ categories:
 - `document.domain`
 - `postMessage`
 
-# 【1】jsonp
+## 【1】jsonp
 
 把JS、CSS、IMG等静态资源分离到独立域名的服务器上。
 **缺点：只能实现GET请求**。
 
-## 【1.1】原生实现
+### 【1.1】原生实现
 
 ```
 <script>
@@ -78,7 +78,7 @@ categories:
 </script>
 ```
 
- ## 【1.2】jquery ajax
+### 【1.2】jquery ajax
 
 ```
 $.ajax({
@@ -90,7 +90,7 @@ $.ajax({
 });
 ```
 
-## 【1.3】vue.js：
+### 【1.3】vue.js：
 
 ```
 this.$http.jsonp('http://www.domain2.com:8080/login', {
@@ -100,18 +100,18 @@ this.$http.jsonp('http://www.domain2.com:8080/login', {
     console.log(res); 
 })
 ```
-# 【2】CORS
+## 【2】CORS
 
 普通跨域请求，只需要服务端设置`Access-Control-Allow-Origin`即可；若要携带`cookie`请求，前后端都要设置。
 
-## 【2.1】原生ajax
+### 【2.1】原生ajax
 
 ```
 // 前端设置是否带cookie
 xhr.withCredentials = true;
 ```
 
-## 【2.2】jQuery ajax
+### 【2.2】jQuery ajax
 
 ```
 $.ajax({
@@ -124,21 +124,21 @@ $.ajax({
 });
 ```
 
-## 【2.3】vue框架 axios设置
+### 【2.3】vue框架 axios设置
 
 ```
 axios.defaults.withCredentials = true
 ```
-# 【3】Nodejs中间件代理跨域
+## 【3】Nodejs中间件代理跨域
 
 如`proxy`中间件
 
-# 【4】document.domain
+## 【4】document.domain
 该方式只能用于二级域名相同的情况下，比如 `a.test.com` 和 `b.test.com` 适用于该方式。
 
 只需要给页面添加 `document.domain = 'test.com'` 表示二级域名都相同就可以实现跨域
 
-# 【5】postMessage
+## 【5】postMessage
 
 这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息。
 
@@ -157,7 +157,7 @@ mc.addEventListener('message', event => {
 
 ---
 
-# 缓存
+# 六、缓存
 
 一般是在`html`中的`meta`标签上定义属性
 
@@ -173,11 +173,11 @@ mc.addEventListener('message', event => {
 <meta http-equiv="expires" content="mon, 18 apr 2016 14:30:00 GMT">
 ```
 
-请求--判断max-age是否过期（没过期就直接在缓存数据库中得到数据）--过期后判断属性是否字段一致，再使用缓存
-。
+请求--判断max-age是否过期（没过期就直接在缓存数据库中得到数据）--过期后判断属性是否字段一致，再使用缓存。
+
 ---
 
-# session和cookie
+# 七、session和cookie
 
-cookie是在客户端，session是在服务端。
-一般如果想跳过cookie的限制，就用session。
+`cookie`是在客户端，`session`是在服务端。
+一般如果想跳过`cookie`的限制，就用`session`。

@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-# 使用getter与setter控制属性访问
+# 一、使用getter与setter控制属性访问
 
 ```
 function Ninja() {
@@ -24,12 +24,12 @@ nijia.setSkillLevel(100)
 console.log(nijia, nijia.getSkillLevel() == 100);
 ```
 
-## 定义getter与setter
+## 【1】定义getter与setter
 
 在`JavaScript`中，可以通过两种方式定义`getter`和`setter`：
 
-- 通过对象字面量定义，或在`ES6`的`class`中定义。
-- 通过使用内置的`Object.defineProperty`方法。
+1. 通过对象字面量定义，或在`ES6`的`class`中定义。
+2. 通过使用内置的`Object.defineProperty`方法。
 
 ```
 const ninjaCollection = {
@@ -46,7 +46,7 @@ const ninjaCollection = {
 console.log(ninjaCollection);
 ```
 
-### 在ES6的class中使用getter和setter
+### 【1.1在ES6的class中使用getter和setter
 
 ```
 class NinjoCollection {
@@ -68,7 +68,7 @@ ninjiaoCollectionClass.firstNinja = 'hello';
 console.log(ninjiaoCollectionClass.firstNinja);
 ```
 
-### Object.defineProperty
+### 【1.2】Object.defineProperty
 
 控制私有变量，下例中`_skillLevel`是私有的，`skillLevel`是公有的。
 ```
@@ -90,7 +90,7 @@ const ninja = new Ninja();
 console.log(typeof ninja._skillLevel);
 ```
 
-## 使用getter与setter检验属性
+## 【2】使用getter与setter检验属性
 
 ```
 function Ninja() {
@@ -118,7 +118,7 @@ try {
 }
 ```
 
-## 使用getter与setter定义如何计算属性值
+## 【3】使用getter与setter定义如何计算属性值
 
 ```
 const nameObj = {
@@ -137,7 +137,7 @@ console.log(nameObj.name == 'a');
 ```
 
 
-# 使用代理控制访问
+# 二、使用代理控制`Proxy`访问
 
 通过`Proxy`构造器创建代理
 
@@ -157,11 +157,11 @@ console.log(emperor.name === 'pdd',representative.name === 'pdd'); // true true
 console.log(emperor.name1,representative.name1); // undefined "error!"
 ```
 
-## 使用代理记录日志
+## 【1】使用代理记录日志
 
 上同
 
-## 使用代理检测性能-apply
+## 【2】使用代理检测性能-apply
 
 **代理的作用有利于原函数的复用**
 
@@ -256,7 +256,7 @@ isPrime1(23); // isPrime: 0.00390625 ms
 isPrime2(23); // isPrime: 2001.0390625 ms
 ```
 
-## 使用代理计算值-apply
+## 【3】使用代理计算值-apply
 
 **apply方法拦截函数的调用、call和apply操作**。
 
@@ -276,7 +276,7 @@ proxy.apply(null, [29,239]); // 536
 Reflect.apply(proxy, null, [32,10]); // 84
 ```
 
-## apply实现负数组
+## 【4】apply实现负数组
 
 ```
 function createNegativeArrayProxy(array) {
@@ -293,7 +293,7 @@ console.log(arr[1],arr[-2]); // b c
 
 普通方法实现暂时想不到，下标也无法获取。
 
-## proxy总结
+## 【5】proxy总结
 
 - 代理可以代理`对象`、`函数`、`数组`；
 
@@ -304,9 +304,9 @@ console.log(arr[1],arr[-2]); // b c
 [JS Proxy 的优势以及使用场景](https://www.suibianlu.com/c/p/14220.html)
 
 
-# 总结
+# 三、总结
 
-1.使用访问器方法（`getter`和`setter`）可以控制对象
+1. 使用访问器方法（`getter`和`setter`）可以控制对象
 - 通过内容的`Object.definedProperty`方法访问属性
 - 通过对象字面量中使用`get`和`set`语法
 - 通过`ES6`的`class`语法
@@ -315,16 +315,16 @@ console.log(arr[1],arr[-2]); // b c
 - `get`可以定义计算属性，`set`可以实现数据验证与日志记录
 
 
-2.使用代理（`proxy`）可以控制对象
+2. 使用代理（`proxy`）可以控制对象
 - 代理可以定义对象交互时的行为
 - 所有的交互行为必须通过代理
 
 
-3.使用代理（`proxy`）可以实现以下内容
+3. 使用代理（`proxy`）可以实现以下内容
 - 日志记录
 - 性能测量
 - 数据校验
 - 数组负索引
 
 
-4.使用代理（`proxy`）效率不高，需进行性能测验
+4. 使用代理（`proxy`）效率不高，需进行性能测验

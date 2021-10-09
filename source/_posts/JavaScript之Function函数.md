@@ -5,9 +5,9 @@ categories:
 - program
 ---
 
-# function和object
+# 一、function和object
 
-## function
+## 【1】function
 
 ```
 var str = (()=> {
@@ -36,7 +36,7 @@ str.sum(); // 1
 ```
 此时的str是已经立即执行函数了，返回的是Object，是{sum:f,reduce:f}，注意，这里的str是获取不到count的，只有return的数据能获取到。
 
-## Object
+## 【2】Object
 
 ```
 var obj = {
@@ -49,20 +49,20 @@ obj.sum(); // 1
 
 这里的`obj`是`Object`，不同于`str`的是，它能获取到`count`，`object`里面的所有数据都能获取到。
 
-## 区别
+## 【3】区别
 
 - `Function`只有`return`的方法才能获取到（闭包）
 - `Function`执行后返回的是对象
 
 
-# JavaScript函数调用及this参数
+# 二、JavaScript函数调用及this参数
 
 JS有4种方式调用函数
 
-- 作为一个函数(`function`)——`fn()`直接被调用
-- 作为一个方法(`methods`)——`obj.fn()`，关联在对象上调用，实现面向对象编程
-- 作为一个构造函数(`constructor`)——`new Fn()`，实例化一个新的对象
-- 通过`apply`或`call`方法调用
+1. 作为一个函数(`function`)——`fn()`直接被调用
+2. 作为一个方法(`methods`)——`obj.fn()`，关联在对象上调用，实现面向对象编程
+3. 作为一个构造函数(`constructor`)——`new Fn()`，实例化一个新的对象
+4. 通过`apply`或`call`方法调用
 
 对应的this的指向：
 
@@ -73,7 +73,7 @@ JS有4种方式调用函数
 
 详解：
 
-## 函数调用
+## 【1】函数调用
 
 ```
 function fn(){
@@ -92,7 +92,7 @@ function fn(){
 fn(); // undefined
 ```
 
-## 方法调用
+## 【2】方法调用
 
 ```
 var obj = {
@@ -103,7 +103,7 @@ var obj = {
 obj.fn() // 返回obj对象：{fn: ƒ}
 ```
 
-## 构造函数调用
+## 【3】构造函数调用
 
 ```
 function Cat(x,y){
@@ -131,7 +131,7 @@ var p = new Point(1,2)
 p // Point{x:1,y:2} 指向p对象
 ```
 
-## aplly或call
+## 【4】aplly或call
 
 ```
 var name = '张三';
@@ -156,7 +156,9 @@ obj.fun.bind(pd,['长沙','上海'])(); // 彭丹 年龄18 来自长沙上海 �
 
 `this`打印出来全都是`{name: "彭丹", age: 18}`，就是第一个参数。
 
-# 函数构造器
+---
+
+# 三、`new Function`：函数构造器
 
 与`构造函数`名字类似，但无太大关系。
 
@@ -184,8 +186,9 @@ test(){
 },
 ```
 
+---
 
-# 函数生成器(generator)
+# 四、`generator`：函数生成器
 
 ```
 function* test(){

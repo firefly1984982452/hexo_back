@@ -5,32 +5,81 @@ categories:
 - program
 ---
 
-# 增
+# 一、对象的增删改查
+
+## 【1】增/改
 
 ```
 var obj = {};
 obj.id = 1;
 ```
 
----
-
-# 删
+## 【2】删
 
 ```
 delete obj.id;
 ```
 
----
+## 【3】查
 
-# assign 合并两个对象
+◆ 1. 普通的查询
 
 ```
-Object.assign(obj1,obj2);
+obj.id; // 1
+```
+
+◆ 2. 用可选链操作符`?.`查
+
+```
+let obj =  {
+  attr: {
+      name: 'kingsaj'
+  }
+}
+```
+
+获取 name 的值
+
+```
+let n_val = obj.attr.name
+```
+
+如果这样直接获取可能会报错，导致程序异常，所以我们需要对 obj 、attr 此次验证
+即：
+
+```
+let n_val = obj && obj.attr && obj.attr.name
+```
+
+**用可选链操作符`?.`**
+
+```
+let n_val = obj?.attr?.name
+```
+
+
+---
+
+# 二、合并多个对象
+
+## 【1】用`Object.assign`
+
+```
+let obj = Object.assign({a:3},{b:4},{c:5});
+obj; // {a: 3, b: 4, c: 5}
+```
+
+## 【2】用`(```)`可以合并多个对象
+
+
+```
+let obj = {...{a:3},...{b:4},...{c:5}}
+obj; // {a: 3, b: 4, c: 5}
 ```
 
 ---
 
-# 深拷贝
+# 三、深拷贝
 
 [链接](https://firefly1984982452.github.io/2020/07/31/JavaScript%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%85%A8%E6%9E%90/)
 
@@ -42,7 +91,7 @@ Object.assign(obj1,obj2);
 
 ---
 
-# 遍历
+# 四、遍历
 
 - `Object.keys()`
 
@@ -52,7 +101,7 @@ Object.assign(obj1,obj2);
 
 ---
 
-# definedProperty
+# 五、`Object.definedProperty`：定义属性
 
 递归遍历对象用`defineProperty`实现`vue`双向绑定
 
@@ -98,42 +147,8 @@ obj.arr.slice(1); // 修改数组监听失败
 
 ---
 
-# is
+# 六、`Object.fromEntries`：把序列化的字符串反转为对象
 
-`Object.is()` 的意思是对象比较
-
-比如之前判断一个值是否为`NaN`的话可能会用`Number.isNaN()`，现在用`Object.is(NaN, NaN)`也能达到一样的效果。
-
----
-
-# 判断对象`{}`是否为空
-
-```
-if(Object.keys(obj).length === 0){...}
-```
-
----
-
-# 对象 key 值构建
-
-```
-var a = 'name'
-var b = {
-    [a] : '小明'
-}
-
-结果：
-
-b = {
-    name: '小明'
-}
-```
-
----
-
-# fromEntries
-
-把序列化的字符串反转为对象。
 
 ```
 window.location.search = '?roomId=9&status=1&taskId=7&serviceId=1109';
@@ -144,7 +159,7 @@ var param = Object.fromEntries(p);
 
 ---
 
-# 防篡改对象
+# 七、防篡改对象
 
 `preventExtensions`：不能增，能删改
 `seal`：不能增删，能改
@@ -227,7 +242,7 @@ Object.isFrozen(obj);// true
 
 ---
 
-# entries 分割对象
+# 八、`Object.entries`：分割对象
 
 ```
 const obj = { foo: 'bar', baz: 42 };
@@ -236,31 +251,34 @@ console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
 
 ---
 
-# 可选链操作符`?.`
+
+# 九、`Object.is()`：对象比较
+
+比如之前判断一个值是否为`NaN`的话可能会用`Number.isNaN()`，现在用`Object.is(NaN, NaN)`也能达到一样的效果。
+
+---
+
+# 十、判断对象`{}`是否为空
 
 ```
-let obj =  {
-  attr: {
-      name: 'kingsaj'
-  }
+if(Object.keys(obj).length === 0){...}
+```
+
+---
+
+# 十一、对象 key 值构建
+
+```
+var a = 'name'
+var b = {
+    [a] : '小明'
+}
+
+结果：
+
+b = {
+    name: '小明'
 }
 ```
 
-获取 name 的值
-
-```
-let n_val = obj.attr.name
-```
-
-如果这样直接获取可能会报错，导致程序异常，所以我们需要对 obj 、attr 此次验证
-即：
-
-```
-let n_val = obj && obj.attr && obj.attr.name
-```
-
-**用可选链操作符`?.`**
-
-```
-let n_val = obj?.attr?.name
-```
+---

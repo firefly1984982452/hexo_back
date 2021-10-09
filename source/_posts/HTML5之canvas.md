@@ -173,7 +173,7 @@ function rectFn() {
 
 ---
 
-# 【4】实例：canvas数据流动效
+# 四、实例：canvas数据流动效
 
 [效果预览](https://firefly1984982452.github.io/my-web-page/canvas-dataflow.html)
 

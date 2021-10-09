@@ -470,7 +470,8 @@ console.log(a,temp); // 1 [2, 3, 4]
 
 # 五、数值的扩展
 
-<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BMath%E5%92%8CNumber/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BMath/"></iframe>
+<iframe style="width:100%;height:900px;" src="https://firefly1984982452.github.io/2020/06/05/JavaScript%E4%B9%8BNumber/"></iframe>
 
 ---
 

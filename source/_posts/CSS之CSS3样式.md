@@ -1767,7 +1767,9 @@ html
 
 ## 【5】prefers-color-scheme：适配主题
 
-[链接 1](https://zhuanlan.zhihu.com/p/374506516) [链接 2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+- [链接 1](https://zhuanlan.zhihu.com/p/374506516) 
+
+- [链接 2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 
 目前我测试 chrome、firefox、safari 浏览器兼容性均不能实现这个功能。
 

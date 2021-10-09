@@ -5,33 +5,27 @@ categories:
 - program
 ---
 
-# `<script>`标签
+# 一、`<script>`标签
 
-## `<noscript>`
+## 【1】`<noscript>`
 
 `<noscript>`标签：当页面不支持`script`或禁用了`script`时会显示`<noscript>`里面的内容。
 
-## `<script>`中的`async`和`defer`
+## 【2】`<script>`中的`async`和`defer`
 
-```
-1.`<script src="script.js"></script>`
 
-读到就立即执行。
+1. `<script src="script.js"></script>`：读到就立即执行。
 
-2.`<script async src="script.js"></script>`
+2. `<script async src="script.js"></script>`：和DOM并行进行（异步）。
 
-和DOM并行进行（异步）。
+3. `<script defer src="script.js"></script>`：和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
 
-2.`<script defer src="script.js"></script>`
-
-和DOM并行进行（异步），但在所有`script.js`的执行解析完后，`DOMContentLoaded`事件触发完成之前。
-```
 
 ---
 
-# 递归
+# 二、递归
 
-## arguments.callee：函数自身
+## 【1】arguments.callee：函数自身
 
 用`arguments.callee`实现递归
 
@@ -51,7 +45,7 @@ test(3)
 
 但是`arguments.callee`已经被弃用了，所以可以尝试其它方法。
 
-## 命名一个 function
+## 【2】命名一个 function
 
 ```
 function test(num) {
@@ -68,11 +62,13 @@ test(3)
 
 ---
 
-# 防抖和节流
+# 三、防抖和节流
 
-[可视化在线 demo](http://demo.nimius.net/debounce_throttle/) [滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
+- [可视化在线 demo](http://demo.nimius.net/debounce_throttle/) 
 
-[学习链接 ](https://www.jianshu.com/p/f9f6b637fd6c)
+- [滚动栏在线 demo](https://wall-wxk.github.io/blogDemo/2017/02/15/throttleAndDebounce.html)
+
+- [学习链接 ](https://www.jianshu.com/p/f9f6b637fd6c)
 
 ## 【1】概念
 
@@ -187,7 +183,7 @@ handleThrottle () {
 
 ---
 
-# 事件委托（事件代理）
+# 四、事件委托（事件代理）
 
 如下代码：因为`li`的点击事件一定会事件冒泡到`ul`上，所以将点击事件写在`ul`上即可委托。
 
@@ -232,11 +228,10 @@ handleClick(e){
 
 ---
 
----
 
-# let 和闭包
+# 五、let 和闭包
 
-## let 劫持作用域
+## 【1】let 劫持作用域
 
 **用 var 时**
 
@@ -268,7 +263,7 @@ let str = 'hello';
 
 这里相当于直接`console.log('未定义变量名')`，此时的 let 已经劫持了 var 的作用域。
 
-## 用闭包作用域解释为什么用 let 的 for 循环可以劫持数据。
+## 【2】用闭包作用域解释为什么用 let 的 for 循环可以劫持数据。
 
 假设我们想每隔 1 秒分别打印 1、2、3、4、5。
 
@@ -310,9 +305,9 @@ for (let i = 1; i < 6; i++) {
 
 ---
 
-# return 和闭包
+# 六、return 和闭包
 
-## 直接 return
+## 【1】直接 return
 
 ```
 var a = 0;
@@ -324,7 +319,7 @@ console.log(fn()); // 12
 console.log(a); // 0
 ```
 
-## return function
+## 【2】return function
 
 ```
 var a = 0;
@@ -338,7 +333,7 @@ console.log(fn()()); // 12
 console.log(a); // 0
 ```
 
-## return 闭包
+## 【3】return 闭包
 
 ```
 var a = 0;
@@ -352,7 +347,7 @@ console.log(fn()); // 12
 console.log(a); // 0
 ```
 
-## 区别
+## 【4】区别
 
 - 1.直接`return`返回的是变量，闭包返回的是执行环境（所以在`return function`部分就要`fn()()`这样调用 2 次）。
 - 2.闭包不是为了让函数外部拿到内部变量，而是为了保护私有变量不被更改。
@@ -360,11 +355,11 @@ console.log(a); // 0
 
 ---
 
-# valueOf、toString 和 Symbol.toPrimitive
+# 七、`valueOf`、`toString` 和 `Symbol.toPrimitive`
 
 对象转基本类型时，先调用`valueOf`,再调用`toString`，如果有`Symbol.toPrimitive`的话优先级是最高的。
 
-## valueOf
+## 【1】valueOf
 
 如果有 valueOf 和 toString 时，valueOf 的优先级高：
 
@@ -380,7 +375,7 @@ let a = {
 console.log( a + '10'); // 110
 ```
 
-## toString
+## 【2】toString
 
 当只有 toString 时，才会调用它：
 
@@ -393,7 +388,7 @@ let a = {
 console.log(a+203); // 2203
 ```
 
-## Symbol.toPrimitive
+## 【3】Symbol.toPrimitive
 
 优先级最高，还可根据不同的类型转换成 Number 类型和 String 类型：
 
@@ -428,9 +423,9 @@ console.log(String(obj)); /// str
 
 ---
 
-# JSON 的更多参数用法
+# 八、JSON 的更多参数用法
 
-## JSON.stringify
+## 【1】JSON.stringify
 
 新建一个普通对象
 
@@ -442,19 +437,19 @@ var settings = {
 };
 ```
 
-### 普通用法
+◆ 普通用法
 
 ```
 var data = JSON.stringify(settings); // "{"username":"lydiahallie","level":19,"health":90}"
 ```
 
-### 参数 2：参数过滤
+◆ 参数 2：参数过滤
 
 ```
 var data = JSON.stringify(settings, ['level', 'health']); // "{"level":19,"health":90}"
 ```
 
-### 参数 3：参数排版
+◆ 参数 3：参数排版
 
 ```
 var data = JSON.stringify(settings, undefined, 2);
@@ -473,15 +468,15 @@ var data = JSON.stringify(settings, undefined, 2);
 
 不再是一行，而是有了排版的字符串。
 
-## JSON.parse
+## 【2】JSON.parse
 
-## 参数 1：普通用法
+## 【3】参数 1：普通用法
 
 ```
 JSON.parse('{"p": 5}'); // {p: 5}
 ```
 
-## 参数 2：过滤函数
+## 【4】参数 2：过滤函数
 
 ```
 JSON.parse('{"p": 5}',((key,value)=>{
@@ -499,21 +494,26 @@ p 5
 
 ---
 
-# JavaScript 相等操作符（==）
+# 九、JavaScript 相等操作符（==）
 
-参考： [链接 1](https://www.cnblogs.com/wisewrong/p/10396002.html) [链接 2](https://blog.csdn.net/magic_xiang/article/details/83686224) [链接 3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
+参考： 
+- [链接 1](https://www.cnblogs.com/wisewrong/p/10396002.html) 
+- [链接 2](https://blog.csdn.net/magic_xiang/article/details/83686224) 
+- [链接 3](https://yuchengkai.cn/docs/frontend/#%E6%93%8D%E4%BD%9C%E7%AC%A6)
 
-## 两组操作符
+## 【1】两组操作符
 
-相等：`==`（先转换再比较）全等：`===`（仅比较不转换）
+- 相等：`==`（先转换再比较）
 
-## 相等（`==`）规则
+- 全等：`===`（仅比较不转换）
+
+## 【2】相等（`==`）规则
 
 **Boolean 规则：Boolean(val)**：如果有一个操作数是`Boolean`值，则在比较前先将其转换为数值——`false`为`0`，`true`为`1`。 **String&Number 规则：Number(string)**：如果一个是`String`，一个是`Number`，则先将`String`转为`Number`。 **Object 规则：valueOf(obj)**：如果有一个是对象，则调用`valueOf`方法（数组调`toString()`方法）。
 
 ![](https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-043719.png)
 
-## 问题探讨
+## 【3】问题探讨
 
 ```
 [] == []; // false
@@ -542,9 +542,9 @@ p 5
 
 ---
 
-# `try...catch`无法用于异步代码
+# 十、`try...catch`无法用于异步代码
 
-## 同步代码
+## 【1】同步代码
 
 ```
 try {
@@ -560,7 +560,7 @@ try {
 异常是：ReferenceError: foo is not defined
 ```
 
-## 异步代码
+## 【2】异步代码
 
 ```
 function foo(){
@@ -581,32 +581,32 @@ try {
 Uncaught ReferenceError: bar is not defined
 ```
 
-## 对比图
+## 【3】对比图
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gho3yuu5lpj30au09n74t.jpg)
 
 ---
 
-# HTML 渲染过程
+# 十一、HTML 渲染过程
 
-- 1、解析 HTML，构成 DOM
-- 2、解析 CSS，形成 CSS 对象模型
-- 3、将 CSS 和 DOM 合并，构成渲染模型
-- 4、绘制
+1. 解析 HTML，构成 DOM
+2. 解析 CSS，形成 CSS 对象模型
+3. 将 CSS 和 DOM 合并，构成渲染模型
+4. 绘制
 
-- 重绘：corlor、borde、visibility，只会小变动；
+- 重绘：`corlor`、`border`、`visibility`：只会小变动；
 - 重排（回流）：DOM 操作、CSS 属性改变、伪类操作，会大变动。
 
 ---
 
-# 前端路由和后端路由
+# 十二、前端路由和后端路由
 
-- 前端路由（#）：hash 值或 pushStatu
-- 后端路由（/）：通过 URL 跳转到具体的 html 页面，每次跳转都重新访问服务端，服务端返回页面。
+- 前端路由（`#`）：`hash` 值或 `pushStatu`
+- 后端路由（`/`）：通过 `URL` 跳转到具体的 `html` 页面，每次跳转都重新访问服务端，服务端返回页面。
 
 ---
 
-# localStorage 标签页通信
+# 十三、localStorage 标签页通信
 
 page1
 
@@ -624,13 +624,15 @@ window.addEventListener('storage', (e) => {
 
 ---
 
-# webSocekt 多人通信
+# 十四、webSocekt 多人通信
 
-[学习链接-基础通信](http://www.imooc.com/article/286001) [学习链接-多人通信(ws)](https://www.cnblogs.com/lihaohua/p/12410511.html) [学习链接-多人通信(nodejs-websocket)](https://zhuanlan.zhihu.com/p/64906193)
+- [学习链接-基础通信](http://www.imooc.com/article/286001) 
+- [学习链接-多人通信(ws)](https://www.cnblogs.com/lihaohua/p/12410511.html) 
+- [学习链接-多人通信(nodejs-websocket)](https://zhuanlan.zhihu.com/p/64906193)
 
 ![效果](https://wx2.sinaimg.cn/large/0069qZtTgy1gls4a0l7fej30ge0agtap.jpg)
 
-## 服务端
+## 【1】服务端
 
 ```
 var ws = require("nodejs-websocket");
@@ -665,7 +667,7 @@ var server = ws.createServer(function (conn) {
 console.log('webSocket建立完毕！');
 ```
 
-## 客户端
+## 【2】客户端
 
 **客户端 1：**
 
@@ -739,7 +741,7 @@ ws.send(
 );
 ```
 
-## 运行服务端
+## 【3】运行服务端
 
 `node server.js`
 
@@ -747,7 +749,7 @@ ws.send(
 
 ---
 
-# MQTT 通信
+# 十五、MQTT 通信
 
 ```
 client = mqttConnect.connect(MQTT_SERVICE, options)
@@ -765,9 +767,9 @@ client.on('connect', () => {
 
 ---
 
-# JavaScript 编码规范
+# 十六、JavaScript 编码规范
 
-## 不要在块内函数声明
+## 【1】不要在块内函数声明
 
 不推荐：
 
@@ -785,7 +787,7 @@ if (x) {
 }
 ```
 
-## 不要封装基本类型
+## 【2】不要封装基本类型
 
 会导致异常，如：
 
@@ -794,9 +796,9 @@ var x = new Boolean(false);
 false === false; // false
 ```
 
-## for-in 循环
+## 【3】for-in 循环
 
-### 只用于 object/map/hast 的遍历
+◆ 只用于 `object`/`map`/`hash` 的遍历
 
 ```
 var obj = {
@@ -807,7 +809,7 @@ for(var i in obj) {
 }
 ```
 
-### 遍历对象时用 hasOwnPropery
+◆ 遍历对象时用 `hasOwnPropery`
 
 ```
 for(var i in obj) {
@@ -815,9 +817,9 @@ for(var i in obj) {
 }
 ```
 
-## 检查 null 和 0
+## 【4】检查 null 和 0
 
-如果你想检查字符串是否为 null 或空:
+如果你想检查字符串是否为 `null` 或`空`:
 
 `if (y != null && y != '') {`
 
@@ -825,7 +827,7 @@ for(var i in obj) {
 
 `if (y) {`
 
-## 使用三元操作符
+## 【5】使用三元操作符
 
 三元操作符用于替代下面的代码:
 
@@ -845,15 +847,15 @@ return val ? foo() : bar();
 
 ---
 
-# 与 JAVA 相通的概念
+# 十七、与 JAVA 相通的概念
 
 ## 【1】MVC、MVVM
 
-### 【1.1】MVC
+◆ 【1.1】MVC
 
 Model 层:模型层，比如图片放一个类，标题放一个类 View 层：显示页面，如 xml Controller 层：控制 Model 的读取、存储。如 MainActivity
 
-### 【1.2】MVVM
+◆ 【1.2】MVVM
 
 MVVM 实现了 View 和 Model 的自动同步，当 Model 的属性改变时，我们不再手动操作 DOM，也就是双向绑定。
 
@@ -865,21 +867,21 @@ js 里面的类和其它 OOP 里面的类概念是一样的。（比如，所有
 
 ---
 
-# hybird 混合式开发
+# 十八、hybird 混合式开发
 
-## jsBridge
+主要应用到：`jsBridge`
 
 js 与 android 的通信
 
-### android 代码：
+◆ android 代码：
 
 java 发消息给 js： `webview.send()` java 收 js 的消息 `webview.registerHander('name',new Bridge(){})`
 
-### javaScript 代码：
+◆ javaScript 代码：
 
 js 发消息给 java `window.WebViewJavaScriptBridge.send()` js 收 java 的消息 `document.addEventListener('WebViewJavaScriptBridgeReady',()=>{})`
 
-### 示例
+◆ 示例
 
 ```
 $(".company_color").click(function(){
@@ -898,7 +900,7 @@ $(".company_color").click(function(){
 
 ---
 
-# Blob 实现下载文件
+# 十九、Blob 实现下载文件
 
 [参考链接](https://zhuanlan.zhihu.com/p/97768916)
 
@@ -922,9 +924,9 @@ download(){
 
 ---
 
-# 打开下载后立马关闭
+# 二十、打开下载后立马关闭
 
-- 1.excel
+## 【1】下载excel文件
 
 ```
 var adom = document.createElement("a");
@@ -937,7 +939,7 @@ adom.click();
 adom.remove();
 ```
 
-- 2.image
+## 【2】下载image文件
 
 ```
 fetch(url).then(res => res.blob()).then((blob) => {
@@ -955,7 +957,7 @@ fetch(url).then(res => res.blob()).then((blob) => {
 
 ---
 
-# `typeof null`为什么返回`object`
+# 二十一、`typeof null`为什么返回`object`
 
 `null`是空对象指针，所以`typeof null`返回的是`object`，
 
@@ -963,7 +965,7 @@ fetch(url).then(res => res.blob()).then((blob) => {
 
 ---
 
-# lighthouse 前端性能优化工具
+# 二十二、`lighthouse` 前端性能优化工具
 
 ```
 npm install -g lighthouse
@@ -975,7 +977,7 @@ lighthouse https://www.cnblogs.com/
 
 ---
 
-# 用 iframe 实现 HTML 在线编辑
+# 二十三、用 iframe 实现 HTML 在线编辑
 
 ```
 <!DOCTYPE html>
@@ -1016,9 +1018,9 @@ lighthouse https://www.cnblogs.com/
 
 ---
 
-# 实现数字递增动画
+# 二十四、实现数字递增动画
 
-## `html`版
+## 【1】`html`版
 
 ```
 <!DOCTYPE html>
@@ -1056,7 +1058,7 @@ lighthouse https://www.cnblogs.com/
 </html>
 ```
 
-## `vue`组件版
+## 【2】`vue`组件版
 
 numberAnimation.vue
 
@@ -1125,7 +1127,7 @@ test.vue
 
 ---
 
-# 全屏
+# 二十五、全屏
 
 ```
 document.querySelector('body').requestFullscreen(); // 全屏
@@ -1134,7 +1136,7 @@ document.exitFullscreen(); // 退出全屏
 
 ---
 
-# `{变量}`方法可以快速使变量变成对象
+# 二十六、`{变量}`方法可以快速使变量变成对象
 
 ```
 const num = 123;
@@ -1144,7 +1146,7 @@ console.log(a); // {num:123}
 
 ---
 
-# `event.getModifierState('CapsLock')`检测到当前开启了大写键盘，而不是用`shift`生成的大写字母
+# 二十七、`event.getModifierState('CapsLock')`检测到当前开启了大写键盘，而不是用`shift`生成的大写字母
 
 ```
 const passwordInput = document.getElementById('password');
@@ -1157,7 +1159,7 @@ passwordInput.addEventListener('keyup', function (event) {
 
 ---
 
-# 可终止条件`true && doSomething();`
+# 二十八、可终止条件`true && doSomething();`
 
 ```
 // 原来的：
@@ -1170,7 +1172,7 @@ true && doSomething();
 
 ---
 
-# 空值合并：`??`
+# 二十九、空值合并：`??`
 
 ```
 // 原来的：
@@ -1188,7 +1190,7 @@ let x = foo ?? bar();
 
 ---
 
-# Web Animation API
+# 三十、Web Animation API
 
 css animation：
 
@@ -1265,7 +1267,7 @@ rotateAni.finished.then(() => {
 
 ---
 
-# `undefined`和`void 0`
+# 三十一、`undefined`和`void 0`
 
 `undefined`在闭包时可更改：
 
