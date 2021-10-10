@@ -7,7 +7,7 @@ categories:
 
 原 date: 2018-11-20 14:35:18
 
-# 链接
+# 一、链接
 
 - [官方 API 链接](https://echarts.apache.org/zh/option.html)
 
@@ -19,7 +19,7 @@ categories:
 
 ---
 
-# 在 vue 中如何使用
+# 二、在 vue 中如何使用
 
 ## 【1】下载
 
@@ -326,7 +326,7 @@ export const getAdapterFont = (e = 7) => {
 
 ---
 
-# 常见通用配置项
+# 三、常见通用配置项
 
 ```
 option = {
@@ -455,7 +455,7 @@ option = {
 
 ---
 
-# 组件其它设置
+# 四、组件其它设置
 
 ## 【1】颜色渐变
 
@@ -497,7 +497,7 @@ axisLabel: {
 
 ---
 
-# js 控制 echarts
+# 五、js 控制 echarts
 
 ## 【1】`window.eventBus`实现 vue 页面与普通 js 数据通信
 
@@ -580,7 +580,7 @@ resizeB: function () {
 
 ---
 
-# 常用图表——折线图、柱状图、饼图
+# 六、常用图表——折线图、柱状图、饼图
 
 ## 【1】折线图-line
 

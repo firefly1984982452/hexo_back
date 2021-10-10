@@ -7,7 +7,7 @@ categories:
 
 docker 可以理解为**容器/虚拟机/服务器**。
 
-# 参考链接
+# 一、参考链接
 
 - [Docker 官方社区](https://hub.docker.com/)
 
@@ -15,13 +15,13 @@ docker 可以理解为**容器/虚拟机/服务器**。
 
 - [菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
 
-# 下载
+# 二、下载
 
 在官网下载安装包
 
 像安装 node、qq 一样正常安装即可
 
-# 创建、查看、运行镜像
+# 三、创建、查看、运行镜像
 
 以 `nginx` 为例：
 
@@ -37,7 +37,7 @@ docker 可以理解为**容器/虚拟机/服务器**。
 
 - `docker run --name test nginx`：运行指定名称的镜像
 
-# 停止、删除、重启
+# 四、停止、删除、重启
 
 `xx` 为`<ID or Image Name >`
 
@@ -57,7 +57,7 @@ docker 可以理解为**容器/虚拟机/服务器**。
 
 - `docker image prune -a`：删除没有使用的所有镜像
 
-# 端口映射的 2 种模式
+# 五、端口映射的 2 种模式
 
 - 【1】attached 模式：在前台运行
 
@@ -111,7 +111,7 @@ docker logx xx
 docker logs -f xx
 ```
 
-# 交互模式
+# 六、交互模式
 
 只看看访问日志已经无法满足需求，这时候就需要交互模式
 
@@ -151,7 +151,7 @@ docker run -d -p 8080:80 nginx
 docker exec -it xx sh
 ```
 
-# 镜像的导出和导入
+# 七、镜像的导出和导入
 
 导出
 
@@ -165,7 +165,7 @@ docker image save test:lastest -o new-test.image
 docker image load -i .\new-test.image
 ```
 
-# Dockerfile
+# 八、Dockerfile
 
 ## 【1】通过 Dockerfile 构建镜像
 

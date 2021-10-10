@@ -7,7 +7,7 @@ categories:
 
 [链接](https://blog.csdn.net/shenlei19911210/article/details/78529939?spm=1001.2014.3001.5501)
 
-# 普通发布代码
+# 一、普通发布代码
 
 ```
 git add .
@@ -16,79 +16,79 @@ git pull
 git push
 ```
 
-# 绑定 git 仓库
+# 二、绑定 git 仓库
 
 ```
 git remote add origin 地址
 ```
 
-# 线上版本回退
+# 三、线上版本回退
 
 ```
 git reset --hard '7位数版本号'
 git pull -f
 ```
 
-# 不要本地的更改文件
+# 四、不要本地的更改文件
 
 ```
 git checkout .
 ```
 
-# 导出干净代码
+# 五、导出干净代码
 
 ```
 git archive --format zip --output "out.zip" master -0
 ```
 
-# 两个版本之前的补丁包
+# 六、两个版本之前的补丁包
 
 比如我要 10 月 3 日 至 10 月 5 日 的补丁包
 
 `$ git diff 10月5日的7位数版本号 10月3日的7位数版本号 --name-only | xargs zip update.zip`
 
-# 不同分支开发
+# 七、不同分支开发
 
-**新建分支**
+1. 新建分支
 
 ```
 git checkout -b name
 ```
 
-**发布新的分支**
+2. 发布新的分支
 
 ```
 <!-- 提交发布代码后： -->
 git push origin name
 ```
 
-**查看所有分支**
+3. 查看所有分支
 
 ```
 git branch
 ```
 
-**切换分支**
+4. 切换分支
 
 ```
 git checkout name
 ```
 
-**将 master 分支上的代码 pull 下来**
+5. 将 master 分支上的代码 pull 下来
 
 ```
 git pull origin master
 ```
 
-**在自己分支上修改代码并 push 到自己分支**
+6. 在自己分支上修改代码并 push 到自己分支
 
-**切换到 master 分支**
+7. 切换到 master 分支
 
 ```
 git checkout master
 ```
 
-**同步并 push 代码**
+8. 同步并 push 代码
 
 ```
 git merge name
@@ -104,7 +104,7 @@ git push
 
 ---
 
-# 新电脑开发新项目
+# 八、新电脑开发新项目
 
 0. 使用 git 命令取消全局设置
 
@@ -146,6 +146,6 @@ open ~/.ssh
 git clone 'xx'
 ```
 
-# git 设备多帐户
+# 九、git 设备多帐户
 
 [链接](https://www.jianshu.com/p/cacf91579268)
