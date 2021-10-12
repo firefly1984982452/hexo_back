@@ -5,11 +5,11 @@ categories:
 - program
 ---
 
-# 正常布局流
+# 一、正常布局流
 
 ---
 
-# 弹性盒子：flex
+# 二、弹性盒子：flex
 
 ## 规范
 
@@ -140,7 +140,7 @@ container{
 
 ---
 
-# 网格布局：grid
+# 三、网格布局：grid
 
 ## 基本使用
 
@@ -172,11 +172,11 @@ place-content: center;
 
 ---
 
-# 浮动布局：float
+# 四、浮动布局：float
 
 ---
 
-# 定位：position
+# 五、定位：position
 
 - `relative`：略
 - `absolute`：略
@@ -206,7 +206,7 @@ top: 0;
 
 ---
 
-# 多列布局：column
+# 六、多列布局：column
 
 [MDN-学习链接](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Multiple-column_Layout)
 
@@ -238,7 +238,7 @@ section{
 
 ---
 
-# BFC、IFC、GFC、FFC
+# 七、BFC、IFC、GFC、FFC
 
 - BFC: 块级格式化上下文(block)
 - IFC: 内联格式化上下文(inline)
@@ -320,7 +320,7 @@ Flexbox 定义了伸缩容器内伸缩项目该如何布局
 
 ---
 
-# content-visibility：内容可见性
+# 八、content-visibility：内容可见性
 
 和`visibility: hidden;`有类似效果，能够占位。其它用处没有测出来。
 
@@ -355,7 +355,7 @@ html
 </main>
 ```
 
-# 五种 CSS 经典布局
+# 九、五种 CSS 经典布局
 
 [阮一峰的博客链接](https://www.ruanyifeng.com/blog/2020/08/five-css-layouts-in-one-line.html)
 

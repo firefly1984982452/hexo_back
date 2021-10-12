@@ -7,7 +7,7 @@ categories:
 
 - [MDN 全元素](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
 
-# 选择器
+# 一、选择器
 
 ## 【1】伪元素、伪类选择器
 
@@ -195,7 +195,7 @@ article h1 {
 
 ---
 
-# 边框
+# 二、边框
 
 - `border-radius`
 - `box-shadow`
@@ -388,7 +388,7 @@ border-bottom-left-radius:  1em 5em;
 
 ---
 
-# 背景：background
+# 三、背景：`background`
 
 ## 【1】区域起源：background-origin
 
@@ -510,7 +510,7 @@ background-attachment: local, scroll;
 
 ---
 
-# 转换：transform
+# 四、转换：`transform`
 
 [所有旋转效果](https://c.runoob.com/codedemo/3391)
 
@@ -637,7 +637,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 ---
 
-# 多边形裁剪路径：clip-path
+# 五、多边形裁剪路径：`clip-path`
 
 可以裁剪图片
 
@@ -709,7 +709,7 @@ clip-path:polygon(x1 y1, x2 y2, x3 y3,...);
 
 ◆ 示例：
 
-- 1. 多边形
+1. 多边形
 
 ![image](https://wx4.sinaimg.cn/mw690/0069qZtTgy1gnai8f18pkj309605nt8m.jpg)
 
@@ -717,7 +717,7 @@ clip-path:polygon(x1 y1, x2 y2, x3 y3,...);
 clip-path: polygon(0 0, 90% 0, 100% 25%, 100% 100%, 10% 100%, 0 85%);
 ```
 
-- 2. 三角形
+2. 三角形
 
 ![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gnai8jg39zj308e05nwed.jpg)
 
@@ -731,7 +731,7 @@ clip-path: (0 100%, 50% 0, 100% 100%);
 
 ---
 
-# 各种阴影
+# 六、各种阴影
 
 ## 【1】边框阴影：box-shadow
 
@@ -838,17 +838,17 @@ box-shadow: 0 0 0 50vmax rgba(0,0,0,.8);
 
 ---
 
-# 渐变：gradient
+# 七、渐变：`gradient`
 
-- `line-gradient`：线性渐变
+1. `line-gradient`：线性渐变
 
-- `radial-gradient`：径向渐变
+2. `radial-gradient`：径向渐变
 
-- `conic-gradient`：圆锥形渐变
+3. `conic-gradient`：圆锥形渐变
 
-- `repeating-line-gradient`：重复线性渐变
+4. `repeating-line-gradient`：重复线性渐变
 
-- `repeating-radial-gradient`：重复径向渐变
+5. `repeating-radial-gradient`：重复径向渐变
 
 与`background-size`组合的话，可以生成条纹背景。
 
@@ -950,7 +950,7 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 
 ---
 
-# 文本效果
+# 八、文本效果
 
 ## 【1】文字及段落
 
@@ -1141,7 +1141,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
 ---
 
-# 文字环绕：shape
+# 九、文字环绕：shape
 
 `shape-outside`属性使得行内（`inline`）的内容，围绕`outside`指定的曲线排列，可以用多边形``里面的属性。
 
@@ -1182,7 +1182,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
 ---
 
-# 动画：animation
+# 十、动画：`animation`
 
 ## 【1】写法
 
@@ -1331,7 +1331,7 @@ window.requestAnimationFrame(() => {
 
 ---
 
-# 过渡：transition
+# 十一、过渡：`transition`
 
 可以直接写`transition:all 2s;`来过渡所有样式。
 
@@ -1375,7 +1375,7 @@ window.requestAnimationFrame(() => {
 
 ---
 
-# 滤镜：filter
+# 十二、滤镜：`filter`
 
 [filter 所有效果](https://www.runoob.com/try/try.php?filename=trycss_ex_images_filters)
 
@@ -1458,7 +1458,7 @@ backdrop-filter: saturate(80%);
 
 ---
 
-# 混合模式：mix-blend-mode
+# 十三、混合模式：`mix-blend-mode`
 
 ## 所有效果
 
@@ -1474,9 +1474,9 @@ isolation: isolate;
 
 ---
 
-# 图片相关
+# 十四、图片相关
 
-## 【1】object-fit
+## 【1】`object-fit`
 
 [效果预览](https://firefly1984982452.github.io/my-web-page/object-fit.html)
 
@@ -1492,7 +1492,7 @@ isolation: isolate;
 
 ![image](https://wx3.sinaimg.cn/large/0069qZtTgy1gnbgsxvddej31hb0ng1b9.jpg)
 
-## 【2】image-set
+## 【2】`image-set`
 
 ```
 background-image: -webkit-image-set(url('./cute.png') 2x, url('./yellow.jpeg') 3x);
@@ -1500,7 +1500,7 @@ background-image: -webkit-image-set(url('./cute.png') 2x, url('./yellow.jpeg') 3
 
 选取移动端符合响应式条件的图片。
 
-## 【3】background-blend-mode
+## 【3】`background-blend-mode`
 
 背景的颜色混合模式，有 16 个值可取：【normal（默认值，即不混合）, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color and luminosity（显示单色效果）】。
 
@@ -1519,7 +1519,7 @@ background: url(img/pattern.png), url(img/jellyfish.jpg), #f07e32;
 background-blend-mode: screen;
 ```
 
-## 【4】object-position
+## 【4】`object-position`
 
 与 `background-position`写法一样，区别是`object-position`用于对象，一般用图片，而`background-position`只能用在背景里面。
 
@@ -1532,7 +1532,7 @@ img {
 }
 ```
 
-## 【5】vertical-align
+## 【5】`vertical-align`
 
 文字对齐图片方式
 
@@ -1541,9 +1541,9 @@ vertical-align: text-top; // 默认文字对齐图片顶部
 vertical-align: text-bottom; // 文字对齐图片底部
 ```
 
-## 【6】image-orientation：纠正图片的方向
+## 【6】`image-orientation`：纠正图片的方向
 
-## 【7】image-rendering：增强图像渲染
+## 【7】`image-renderin`g：增强图像渲染
 
 ```
 image-rendering: auto;
@@ -1553,7 +1553,7 @@ image-rendering: pixelated;
 
 ---
 
-# 其它
+# 十五、其它
 
 ## 【1】reiseze 属性
 
@@ -1590,7 +1590,7 @@ resize: auto;
 
 ---
 
-# -webkit-box-reflect：倒影
+# 十六、`-webkit-box-reflect`：倒影
 
 - [MDN](https://developer.mozilla.org/de/docs/Web/CSS/-webkit-box-reflect)
 
@@ -1602,7 +1602,7 @@ img{
 
 ---
 
-# mask：面具
+# 十七、`mask`：面具
 
 [学习链接](https://www.zhangxinxu.com/wordpress/2017/11/css-css3-mask-masks/)
 
@@ -1658,7 +1658,7 @@ img{
 
 ---
 
-# @media：媒体查询
+# 十八、`@media`：媒体查询
 
 ## 【1】any-hover
 
@@ -1777,7 +1777,7 @@ html
 
 ---
 
-# appearance：修改默认样式
+# 十九、`appearance`：修改默认样式
 
 [链接](https://blog.csdn.net/webofrxy/article/details/79853710)
 
@@ -1815,7 +1815,7 @@ input[type="checkbox"] {
 
 ---
 
-# css 比较函数：min()、max()、clamp()
+# 二十、css 比较函数：`min()`、`max()`、`clamp()`
 
 可以择优选择一个最合适的尺寸，不仅用于 width，还可以用于 font-size 等值。
 
@@ -1862,7 +1862,7 @@ input[type="checkbox"] {
 
 ---
 
-# will-change：性能优化
+# 二十一、`will-change`：性能优化
 
 [will-change 链接](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change) [animation 事件监听](https://www.runoob.com/try/try.php?filename=tryjsref_animationstart)
 
@@ -1935,7 +1935,7 @@ input[type="checkbox"] {
 
 ---
 
-# preserve
+# 二十二、`preserve`
 
 [学习链接](https://www.cnblogs.com/coco1s/p/15178959.html)
 
@@ -1950,7 +1950,7 @@ input[type="checkbox"] {
 
 3. perspective: number|none;
 
-# 移动端环境变量函数 `env()`和`constant()`
+# 二十三、移动端环境变量函数 `env()`和`constant()`
 
 `env()`和`constant()`，是`IOS11`新增特性，`Webkit`的`css`函数，用于设定安全区域与边界的距离，有4个预定义变量：
 

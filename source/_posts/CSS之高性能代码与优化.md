@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-# CSS 编码技巧
+# 一、CSS 编码技巧
 
 ## 【1】尽量减少代码重复
 
@@ -73,7 +73,7 @@ background-color: red;
 
 ---
 
-# 文档分析注释
+# 二、文档分析注释
 
 ## 目录注释
 
@@ -121,7 +121,7 @@ import './assets/css/public.css';
 
 ---
 
-# CSS 编写顺序
+# 三、CSS 编写顺序
 
 1. Reset；
 2. DOM 元素，如 ul、li；
@@ -131,7 +131,7 @@ import './assets/css/public.css';
 
 ---
 
-# CSS 命名
+# 四、CSS 命名
 
 ## 命名规范
 
@@ -149,7 +149,7 @@ import './assets/css/public.css';
 
 ---
 
-# 优先级及优化
+# 五、优先级及优化
 
 ## 优先级
 
@@ -168,7 +168,7 @@ Class
 
 ---
 
-# CSS 样式继承
+# 六、CSS 样式继承
 
 - 文字相关：`font-family`、`color`、`font-size`、`font-style`等。
 - 列表相关：`list-style`、`list-style-type`、`list-style-position`等。
@@ -178,7 +178,7 @@ Class
 
 ---
 
-# SEO 优化和增加可读性
+# 七、SEO 优化和增加可读性
 
 - 鼠标样式随功能变化；
 

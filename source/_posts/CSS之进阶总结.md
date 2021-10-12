@@ -5,7 +5,7 @@ categories:
 - program
 ---
 
-# CSS 的进化历史
+# 一、CSS 的进化历史
 
 - `Scss(Sass)`、`Less`、`stylus` 和 `PostCSS` 等 CSS 预处理器
 
@@ -25,7 +25,7 @@ categories:
 
   JavaScript 和 CSS 可以方便的共享变量和方法
 
-# html `<head>`相关
+# 二、html `<head>`相关
 
 ## 【1】禁止缓存
 
@@ -51,7 +51,7 @@ categories:
 
 ---
 
-# CSS 键盘鼠标相关
+# 三、CSS 键盘鼠标相关
 
 ## 【1】CSS 禁止鼠标点击
 
@@ -161,7 +161,7 @@ $(document).ready(function(){
 
 ---
 
-# CSS 单位
+# 四、CSS 单位
 
 ## 【1】em
 
@@ -219,7 +219,7 @@ p{
 
 ---
 
-# 屏幕尺寸，分辨率，像素，PPI
+# 五、屏幕尺寸，分辨率，像素，PPI
 
 [学习链接](https://zhuanlan.zhihu.com/p/26232703?utm_source=com.tencent.mtt)
 
@@ -272,7 +272,7 @@ p{
 
 ---
 
-# CSS 自定义属性（CSS 变量）
+# 六、CSS 自定义属性（CSS 变量）
 
 要点：
 
@@ -292,7 +292,7 @@ p{
 
 ---
 
-# width 和 height 相关知识点
+# 七、width 和 height 相关知识点
 
 ## 【1】table
 
@@ -321,11 +321,13 @@ Table 表格中，定了 width，如果其它的内容很高，内容少的可�
 
 ## 【6】让元素 heigth 支持 100%的方法
 
-方法一：
+◆ 方法一
 
-`html,body{heigth:100%}`
+```
+html,body{heigth:100%}
+```
 
-方法二：
+◆ 方法二
 
 使用绝对定位
 
@@ -376,7 +378,7 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 ---
 
-# 宽高比：`aspect-ratio`
+# 八、宽高比：`aspect-ratio`
 
 设置元素的宽高比为 `10:1`：
 
@@ -388,18 +390,18 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 ---
 
-# 文字相关
+# 九、文字相关
 
-- 1. 文字渐变
-- 2. 抗锯齿渲染：-webkit-font-smoothing
-- 3. 文字描边：-webkit-text-stroke
-- 4. 文字阴影：text-shadow
-- 5. 文字颜色：-webkit-text-fill-color
-- 6. font-size:10px
-- 7. 自定义字体：font-face
-- 8. 垂直排版
-- 9. 断行规则：line-break
-- 10. 优化字体性能：font-display
+1. 文字渐变
+2. 抗锯齿渲染：-webkit-font-smoothing
+3. 文字描边：-webkit-text-stroke
+4. 文字阴影：text-shadow
+5. 文字颜色：-webkit-text-fill-color
+6. font-size:10px
+7. 自定义字体：font-face
+8. 垂直排版
+9. 断行规则：line-break
+10. 优化字体性能：font-display
 
 ## 【1】文字渐变
 
@@ -487,7 +489,7 @@ line-break: anywhere; // 任意位置标点都可以换行
 
 ---
 
-# display 显示
+# 十、display 显示
 
 [链接](https://blog.csdn.net/qq_42161935/article/details/99844944)
 
@@ -530,7 +532,7 @@ line-break: anywhere; // 任意位置标点都可以换行
 
 ---
 
-# CSS 关键字：initial、inherit、unset、revert 和 all
+# 十一、CSS 关键字：initial、inherit、unset、revert 和 all
 
 - [区别预览](https://firefly1984982452.github.io/my-web-page/css-keyword.html)
 
@@ -626,7 +628,7 @@ p{
 
 ---
 
-# 打印相关
+# 十二、打印相关
 
 ## 【1】打印方法
 
@@ -749,7 +751,7 @@ table {
 
 ---
 
-# @supports 支持
+# 十三、@supports 支持
 
 `supports`命令用来判断浏览器是否支持某项 CSS 功能。
 
@@ -788,7 +790,7 @@ table {
 
 ---
 
-# 简写属性
+# 十四、简写属性
 
 **4 个值：上右下左(时钟)；2 个值：右/左和上下（x 轴和 y 轴）；**
 
@@ -804,7 +806,7 @@ table {
 
 ---
 
-# HTML 默认字体大小 14px
+# 十五、HTML 默认字体大小 14px
 
 ```
 font-size: 14px;
@@ -812,11 +814,11 @@ font-size: 14px;
 
 ---
 
-# `content: ''` 的妙用
+# 十六、`content: ''` 的妙用
 
 [链接](https://echeverra.cn/2021/08/06/css-content/)
 
-# counter 计数器
+# 十七、counter 计数器
 
 [MDN-counter](<https://developer.mozilla.org/zh-CN/docs/Web/CSS/counter()>) [MDN-counters](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters) [其它博客](https://blog.csdn.net/lhjuejiang/article/details/79823803)
 
@@ -998,49 +1000,14 @@ counters(name, string, style) string
 
 ---
 
-# CSS 插件之 gsap 数字动画
 
-```
-npm install gsap@2.0.2
-
-最新版本我尝试的时候不行，也许不同环境下可以
-```
-
-```
-<input v-model="number" type="text" step="20">
-<p>{{ animatedNumber }}</p>
-...
-import { TweenLite } from 'gsap/TweenMax'
-export default {
-  data() {
-    return {
-      number: 0,
-      tweenedNumber: 0
-    }
-  },
-
-  computed: {
-    animatedNumber: function() {
-      return this.tweenedNumber.toFixed(0);
-    }
-  },
-  watch: {
-    number: function(newValue) {
-      TweenLite.to(this.$data, 2, { tweenedNumber: newValue })
-    }
-  },
-}
-```
-
----
-
-# content 中的特殊字符及图标
+# 十八、content 中的特殊字符及图标
 
 [网址](https://blog.csdn.net/qq_41995919/article/details/112377349)
 
 ---
 
-# 交互优化
+# 十九、交互优化
 
 ## 【1】scroll-behavior
 
@@ -1090,7 +1057,7 @@ overflow-anchor: none; // 禁止滚动锚点
 
 ---
 
-# caret-color：插入光杆颜色
+# 二十、caret-color：插入光杆颜色
 
 ```
 
@@ -1100,7 +1067,7 @@ input.custom { caret-color: #0f0; }
 
 ---
 
-# user-select：用户选择
+# 二十一、user-select：用户选择
 
 ```
 
@@ -1112,7 +1079,7 @@ user-select: auto | text | none | contain | all;
 
 ---
 
-# all：级联和继承
+# 二十二、all：级联和继承
 
 ```
 
@@ -1137,6 +1104,45 @@ user-select: auto | text | none | contain | all;
     <p>This is a little widget.</p>
   </aside>
 <section>
+```
+
+---
+
+---
+
+
+# 二十三、CSS 插件之 gsap 数字动画
+
+```
+npm install gsap@2.0.2
+
+最新版本我尝试的时候不行，也许不同环境下可以
+```
+
+```
+<input v-model="number" type="text" step="20">
+<p>{{ animatedNumber }}</p>
+...
+import { TweenLite } from 'gsap/TweenMax'
+export default {
+  data() {
+    return {
+      number: 0,
+      tweenedNumber: 0
+    }
+  },
+
+  computed: {
+    animatedNumber: function() {
+      return this.tweenedNumber.toFixed(0);
+    }
+  },
+  watch: {
+    number: function(newValue) {
+      TweenLite.to(this.$data, 2, { tweenedNumber: newValue })
+    }
+  },
+}
 ```
 
 ---
