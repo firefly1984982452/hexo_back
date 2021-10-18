@@ -201,16 +201,43 @@ article h1 {
 - `box-shadow`
 - `border-image`
 - `border-style`
+- `text-emphasis`
+
+## 【0】`text-emphasis`：强调文字
+
+◆ 示例：
+
+<a style="text-emphasis: open red;-webkit-text-emphasis: open red;">你好，hello world.</a>
+
+◆ 代码：
+
+```
+text-emphasis: 'x';
+text-emphasis: '点';
+text-emphasis: '\25B2';
+text-emphasis: '*' #555;
+text-emphasis: 'foo'; 
+
+text-emphasis: filled;
+text-emphasis: open;
+text-emphasis: filled sesame;
+text-emphasis: open sesame;
+
+text-emphasis: filled sesame #555;
+
+
+-webkit-text-emphasis-position: under;
+```
 
 ## 【1】box-shadow
 
 `box-shadow: 50px 50px 0 20px #ffb;`
 
-图：
+◆ 示例图：
 
 ![image](https://wx3.sinaimg.cn/mw690/0069qZtTgy1gj0nvzcynqj308y069dfn.jpg)
 
-解析：
+◆ 解析：
 
 ```
 参数1：X轴，图中为30，因为50-20=30；

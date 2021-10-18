@@ -68,7 +68,7 @@ import Page1 from '@/components/Page1'
 
 ## 3.1 通过<router-link> 标签中的to传参
 
-用<router-link>标签中的to属性进行传参，写成:to
+用`<router-link>`标签中的to属性进行传参，写成:to
 
 `<router-link :to="{name:'Page1',params:{username:'彭丹丹'}}">找宝宝并用link to传参</router-link>`
 
@@ -247,9 +247,9 @@ index.js
 
 # 7. 路由的过渡动画
 
-## 7.1 <transition>标签
+## 7.1 `<transition>`标签
 
-在/src/App.vue文件里添加了<transition>标签，并给标签起了一个名字叫fade。
+在`/src/App.vue`文件里添加了`<transition>`标签，并给标签起了一个名字叫`fade`。
 
 ```
 <transition name="fade">

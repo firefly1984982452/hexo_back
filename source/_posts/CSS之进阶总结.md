@@ -202,8 +202,54 @@ p{
 ```
 vm：1/100的视口宽度；
 vh：1/100的视口高度；
-vmax：1/100的视口中较大的一方的长度；
-vmin：1/100的视口中较小的一方的长度；
+vmax：当前vw和vh中较大的一个值；
+vmin：当前vw和vh中较小的一个值；
+vmin、vmax的作用：在做移动端页面开发时，会使得文字大小在横竖屏下保持一致。
+```
+
+## 【4】`min-inline-size`、`max-inline-size`：最小/最大直列大小
+
+最小/最大直列大小
+
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CSS | max-inline-size Property</title>
+  <style>
+    h1 {
+      color: green;
+    }
+
+    div {
+      background-color: green;
+      width: 200px;
+      height: 20px;
+    }
+
+    .one {
+      max-inline-size: 10px;
+      background-color: cyan;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <h1>Geeksforgeeks</h1>
+    <b>CSS | max-inline-size Property</b>
+    <br>
+    <br>
+    <div>
+      <p class="one">
+        A Computer Science Portal for Geeks
+      </p>
+    </div>
+  </center>
+</body>
+
+</html>
 ```
 
 ## 移动端最快使用 rem 的方法
@@ -1057,7 +1103,9 @@ overflow-anchor: none; // 禁止滚动锚点
 
 ---
 
-# 二十、caret-color：插入光杆颜色
+# 二十、caret-color：插入光标颜色
+
+- [学习链接](https://www.zhangxinxu.com/wordpress/2018/01/css-caret-color-first-line/)
 
 ```
 
@@ -1075,7 +1123,7 @@ user-select: auto | text | none | contain | all;
 
 ```
 
-有时候用<p>标签默认鼠标能选中文字，这时可以使用`user-select: none`来禁止点击文字之后处于选中状态，也能避免复制能操作。
+有时候用`<p>`标签默认鼠标能选中文字，这时可以使用`user-select: none`来禁止点击文字之后处于选中状态，也能避免复制能操作。
 
 ---
 
@@ -1106,7 +1154,6 @@ user-select: auto | text | none | contain | all;
 <section>
 ```
 
----
 
 ---
 

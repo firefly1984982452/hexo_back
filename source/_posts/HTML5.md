@@ -972,3 +972,18 @@ summary::-webkit-details-marker {
 | `&qpos;` |   `'`   |
 
 `&#9;`代表的 Tab 格只有在`<pre></pre>`中才生效。
+
+
+---
+
+# 十六、已废弃但可以了解一下的标签元素
+
+## 【1】`<marquee>`：跑马灯
+
+兼容性在各大浏览器都挺好，但MDN不推荐使用，以后也可能会删除。
+
+<marquee>hello world , your canvas is good.</marquee>
+
+```
+<marquee >hello world , your canvas is good.</marquee>
+```
