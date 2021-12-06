@@ -2,10 +2,21 @@
 title: CSS之实现各种功能
 date: 2021-01-07 17:19:32
 categories:
-- program
+  - program
 ---
 
+<style>
+  p.example{
+    color:#f00;
+    border: 1px solid;
+  }
+  div.example{
+    border: 1px solid #f00;
+  }
+</style>
+
 # 【1】
+
 ---
 
 # 【2】限定 N 行
@@ -26,6 +37,16 @@ word-wrap: break-word;
     white-space: nowrap;
  }
 ```
+
+◆ 示例：
+
+<p class="example" style="width:300px;display: -webkit-box;
+overflow: hidden;
+white-space: normal!important;
+text-overflow: ellipsis;
+word-wrap: break-word;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;">日历中的历法又分为阴历、阳历和阴阳合历,三种。 阳历亦即太阳历,其历年为一个回归年,现时国际通用的公历(格里高利历)和中国的干支历即属于太阳历这类。</p>
 
 ---
 
@@ -55,6 +76,16 @@ border-style: solid;
 border-width: 10px;
 ```
 
+◆ 示例：
+
+<div class="example">
+<div style="width: 0;
+height: 0;
+border-color: #f60 transparent transparent transparent;
+border-style: solid;
+border-width: 20px;"></div>
+</div>
+
 ---
 
 # 【5】检查边距
@@ -71,17 +102,7 @@ border-width: 10px;
 
 ---
 
-# 【6】图片与文字顶部对齐
-
-虽然`flex`可以实现，但有时候如果不想用到`flex`，可以尝试`img`自带的`vertical-align`属性。
-
-```
-img{
-  vertical-align:text-top; // 图片与文字顶部对齐
-}
-```
-
----
+# 【6】
 
 # 【7】左边定宽，右边自适应
 
@@ -92,6 +113,38 @@ img{
 ---
 
 # 【8】单行居中显示文字，多行居左显示，最多两行超过用省略号结尾
+
+◆ 示例：
+
+<style>
+.line-clamp{
+  width: 300px;
+}
+.line-clamp h2{
+  text-align: center;
+}
+.line-clamp p{
+  display: inline-block;
+  text-align: left;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.line-clamp em{
+  display: block;
+  text-align: center;
+}
+</style>
+
+<div class="example line-clamp">
+  <h2><p><em>单行居中，多行居左<em></p></h2>
+  <h2><p>上呼吸道感染，咽喉痛无发热</p></h2>
+  <h2><p>老人主诉头晕多日，饭后胸闷，结合体检情况，考虑为交感神经。</p></h2>
+</div>
+
+◆ 解析：
 
 前 2 项条件：
 
@@ -143,6 +196,39 @@ h2{
 <h2><p><em>单行居中，多行居左<em></p></h2>
 ```
 
+◆ 代码：
+
+```
+
+<style>
+.line-clamp{
+  width: 300px;
+}
+.line-clamp h2{
+  text-align: center;
+}
+.line-clamp p{
+  display: inline-block;
+  text-align: left;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.line-clamp em{
+  display: block;
+  text-align: center;
+}
+</style>
+
+<div class="example line-clamp">
+  <h2><p><em>单行居中，多行居左<em></p></h2>
+  <h2><p>上呼吸道感染，咽喉痛无发热</p></h2>
+  <h2><p>老人主诉头晕多日，饭后胸闷，结合体检情况，考虑为交感神经。</p></h2>
+</div>
+```
+
 ---
 
 # 【9】满屏背景和固定宽度
@@ -182,6 +268,17 @@ body{
   display: flex;
   flex-direction: column;
 }
+
+header{
+  height: 100px;
+}
+.main{
+  background-color: #fbb;
+  flex:1;
+}
+footer{
+  height: 100px;
+}
 ```
 
 ---
@@ -195,6 +292,20 @@ body{
 ---
 
 # 【12】`background-clip: padding-box;`实现半透明边框
+
+◆ 示例：
+
+<div style="height:100px;border: 10px solid rgba(255, 255, 255, 0.5);
+background: #fbb;">
+默认
+</div>
+
+<div style="height:100px;border: 10px solid rgba(255, 255, 255, 0.5);
+background: #fbb;background-clip: content-box;">
+background-clip: padding-box;或background-clip: content-box;
+</div>
+
+◆ 代码：
 
 ```
 border: 10px solid rgba(255, 255, 255, 0.5);
@@ -683,6 +794,28 @@ li:not(:last-child)...
 
 # 【23】上下左右箭头
 
+◆ 示例：
+
+<style>
+  .arrow{
+    width: 20px;
+    height: 20px;
+    border-top: 1px solid #c3c8d6;
+    border-right: 1px solid #c3c8d6;
+  }
+</style>
+
+<div class="example" style="padding:10px;">
+  <div class="arrow" style="transform: rotate(-45deg);"></div>
+  <div class="arrow" style="transform: rotate(135deg);"></div>
+  <br />
+  <div class="arrow" style="transform: rotate(-135deg);"></div>
+  <br />
+  <div class="arrow" style="transform: rotate(45deg);"></div>
+</div>
+
+◆ 代码：
+
 ```
 width: 20px;
 height: 20px;
@@ -726,7 +859,54 @@ background-position: 0 1.1em;
 
 # 【25】自定义复选框
 
-[效果预览地址](https://firefly1984982452.github.io/my-web-page/image-contrast.html)
+◆ 示例：
+
+<style>
+  .awesome-box input[type="checkbox"] {
+    /* display: none; */
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .awesome-box label {
+    font-size: 40px;
+  }
+
+  .awesome-box input[type="checkbox"]+label::before {
+    content: "\a0";
+    display: inline-block;
+    vertical-align: 0.2em;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.2em;
+    border-radius: 0.2em;
+    background: silver;
+    text-indent: 0.15em;
+    line-height: 0.65em;
+  }
+
+  .awesome-box input[type="checkbox"]:checked+label::before {
+    content: "\2713";
+    background: yellowgreen;
+  }
+
+  .awesome-box input[type="checkbox"]:focus+label::before {
+    box-shadow: 0 0 0.1em 0.1em #fbb;
+  }
+
+  .awesome-box input[type="checkbox"]:disabled+label::before {
+    background: #f00;
+    box-shadow: none;
+    color: #555;
+  }
+</style>
+
+<div class="example awesome-box">
+  <input type="checkbox" id="awesome" />
+  <label for="awesome">点击选中</label>
+</div>
+
+◆ 代码：
 
 ```
 <!DOCTYPE html>
@@ -778,6 +958,8 @@ background-position: 0 1.1em;
 ---
 
 # 自定义图片对比控件
+
+[效果预览地址](https://firefly1984982452.github.io/my-web-page/image-contrast.html)
 
 ```
 <!DOCTYPE html>
@@ -950,7 +1132,7 @@ background-position: 0 1.1em;
 }
 ```
 
-此时只是叠加动画，加上6秒的时间差之后才有上右下左的环绕效果：
+此时只是叠加动画，加上 6 秒的时间差之后才有上右下左的环绕效果：
 
 ```
 animation: anmiteX 12s linear -6s infinite alternate,/* 叠加上6秒时间差 */
@@ -958,6 +1140,7 @@ animation: anmiteX 12s linear -6s infinite alternate,/* 叠加上6秒时间差 *
 ```
 
 再加上贝塞尔曲线。
+
 ## 源码
 
 ```

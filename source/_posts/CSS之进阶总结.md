@@ -2,8 +2,15 @@
 title: CSS之进阶总结
 date: 2020-12-07 14:19:32
 categories:
-- program
+  - program
 ---
+
+<style>
+  p.example{
+    color:#f00;
+    font-size:2em;
+  }
+</style>
 
 # 一、CSS 的进化历史
 
@@ -451,6 +458,12 @@ line-height: 1.5; // 资料上都是1，但chrome和firfox上应该都是1.5
 
 ## 【1】文字渐变
 
+◆ 示例：
+
+<h1 style="background: linear-gradient(to bottom, #8AF0FF,#3780E6);-webkit-background-clip: text;color: transparent;">文字渐变</h1>
+
+◆ 代码：
+
 ```
 background: linear-gradient(to bottom, #8AF0FF,#3780E6);;
 -webkit-background-clip: text;
@@ -473,13 +486,35 @@ color: transparent;
 
 ## 【3】文字描边：-webkit-text-stroke
 
+◆ 示例：
+
+<p class="example" style="-webkit-text-stroke:1px #ff0;">文字描边</p>
+
+◆ 代码：
+
 ```
--webkit-text-stroke: 1px #fff;
+-webkit-text-stroke: 1px #ff0;
 ```
 
 ## 【4】文字阴影：text-shadow
 
+◆ 示例：
+
+<p class="example" style="text-shadow: 5px 5px 5px #f00;">文字阴影</p>
+
+◆ 代码：
+
+```
+text-shadow: 5px 5px 5px #f00;
+```
+
 ## 【5】文字颜色：-webkit-text-fill-color
+
+◆ 示例：
+
+<p class="example" style="-webkit-text-fill-color: red;color: green;">文字颜色</p>
+
+◆ 代码：
 
 ```
 a{
@@ -508,6 +543,16 @@ a{
 ```
 
 ## 【8】垂直排版
+
+◆ 示例：
+
+<p style="writing-mode: vertical-lr;text-orientation: upright;">数字横向123</p>
+<hr />
+<p style="writing-mode: vertical-lr;">竖向2021排版</p>
+<hr />
+<p style="writing-mode: vertical-lr;">竖向<span style="text-combine-upright: all;">2021</span>排版</p>
+
+◆ 代码：
 
 ```
 p{
@@ -670,7 +715,6 @@ p{
     <div class="in">测试文字</div>
 </div>
 ```
-
 
 ---
 
@@ -1046,7 +1090,6 @@ counters(name, string, style) string
 
 ---
 
-
 # 十八、content 中的特殊字符及图标
 
 [网址](https://blog.csdn.net/qq_41995919/article/details/112377349)
@@ -1154,9 +1197,7 @@ user-select: auto | text | none | contain | all;
 <section>
 ```
 
-
 ---
-
 
 # 二十三、CSS 插件之 gsap 数字动画
 
@@ -1193,3 +1234,118 @@ export default {
 ```
 
 ---
+
+# CSS 其它案例
+
+## 空间动画
+
+[链接](https://css-tricks.com/recreating-the-apple-music-hits-playlist-animation-in-css/)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #25272c;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #eb5bec;
+      width: 300px;
+      height: 400px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+      background-color: #471e45;
+      animation: grow 10s linear infinite;
+    }
+
+    .box {
+      animation-delay: 1s;
+    }
+
+    .box:nth-child(2) {
+      animation-delay: 2s;
+    }
+
+    .box:nth-child(3) {
+      animation-delay: 3s;
+    }
+
+    .box:nth-child(4) {
+      animation-delay: 4s;
+    }
+
+    .box:nth-child(5) {
+      animation-delay: 5s;
+    }
+
+    .box:nth-child(6) {
+      animation-delay: 6s;
+    }
+
+    .box:nth-child(7) {
+      animation-delay: 7s;
+    }
+
+    .box:nth-child(8) {
+      animation-delay: 8s;
+    }
+
+    .box:nth-child(9) {
+      animation-delay: 9s;
+    }
+
+    .box:nth-child(10) {
+      animation-delay: 10s;
+    }
+
+    @keyframes grow {
+      from {
+        opacity: .5;
+        transform: scale(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: scale(3.85);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">01</div>
+    <div class="box">02</div>
+    <div class="box">03</div>
+    <div class="box">04</div>
+    <div class="box">05</div>
+    <div class="box">06</div>
+    <div class="box">07</div>
+    <div class="box">08</div>
+    <div class="box">09</div>
+    <div class="box">10</div>
+  </div>
+</body>
+
+</html>
+```

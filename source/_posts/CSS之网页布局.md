@@ -2,7 +2,7 @@
 title: CSS之网页布局
 date: 2021-03-24 14:19:32
 categories:
-- program
+  - program
 ---
 
 # 一、正常布局流
@@ -142,7 +142,7 @@ container{
 
 # 三、网格布局：grid
 
-## 基本使用
+## 【1】基本使用
 
 ```
 display: grid;
@@ -159,7 +159,7 @@ grid-row-gap: 0.3rem;
 - [阮一峰的学习链接-grid](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
 - [其它-grid](https://juejin.cn/post/6854573220306255880#heading-22)
 
-## place-content
+## 【2】place-content
 
 `place-content` 属性是`align-content` 和 `justify-content`的简写。
 
@@ -169,6 +169,30 @@ grid-row-gap: 0.3rem;
 display: grid;
 place-content: center;
 ```
+
+## 【3】grid-template-columns 更多属性
+
+### 【3.1】响应式布局`auto-fit`
+
+```
+width: 100%;
+height: 400px;
+display: grid;
+grid-gap: 10px;
+grid-template-columns: repeat(auto-fit, 100px);
+```
+
+重点：`grid-template-columns: repeat(auto-fit, 100px);`代表以 `100px` 为子元素长度，自动排一行的数量，当一行不够时自动换行。
+
+### 【3.2】跨越所有列`1 / -1`
+
+```
+.fullwidth {
+  grid-column: 1 / -1;
+}
+```
+
+重点：`1 / -1`是指从第 1 列开始，直到最后一列结束，即铺满整行。
 
 ---
 

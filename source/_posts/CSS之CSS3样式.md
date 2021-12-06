@@ -5,6 +5,16 @@ categories:
   - program
 ---
 
+<style>
+  p.example{
+    color:#f00;
+    border: 1px solid;
+  }
+  div.example{
+    border: 1px solid #f00;
+  }
+</style>
+
 - [MDN 全元素](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
 
 # 一、选择器
@@ -197,17 +207,17 @@ article h1 {
 
 # 二、边框
 
+- `text-emphasis`
 - `border-radius`
 - `box-shadow`
 - `border-image`
 - `border-style`
-- `text-emphasis`
 
 ## 【0】`text-emphasis`：强调文字
 
 ◆ 示例：
 
-<a style="text-emphasis: open red;-webkit-text-emphasis: open red;">你好，hello world.</a>
+<p class="example" style="text-emphasis: open green;-webkit-text-emphasis: open green;">你好，hello world.</p>
 
 ◆ 代码：
 
@@ -216,7 +226,7 @@ text-emphasis: 'x';
 text-emphasis: '点';
 text-emphasis: '\25B2';
 text-emphasis: '*' #555;
-text-emphasis: 'foo'; 
+text-emphasis: 'foo';
 
 text-emphasis: filled;
 text-emphasis: open;
@@ -565,9 +575,9 @@ transform: rotate3d(1, 0, 0, 83deg);
 transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 ```
 
-◆ 使用`transform: translateZ(0)` 用GPU硬件加速提升性能
+◆ 使用`transform: translateZ(0)` 用 GPU 硬件加速提升性能
 
-使用 `translatZ` 之后，变成了3D效果，走GPU渲染，开始硬件开速。
+使用 `translatZ` 之后，变成了 3D 效果，走 GPU 渲染，开始硬件开速。
 
 ## 【1】rotate：旋转
 
@@ -1019,19 +1029,24 @@ background: conic-gradient(pink 0 30%, yellow 0 70%, lime 0 100%);
 - font-variant-ligatures: no-common-ligatures; // 连字形式【英文的 fi 会分开】
 - font-variant-numeric: slashed-zero; // 数字 0 显示为中间有斜杠，好和 o 区分
 
-https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
+◆ `font-variant: small-caps`效果：
+
+<p class="example" style="font-size:3em;">This</p>
+<p class="example" style="font-size:3em;font-variant: small-caps">This</p>
+
+◆ `font-variant-ligatures: no-common-ligatures`效果：
+
+<p class="example" style="font-size:3em;">fight</p>
+<p class="example" style="font-size:3em;text-rendering: optimizeSpeed;">fight</p>
+
+◆ [链接：MDN 中 font-variant-numeric 的不同值对比](https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric)
 
 ## 【2】行内元素文字间距自动调整
 
 ◆ 效果：
 
-<div style="width: 100px; text-align: justify; text-align-last: justify"
-  >姓名</div
->
-<div style="width: 100px; text-align: justify; text-align-last: justify">
-  家庭住址
-</div>
-<br />
+<p class="example" style="width: 100px; text-align: justify; text-align-last: justify">姓名</p>
+<p class="example" style="width: 100px; text-align: justify; text-align-last: justify">家庭住址</p>
 
 ◆ 代码：
 
@@ -1059,17 +1074,15 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 
 ◆ 效果：
 
-<div style="background:#fbb;">
-  <p style="text-align: right">
-    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
-  </p>
-  <div style="direction: rtl">
-    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
-  </div>
-  <section style="direction: rtl; unicode-bidi: bidi-override">
-    我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
-  </section>
-</div>
+<p class="example" style="text-align: right">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</p>
+<p class="example" style="direction: rtl">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</p>
+<p class="example" style="direction: rtl; unicode-bidi: bidi-override">
+  我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
+</p>
 
 ◆ 代码：
 
@@ -1077,12 +1090,12 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 <p style="text-align: right">
   我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
 </p>
-<div style="direction: rtl">
+<p style="direction: rtl">
   我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
-</div>
-<section style="direction: rtl; unicode-bidi: bidi-override">
+</p>
+<p style="direction: rtl; unicode-bidi: bidi-override">
   我向来是不惮以最坏的恶意来推测中国人的,然而我还不料,也不信竟会下劣凶残到这地步。
-</section>
+</p>
 ```
 
 ## 【3】文字换行与截断
@@ -1095,72 +1108,55 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-variant-numeric
 - word-break: keep-all; //【默认】单词放不下会自动换行【文字截断】。
 - word-break: break-all; // 单词放不下会折断换行，铺满元素【文字截断】。
 
+◆ 效果图：
+
+![image](https://wx1.sinaimg.cn/mw2000/0069qZtTgy1gx43wj1frpj32ko0ts1kx.jpg)
+
+◆ [效果预览](https://firefly1984982452.github.io/my-web-page/word-break.html)
+
+◆ [源码地址](https://github.com/firefly1984982452/my-web-page/blob/master/word-break.html)
+
+## 【4】盒装饰器中断
+
 - box-decoration-break: clone; // 盒装饰器中断【复制】
 - box-decoration-break: slice; // 盒装饰器中断【默认】
 
-```
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <style>
-      main {
-        width: 200px;
-        color: #999;
-      }
-      .text {
-        border-radius: 30px;
-        background-color: #cd0000;
-        -webkit-box-decoration-break: clone;
-        box-decoration-break: clone;
-      }
-      section {
-        width: 300px;
-        column-count: 2;
-      }
-      .text1 {
-        border: 1px solid #f00;
-        -webkit-box-decoration-break: clone;
-        box-decoration-break: clone;
-      }
-    </style>
-  </head>
-  <body>
-    <h3>chrome不行的话，试试firefox</h3>
-    <main>
-      <span class="text">测试demo，测试demo，测试demo。</span>
-    </main>
-    <section>
-      <p class="text1">
-        测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。测试demo，测试demo，测试demo。
-      </p>
-    </section>
-  </body>
-</html>
+◆ 效果图：
 
-```
+![image](https://wx2.sinaimg.cn/orj360/0069qZtTgy1gx43neotd9j30ju0g0dm6.jpg)
 
-## 【4】文字间距
+◆ [效果预览](https://firefly1984982452.github.io/my-web-page/box-decoration-break.html)
+
+◆ [源码地址](https://github.com/firefly1984982452/my-web-page/blob/master/box-decoration-break.html)
+
+## 【5】文字间距
 
 - word-spacing:30px; // 单词与单词之间的距离。
 - letter-spacing:-3px; // 字母与字母之间的距离。
 
-## 【5】文字连字符换行：`hyphens`
+◆ 效果预览：
+
+<p class="example">默认：I am a programer</p>
+<p class="example" style="word-spacing:30px;">间距：I am a programer</p>
+<p class="example" style="letter-spacing:-3px;">间距：I am a programer</p>
+
+## 【6】文字连字符换行：`hyphens`
 
 ◆ 功能：连字符换行
 
 ◆ 与`text-align: justify`的区别
 
-<p style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
-<p style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
+<p class="example" style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
+<p class="example" style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
 
 ```
 <p style="width: 100px; hyphens: auto;border:1px solid">An extreme ly long English word</p>
 <p style="width: 100px; text-align: justify; text-align-last: justify;border:1px solid">An extreme ly long English word</p>
 ```
 
-## 【6】line-clamp：限制文本行数
+## 【7】line-clamp：限制文本行数
 
-必须加上-webkit-
+必须加上`-webkit-`
 
 ```
 -webkit-line-clamp: 3;
@@ -1559,18 +1555,39 @@ img {
 }
 ```
 
-## 【5】`vertical-align`
-
-文字对齐图片方式
+## 【5】`vertical-align`：文字对齐图片方式
 
 ```
-vertical-align: text-top; // 默认文字对齐图片顶部
-vertical-align: text-bottom; // 文字对齐图片底部
+vertical-align: text-top; // 文字对齐图片顶部
+vertical-align: text-bottom; // 默认文字对齐图片底部
+```
+
+◆ 效果预览：
+
+<p class="example">
+  文字与图片对齐
+  <img style="vertical-align: text-top;" src="https://wx2.sinaimg.cn/mw2000/0069qZtTgy1gqmp3kbrbsj30dw0dwt9o.jpg" width="100" height="100" />
+  设置为顶部对齐
+</p>
+<p class="example">
+  文字与图片对齐
+  <img style="vertical-align: text-bottom;" src="https://wx2.sinaimg.cn/mw2000/0069qZtTgy1gqmp3kbrbsj30dw0dwt9o.jpg" width="100" height="100" />
+  设置为底部对齐
+</p>
+
+◆ 源码：
+
+```
+<p class="example">
+  文字与图片对齐
+  <img style="vertical-align: text-top;" src="https://wx2.sinaimg.cn/mw2000/0069qZtTgy1gqmp3kbrbsj30dw0dwt9o.jpg" width="100" height="100" />
+  设置为顶部对齐
+</p>
 ```
 
 ## 【6】`image-orientation`：纠正图片的方向
 
-## 【7】`image-renderin`g：增强图像渲染
+## 【7】`image-rendering`：增强图像渲染
 
 ```
 image-rendering: auto;
@@ -1582,21 +1599,20 @@ image-rendering: pixelated;
 
 # 十五、其它
 
-## 【1】reiseze 属性
+## 【1】`resize` 属性
+
+<p class="example" style="resize:both;overflow: hidden;">resize属性规定是否由用户调整元素大小</p>
 
 ```
-width: 200px;
-height: 200px;
+resize:both;
 overflow: hidden;
-border: 1px solid #ebb;
-resize: auto;
 ```
 
 条件：
 
 - 子元素要比父元素大；
 
-- `overflow: hidden;`
+- 一定要写上`overflow: hidden;`
 
 ## 【2】z-index 属性
 
@@ -1621,11 +1637,15 @@ resize: auto;
 
 - [MDN](https://developer.mozilla.org/de/docs/Web/CSS/-webkit-box-reflect)
 
+![image](https://images2015.cnblogs.com/blog/857662/201609/857662-20160926120127360-1912773451.png)
+
 ```
 img{
   -webkit-box-reflect: below;
 }
 ```
+
+**仅 chrome 生效**
 
 ---
 
@@ -1794,7 +1814,7 @@ html
 
 ## 【5】prefers-color-scheme：适配主题
 
-- [链接 1](https://zhuanlan.zhihu.com/p/374506516) 
+- [链接 1](https://zhuanlan.zhihu.com/p/374506516)
 
 - [链接 2](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 
@@ -1806,9 +1826,17 @@ html
 
 # 十九、`appearance`：修改默认样式
 
-[链接](https://blog.csdn.net/webofrxy/article/details/79853710)
+## 【1】更改`<button />`的默认样式为无
 
-更改`<button />`的默认样式为无
+◆ 示例：
+
+<div class="example">
+  <button>button 样式</button>
+  <br />
+  <button style="appearance:none;">文本样式</button>
+</div>
+
+◆ 代码：
 
 ```
 {
@@ -1820,13 +1848,35 @@ appearance:none;
 ...
 
 <button>一些文本。</button>
-```
-
-更改`<input />`默认的大小和边框样式
 
 ```
 
-input[type="checkbox"] {
+## 【2】更改`<input />`默认的大小和边框样式
+
+◆ 示例：
+
+<style>
+
+input#test {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid red;
+}
+</style>
+
+<div class="example">
+  <input type="checkbox" />默认复选框
+  <br />
+  <input id="test" type="checkbox" />更改默认复选框
+</div>
+
+◆ 代码：
+
+```
+input#test {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -1979,16 +2029,14 @@ input[type="checkbox"] {
 
 # 二十三、移动端环境变量函数 `env()`和`constant()`
 
-`env()`和`constant()`，是`IOS11`新增特性，`Webkit`的`css`函数，用于设定安全区域与边界的距离，有4个预定义变量：
+`env()`和`constant()`，是`IOS11`新增特性，`Webkit`的`css`函数，用于设定安全区域与边界的距离，有 4 个预定义变量：
 
 - `safe-area-inset-left`：安全区域距离左边边界的距离
 - `safe-area-inset-right`：安全区域距离右边边界的距离
 - `safe-area-inset-top`：安全区域距离顶部边界的距离
 - `safe-area-inset-bottom` ：安全距离底部边界的距离
 
-
-H5网页设置`viewport-fit=cover`的时候才生效，小程序里的`viewport-fit`默认是`cover`
-
+H5 网页设置`viewport-fit=cover`的时候才生效，小程序里的`viewport-fit`默认是`cover`
 
 ```
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
