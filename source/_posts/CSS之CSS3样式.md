@@ -579,7 +579,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 
 使用 `translatZ` 之后，变成了 3D 效果，走 GPU 渲染，开始硬件开速。
 
-## 【1】rotate：旋转
+## 【1】`rotate`：旋转
 
 **rotate(10turn)代表转 10 圈**
 
@@ -617,7 +617,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 }
 ```
 
-## 【2】skewX：倾斜
+## 【2】`skewX`：倾斜
 
 `transform: skewX(-45deg);` // 平形四边形
 
@@ -645,7 +645,7 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
 }
 ```
 
-## 【3】perspective：梯形效果
+## 【3】`perspective`：梯形效果
 
 ![image](https://wx2.sinaimg.cn/mw690/0069qZtTgy1gj0mzj9rt8j307o041t8i.jpg)
 
@@ -670,6 +670,14 @@ transform: rotate(45deg) translate(20px, 10px) scale(.5) skew(45deg);
   background:#fbb;
   transform: perspective(30px)rotateX(5deg);
 }
+```
+
+## 【4】`matrix`：矩阵
+
+`skew`、`scale`、`rotate`、`translate` 等全都是由 `matrix` 矩阵实现的。
+
+```
+transform: matrix(2, 2, 0, 2, 45, 0);
 ```
 
 ---
