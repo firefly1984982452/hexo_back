@@ -1,8 +1,8 @@
 ---
 title: TypeScript总结
 date: 2020-09-01 18:50:17
-categories: 
-- program
+categories:
+  - program
 ---
 
 [链接](https://jspang.com/detailed?id=63)
@@ -14,7 +14,9 @@ categories:
 ```
 npm install typescript -g
 ```
+
 或
+
 ```
 yarn global add typescript
 ```
@@ -43,7 +45,9 @@ node temo.js
 ```
 npm install -g ts-node
 ```
+
 安装成功后：
+
 ```
 ts-node Demo1.ts
 ```
@@ -54,13 +58,13 @@ ts-node Demo1.ts
 
 被定义后就不可改变变量的类型了。
 
-js是弱类型语言，可以被改变。
+js 是弱类型语言，可以被改变。
 
 ## 【1】基本使用
 
 ```
 // 定义count是number类型
-const count : number = 1; 
+const count : number = 1;
 count = 'hello'; // 此时改变类型为string就会报错编译不通过
 ```
 
@@ -92,6 +96,7 @@ console.log(xh);
 - 函数类型
 
 **【3.2.1】对象类型**
+
 ```
 const xiaoJieJie: {
     name: string,
@@ -104,6 +109,7 @@ console.log(xiaoJieJie.name)
 ```
 
 **【3.2.2】数组类型**
+
 ```
 const arr : number [] = [1,2,3];
 const xiaoJieJies : String [] = ['小明','小红','小黄'];
@@ -111,6 +117,7 @@ console.log(xiaoJieJies)
 ```
 
 **【3.2.3】类类型**
+
 ```
 class Person{}
 const xm : Person = new Person();
@@ -118,6 +125,7 @@ console.log(xm);
 ```
 
 **【3.2.4】函数类型**
+
 ```
 const j : () => string = ()=> {return '小明'};
 console.log(j);
@@ -130,7 +138,7 @@ console.log(j);
 ## 【1】类型注释
 
 ```
-let count : number; 
+let count : number;
 count = 123
 ```
 
@@ -140,7 +148,7 @@ count = 123
 let countInference = 123
 ```
 
-这时编辑器和编译器都会推断出是number类型。
+这时编辑器和编译器都会推断出是 number 类型。
 
 ---
 
@@ -157,7 +165,7 @@ function getTotal(one : number, two :number){
 const total = getTotal(1,2)
 ```
 
-虽然能推断出是返回number，但这样不规范。
+虽然能推断出是返回 number，但这样不规范。
 
 **定义时：**
 
@@ -169,7 +177,7 @@ function getTotal(one : number, two :number) : number{
 const total = getTotal(1,2)
 ```
 
-**无需return时：void**
+**无需 return 时：void**
 
 ```
 function sayHello(){
@@ -177,12 +185,12 @@ function sayHello(){
 }
 ```
 
-**异常或死循环：never返回值类型**
+**异常或死循环：never 返回值类型**
 
 异常：
 
 ```
- function errorFuntion() : never{ 
+ function errorFuntion() : never{
     throw new Error()
     console.log('Hello World')
  }
@@ -199,7 +207,7 @@ function sayHello(){
 
 ## 【2】函数参数为对象（解构）时
 
-TS函数参数解构：
+TS 函数参数解构：
 
 ```
 function add ({one, two} : {one: number, two: number}) {
@@ -210,7 +218,7 @@ const three = add({one:1,two:3});
 console.log(three); // 4
 ```
 
-ES6函数参数解构：
+ES6 函数参数解构：
 
 ```
 function add({x,y} = {}){
@@ -313,7 +321,7 @@ interface Girl {
 
 语法：`[anyname:string]:any;`
 
-`string`的意思是对象名是string类型，`any`的意思是对象值是任意类型。
+`string`的意思是对象名是 string 类型，`any`的意思是对象值是任意类型。
 
 ```
 interface Girl1 {
@@ -362,12 +370,14 @@ const xh = {
 类实现接口时必须把**所有**要必填的属性和方法实现，否则就会报错。
 
 错误的：
+
 ```
 class XiaoJieJie implements Girl{
 }
 ```
 
 正确的：
+
 ```
 class XiaoJieJie implements Girl{
     name = '小红';
@@ -438,7 +448,7 @@ class XiaoJieJie extends Lady {
 }
 ```
 
-JAVA中类的继承
+JAVA 中类的继承
 
 ```
 class Animal{
@@ -446,7 +456,7 @@ class Animal{
         System.out.println("动物可以移动");
     }
 }
-  
+
 class Dog extends Animal{
     @Override // 表示方法重写
     public void move(){
@@ -457,9 +467,10 @@ class Dog extends Animal{
 ```
 
 区别：
-- java中要用到`@Override`标签
 
-**@Override标签的作用与好处**
+- java 中要用到`@Override`标签
+
+**@Override 标签的作用与好处**
 
 - 它是伪代码，表示方法重写
 - 作为注释，帮助检查是否正确复写了父类中已有的方法
@@ -513,19 +524,19 @@ console.log(new Lady().protectedFn()); // 编译不通过
 
 ### 【2.4】对比表
 
-|类型|public|protected|private|
-|:--:|:--:|:--:|:--:|
-|自己（父类）|✓|✓|✓|
-|继承（子类）|✓|×|×|
-|外部（`new Class().fun()`）|✓|✓|×|
+|            类型             | public | protected | private |
+| :-------------------------: | :----: | :-------: | :-----: |
+|        自己（父类）         |   ✓    |     ✓     |    ✓    |
+|        继承（子类）         |   ✓    |     ×     |    ×    |
+| 外部（`new Class().fun()`） |   ✓    |     ✓     |    ×    |
 
-附：JAVA异同表
+附：JAVA 异同表
 
-|类型|public|protected|private|
-|:--:|:--:|:--:|:--:|
-|自己（父类）|✓|✓|✓|
-|继承（子类）|✓|✓|×|
-|外部（`new Class().fun()`）|✓|×|×|
+|            类型             | public | protected | private |
+| :-------------------------: | :----: | :-------: | :-----: |
+|        自己（父类）         |   ✓    |     ✓     |    ✓    |
+|        继承（子类）         |   ✓    |     ✓     |    ×    |
+| 外部（`new Class().fun()`） |   ✓    |     ×     |    ×    |
 
 ## 【3】构造函数
 
@@ -552,7 +563,8 @@ var teacher = new Teacher(19);
 console.log(teacher,teacher.age);
 ```
 
-ES6实现对比：
+ES6 实现对比：
+
 ```
 class People {
     constructor (name,sex) {
@@ -575,7 +587,8 @@ var teacher = new Teacher('小明','女',19);
 console.log(teacher,teacher.age);
 ```
 
-JAVA实现对比：
+JAVA 实现对比：
+
 ```
 
 class People {
@@ -592,7 +605,7 @@ public class Teacher extends People {
 }
 ```
 
-## 【4】get和set
+## 【4】get 和 set
 
 ```
 class XiaoJieJie {
@@ -616,14 +629,14 @@ const xj =  new XiaoJieJie(18,'小明');
 console.log(xj,xj.age); // XiaoJieJie { _age: 18, _name: '小明' } 16
 ```
 
-编译如果无法通过需要加上es5：
+编译如果无法通过需要加上 es5：
 
 ```
 tsc demo.ts -t es5
 node demo.js
 ```
 
-java中
+java 中
 
 ```
 class Stutent1{
@@ -647,9 +660,9 @@ class Stutent1{
 }
 ```
 
-## 【5】static装饰符
+## 【5】static 装饰符
 
-不用new新建就可以创建
+不用 new 新建就可以创建
 
 ```
 class Girl {
@@ -660,9 +673,10 @@ class Girl {
 
 console.log(Girl.sayLove());
 ```
-不用new Girl()就可以调用方法了。
 
-## 【6】只读属性readonly
+不用 new Girl()就可以调用方法了。
+
+## 【6】只读属性 readonly
 
 ```
 class XiaoJieJie {
@@ -690,7 +704,7 @@ console.log(xj,xj.age);
 
 ## 【7】抽象类
 
-### 【7.1】不加abstract时
+### 【7.1】不加 abstract 时
 
 特点：
 
@@ -730,12 +744,12 @@ console.log(new Girl().skill())
 
 ```
 
-### 【7.2】加abstract关键字时
+### 【7.2】加 abstract 关键字时
 
 特点：
 
 - 不能调用父类
-- abstract方法不能有具体实现内容
+- abstract 方法不能有具体实现内容
 
 ```
 abstract class Girl {
@@ -768,39 +782,37 @@ console.log(new Girl3().skill())
 
 区别：写了`abstract`关键字就是抽象类，如果不加，就是`重写（Override）`，也视为多态。
 
-
 ### 【7.3】多态
 
-多态是同一个行为具有多个不同表现形式或形态的能力。
-比如打印机有打印方法，彩色打印机类打印方法是彩色，黑色打印机类打印方法是黑色。
+多态是同一个行为具有多个不同表现形式或形态的能力。比如打印机有打印方法，彩色打印机类打印方法是彩色，黑色打印机类打印方法是黑色。
 
-java中多态的实现方式
+java 中多态的实现方式
 
 - 方式一：重写
 - 方式二：接口
 - 方式三：抽象类和抽象方法
 
 ```
-abstract class Animal {  
-    abstract void eat();  
-}  
-  
-class Cat extends Animal {  
-    public void eat() {  
-        System.out.println("吃鱼");  
-    }  
-    public void work() {  
-        System.out.println("抓老鼠");  
-    }  
-}  
-  
-class Dog extends Animal {  
-    public void eat() {  
-        System.out.println("吃骨头");  
-    }  
-    public void work() {  
-        System.out.println("看家");  
-    }  
+abstract class Animal {
+    abstract void eat();
+}
+
+class Cat extends Animal {
+    public void eat() {
+        System.out.println("吃鱼");
+    }
+    public void work() {
+        System.out.println("抓老鼠");
+    }
+}
+
+class Dog extends Animal {
+    public void eat() {
+        System.out.println("吃骨头");
+    }
+    public void work() {
+        System.out.println("看家");
+    }
 }
 ```
 
@@ -808,7 +820,7 @@ class Dog extends Animal {
 
 ---
 
-# 配置项tsconfig.json
+# 配置项 tsconfig.json
 
 `tsconfig.json`为配置文件，该配置文件通过`tsc --init`命令行来生成。
 
@@ -851,15 +863,15 @@ class Dog extends Animal {
   }
 }
 ```
-## 【2】compilerOptions配置
+
+## 【2】compilerOptions 配置
 
 - `removeComments`：编译文件是否显示注释
 - `static`：是否按严格模式编译和书写
-- `nolmplicitAny`：是否允许注解类型any不用声明
+- `nolmplicitAny`：是否允许注解类型 any 不用声明
 - `strictNullChecks`：是否允许非空检查
 - `rootDir`：项目文件夹
 - `outDir`：编译文件夹
-
 
 ---
 
@@ -898,7 +910,7 @@ function test(animal: Waiter | Teacher){
 }
 ```
 
-## 【3】类型保护-in语法
+## 【3】类型保护-in 语法
 
 判断在对象中是否存在该方法
 
@@ -914,7 +926,7 @@ function test(animal: Waiter | Teacher){
 
 ```
 
-## 【4】断言和in的实例
+## 【4】断言和 in 的实例
 
 ```
 interface Waiter {
@@ -953,14 +965,14 @@ const xiaoming : Waiter = {
     say(){
         return 'hello';
     },
-    
+
 }
 
 test(xiaohong);
 test(xiaoming);
 ```
 
-## 【5】类型保护-typeof语法
+## 【5】类型保护-typeof 语法
 
 判断是不是不同的类型
 
@@ -975,7 +987,7 @@ console.log(add(1,'2')) // 12
 console.log(add(1,2)) // 3
 ```
 
-## 【6】类型保护-instanceof语法
+## 【6】类型保护-instanceof 语法
 
 ```
 
@@ -1056,14 +1068,13 @@ enum Data {
 
 ```
 undefined
-4 
+4
 { '3': 'STATU', '4': 'DATA', MASSAGE: 'success', STATU: 3, DATA: 4 }
 ```
 
 如果是数字，会累加。
 
 枚举可实现的，对象也可以实现，但是它可以实现`反射映射`。
-
 
 ---
 
@@ -1079,7 +1090,7 @@ console.log(join <string> ('peng','dan')) // 'pengdan'
 console.log(join <number> (3,2)) // 32
 ```
 
-参数1和参数2可以是任意类型，但2者得同时是同一类型。
+参数 1 和参数 2 可以是任意类型，但 2 者得同时是同一类型。
 
 优化：
 
@@ -1102,7 +1113,7 @@ class SelectGirl {
 const selectGirl = new SelectGirl(['小A','小B','小C']);
 ```
 
-这时只能使用string类型的，改为泛型即可使用任意类型。
+这时只能使用 string 类型的，改为泛型即可使用任意类型。
 
 ```
 class SelectGirl<T> {
@@ -1117,6 +1128,7 @@ const selectGirl2 = new SelectGirl([1,2,3]);
 ```
 
 ---
+
 # 搭建浏览器开发环境
 
 1. 建立好文件夹后，打开 `VSCode`，把文件夹拉到编辑器当中，然后打开终端，运行`npm init -y`,创建`package.json`文件。
@@ -1130,11 +1142,11 @@ const selectGirl2 = new SelectGirl([1,2,3]);
 
 ---
 
-# 命名空间namespace
+# 命名空间 namespace
 
 ## 【1】当不使用命名空间时
 
-在page.ts文件里，写出下面的代码：
+在 page.ts 文件里，写出下面的代码：
 
 ```
 class Header {
@@ -1182,7 +1194,7 @@ class Page {
 
 ## 【2】使用命名空间
 
-用namespace和export导出，用Home.page()实例化。
+用 namespace 和 export 导出，用 Home.page()实例化。
 
 ```
 namespace Home {
@@ -1261,8 +1273,7 @@ namespace Home {
 
 ## 【4】多文件编译成一个文件
 
-将`tsconfig.json`中的`"module":"commonjs"`改为`"module":"amd"`；
-然后修改`outFile`配置项。
+将`tsconfig.json`中的`"module":"commonjs"`改为`"module":"amd"`；然后修改`outFile`配置项。
 
 ```
 {
@@ -1290,7 +1301,7 @@ namespace Components {
 
 ---
 
-# 使用import和export
+# 使用 import 和 export
 
 修改`compontens.ts`，删除`namespace`
 
@@ -1332,7 +1343,7 @@ export class Page {
 <script>new Home.Page();</script>
 ```
 
-## 【2】使用require
+## 【2】使用 require
 
 **【2.1】引入：**
 
@@ -1364,7 +1375,7 @@ export default class Page {
 
 ---
 
-# 使用parcel打包
+# 使用 parcel 打包
 
 安装
 
@@ -1376,16 +1387,12 @@ yarn add --dev parcel@next
 
 {
 
-  "scripts": {
-    "test": "parcel ./src/index.html"
-  },
-}
+"scripts": { "test": "parcel ./src/index.html" }, }
 
 输入`yarn test`，打包出地址：`http://localhost:1234`
-
 
 ---
 
 # 结语
 
-学习开始于2020-09-01，结束于2020-10-26，耗时55天。
+学习开始于 2020-09-01，结束于 2020-10-26，耗时 55 天。
