@@ -357,3 +357,5 @@ window.postMessage("hi there!", location.origin);
 ```
 window.addEventListener('storage', (e) => {})
 ```
+
+# `windows.copy`

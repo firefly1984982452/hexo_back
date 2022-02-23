@@ -66,6 +66,7 @@ npm config set https-proxy null
 
 2、设置
 npm config set registry http://registry.cnpmjs.org/
+npm config set registry https://www.npmjs.com/
 ```
 
 设置 cnpm 镜像源：

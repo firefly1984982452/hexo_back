@@ -149,3 +149,11 @@ git clone 'xx'
 # 九、git 设备多帐户
 
 [链接](https://www.jianshu.com/p/cacf91579268)
+
+# 十、将源码转入新的仓库
+
+```
+git remote rm origin
+git remote add origin https://git.coding.net/**/**.git
+git pull origin master --allow-unrelated-histories
+```
